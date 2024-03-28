@@ -13,10 +13,9 @@ const CustomPasswordInput = (props) => {
       </Typography>
 
       <Input
-      size="small"
+        size="small"
         shadow={false}
         type={`${showPass ? "text" : "password"}`}
-     
         placeholder="password"
         variant="static"
         className=" bg-white p-0 m-0  ring-4 ring-transparent "
@@ -24,8 +23,7 @@ const CustomPasswordInput = (props) => {
           className: "hidden",
         }}
         containerProps={{ className: "min-w-[100px] -mt-2 p-0" }}
-        style={{ border: "none", padding:0, margin:0}} 
-
+        style={{ border: "none", padding: 0, margin: 0 }}
         icon={
           showPass ? (
             <EyeIcon
