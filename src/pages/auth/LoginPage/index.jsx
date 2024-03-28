@@ -12,6 +12,7 @@ import {
 } from "@material-tailwind/react";
 
 import LoginForm from "../../../components/LoginForm";
+// import Divider from '@mui/material/Divider';
 const LoginPage = () => {
  
   // return (
@@ -25,9 +26,10 @@ const LoginPage = () => {
   // );
 
   return (
+    <>
     <main className="h-screen w-full flex flex-col ">
       <div class="lg:flex h-full">
-        <div class="lg:w-1/2   h-full  ">
+        <div class="lg:w-1/2   h-full hidden sm:block ">
           {/* <Card   variant="gradient" color="red" className="h-full w-full"></Card> */}
           <div class="w-full h-full bg-white shadow-lg  overflow-hidden">
           <div className="flex justify-center items-center bg-gradient-to-r from-[#DC216D] to-[#336AEA] h-screen">
@@ -44,10 +46,10 @@ const LoginPage = () => {
 
         <div class="lg:w-1/2 h-full">
         <main className="h-screen w-full flex flex-col bg-sky-300  justify-center items-center " >
-        <div className="text-start -ml-20 ">
-        <Typography  style={{ color: '#6499E9' }}  className=" font-poppinss font-black  text-3xl ">MaidanCube</Typography>
-        <Typography variant="h5" style={{ color: 'black' }}  className=" font-bold font-poppinss mt-8">Welcome Back,</Typography>
-        <Typography style={{ color: 'black' }} className=" mt-2 text-xs  font-poppinss" >It is a long established fact that a reader will 
+        <div className="text-start laptopM:-ml-20 mobileM:mt-20 ">
+        <Typography  style={{ color: '#6499E9' }}  className=" font-poppinss font-black  mobileM:text-center laptopM:text-start text-3xl ">MaidanCube</Typography>
+        <Typography variant="h5" style={{ color: 'black' }}  className=" font-bold font-poppinss mobileM:text-center laptopM:text-start mt-8">Welcome Back,</Typography>
+        <Typography style={{ color: 'black' }} className=" mt-2 text-xs mobileM:text-center font-poppinss" >It is a long established fact that a reader will 
         be distracted by the  </Typography>
         <Typography style={{ color: 'black' }} className="  text-xs font-poppinss" >readable content of a page when looking at its layout.</Typography>
         </div>
@@ -55,11 +57,14 @@ const LoginPage = () => {
     
       
   <LoginForm/>
+  
     </div>
   </main>
         </div>
       </div>
     </main>
+  
+    </>
   );
 };
 

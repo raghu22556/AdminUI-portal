@@ -7,8 +7,8 @@ const CustomPasswordInput = (props) => {
   const [showPass, setShowPass] = useState(false);
   const handleShowPass = () => setShowPass((prev) => !prev);
   return (
-    <div className=" flex flex-col   border border-gray-300 p-2 rounded-md">
-      <Typography variant="small" color="gray" className="p-0 m-0 text-xs">
+    <div  className=" flex flex-col   border border-gray-300 p-2 rounded-md " style={{height:59}}>
+      <Typography variant="small" color="gray" className="text-xs">
         {label}
       </Typography>
 
@@ -23,7 +23,7 @@ const CustomPasswordInput = (props) => {
         labelProps={{
           className: "hidden",
         }}
-        containerProps={{ className: "min-w-[100px] -mt-2 p-0" }}
+        containerProps={{ className: "w-[100px]  " }}
         style={{ border: "none", padding:0, margin:0}} 
 
         icon={

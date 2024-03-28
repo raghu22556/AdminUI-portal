@@ -5,6 +5,7 @@ import './index.css'
 import { BrowserRouter } from 'react-router-dom'
 import { ThemeProvider } from "@material-tailwind/react";
 import theme from './utils/theme.js'
+import { MaterialTailwindControllerProvider } from './context/index.jsx'
 
 
 // const theme = {
@@ -237,7 +238,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <BrowserRouter>
     <ThemeProvider value={theme} >
+    <MaterialTailwindControllerProvider>
     <App />
+    </MaterialTailwindControllerProvider>
     </ThemeProvider>
     </BrowserRouter>
   </React.StrictMode>,

@@ -11,15 +11,20 @@ import {
 } from "@material-tailwind/react";
 
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
-import CustomInput from "../common/CustomPasswordInput";
 import CustomPasswordInput from "../common/CustomPasswordInput";
 import CustomEmailInput from "../common/CustomEmailInput";
 import AppleSignUpBtn from "../common/AppleSignUpBtn";
 import GoogleSignUpBtn from "../common/GoogleSignUpBtn";
+// import LoginForm from "../../../components/LoginForm";
+import Divider from '@mui/material/Divider';
+
+
+
 const LoginForm = () => {
   const [showPass, setShowPass] = useState(false);
   const handleShowPass = () => setShowPass((prev) => !prev);
   return (
+    <div  className="">
     <Card
       className="px-4  max-w-lg w-full "
       color="transparent"
@@ -28,9 +33,8 @@ const LoginForm = () => {
     
 
       <form onSubmit={(value) => {}}>
-        <CardBody className="flex flex-col gap-3">
+        <CardBody className="flex flex-col gap-3 ">
           <CustomEmailInput
-          
             crossOrigin={""}
             label="Email"
             size="lg"
@@ -40,7 +44,6 @@ const LoginForm = () => {
           <CustomPasswordInput
           
             crossOrigin={""}
-          
             label="Password"
             type={`${false ? "text" : "password"}`}
             size="lg"
@@ -63,7 +66,7 @@ const LoginForm = () => {
           <div className=" flex justify-between ">
             <Checkbox variant="paragraph"  label="Keep Me Login" className="text-sm" color="blue" />
 
-            <Typography   className="mt-2.5 text-sm" style={{ color: '#6499E9' }}  >
+            <Typography   className="text-sm mt-2.5" style={{ color: '#6499E9' }}  >
               Forgot Password?
             </Typography>
           </div>
@@ -71,18 +74,17 @@ const LoginForm = () => {
 
         <CardFooter className="pt-0">
           <Button
-          className=" bg-primary font-poppins "
+          className=" bg-primary font-poppins  "
             type="submit"
             shadow={false}
             fullWidth
             // color="blue"
             disabled={false}
-            color="rose"
-            // style={{ backgroundColor: '#6499E9' }} 
+           
           >
             Log In
           </Button>
-          <Typography variant="small" className="mt-6 flex justify-center ">
+          <Typography variant="small" className="mt-3 flex justify-center ">
             Don&apos;t have an account?
             <Typography
               // as={Link}
@@ -98,7 +100,7 @@ const LoginForm = () => {
 
     
 
-          <Typography variant="small" className="mt-10 flex justify-center">
+          <Typography variant="small" className="mt-5 flex justify-center">
           OR Login With
            
           </Typography>
@@ -109,8 +111,27 @@ const LoginForm = () => {
 </div>
 
         </CardFooter>
+       
+       
+
       </form>
+      
     </Card>
+    
+    <div className="lg:mt-12  ">
+ 
+  <div className="flex justify-between items-center lg:w-full">
+    <div className="text-black text-xs text-start mt-3 -ml-24">
+ Copyright © 2022 Maiden Cube Pvt Ltd . All rights reserved.
+    </div>
+    <div className="text-xs mt-3 -mr-24">
+    
+      Privacy Policy   terms & Condition
+    </div>
+  </div>
+</div>
+   
+  </div>
   );
   
 };

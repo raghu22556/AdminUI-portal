@@ -7,8 +7,10 @@ const CustomEmailInput = (props) => {
   const [showPass, setShowPass] = useState(false);
   const handleShowPass = () => setShowPass((prev) => !prev);
   return (
-    <div className=" flex flex-col   border border-gray-300 p-1 rounded-md h-14">
-      <Typography variant="small" color="gray" className="p-0 m-0 text-xs">
+    <>
+   
+    <div className=" flex flex-col   border border-gray-300 p-2 rounded-md " style={{height:57}}>
+      <Typography variant="small" color="gray" className="text-xs">
         {label}
       </Typography>
 
@@ -18,28 +20,18 @@ const CustomEmailInput = (props) => {
      
         placeholder="admin@gmail.com"
         variant="static"
-        className=" bg-white p-0 m-0  ring-4 ring-transparent "
+        className=" bg-white ring-4 ring-transparent "
         labelProps={{
           className: "hidden",
         }}
-        containerProps={{ className: "min-w-[100px] -mt-5" }}
+        containerProps={{ className: "w-[100px]  " }}
         style={{ border: "none", padding:0, margin:0}} 
 
-        // icon={
-        //   showPass ? (
-        //     <EyeIcon
-        //       onClick={handleShowPass}
-        //       className="h-5 w-5 text-blue-500 cursor-pointer"
-        //     />
-        //   ) : (
-        //     <EyeSlashIcon
-        //       onClick={handleShowPass}
-        //       className="h-5 w-5 cursor-pointer"
-        //     />
-        //   )
-        // }
+       
       />
+   
     </div>
+    </>
   );
 };
 
