@@ -76,7 +76,7 @@ const Sidebar = (props) => {
       icon: <AiFillShopping />,
       path: "/UserManagement",
       child: [
-        { name: "User Management", path: "/Masters/UserManagement" },
+        { name: "User Management", path: "/userpage" },
         { name: "Designations", path: "/Masters/UserManagement" },
         { name: "Roles", path: "/Masters/UserManagement" },
         { name: "Access Control", path: "/Masters/UserManagement" },

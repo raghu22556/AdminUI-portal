@@ -4,10 +4,12 @@ import ProjectCardsData from "../../../data/ProjectCardsData";
 import { ProjectCard } from "../../../widgets/cards";
 import { Button, Typography } from "@material-tailwind/react";
 import { GrAdd } from "react-icons/gr";
+import { useNavigate } from "react-router-dom";
 
 
-const ProjectPage = () => {
+const OrganizationPage = () => {
 
+    const navigate = useNavigate()
     return (<div >
 
         <div className="flex justify-between mt-4">
@@ -18,6 +20,10 @@ const ProjectPage = () => {
         <div className="mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-4 mt-6">
             {ProjectCardsData.map(({ icon, title, footer, ...rest }) => (
                 <ProjectCard
+                onClick={()=>{
+                    alert("ddd")
+                    // navigate('/ProjectDetailsPage') 
+                }}
                     key={title}
                     {...rest}
                     title={title}
@@ -29,4 +35,4 @@ const ProjectPage = () => {
     </div>)
 }
 
-export default Layout(ProjectPage);
+export default Layout(OrganizationPage);
