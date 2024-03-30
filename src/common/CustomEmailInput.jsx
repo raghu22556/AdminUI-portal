@@ -15,7 +15,6 @@ const CustomEmailInput = (props) => {
       <Input
         shadow={false}
         type={`${false ? "text" : "Email"}`}
-     
         placeholder="admin@gmail.com"
         variant="static"
         className=" bg-white p-0 m-0  ring-4 ring-transparent "
@@ -23,7 +22,7 @@ const CustomEmailInput = (props) => {
           className: "hidden",
         }}
         containerProps={{ className: "min-w-[100px] -mt-5" }}
-        style={{ border: "none", padding:0, margin:0}} 
+        style={{ border: "none", padding: 0, margin: 0 }}
 
         // icon={
         //   showPass ? (

@@ -1,4 +1,6 @@
 import { FormEvent, useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+
 import {
   Card,
   CardHeader,
@@ -20,17 +22,10 @@ const LoginForm = () => {
   const [showPass, setShowPass] = useState(false);
   const handleShowPass = () => setShowPass((prev) => !prev);
   return (
-    <Card
-      className="px-4  max-w-lg w-full "
-      color="transparent"
-      shadow={false}
-    >
-    
-
+    <Card className="px-4  max-w-lg w-full " color="transparent" shadow={false}>
       <form onSubmit={(value) => {}}>
         <CardBody className="flex flex-col gap-3">
           <CustomEmailInput
-          
             crossOrigin={""}
             label="Email"
             size="lg"
@@ -38,9 +33,7 @@ const LoginForm = () => {
             required
           />
           <CustomPasswordInput
-          
             crossOrigin={""}
-          
             label="Password"
             type={`${false ? "text" : "password"}`}
             size="lg"
@@ -61,9 +54,14 @@ const LoginForm = () => {
             required
           />
           <div className=" flex justify-between ">
-            <Checkbox variant="paragraph"  label="Keep Me Login" className="text-sm" color="blue" />
+            <Checkbox
+              variant="paragraph"
+              label="Keep Me Login"
+              className="text-sm"
+              color="blue"
+            />
 
-            <Typography   className="mt-2.5 text-sm" style={{ color: '#6499E9' }}  >
+            <Typography className="mt-2.5 text-sm" style={{ color: "#6499E9" }}>
               Forgot Password?
             </Typography>
           </div>
@@ -71,48 +69,36 @@ const LoginForm = () => {
 
         <CardFooter className="pt-0">
           <Button
-          className=" bg-primary font-poppins "
+            className=" bg-primary font-poppins "
             type="submit"
             shadow={false}
             fullWidth
             // color="blue"
             disabled={false}
             color="rose"
-            // style={{ backgroundColor: '#6499E9' }} 
+            // style={{ backgroundColor: '#6499E9' }}
           >
             Log In
           </Button>
           <Typography variant="small" className="mt-6 flex justify-center ">
             Don&apos;t have an account?
-            <Typography
-              // as={Link}
-              href="/signup"
-              variant="small"
-              color="blue"
-              className="ml-1 font-bold"
-            >
+            <Link to="/signup" className="ml-1 font-bold text-blue-500">
               Create Account
-            </Typography>
+            </Link>
           </Typography>
-
-
-    
 
           <Typography variant="small" className="mt-10 flex justify-center">
-          OR Login With
-           
+            OR Login With
           </Typography>
 
-<div className="flex gap-3 mt-4 ">
-    <AppleSignUpBtn/>
-    <GoogleSignUpBtn/>
-</div>
-
+          <div className="flex gap-3 mt-4 ">
+            <AppleSignUpBtn />
+            <GoogleSignUpBtn />
+          </div>
         </CardFooter>
       </form>
     </Card>
   );
-  
 };
 
 export default LoginForm;
