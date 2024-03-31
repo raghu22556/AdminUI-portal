@@ -18,7 +18,7 @@ import CustomEmailInput from "../common/CustomEmailInput";
 import AppleSignUpBtn from "../common/AppleSignUpBtn";
 import GoogleSignUpBtn from "../common/GoogleSignUpBtn";
 // import LoginForm from "../../../components/LoginForm";
-import Divider from '@mui/material/Divider';
+//import Divider from '@mui/material/Divider';
 
 
 
