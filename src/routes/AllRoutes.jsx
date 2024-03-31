@@ -15,7 +15,7 @@ const AllRoutes = [
   
   { name: "UserPage", path: "/userpage", element: <UsersPage />, private: false },
   
-  organization
+  
 
    
 ];
