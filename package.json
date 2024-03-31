@@ -8,7 +8,7 @@
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-	"prettier": "prettier --write src/**/*.js src/**/**/*.js src/**/**/**/*.js src/**/**/**/**/*.js"
+    "prettier": "prettier --write src/**/*.js src/**/**/*.js src/**/**/**/*.js src/**/**/**/**/*.js"
   },
   "dependencies": {
     "@emotion/styled": "^11.11.0",
@@ -20,6 +20,7 @@
     "ag-grid-react": "^31.2.0",
     "autoprefixer": "^10.4.19",
     "postcss-cli": "^11.0.0",
+    "prettier": "^3.2.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.51.1",

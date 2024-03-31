@@ -1,4 +1,6 @@
 import { FormEvent, useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+
 import {
   Card,
   CardHeader,
@@ -42,7 +44,6 @@ const LoginForm = () => {
             required
           />
           <CustomPasswordInput
-          
             crossOrigin={""}
             label="Password"
             type={`${false ? "text" : "password"}`}
@@ -64,7 +65,12 @@ const LoginForm = () => {
             required
           />
           <div className=" flex justify-between ">
-            <Checkbox variant="paragraph"  label="Keep Me Login" className="text-sm" color="blue" />
+            <Checkbox
+              variant="paragraph"
+              label="Keep Me Login"
+              className="text-sm"
+              color="blue"
+            />
 
             <Typography   className="text-sm mt-2.5" style={{ color: '#6499E9' }}  >
               Forgot Password?
@@ -86,15 +92,9 @@ const LoginForm = () => {
           </Button>
           <Typography variant="small" className="mt-3 flex justify-center ">
             Don&apos;t have an account?
-            <Typography
-              // as={Link}
-              href="/signup"
-              variant="small"
-              color="blue"
-              className="ml-1 font-bold"
-            >
+            <Link to="/signup" className="ml-1 font-bold text-blue-500">
               Create Account
-            </Typography>
+            </Link>
           </Typography>
 
 
@@ -105,11 +105,10 @@ const LoginForm = () => {
            
           </Typography>
 
-<div className="flex gap-3 mt-4 ">
-    <AppleSignUpBtn/>
-    <GoogleSignUpBtn/>
-</div>
-
+          <div className="flex gap-3 mt-4 ">
+            <AppleSignUpBtn />
+            <GoogleSignUpBtn />
+          </div>
         </CardFooter>
        
        
@@ -133,7 +132,6 @@ const LoginForm = () => {
    
   </div>
   );
-  
 };
 
 export default LoginForm;

@@ -17,7 +17,6 @@ const CustomEmailInput = (props) => {
       <Input
         shadow={false}
         type={`${false ? "text" : "Email"}`}
-     
         placeholder="admin@gmail.com"
         variant="static"
         className=" bg-white ring-4 ring-transparent "
