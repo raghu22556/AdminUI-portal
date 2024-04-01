@@ -1,7 +1,4 @@
-
-
-
- import { PencilIcon } from "@heroicons/react/24/solid";
+import { PencilIcon } from "@heroicons/react/24/solid";
 import {
   ArrowDownTrayIcon,
   MagnifyingGlassIcon,
@@ -20,9 +17,9 @@ import {
   Input,
 } from "@material-tailwind/react";
 import Layout from "../../../components/Layout";
- 
+
 const TABLE_HEAD = ["Transaction", "Amount", "Date", "Status", "Account", ""];
- 
+
 const TABLE_ROWS = [
   {
     img: "https://docs.material-tailwind.com/img/logos/logo-spotify.svg",
@@ -75,8 +72,8 @@ const TABLE_ROWS = [
     expiry: "06/2026",
   },
 ];
- 
- const ProjectsPage=()=> {
+
+const ProjectsPage = () => {
   return (
     <Card className="h-full w-full">
       <CardHeader floated={false} shadow={false} className="rounded-none">
@@ -141,7 +138,7 @@ const TABLE_ROWS = [
                 const classes = isLast
                   ? "p-4"
                   : "p-4 border-b border-blue-gray-50";
- 
+
                 return (
                   <tr key={name}>
                     <td className={classes}>
@@ -189,8 +186,8 @@ const TABLE_ROWS = [
                             status === "paid"
                               ? "green"
                               : status === "pending"
-                              ? "amber"
-                              : "red"
+                                ? "amber"
+                                : "red"
                           }
                         />
                       </div>
@@ -275,6 +272,6 @@ const TABLE_ROWS = [
       </CardFooter>
     </Card>
   );
-}
+};
 
-export default Layout(ProjectsPage)
+export default Layout(ProjectsPage);

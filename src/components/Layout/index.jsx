@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import Sidebar from "../Sidebar";
 import Navbar from "../Navbar";
 
-
-
 const Layout = (Child) => {
   return function Component() {
     const [drawer, setDrawer] = useState(false);

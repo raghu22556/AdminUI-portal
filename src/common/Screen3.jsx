@@ -216,7 +216,7 @@ export default function Screen3() {
                         accountNumber,
                         expiry,
                       },
-                      index
+                      index,
                     ) => {
                       const isLast = index === TABLE_ROWS.length - 1;
                       const classes = isLast
@@ -270,8 +270,8 @@ export default function Screen3() {
                                   status === "paid"
                                     ? "green"
                                     : status === "pending"
-                                    ? "amber"
-                                    : "red"
+                                      ? "amber"
+                                      : "red"
                                 }
                               />
                             </div>
@@ -318,7 +318,7 @@ export default function Screen3() {
                           </td>
                         </tr>
                       );
-                    }
+                    },
                   )}
                 </tbody>
               </table>

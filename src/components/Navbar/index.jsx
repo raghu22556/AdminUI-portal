@@ -22,7 +22,6 @@ const Navbar = (props) => {
           drawer ? "hidden md:flex" : "flex md:hidden"
         }`}
       >
-       
         <Typography>MaidenCube</Typography>
       </div>
 

@@ -8,28 +8,27 @@ const CustomEmailInput = (props) => {
   const handleShowPass = () => setShowPass((prev) => !prev);
   return (
     <>
-   
-    <div className=" flex flex-col   border border-gray-300 p-2 rounded-md " style={{height:57}}>
-      <Typography variant="small" color="gray" className="text-xs">
-        {label}
-      </Typography>
+      <div
+        className=" flex flex-col   border border-gray-300 p-2 rounded-md "
+        style={{ height: 57 }}
+      >
+        <Typography variant="small" color="gray" className="text-xs">
+          {label}
+        </Typography>
 
-      <Input
-        shadow={false}
-        type={`${false ? "text" : "Email"}`}
-        placeholder="admin@gmail.com"
-        variant="static"
-        className=" bg-white ring-4 ring-transparent "
-        labelProps={{
-          className: "hidden",
-        }}
-        containerProps={{ className: "w-[100px]  " }}
-        style={{ border: "none", padding:0, margin:0}} 
-
-       
-      />
-   
-    </div>
+        <Input
+          shadow={false}
+          type={`${false ? "text" : "Email"}`}
+          placeholder="admin@gmail.com"
+          variant="static"
+          className=" bg-white ring-4 ring-transparent "
+          labelProps={{
+            className: "hidden",
+          }}
+          containerProps={{ className: "w-[100px]  " }}
+          style={{ border: "none", padding: 0, margin: 0 }}
+        />
+      </div>
     </>
   );
 };

@@ -15,7 +15,7 @@ const App = () => {
       <Loader isLoading={isLoading} />
       <Routes>
         {AllRoutes.map((item) => {
-          debugger
+          debugger;
           const { name, path, element } = item;
           return (
             <Route

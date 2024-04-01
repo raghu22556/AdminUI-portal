@@ -27,8 +27,6 @@ import { TbBrandBooking } from "react-icons/tb";
 import { GrSchedule } from "react-icons/gr";
 import { Button, Typography } from "@material-tailwind/react";
 
-
-
 const Sidebar = (props) => {
   const navigate = useNavigate();
   const { handleToggle } = props;
@@ -46,31 +44,25 @@ const Sidebar = (props) => {
     // Dashboard
     {
       name: "Dashboard",
-      icon:  <BiSolidHome />,
+      icon: <BiSolidHome />,
       path: "/dashboard",
-     
     },
     {
       name: "Organization",
       icon: <FaUsers />,
       path: "/organization",
-      
     },
     {
       name: "Projects",
       icon: <MdBorderAll />,
       path: "/projects",
-      
     },
     {
       name: "Reports",
       icon: <TbBrandBooking />,
       path: "/Reports",
-      
     },
-    
-   
-   
+
     {
       name: "Masters",
       icon: <AiFillShopping />,
@@ -80,14 +72,8 @@ const Sidebar = (props) => {
         { name: "Designations", path: "/Masters/UserManagement" },
         { name: "Roles", path: "/Masters/UserManagement" },
         { name: "Access Control", path: "/Masters/UserManagement" },
-       
       ],
     },
-
-    
-
-    
-
   ];
 
   return (
@@ -108,10 +94,7 @@ const Sidebar = (props) => {
 
       {/* NavLinks */}
       <nav className="my-7 grid gap-1 tracking-wide text-sm px-4 text-[rgb(145,145,145)]">
-
-  
-
-      {navLinks.map((item) => {
+        {navLinks.map((item) => {
           return (
             <div key={item.name}>
               <div

@@ -1,12 +1,11 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
-import './index.css'
-import { BrowserRouter } from 'react-router-dom'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App.jsx";
+import "./index.css";
+import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "@material-tailwind/react";
-import theme from './utils/theme.js'
-import { MaterialTailwindControllerProvider } from './context/index.jsx'
-
+import theme from "./utils/theme.js";
+import { MaterialTailwindControllerProvider } from "./context/index.jsx";
 
 // const theme = {
 //   typography: {
@@ -233,15 +232,14 @@ import { MaterialTailwindControllerProvider } from './context/index.jsx'
 //   },
 // };
 
-
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
-    <ThemeProvider value={theme} >
-    <MaterialTailwindControllerProvider>
-    <App />
-    </MaterialTailwindControllerProvider>
-    </ThemeProvider>
+      <ThemeProvider value={theme}>
+        <MaterialTailwindControllerProvider>
+          <App />
+        </MaterialTailwindControllerProvider>
+      </ThemeProvider>
     </BrowserRouter>
   </React.StrictMode>,
-)
+);
