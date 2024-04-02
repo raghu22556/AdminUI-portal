@@ -1,5 +1,6 @@
 // import Dashboard from "../layouts/dashboard";
 import LoginPage from "../pages/auth/LoginPage";
+import AcceptTermPage from "../pages/auth/AcceptTermPage";
 import Organization from "../pages/dashboard/Organization";
 import ProjectsPage from "../pages/dashboard/Projects";
 import ProjectDetailsPage from "../pages/dashboard/ProjectDetails";
@@ -12,6 +13,12 @@ const AllRoutes = [
   { name: "Login", path: "/", element: <LoginPage />, private: false },
   { name: "Signup", path: "/signup", element: <SignupPage />, private: false },
   { name: "Scree3", path: "/screen3", element: <Screen3 />, private: false },
+  {
+    name: "AcceptTerm",
+    path: "/acceptterm",
+    element: <AcceptTermPage />,
+    private: false,
+  },
   {
     name: "Organization",
     path: "/organization",

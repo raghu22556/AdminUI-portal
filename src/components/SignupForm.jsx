@@ -89,18 +89,20 @@ const SignupForm = () => {
         </CardBody>
 
         <CardFooter className="pt-0">
-          <Button
-            className=" bg-primary font-poppins "
-            type="submit"
-            shadow={false}
-            fullWidth
-            // color="blue"
-            disabled={false}
-            color="rose"
-            // style={{ backgroundColor: '#6499E9' }}
-          >
-            Continue
-          </Button>
+          <Link to="/acceptterm" className="ml-1 font-bold text-blue-500">
+            <Button
+              className=" bg-primary font-poppins "
+              type="submit"
+              shadow={false}
+              fullWidth
+              // color="blue"
+              disabled={false}
+              color="rose"
+              // style={{ backgroundColor: '#6499E9' }}
+            >
+              Continue
+            </Button>
+          </Link>
           <Typography variant="small" className="mt-6 flex justify-center ">
             Already have an Account ?
             <Link to="/signup" className="ml-1 font-bold text-blue-500">

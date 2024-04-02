@@ -1,6 +1,14 @@
 import { Typography } from "@material-tailwind/react";
 
 export const welcomePage = (RenderComponent) => {
+  let text = "";
+  if (RenderComponent.name == "LoginForm") {
+    text += "Welcome Back ";
+  } else if (RenderComponent.name == "SignupForm") {
+    text += "Create Account. ";
+  } else if (RenderComponent.name == "AcceptTermForm") {
+    text += "Help us to personalize your experience. ";
+  }
   return (
     <>
       <main className="h-screen w-full flex flex-col ">
@@ -38,7 +46,7 @@ export const welcomePage = (RenderComponent) => {
                   style={{ color: "black" }}
                   className=" font-bold font-poppinss mobileM:text-center laptopM:text-start mt-8"
                 >
-                  Welcome Back,
+                  {text}
                 </Typography>
                 <Typography
                   style={{ color: "black" }}
