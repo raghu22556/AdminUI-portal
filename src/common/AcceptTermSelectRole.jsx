@@ -1,8 +1,9 @@
-import { Typography, Select, Option } from "@material-tailwind/react";
 import React, { useState } from "react";
+import { Typography, Select, Option } from "@material-tailwind/react";
 
 const AcceptTermSelectRole = (props) => {
   const { label, icon, action } = props;
+  const [selectedValue, setSelectedValue] = useState("");
 
   return (
     <>
@@ -20,8 +21,11 @@ const AcceptTermSelectRole = (props) => {
           labelProps={{ className: "hidden" }}
           containerProps={{ className: "w-[100px]" }}
           style={{ border: "none", padding: 0, margin: 0 }}
-          onChange={(e) => action(e.target.value)}
+          value={selectedValue}
         >
+          <Option value="" disabled>
+            Select
+          </Option>
           <Option value="">Student</Option>
           <Option value="">Organization</Option>
           <Option value="">Researcher</Option>

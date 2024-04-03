@@ -1,9 +1,10 @@
+import React, { useState } from "react";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
 import { Typography, Select, Option } from "@material-tailwind/react";
-import React, { useState } from "react";
 
 const AcceptTermSelectBackend = (props) => {
   const { label, icon, action } = props;
+  const [selectedValue, setSelectedValue] = useState("");
 
   return (
     <>
@@ -21,11 +22,14 @@ const AcceptTermSelectBackend = (props) => {
           labelProps={{ className: "hidden" }}
           containerProps={{ className: "w-[100px]" }}
           style={{ border: "none", padding: 0, margin: 0 }}
-          onChange={(e) => action(e.target.value)}
+          value={selectedValue}
         >
-          <Option value="">Beginner</Option>
-          <Option value="">Intermediate</Option>
-          <Option value="">Expert</Option>
+          <Option value="" disabled>
+            Select
+          </Option>
+          <Option value="Beginner">Beginner</Option>
+          <Option value="Intermediate">Intermediate</Option>
+          <Option value="Expert">Expert</Option>
         </Select>
       </div>
     </>
