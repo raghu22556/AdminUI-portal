@@ -12,10 +12,10 @@ const ProjectPage = () => {
     <div>
       <div className="flex justify-between mt-4">
         <Typography className="text-xl text-black font-bold">
-        Organizations
+          Organizations
         </Typography>
-        
-        <AddOrganizationModal/>
+
+        <AddOrganizationModal />
       </div>
 
       <div className="mb-12 grid gap-y-10 gap-x-6 md:grid-cols-2 xl:grid-cols-4 mt-6">

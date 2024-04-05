@@ -27,7 +27,7 @@ import { TbBrandBooking } from "react-icons/tb";
 import { GrSchedule } from "react-icons/gr";
 import { Button, Typography } from "@material-tailwind/react";
 
-import svgIcon  from './../../assets/category.svg'
+import svgIcon from "./../../assets/category.svg";
 import DashbordIcon from "../../assets/DashbordIcon";
 const Sidebar = (props) => {
   const navigate = useNavigate();
@@ -87,7 +87,9 @@ const Sidebar = (props) => {
           alt="sidebar-logo"
           className="w-28"
         /> */}
-        <Typography className="text-[#DC216D] font-poppins font-bold text-xl">MaidenCube</Typography>
+        <Typography className="text-[#DC216D] font-poppins font-bold text-xl">
+          MaidenCube
+        </Typography>
         <MdClose
           onClick={handleToggle}
           className="text-color text-xl md:hidden cursor-pointer"

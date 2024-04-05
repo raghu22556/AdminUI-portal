@@ -9,7 +9,7 @@ const EmailAddressInputModal = (props) => {
   return (
     <div className=" flex flex-col   border border-purple-800 p-1 rounded-md h-20">
       <Typography variant="small" color="gray" className="p-0 m-0 text-xs">
-      Organization Name
+        Organization Name
       </Typography>
 
       <Input

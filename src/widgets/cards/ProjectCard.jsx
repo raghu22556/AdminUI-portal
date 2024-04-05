@@ -3,9 +3,12 @@ import PropTypes from "prop-types";
 
 export function ProjectCard({ title, discription, onClick }) {
   return (
-    <Card className="rounded-md   border-1 border-[#95A4FC] " onClick={onClick} >
+    <Card className="rounded-md   border-1 border-[#95A4FC] " onClick={onClick}>
       <CardBody className="p-4 text-right">
-        <Typography variant="small" className=" font-poppins text-black text-lg">
+        <Typography
+          variant="small"
+          className=" font-poppins text-black text-lg"
+        >
           {title}
         </Typography>
         <Typography

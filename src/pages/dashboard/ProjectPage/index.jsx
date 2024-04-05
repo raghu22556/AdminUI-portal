@@ -24,7 +24,7 @@ const OrganizationPage = () => {
         {ProjectCardsData.map(({ icon, title, footer, ...rest }) => (
           <ProjectCard
             onClick={() => {
-              navigate('/projectTable')
+              navigate("/projectTable");
             }}
             key={title}
             {...rest}

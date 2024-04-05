@@ -9,7 +9,7 @@ const DescriptionModal = (props) => {
   return (
     <div className=" flex flex-col p-2  border border-gray-300  rounded-md ">
       <Typography variant="small" color="gray" className="p-0 m-0 text-xs">
-      Sort Description
+        Sort Description
       </Typography>
 
       <Textarea
@@ -23,7 +23,6 @@ const DescriptionModal = (props) => {
         }}
         containerProps={{ className: "min-w-[100px] -mt-5" }}
         style={{ border: "none", padding: 0, margin: 0 }}
-
       />
     </div>
   );
