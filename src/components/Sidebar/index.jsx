@@ -27,6 +27,8 @@ import { TbBrandBooking } from "react-icons/tb";
 import { GrSchedule } from "react-icons/gr";
 import { Button, Typography } from "@material-tailwind/react";
 
+import svgIcon  from './../../assets/category.svg'
+import DashbordIcon from "../../assets/DashbordIcon";
 const Sidebar = (props) => {
   const navigate = useNavigate();
   const { handleToggle } = props;
@@ -44,28 +46,28 @@ const Sidebar = (props) => {
     // Dashboard
     {
       name: "Dashboard",
-      icon: <BiSolidHome />,
+      icon: <DashbordIcon />,
       path: "/dashboard",
     },
     {
       name: "Organization",
-      icon: <FaUsers />,
+      icon: <DashbordIcon />,
       path: "/organization",
     },
     {
       name: "Projects",
-      icon: <MdBorderAll />,
+      icon: <DashbordIcon />,
       path: "/projects",
     },
     {
       name: "Reports",
-      icon: <TbBrandBooking />,
+      icon: <DashbordIcon />,
       path: "/Reports",
     },
 
     {
       name: "Masters",
-      icon: <AiFillShopping />,
+      icon: <DashbordIcon />,
       path: "/UserManagement",
       child: [
         { name: "User Management", path: "/userpage" },
@@ -85,7 +87,7 @@ const Sidebar = (props) => {
           alt="sidebar-logo"
           className="w-28"
         /> */}
-        <Typography>MaidenCube</Typography>
+        <Typography className="text-[#DC216D] font-poppins font-bold text-xl">MaidenCube</Typography>
         <MdClose
           onClick={handleToggle}
           className="text-color text-xl md:hidden cursor-pointer"
@@ -106,11 +108,11 @@ const Sidebar = (props) => {
                 }
                 className={`flex cursor-pointer font-medium   items-center gap-2 ${
                   (item.name === dropValue || item.path === pathname) &&
-                  "text-white bg-[#E5ECF6]"
+                  "text-white bg-[#1C1C1C]"
                 } lg:text-base cursor-pointer py-1.5 md:px-3 rounded items-center relative gap-2 `}
               >
                 <span className="text-lg">{item.icon}</span>
-                <span>{item.name}</span>
+                <span className=" font-poppins text-sm">{item.name}</span>
                 {item.child && (
                   <span className="ml-auto">
                     {item.name === dropValue ? (

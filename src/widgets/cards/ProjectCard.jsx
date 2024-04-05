@@ -3,15 +3,15 @@ import PropTypes from "prop-types";
 
 export function ProjectCard({ title, discription, onClick }) {
   return (
-    <Card className="rounded-md shadow-light-blue-500" onClick={onClick}>
+    <Card className="rounded-md   border-1 border-[#95A4FC] " onClick={onClick} >
       <CardBody className="p-4 text-right">
-        <Typography variant="small" className="font-normal text-black text-lg">
+        <Typography variant="small" className=" font-poppins text-black text-lg">
           {title}
         </Typography>
         <Typography
           variant="small"
           color="blue-gray"
-          className="text-sm mt-2 text-blue-gray-400 tracking-normal"
+          className="text-sm mt-2 text-blue-gray-400 tracking-normal font-poppins"
         >
           {discription}
         </Typography>

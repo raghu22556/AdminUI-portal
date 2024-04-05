@@ -14,7 +14,7 @@ const OrganizationPage = () => {
         <Typography className="text-xl text-black font-bold">
           Projects
         </Typography>
-        <Button className="flex gap-3 bg-[#6499E9]">
+        <Button className="flex gap-3 bg-[#056EE9] capitalize">
           <GrAdd />
           Create Project
         </Button>
@@ -24,8 +24,7 @@ const OrganizationPage = () => {
         {ProjectCardsData.map(({ icon, title, footer, ...rest }) => (
           <ProjectCard
             onClick={() => {
-              alert("ddd");
-              // navigate('/ProjectDetailsPage')
+              navigate('/projectTable')
             }}
             key={title}
             {...rest}

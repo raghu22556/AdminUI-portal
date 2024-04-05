@@ -18,6 +18,7 @@
     "@mui/icons-material": "^5.15.14",
     "ag-grid-community": "^31.2.0",
     "ag-grid-react": "^31.2.0",
+    "antd": "^5.16.1",
     "autoprefixer": "^10.4.19",
     "postcss-cli": "^11.0.0",
     "prettier": "^3.2.5",

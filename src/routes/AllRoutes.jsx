@@ -8,6 +8,7 @@ import UsersPage from "../pages/dashboard/UsersPage";
 import ProjectPage from "../pages/dashboard/ProjectPage";
 import SignupPage from "../pages/auth/SignupPage";
 import Screen3 from "../common/Screen3";
+import ProjectTablePage from "../pages/dashboard/ProjectTablePage";
 
 const AllRoutes = [
   { name: "Login", path: "/", element: <LoginPage />, private: false },
@@ -26,9 +27,15 @@ const AllRoutes = [
     private: false,
   },
   {
-    name: "Organization",
+    name: "Project",
     path: "/projects",
     element: <ProjectPage />,
+    private: false,
+  },
+  {
+    name: "ProjectTable",
+    path: "/projectTable",
+    element: <ProjectTablePage />,
     private: false,
   },
   {
