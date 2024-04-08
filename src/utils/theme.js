@@ -8,4 +8,12 @@ const theme = {
   },
 };
 
+export const darkTheme = {
+
+}
+
+export const whiteTheme = {
+  
+}
+
 export default theme;
