@@ -1,5 +1,5 @@
 import { FormEvent, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import {
   Card,
@@ -17,12 +17,31 @@ import CustomPasswordInput from "../common/CustomPasswordInput";
 import CustomEmailInput from "../common/CustomEmailInput";
 import AppleSignUpBtn from "../common/AppleSignUpBtn";
 import GoogleSignUpBtn from "../common/GoogleSignUpBtn";
+import axios from "axios";
 // import LoginForm from "../../../components/LoginForm";
 //import Divider from '@mui/material/Divider';
 
 const LoginForm = () => {
+  const navigate = useNavigate();
   const [showPass, setShowPass] = useState(false);
   const handleShowPass = () => setShowPass((prev) => !prev);
+  const onLoginClick = () => {
+    var params = {
+      email: "webuser@confess.com",
+      password: "Demo@145",
+      OrganizationId: "2f6eca88-278d-49ee-8c25-e916a24c6019",
+    };
+    axios
+      .post(
+        "https://maidenconfessapp.azurewebsites.net/api/v1/Registration/VerifyAdminUser",
+        params
+      )
+      .then((response) => {
+        localStorage.setItem("menu", JSON.stringify(response.data.menu));
+        navigate("/screen3");
+      });
+  };
+
   return (
     <div className="">
       <Card
@@ -30,81 +49,77 @@ const LoginForm = () => {
         color="transparent"
         shadow={false}
       >
-        <form onSubmit={(value) => {}}>
-          <CardBody className="flex flex-col gap-3 ">
-            <CustomEmailInput
-              crossOrigin={""}
-              label="Email"
-              size="lg"
+        <CardBody className="flex flex-col gap-3 ">
+          <CustomEmailInput
+            crossOrigin={""}
+            label="Email"
+            size="lg"
+            color="blue"
+            //required
+          />
+          <CustomPasswordInput
+            crossOrigin={""}
+            label="Password"
+            type={`${false ? "text" : "password"}`}
+            size="lg"
+            color="blue"
+            icon={
+              showPass ? (
+                <EyeIcon
+                  onClick={handleShowPass}
+                  className="h-5 w-5 text-blue-500 cursor-pointer"
+                />
+              ) : (
+                <EyeSlashIcon
+                  onClick={handleShowPass}
+                  className="h-5 w-5 cursor-pointer"
+                />
+              )
+            }
+            //required
+          />
+          <div className=" flex justify-between ">
+            <Checkbox
+              variant="paragraph"
+              label="Keep Me Login"
+              className="text-sm"
               color="blue"
-              required
             />
-            <CustomPasswordInput
-              crossOrigin={""}
-              label="Password"
-              type={`${false ? "text" : "password"}`}
-              size="lg"
-              color="blue"
-              icon={
-                showPass ? (
-                  <EyeIcon
-                    onClick={handleShowPass}
-                    className="h-5 w-5 text-blue-500 cursor-pointer"
-                  />
-                ) : (
-                  <EyeSlashIcon
-                    onClick={handleShowPass}
-                    className="h-5 w-5 cursor-pointer"
-                  />
-                )
-              }
-              required
-            />
-            <div className=" flex justify-between ">
-              <Checkbox
-                variant="paragraph"
-                label="Keep Me Login"
-                className="text-sm"
-                color="blue"
-              />
 
-              <Typography
-                className="text-sm mt-2.5"
-                style={{ color: "#6499E9" }}
-              >
-                Forgot Password?
-              </Typography>
-            </div>
-          </CardBody>
-
-          <CardFooter className="pt-0">
-            <Button
-              className=" bg-primary font-poppins  "
-              type="submit"
-              shadow={false}
-              fullWidth
-              // color="blue"
-              disabled={false}
-            >
-              Log In
-            </Button>
-            <Typography variant="small" className="mt-3 flex justify-center ">
-              Don&apos;t have an account?
-              <Link to="/signup" className="ml-1 font-bold text-blue-500">
-                Create Account
-              </Link>
+            <Typography className="text-sm mt-2.5" style={{ color: "#6499E9" }}>
+              Forgot Password?
             </Typography>
+          </div>
+        </CardBody>
 
-            <Typography variant="small" className="mt-5 flex justify-center">
-              OR Login With
-            </Typography>
+        <CardFooter className="pt-0">
+          <Button
+            className=" bg-primary font-poppins  "
+            type="submit"
+            shadow={false}
+            fullWidth
+            // color="blue"
+            disabled={false}
+            onClick={onLoginClick}
+          >
+            Log In
+          </Button>
+          <Typography variant="small" className="mt-3 flex justify-center ">
+            Don&apos;t have an account?
+            <Link to="/signup" className="ml-1 font-bold text-blue-500">
+              Create Account
+            </Link>
+          </Typography>
 
-            <div className="flex gap-3 mt-4 ">
-              <AppleSignUpBtn />
-              <GoogleSignUpBtn />
-            </div>
-          </CardFooter>
-        </form>
+          <Typography variant="small" className="mt-5 flex justify-center">
+            OR Login With
+          </Typography>
+
+          <div className="flex gap-3 mt-4 ">
+            <AppleSignUpBtn />
+            <GoogleSignUpBtn />
+          </div>
+        </CardFooter>
       </Card>
 
       <div className="lg:mt-12  ">
