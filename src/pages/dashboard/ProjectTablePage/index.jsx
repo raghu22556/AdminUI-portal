@@ -2,13 +2,21 @@ import React from "react";
 import Layout from "../../../components/Layout";
 
 import { ProjectCard } from "../../../widgets/cards";
-import { Button, Typography } from "@material-tailwind/react";
+import { IconButton, Typography } from "@material-tailwind/react";
 import { GrAdd } from "react-icons/gr";
 import OrganizatiopnCardsData from "../../../data/OrganizatiopnCardsData";
 import SearchInput from "../../../common/SearchInput";
 import AddModuleModal from "../../../components/Modals/AddModuleModal";
-import { Table, Popover } from "antd";
+// import { Table, Popover } from "antd";
+
+
+import { Table, Popover, Button, Space } from 'antd';
+import { EllipsisOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
+
 import AddOrganizationModal from "../../../components/Modals/AddOrganizationModal";
+// import { EditIcon } from "../../../assets";
+import EditIcon from './../../../assets/editicon.svg'
+import StatusIcon from "../../../assets/StatusIcon";
 const ProjectTablePage = () => {
   const columns = [
     {
@@ -47,18 +55,31 @@ const ProjectTablePage = () => {
       title: "Status",
       dataIndex: "status",
       defaultSortOrder: "descend",
+
       sorter: (a, b) => a.status - b.status,
       render: (status) => {
         let statusLabel;
         switch (status) {
           case "pending":
-            statusLabel = <span className="text-yellow-500">Pending</span>;
+            // statusLabel = <span className="text-yellow-500">Pending</span>;
+            statusLabel = <div className=" flex justify-center">
+              <StatusIcon color={'#59A8D4'}/> 
+              <span className="text-[#59A8D4]">Pending</span>
+            </div>;
             break;
           case "completed":
-            statusLabel = <span className="text-green-500">Completed</span>;
+            // statusLabel = <span className="text-green-500">Completed</span>;
+            statusLabel = <div className=" flex justify-center">
+            <StatusIcon color={'#4AA785'}/> 
+            <span className="text-[#4AA785]">Completed</span>
+          </div>;
             break;
           case "inprogress":
-            statusLabel = <span className="text-blue-500">In Progress</span>;
+            // statusLabel = <span className="text-blue-500">In Progress</span>;
+            statusLabel = <div className=" flex justify-center">
+            <StatusIcon color={'#59A8D4'} className=" "/> 
+            <span className="text-[#59A8D4]">Progress</span>
+          </div>;
             break;
           default:
             statusLabel = <span>{status}</span>;
@@ -69,25 +90,53 @@ const ProjectTablePage = () => {
     {
       title: "Actions",
       dataIndex: "actions",
+
       render: (text, record) => (
         <Popover
           content={
-            <div>
+            <Space>
               <Button onClick={() => handleEdit(record.key)} type="text">
-                {/* <EditOutlined /> */}
-                Edit
+                <EditOutlined /> View Tables
               </Button>
               <Button onClick={() => handleDelete(record.key)} type="text">
-                {/* <DeleteOutlined /> */}
-                Delete
+                <DeleteOutlined /> View Tables
               </Button>
-            </div>
+            </Space>
           }
           trigger="click"
         >
-          <Button type="text">Actions</Button>
+          <Button type="text" icon={<EllipsisOutlined />} />
         </Popover>
       ),
+    
+      // render: (text, record) => (
+      //   <Popover
+      //     content={
+      //       <div className="">
+      //         <Button onClick={() => handleEdit(record.key)} type="text">
+      //           Edit
+      //         </Button>
+      //         <Button onClick={() => handleDelete(record.key)} type="text">
+      //           Delete
+      //         </Button>
+      //       </div>
+      //     }
+      //     trigger="click"
+      //   >
+      //     {/* <Button type="text"><EditIcon/></Button> */}
+      //     {/* <EditIcon/> */}
+      //     <IconButton color="white">
+      //       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+      //         <path d="M4 7C4.55228 7 5 7.44772 5 8C5 8.55229 4.55228 9 4 9C3.44772 9 3 8.55229 3 8C3 7.44772 3.44772 7 4 7Z" fill="#1C1C1C" />
+      //         <path d="M8 7C8.55228 7 9 7.44772 9 8C9 8.55229 8.55228 9 8 9C7.44772 9 7 8.55229 7 8C7 7.44772 7.44772 7 8 7Z" fill="#1C1C1C" />
+      //         <path d="M13 8C13 7.44772 12.5523 7 12 7C11.4477 7 11 7.44772 11 8C11 8.55229 11.4477 9 12 9C12.5523 9 13 8.55229 13 8Z" fill="#1C1C1C" />
+      //       </svg>
+
+      //     </IconButton>
+
+
+      //   </Popover>
+      // ),
     },
   ];
   const data = [
@@ -166,7 +215,7 @@ const ProjectTablePage = () => {
         ))} */}
         <div></div>
       </div>
-
+      <div className="overflow-x-auto">
       <Table
         className="table-auto min-w-full"
         bordered
@@ -178,6 +227,7 @@ const ProjectTablePage = () => {
           target: "sorter-icon",
         }}
       />
+   </div>
     </div>
   );
 };

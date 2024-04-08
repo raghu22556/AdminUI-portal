@@ -32,9 +32,9 @@ export const welcomePage = (RenderComponent) => {
             </div>
           </div>
 
-          <div class="lg:w-1/2 h-full">
+          <div class="lg:w-1/2 laptopM:h-full">
             <main className="h-screen w-full flex flex-col bg-sky-300  justify-center items-center ">
-              <div className="text-start laptopM:-ml-20 mobileM:mt-20 ">
+              <div className="text-start laptopM:-ml-20 -ml-10 laptop:mt-20 -mt-32  ">
                 <Typography
                   style={{ color: "#6499E9" }}
                   className=" font-poppinss font-black  mobileM:text-center laptopM:text-start text-3xl "
@@ -50,7 +50,7 @@ export const welcomePage = (RenderComponent) => {
                 </Typography>
                 <Typography
                   style={{ color: "black" }}
-                  className=" mt-2 text-xs mobileM:text-center font-poppinss"
+                  className=" mt-2 text-xs  font-poppinss"
                 >
                   It is a long established fact that a reader will be distracted
                   by the  

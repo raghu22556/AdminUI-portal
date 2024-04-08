@@ -9,7 +9,7 @@ const CustomEmailInput = (props) => {
   return (
     <>
       <div
-        className=" flex flex-col   border border-gray-300 p-2 rounded-md "
+        className=" flex flex-col   border border-gray-300 p-2 rounded-md  laptopM:w-full w-16 -ml-0 laptopM:ml-0"
         style={{ height: 57 }}
       >
         <Typography variant="small" color="gray" className="text-xs">

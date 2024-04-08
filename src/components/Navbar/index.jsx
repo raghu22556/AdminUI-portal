@@ -41,7 +41,7 @@ const Navbar = (props) => {
           />
           <div className="text-sm hidden md:flex flex-col">
             <span className="text-color font-semibold">Admin</span>
-            <span className="text-gray-500 text-xs">navyroute.in</span>
+            <span className="text-gray-500 text-xs">MaidenCube.in</span>
           </div>
           <button onClick={() => setPop(!pop)}>
             {pop ? (

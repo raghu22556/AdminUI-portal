@@ -26,18 +26,19 @@ const LoginForm = () => {
   return (
     <div className="">
       <Card
-        className="px-4  max-w-lg w-full "
+        className="px-4  max-w-lg laptopM:w-full "
         color="transparent"
         shadow={false}
       >
         <form onSubmit={(value) => {}}>
-          <CardBody className="flex flex-col gap-3 ">
+          <CardBody className="flex flex-col laptopM:gap-3 ">
             <CustomEmailInput
               crossOrigin={""}
               label="Email"
               size="lg"
               color="blue"
               required
+              className=""
             />
             <CustomPasswordInput
               crossOrigin={""}
@@ -60,7 +61,7 @@ const LoginForm = () => {
               }
               required
             />
-            <div className=" flex justify-between ">
+            <div className=" flex laptopM:justify-between   ">
               <Checkbox
                 variant="paragraph"
                 label="Keep Me Login"
@@ -69,7 +70,7 @@ const LoginForm = () => {
               />
 
               <Typography
-                className="text-sm mt-2.5"
+                className="text-sm mt-2.5 ml-16"
                 style={{ color: "#6499E9" }}
               >
                 Forgot Password?
@@ -79,27 +80,27 @@ const LoginForm = () => {
 
           <CardFooter className="pt-0">
             <Button
-              className=" bg-primary font-poppins  "
+              className=" bg-primary font-poppins laptopM:w-full w-72 ml-6 laptopM:ml-0"
               type="submit"
               shadow={false}
-              fullWidth
+              
               // color="blue"
               disabled={false}
             >
               Log In
             </Button>
-            <Typography variant="small" className="mt-3 flex justify-center ">
+            <Typography variant="small" className="mt-3 flex laptopM:justify-center ml-8 ">
               Don&apos;t have an account?
               <Link to="/signup" className="ml-1 font-bold text-blue-500">
                 Create Account
               </Link>
             </Typography>
 
-            <Typography variant="small" className="mt-5 flex justify-center">
+            <Typography variant="small" className="mt-5 flex laptopM:justify-center mobile:justify-center ">
               OR Login With
             </Typography>
 
-            <div className="flex gap-3 mt-4 ">
+            <div className="flex gap-3 mt-4 mobile:flex-col  laptopM:flex-row">
               <AppleSignUpBtn />
               <GoogleSignUpBtn />
             </div>
@@ -108,11 +109,11 @@ const LoginForm = () => {
       </Card>
 
       <div className="lg:mt-12  ">
-        <div className="flex justify-between items-center lg:w-full">
-          <div className="text-black text-xs text-start mt-3 -ml-24">
+        <div className="flex laptop:justify-between items-center lg:w-full mobile:flex-col laptopM:flex-row ">
+          <div className="text-black laptop:text-xs text-start mt-3 -ml-24 mobile:text-[10px]">
             Copyright © 2022 Maiden Cube Pvt Ltd . All rights reserved.
           </div>
-          <div className="text-xs mt-3 -mr-24">
+          <div className="laptop:text-xs laptop:mt-3 laptopM:-mr-24 mobile:text-[10px] mobile:-ml-20 ">
             Privacy Policy terms & Condition
           </div>
         </div>

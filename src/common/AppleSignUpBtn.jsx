@@ -6,7 +6,7 @@ const AppleSignUpBtn = () => {
     <div>
       <Button
         shadow={false}
-        className="flex items-center gap-3 text-sm lowercase"
+        className="flex items-center gap-3 text-sm lowercase "
         // style={{ backgroundColor: '#eceff1', color: '#eceff1' }}
         style={{ backgroundColor: "#eceff1", color: "black", width: "210px" }}
         // variant="gradient"
