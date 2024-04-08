@@ -41,6 +41,7 @@ export function MaterialTailwindControllerProvider({ children }) {
   };
 
   const [controller, dispatch] = React.useReducer(reducer, initialState);
+  console.log(controller)
   const value = React.useMemo(
     () => [controller, dispatch],
     [controller, dispatch],
