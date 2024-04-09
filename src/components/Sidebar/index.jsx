@@ -43,6 +43,8 @@ const Sidebar = (props) => {
   // Handle Dropdown
   const handleDrop = (value) => setDropValue(value === dropValue ? "" : value);
 
+  let menu = JSON.parse(localStorage.getItem("menu"));
+
   // All Links & Nested Links
   const navLinks = [
     // Dashboard
@@ -104,6 +106,22 @@ const Sidebar = (props) => {
       ],
     },
   ];
+
+  menu.forEach((menuItem) => {
+    let newNavItem = {
+      name: menuItem.cardText,
+      path: "/" + menuItem.url,
+    };
+
+    if (menuItem.children && menuItem.children.length > 0) {
+      newNavItem.child = menuItem.children.map((childItem) => ({
+        name: childItem.cardText,
+        path: "/" + menuItem.cardText + "/" + childItem.url,
+      }));
+    }
+
+    navLinks.push(newNavItem);
+  });
 
   return (
     <div>
