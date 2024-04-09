@@ -24,7 +24,6 @@ export function Dashboard() {
       />
       <div className="p-4 xl:ml-80">
         <DashboardNavbar />
-        <h1>Shaikh</h1>
         <Configurator />
         <IconButton
           size="lg"
@@ -41,7 +40,7 @@ export function Dashboard() {
               layout === "dashboard" &&
               pages.map(({ path, element }) => (
                 <Route exact path={path} element={element} />
-              ))
+              )),
           )}
         </Routes>
         <div className="text-blue-gray-600">

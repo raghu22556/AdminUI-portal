@@ -87,7 +87,7 @@ const Sidebar = (props) => {
           alt="sidebar-logo"
           className="w-28"
         /> */}
-        <Typography className="text-[#DC216D] text-left font-poppins font-bold text-xl">
+        <Typography className="text-[#DC216D] font-poppins font-bold text-xl">
           MaidenCube
         </Typography>
         <MdClose
