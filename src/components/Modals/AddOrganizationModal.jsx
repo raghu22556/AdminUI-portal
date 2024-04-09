@@ -8,7 +8,6 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import { GrAdd } from "react-icons/gr";
-import EmailAddressInput from "../../common/EmailAddressInput";
 import { HiChevronLeft } from "react-icons/hi";
 import { HiChevronRight } from "react-icons/hi";
 import EmailAddressInputModal from "../../common/EmailAddressInputModal";

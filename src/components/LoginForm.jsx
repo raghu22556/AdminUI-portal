@@ -13,10 +13,12 @@ import {
 } from "@material-tailwind/react";
 
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
-import CustomPasswordInput from "../common/CustomPasswordInput";
-import CustomEmailInput from "../common/CustomEmailInput";
 import AppleSignUpBtn from "../common/AppleSignUpBtn";
 import GoogleSignUpBtn from "../common/GoogleSignUpBtn";
+import {
+  CustomEmailInput,
+  CustomPasswordInput,
+} from "../maiden-core/ui-components";
 import axios from "axios";
 // import LoginForm from "../../../components/LoginForm";
 //import Divider from '@mui/material/Divider';
@@ -24,8 +26,10 @@ import axios from "axios";
 const LoginForm = () => {
   const navigate = useNavigate();
   const [showPass, setShowPass] = useState(false);
+  const [email, setEmail] = useState("");
   const handleShowPass = () => setShowPass((prev) => !prev);
   const onLoginClick = () => {
+    alert(email);
     var params = {
       email: "webuser@confess.com",
       password: "Demo@145",
@@ -50,34 +54,8 @@ const LoginForm = () => {
         shadow={false}
       >
         <CardBody className="flex flex-col gap-3 ">
-          <CustomEmailInput
-            crossOrigin={""}
-            label="Email"
-            size="lg"
-            color="blue"
-            //required
-          />
-          <CustomPasswordInput
-            crossOrigin={""}
-            label="Password"
-            type={`${false ? "text" : "password"}`}
-            size="lg"
-            color="blue"
-            icon={
-              showPass ? (
-                <EyeIcon
-                  onClick={handleShowPass}
-                  className="h-5 w-5 text-blue-500 cursor-pointer"
-                />
-              ) : (
-                <EyeSlashIcon
-                  onClick={handleShowPass}
-                  className="h-5 w-5 cursor-pointer"
-                />
-              )
-            }
-            //required
-          />
+          <CustomEmailInput onChange={event => setEmail(event.target.value)}/>
+          <CustomPasswordInput />
           <div className=" flex justify-between ">
             <Checkbox
               variant="paragraph"

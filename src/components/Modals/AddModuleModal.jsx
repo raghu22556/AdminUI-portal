@@ -8,7 +8,7 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import { GrAdd } from "react-icons/gr";
-import EmailAddressInput from "../../common/EmailAddressInput";
+import { CustomEmailInput } from "../../maiden-core/ui-components";
 import { HiChevronLeft } from "react-icons/hi";
 import { HiChevronRight } from "react-icons/hi";
 
@@ -53,8 +53,8 @@ const AddModuleModal = () => {
         </DialogBody>
 
         <DialogBody>
-          <EmailAddressInput label={"Module Name"} />
-          <EmailAddressInput label={"Module Name"} />
+          <CustomEmailInput label={"Module Name"} />
+          <CustomEmailInput label={"Module Name"} />
         </DialogBody>
         <DialogFooter></DialogFooter>
       </Dialog>
