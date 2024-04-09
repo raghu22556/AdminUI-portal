@@ -11,6 +11,7 @@
     "prettier": "prettier --write src/**/*.js src/**/**/*.js src/**/**/**/*.js src/**/**/**/**/*.js src/**/*.jsx src/**/**/*.jsx src/**/**/**/*.jsx src/**/**/**/**/*.jsx"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.0",
     "@heroicons/react": "^2.1.3",
     "@hookform/resolvers": "^3.3.4",
