@@ -8,7 +8,7 @@ const CustomInput = (props) => {
   const { label } = props;
   return (
     <div
-      className=" flex flex-col border border-gray-300 p-2 rounded-md "
+      className=" flex flex-col border border-gray-300 p-2 rounded-md laptopM:w-full  laptopM:ml-0"
       style={{ height: 57 }}
     >
       {label && (
