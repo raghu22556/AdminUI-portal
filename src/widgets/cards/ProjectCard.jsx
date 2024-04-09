@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 export function ProjectCard({ title, discription, onClick }) {
   return (
     <Card className="rounded-md   border-1 border-[#95A4FC] " onClick={onClick}>
-      <CardBody className="p-4 text-right">
+      <CardBody className="p-4 text-right ">
         <Typography
           variant="small"
           className=" font-poppins text-black text-lg"

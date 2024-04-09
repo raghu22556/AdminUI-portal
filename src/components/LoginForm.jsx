@@ -1,5 +1,5 @@
 import { FormEvent, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import {
   Card,
@@ -17,12 +17,31 @@ import CustomPasswordInput from "../common/CustomPasswordInput";
 import CustomEmailInput from "../common/CustomEmailInput";
 import AppleSignUpBtn from "../common/AppleSignUpBtn";
 import GoogleSignUpBtn from "../common/GoogleSignUpBtn";
+import axios from "axios";
 // import LoginForm from "../../../components/LoginForm";
 //import Divider from '@mui/material/Divider';
 
 const LoginForm = () => {
+  const navigate = useNavigate();
   const [showPass, setShowPass] = useState(false);
   const handleShowPass = () => setShowPass((prev) => !prev);
+  const onLoginClick = () => {
+    var params = {
+      email: "webuser@confess.com",
+      password: "Demo@145",
+      OrganizationId: "2f6eca88-278d-49ee-8c25-e916a24c6019",
+    };
+    axios
+      .post(
+        "https://maidenconfessapp.azurewebsites.net/api/v1/Registration/VerifyAdminUser",
+        params,
+      )
+      .then((response) => {
+        localStorage.setItem("menu", JSON.stringify(response.data.menu));
+        navigate("/screen3");
+      });
+  };
+
   return (
     <div className="">
       <Card
@@ -61,16 +80,16 @@ const LoginForm = () => {
               }
               required
             />
-            <div className=" flex laptopM:justify-between   ">
+            <div className=" flex justify-between mobile:text-xs mobile:text-center laptop:text-sm mobile:-ml-4  laptop:flex-row  ">
               <Checkbox
                 variant="paragraph"
                 label="Keep Me Login"
-                className="text-sm"
+                className="text-sm mobile:h-4 mobile:w-4"
                 color="blue"
               />
 
               <Typography
-                className="text-sm mt-2.5 ml-16"
+                className="laptop:text-sm laptop:mt-2.5 laptop:ml-16 mobile:text-start  mobile:text-xs  mt-3  "
                 style={{ color: "#6499E9" }}
               >
                 Forgot Password?
@@ -79,28 +98,29 @@ const LoginForm = () => {
           </CardBody>
 
           <CardFooter className="pt-0">
-            <Button
-              className=" bg-primary font-poppins laptopM:w-full w-72 ml-6 laptopM:ml-0"
-              type="submit"
-              shadow={false}
-              
-              // color="blue"
-              disabled={false}
-            >
-              Log In
-            </Button>
-            <Typography variant="small" className="mt-3 flex laptopM:justify-center ml-8 ">
-              Don&apos;t have an account?
-              <Link to="/signup" className="ml-1 font-bold text-blue-500">
-                Create Account
-              </Link>
-            </Typography>
+            <div>
+              <Button
+                className=" bg-primary font-poppins laptopM:w-full mobile:w-80 mobile:justify-center laptopM:ml-0"
+                type="submit"
+                shadow={false}
+                // color="blue"
+                disabled={false}
+              >
+                Log In
+              </Button>
+              <Typography className="mt-3 flex laptopM:justify-center laptop:ml-8  laptop:text-sm mobile:text-xs mobile:justify-center ">
+                Don&apos;t have an account?
+                <Link to="/signup" className="ml-1 font-bold text-blue-500">
+                  Create Account
+                </Link>
+              </Typography>
+            </div>
 
-            <Typography variant="small" className="mt-5 flex laptopM:justify-center mobile:justify-center ">
+            <Typography className="mt-5 flex laptopM:justify-center laptop:text-sm mobile:text-xs  mobile:justify-center ">
               OR Login With
             </Typography>
 
-            <div className="flex gap-3 mt-4 mobile:flex-col  laptopM:flex-row">
+            <div className="flex gap-3 mt-4 mobile:flex-col  laptopM:flex-row mobile:items-center  ">
               <AppleSignUpBtn />
               <GoogleSignUpBtn />
             </div>
@@ -108,12 +128,12 @@ const LoginForm = () => {
         </form>
       </Card>
 
-      <div className="lg:mt-12  ">
-        <div className="flex laptop:justify-between items-center lg:w-full mobile:flex-col laptopM:flex-row ">
-          <div className="text-black laptop:text-xs text-start mt-3 -ml-24 mobile:text-[10px]">
+      <div className="mt-12  mobile:items-center ">
+        <div className="flex laptop:justify-between  items-center w-full mobile:flex-col laptopM:flex-row laptop:-ml-24">
+          <div className="text-black laptop:text-xs  mt-3 mobile:text-[11px]">
             Copyright © 2022 Maiden Cube Pvt Ltd . All rights reserved.
           </div>
-          <div className="laptop:text-xs laptop:mt-3 laptopM:-mr-24 mobile:text-[10px] mobile:-ml-20 ">
+          <div className="laptop:text-xs laptop:mt-3 mobile:text-[11px] ">
             Privacy Policy terms & Condition
           </div>
         </div>

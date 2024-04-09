@@ -11,7 +11,10 @@ const Layout = (Child) => {
         {/* Sidebar */}
         <section
           id="sidebar"
-          className={`w-80 z-50 lg:w-80 overflow-y-auto md:w-96 shadow border-gray-200 bg-white p-2 md:static absolute h-full transition-all duration-50 ${
+          // className={`w-80 z-50 lg:w-80 overflow-y-auto md:w-96 shadow border-gray-200 bg-white p-2 md:static absolute h-full transition-all duration-50 ${
+          //   drawer ? "md:hidden left-0" : "-left-full"
+          // }`}
+          className={`w-60 z-50 lg:w-60 overflow-y-auto md:w-60  border-gray-200 bg-white p-2 md:static absolute h-full transition-all duration-50 ${
             drawer ? "md:hidden left-0" : "-left-full"
           }`}
         >

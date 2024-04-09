@@ -34,23 +34,23 @@ export const welcomePage = (RenderComponent) => {
 
           <div class="lg:w-1/2 laptopM:h-full">
             <main className="h-screen w-full flex flex-col bg-sky-300  justify-center items-center ">
-              <div className="text-start laptopM:-ml-20 -ml-10 laptop:mt-20 -mt-32  ">
+              <div className="laptop:text-start laptopM:-ml-20 laptop:mt-20 mobile:text-center ">
                 <Typography
                   style={{ color: "#6499E9" }}
-                  className=" font-poppinss font-black  mobileM:text-center laptopM:text-start text-3xl "
+                  className=" font-poppinss font-black  mobileM:items-center laptopM:text-start laptop:text-3xl  mobile:text-2xl"
                 >
                   MaidanCube
                 </Typography>
                 <Typography
                   variant="h5"
                   style={{ color: "black" }}
-                  className=" font-bold font-poppinss mobileM:text-center laptopM:text-start mt-8"
+                  className=" laptop:font-bold font-poppinss mobileM:text-center laptopM:text-start laptop:mt-8 mobile:mt-3 mobile:text-sm"
                 >
                   {text}
                 </Typography>
                 <Typography
                   style={{ color: "black" }}
-                  className=" mt-2 text-xs  font-poppinss"
+                  className=" mt-2 laptop:text-xs mobile:text-xs  font-poppinss"
                 >
                   It is a long established fact that a reader will be distracted
                   by the  

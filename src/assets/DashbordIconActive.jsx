@@ -1,4 +1,4 @@
-export default function DashbordIcon({ color = "#0D0E12" }) {
+export default function DashbordIconActive({ color = "#6499E9" }) {
   return (
     <svg
       width="20"

@@ -7,15 +7,19 @@ import { GrAdd } from "react-icons/gr";
 import OrganizatiopnCardsData from "../../../data/OrganizatiopnCardsData";
 import SearchInput from "../../../common/SearchInput";
 import AddModuleModal from "../../../components/Modals/AddModuleModal";
+
 // import { Table, Popover } from "antd";
 
-
-import { Table, Popover, Button, Space } from 'antd';
-import { EllipsisOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { Table, Popover, Button, Space } from "antd";
+import {
+  EllipsisOutlined,
+  EditOutlined,
+  DeleteOutlined,
+} from "@ant-design/icons";
 
 import AddOrganizationModal from "../../../components/Modals/AddOrganizationModal";
 // import { EditIcon } from "../../../assets";
-import EditIcon from './../../../assets/editicon.svg'
+import EditIcon from "./../../../assets/editicon.svg";
 import StatusIcon from "../../../assets/StatusIcon";
 const ProjectTablePage = () => {
   const columns = [
@@ -62,24 +66,30 @@ const ProjectTablePage = () => {
         switch (status) {
           case "pending":
             // statusLabel = <span className="text-yellow-500">Pending</span>;
-            statusLabel = <div className=" flex justify-center">
-              <StatusIcon color={'#59A8D4'}/> 
-              <span className="text-[#59A8D4]">Pending</span>
-            </div>;
+            statusLabel = (
+              <div className=" flex justify-center">
+                <StatusIcon color={"#59A8D4"} />
+                <span className="text-[#59A8D4]">Pending</span>
+              </div>
+            );
             break;
           case "completed":
             // statusLabel = <span className="text-green-500">Completed</span>;
-            statusLabel = <div className=" flex justify-center">
-            <StatusIcon color={'#4AA785'}/> 
-            <span className="text-[#4AA785]">Completed</span>
-          </div>;
+            statusLabel = (
+              <div className=" flex justify-center">
+                <StatusIcon color={"#4AA785"} />
+                <span className="text-[#4AA785]">Completed</span>
+              </div>
+            );
             break;
           case "inprogress":
             // statusLabel = <span className="text-blue-500">In Progress</span>;
-            statusLabel = <div className=" flex justify-center">
-            <StatusIcon color={'#59A8D4'} className=" "/> 
-            <span className="text-[#59A8D4]">Progress</span>
-          </div>;
+            statusLabel = (
+              <div className=" flex justify-center">
+                <StatusIcon color={"#59A8D4"} className=" " />
+                <span className="text-[#59A8D4]">Progress</span>
+              </div>
+            );
             break;
           default:
             statusLabel = <span>{status}</span>;
@@ -108,7 +118,7 @@ const ProjectTablePage = () => {
           <Button type="text" icon={<EllipsisOutlined />} />
         </Popover>
       ),
-    
+
       // render: (text, record) => (
       //   <Popover
       //     content={
@@ -133,7 +143,6 @@ const ProjectTablePage = () => {
       //       </svg>
 
       //     </IconButton>
-
 
       //   </Popover>
       // ),
@@ -216,18 +225,18 @@ const ProjectTablePage = () => {
         <div></div>
       </div>
       <div className="overflow-x-auto">
-      <Table
-        className="table-auto min-w-full"
-        bordered
-        size="middle" // or "small" for smaller size
-        columns={columns}
-        dataSource={data}
-        onChange={onChange}
-        showSorterTooltip={{
-          target: "sorter-icon",
-        }}
-      />
-   </div>
+        {/* <Table
+          className="table-auto min-w-full"
+          bordered
+          size="middle" // or "small" for smaller size
+          columns={columns}
+          dataSource={data}
+          onChange={onChange}
+          showSorterTooltip={{
+            target: "sorter-icon",
+          }}
+        /> */}
+      </div>
     </div>
   );
 };

@@ -29,6 +29,8 @@ import { Button, Typography } from "@material-tailwind/react";
 
 import svgIcon from "./../../assets/category.svg";
 import DashbordIcon from "../../assets/DashbordIcon";
+import DashbordIconActive from "../../assets/DashbordIconActive";
+import SubIcons from "../../assets/SubIcons";
 const Sidebar = (props) => {
   const navigate = useNavigate();
   const { handleToggle } = props;
@@ -47,33 +49,58 @@ const Sidebar = (props) => {
     {
       name: "Dashboard",
       icon: <DashbordIcon />,
+      activeIcon: <DashbordIconActive />,
       path: "/dashboard",
     },
     {
       name: "Organization",
       icon: <DashbordIcon />,
+      activeIcon: <DashbordIconActive />,
       path: "/organization",
     },
     {
       name: "Projects",
       icon: <DashbordIcon />,
+      activeIcon: <DashbordIconActive />,
       path: "/projects",
     },
     {
       name: "Reports",
       icon: <DashbordIcon />,
+      activeIcon: <DashbordIconActive />,
       path: "/Reports",
     },
 
     {
       name: "Masters",
       icon: <DashbordIcon />,
+      activeIcon: <DashbordIconActive />,
       path: "/UserManagement",
       child: [
-        { name: "User Management", path: "/userpage" },
-        { name: "Designations", path: "/Masters/UserManagement" },
-        { name: "Roles", path: "/Masters/UserManagement" },
-        { name: "Access Control", path: "/Masters/UserManagement" },
+        {
+          name: "User Management",
+          path: "/userpage",
+          icon: <SubIcons />,
+          activeIcon: <SubIcons />,
+        },
+        {
+          name: "Designations",
+          path: "/Masters/UserManagement",
+          icon: <SubIcons />,
+          activeIcon: <SubIcons />,
+        },
+        {
+          name: "Roles",
+          path: "/Masters/UserManagement",
+          icon: <SubIcons />,
+          activeIcon: <SubIcons />,
+        },
+        {
+          name: "Access Control",
+          path: "/Masters/UserManagement",
+          icon: <SubIcons />,
+          activeIcon: <SubIcons />,
+        },
       ],
     },
   ];
@@ -87,7 +114,7 @@ const Sidebar = (props) => {
           alt="sidebar-logo"
           className="w-28"
         /> */}
-        <Typography className="text-[#DC216D] font-poppins font-bold text-xl">
+        <Typography className="text-[#6499E9] font-poppins font-bold text-xl">
           MaidenCube
         </Typography>
         <MdClose
@@ -110,10 +137,14 @@ const Sidebar = (props) => {
                 }
                 className={`flex cursor-pointer font-medium   items-center gap-2 ${
                   (item.name === dropValue || item.path === pathname) &&
-                  "text-white bg-[#1C1C1C]"
+                  "text-[#6499E9] bg-[#E5ECF680]"
                 } lg:text-base cursor-pointer py-1.5 md:px-3 rounded items-center relative gap-2 `}
               >
-                <span className="text-lg">{item.icon}</span>
+                {item.name === dropValue || item.path === pathname ? (
+                  <span className="text-lg">{item.activeIcon}</span>
+                ) : (
+                  <span className="text-lg">{item?.icon}</span>
+                )}
                 <span className=" font-poppins text-sm">{item.name}</span>
                 {item.child && (
                   <span className="ml-auto">
@@ -138,7 +169,12 @@ const Sidebar = (props) => {
                           subItem.path === pathname && "text-color"
                         }`}
                       >
-                        - <span>{subItem.name}</span>
+                        {item.path === pathname ? (
+                          <span className="text-lg">{subItem.activeIcon}</span>
+                        ) : (
+                          <span className="text-lg">{subItem.icon}</span>
+                        )}
+                        <span>{subItem.name}</span>
                       </div>
                     );
                   })}

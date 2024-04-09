@@ -8,7 +8,7 @@ const CustomPasswordInput = (props) => {
   const handleShowPass = () => setShowPass((prev) => !prev);
   return (
     <div
-      className=" flex flex-col   border border-gray-300 p-2 rounded-md mt-2 laptopM:mt-0 ml-10 laptopM:ml-0"
+      className=" flex flex-col   border border-gray-300 p-2 rounded-md mt-2 laptopM:mt-0  "
       style={{ height: 59 }}
     >
       <Typography variant="small" color="gray" className="text-xs">

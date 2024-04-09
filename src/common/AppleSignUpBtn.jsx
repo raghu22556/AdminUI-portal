@@ -6,10 +6,8 @@ const AppleSignUpBtn = () => {
     <div>
       <Button
         shadow={false}
-        className="flex items-center gap-3 text-sm lowercase "
-        // style={{ backgroundColor: '#eceff1', color: '#eceff1' }}
-        style={{ backgroundColor: "#eceff1", color: "black", width: "210px" }}
-        // variant="gradient"
+        className="flex items-center gap-3 text-sm lowercase  laptopM:w-full "
+        style={{ backgroundColor: "#eceff1", color: "black" }}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
