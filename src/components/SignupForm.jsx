@@ -12,20 +12,17 @@ import {
   Button,
 } from "@material-tailwind/react";
 
-import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
-import CustomInput from "../common/CustomPasswordInput";
-import CustomPasswordInput from "../common/CustomPasswordInput";
 import OrganizationNameInput from "../common/OrganizationNameInput";
-import EmailAddressInput from "../common/EmailAddressInput";
-import CreatePasswordInput from "../common/CreatePasswordInput";
-import CreateConfirmPasswordInput from "../common/CreateConfirmPasswordInput";
 
-import CustomEmailInput from "../common/CustomEmailInput";
+import {
+  CustomEmailInput,
+  CustomPasswordInput,
+  CustomConfirmPasswordInput
+} from "../maiden-core/ui-components";
+
 import AppleSignUpBtn from "../common/AppleSignUpBtn";
 import GoogleSignUpBtn from "../common/GoogleSignUpBtn";
 const SignupForm = () => {
-  const [showPass, setShowPass] = useState(false);
-  const handleShowPass = () => setShowPass((prev) => !prev);
   return (
     <Card className="px-4  max-w-lg w-full " color="transparent" shadow={false}>
       <form onSubmit={(value) => {}}>
@@ -37,55 +34,9 @@ const SignupForm = () => {
             color="blue"
             required
           />
-          <EmailAddressInput
-            crossOrigin={""}
-            label="Email Address"
-            size="lg"
-            color="blue"
-            required
-          />
-          <CreatePasswordInput
-            crossOrigin={""}
-            label="Create Password"
-            type={`${false ? "text" : "password"}`}
-            size="lg"
-            color="blue"
-            icon={
-              showPass ? (
-                <EyeIcon
-                  onClick={handleShowPass}
-                  className="h-5 w-5 text-blue-500 cursor-pointer"
-                />
-              ) : (
-                <EyeSlashIcon
-                  onClick={handleShowPass}
-                  className="h-5 w-5 cursor-pointer"
-                />
-              )
-            }
-            required
-          />
-          <CreateConfirmPasswordInput
-            crossOrigin={""}
-            label="Confirm Password"
-            type={`${false ? "text" : "password"}`}
-            size="lg"
-            color="blue"
-            icon={
-              showPass ? (
-                <EyeIcon
-                  onClick={handleShowPass}
-                  className="h-5 w-5 text-blue-500 cursor-pointer"
-                />
-              ) : (
-                <EyeSlashIcon
-                  onClick={handleShowPass}
-                  className="h-5 w-5 cursor-pointer"
-                />
-              )
-            }
-            required
-          />
+          <CustomEmailInput onChange={event => setEmail(event.target.value)} required/>
+          <CustomPasswordInput label="Create Password" required />
+          <CustomConfirmPasswordInput label="Confirm Password" required />
         </CardBody>
 
         <CardFooter className="pt-0">
