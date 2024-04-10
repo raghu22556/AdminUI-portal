@@ -6,6 +6,7 @@ const CustomInput_Old = (props) => <Input {...props} />;
 
 const CustomInput = (props) => {
   const { label } = props;
+
   return (
     <div
       className=" flex flex-col border border-gray-300 p-2 rounded-md laptopM:w-full  laptopM:ml-0"
@@ -37,12 +38,13 @@ const CustomEmailInput = (props) => {
 
 const CustomPasswordInput = (props) => {
   const [showPass, setShowPass] = useState(false);
+
   const handleShowPass = () => setShowPass((prev) => !prev);
   let componentType = "password";
-  if(props.type){
+  if (props.type) {
     componentType = props.type;
   }
-  if(showPass){
+  if (showPass) {
     componentType = "text";
   }
   return (
@@ -71,4 +73,9 @@ const CustomConfirmPasswordInput = (props) => {
   return <CustomPasswordInput {...props} placeholder="Enter password" />;
 };
 
-export { CustomInput, CustomEmailInput, CustomPasswordInput, CustomConfirmPasswordInput };
+export {
+  CustomInput,
+  CustomEmailInput,
+  CustomPasswordInput,
+  CustomConfirmPasswordInput,
+};
