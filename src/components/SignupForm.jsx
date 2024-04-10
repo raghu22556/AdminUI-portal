@@ -17,12 +17,28 @@ import OrganizationNameInput from "../common/OrganizationNameInput";
 import {
   CustomEmailInput,
   CustomPasswordInput,
-  CustomConfirmPasswordInput
+  CustomConfirmPasswordInput,
 } from "../maiden-core/ui-components";
 
 import AppleSignUpBtn from "../common/AppleSignUpBtn";
 import GoogleSignUpBtn from "../common/GoogleSignUpBtn";
+import { Password } from "@mui/icons-material";
 const SignupForm = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("hello");
+  const [confirmPass, setConfirPass] = useState("");
+
+  const continueHandler = () => {
+    const signupData = {
+      email: email,
+      Password: Password,
+      confirmPass: confirmPass,
+    };
+
+    const signupDataJSON = JSON.stringify(signupData);
+    alert(signupDataJSON);
+  };
+
   return (
     <Card className="px-4  max-w-lg w-full " color="transparent" shadow={false}>
       <form onSubmit={(value) => {}}>
@@ -34,9 +50,23 @@ const SignupForm = () => {
             color="blue"
             required
           />
-          <CustomEmailInput onChange={event => setEmail(event.target.value)} required/>
-          <CustomPasswordInput label="Create Password" required />
-          <CustomConfirmPasswordInput label="Confirm Password" required />
+          <CustomEmailInput
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
+            required
+          />
+          <CustomPasswordInput
+            value={password}
+            label="Create Password"
+            required
+            onChange={(event) => setPassword(event.target.value)}
+          />
+          <CustomConfirmPasswordInput
+            value={confirmPass}
+            label="Confirm Password"
+            required
+            onChange={(event) => setConfirPass(event.target.value)}
+          />
         </CardBody>
 
         <CardFooter className="pt-0">
@@ -44,6 +74,7 @@ const SignupForm = () => {
             <Button
               className=" bg-primary font-poppins "
               type="submit"
+              onClick={continueHandler}
               shadow={false}
               fullWidth
               // color="blue"
