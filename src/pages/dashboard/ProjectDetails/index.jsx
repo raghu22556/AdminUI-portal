@@ -1,7 +1,6 @@
 import React from "react";
 import Layout from "../../../components/Layout";
-import ProjectCardsData from "../../../data/ProjectCardsData";
-import { ProjectCard } from "../../../widgets/cards";
+
 import { Button, Typography } from "@material-tailwind/react";
 import { GrAdd } from "react-icons/gr";
 import { AgGridReact } from "ag-grid-react";

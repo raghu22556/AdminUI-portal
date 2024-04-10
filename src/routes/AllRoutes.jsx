@@ -9,11 +9,18 @@ import ProjectPage from "../pages/dashboard/ProjectPage";
 import SignupPage from "../pages/auth/SignupPage";
 import Screen3 from "../common/Screen3";
 import ProjectTablePage from "../pages/dashboard/ProjectTablePage";
+import Dashboard from "../pages/dashboard/Dashboard";
 
 const AllRoutes = [
   { name: "Login", path: "/", element: <LoginPage />, private: false },
   { name: "Signup", path: "/signup", element: <SignupPage />, private: false },
   { name: "Scree3", path: "/screen3", element: <Screen3 />, private: false },
+  {
+    name: "Dashboard",
+    path: "/dashboard",
+    element: <Dashboard />,
+    private: false,
+  },
   {
     name: "AcceptTerm",
     path: "/acceptterm",
