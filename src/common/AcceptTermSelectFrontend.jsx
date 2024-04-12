@@ -2,8 +2,14 @@ import React, { useState } from "react";
 import { Typography, Select, Option } from "@material-tailwind/react";
 
 const AcceptTermSelectFrontend = (props) => {
-  const { label, icon, action } = props;
-  const [selectedValue, setSelectedValue] = useState("");
+  const { label, onChange } = props;
+  const [selectedFrontendValue, setSelectedFrontendValue] = useState("");
+
+  const selectFrontendHandler = (event) => {
+    const selectedValue = event;
+    setSelectedFrontendValue(selectedValue);
+    onChange(selectedValue);
+  };
 
   return (
     <>
@@ -21,14 +27,15 @@ const AcceptTermSelectFrontend = (props) => {
           labelProps={{ className: "hidden" }}
           containerProps={{ className: "w-[100px]" }}
           style={{ border: "none", padding: 0, margin: 0 }}
-          value={selectedValue}
+          value={selectedFrontendValue}
+          onChange={selectFrontendHandler}
         >
           <Option value="" disabled>
             Select
           </Option>
-          <Option value="">Beginner</Option>
-          <Option value="">Intermediate</Option>
-          <Option value="">Expert</Option>
+          <Option value="Beginner">Beginner</Option>
+          <Option value="Intermediate">Intermediate</Option>
+          <Option value="Expert">Expert</Option>
         </Select>
       </div>
     </>
