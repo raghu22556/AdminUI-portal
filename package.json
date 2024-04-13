@@ -11,6 +11,9 @@
     "prettier": "prettier --write src/**/*.js src/**/**/*.js src/**/**/**/*.js src/**/**/**/**/*.js src/**/*.jsx src/**/**/*.jsx src/**/**/**/*.jsx src/**/**/**/**/*.jsx"
   },
   "dependencies": {
+    "@ag-grid-community/client-side-row-model": "^31.2.1",
+    "@ag-grid-community/react": "^31.2.1",
+    "@ag-grid-community/styles": "^31.2.1",
     "@ant-design/icons": "^5.3.6",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.0",
@@ -21,7 +24,7 @@
     "@mui/material": "^5.15.15",
     "@mui/x-charts": "^7.1.1",
     "ag-grid-community": "^31.2.0",
-    "ag-grid-react": "^31.2.0",
+    "ag-grid-react": "^31.2.1",
     "antd": "^5.16.1",
     "apexcharts": "^3.48.0",
     "autoprefixer": "^10.4.19",

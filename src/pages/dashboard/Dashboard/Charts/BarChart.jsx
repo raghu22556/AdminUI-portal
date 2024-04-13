@@ -37,7 +37,7 @@ export default function BasicBars() {
                 width={bar.width}
                 height={bar.height}
               />
-            ))
+            )),
           )
         }
       </BarChart>
