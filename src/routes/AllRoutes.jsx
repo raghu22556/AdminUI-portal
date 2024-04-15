@@ -2,6 +2,7 @@
 import LoginPage from "../pages/auth/LoginPage";
 import AcceptTermPage from "../pages/auth/AcceptTermPage";
 import Organization from "../pages/dashboard/Organization";
+import NewOrganization from "../pages/dashboard/NewOrganization";
 import ProjectsPage from "../pages/dashboard/Projects";
 import ProjectDetailsPage from "../pages/dashboard/ProjectDetails";
 import UsersPage from "../pages/dashboard/UsersPage";
@@ -15,6 +16,12 @@ const AllRoutes = [
   { name: "Login", path: "/", element: <LoginPage />, private: false },
   { name: "Signup", path: "/signup", element: <SignupPage />, private: false },
   { name: "Scree3", path: "/screen3", element: <Screen3 />, private: false },
+  {
+    name: "NewOrganization",
+    path: "/neworganization",
+    element: <NewOrganization />,
+    private: false,
+  },
   {
     name: "Dashboard",
     path: "/dashboard",
