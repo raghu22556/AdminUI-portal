@@ -29,6 +29,12 @@ const AllRoutes = [
     private: false,
   },
   {
+    name: "MuiComponents",
+    path: "/muiComponents",
+    element: <MuiComponents />,
+    private: false,
+  },
+  {
     name: "AcceptTerm",
     path: "/acceptterm",
     element: <AcceptTermPage />,
