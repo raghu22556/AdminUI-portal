@@ -17,10 +17,37 @@ import {
   Option,
 } from "@material-tailwind/react";
 
-// import LoginForm from "../../../components/LoginForm";
-//import Divider from '@mui/material/Divider';
-
 const AcceptTermForm = () => {
+  const [acceptTermSelectBackend, setAcceptTermSelectBackend] = useState("");
+  const [acceptTermSelectFrontend, setAcceptTermSelectFrontend] = useState("");
+  const [selectedRole, setSelectedRole] = useState("");
+
+  const selectBackendHandler = (selectedValue) => {
+    setAcceptTermSelectBackend(selectedValue);
+  };
+
+  const selectFrontendHandler = (selectedValue) => {
+    setAcceptTermSelectFrontend(selectedValue);
+  };
+
+  const selectRoleHandler = (selectedValue) => {
+    setSelectedRole(selectedValue);
+  };
+
+  const formSubmitHandler = (event) => {
+    event.preventDefault();
+
+    var selectedData = {
+      acceptBackend: acceptTermSelectBackend,
+      acceptFrontend: acceptTermSelectFrontend,
+      selectRole: selectedRole,
+    };
+
+    const jsonData = JSON.stringify(selectedData);
+
+    alert(jsonData);
+  };
+
   return (
     <div className="">
       <Card
@@ -29,7 +56,7 @@ const AcceptTermForm = () => {
         shadow={false}
         style={{ width: "800px" }}
       >
-        <form onSubmit={(value) => {}}>
+        <form onSubmit={formSubmitHandler}>
           <CardBody className="flex flex-col gap-3 ">
             <AcceptTermSelectBackend
               crossOrigin={""}
@@ -37,6 +64,8 @@ const AcceptTermForm = () => {
               size="lg"
               color="blue"
               required
+              value={acceptTermSelectBackend}
+              onChange={selectBackendHandler}
             />
             <AcceptTermSelectFrontend
               crossOrigin={""}
@@ -44,6 +73,8 @@ const AcceptTermForm = () => {
               size="lg"
               color="blue"
               required
+              value={acceptTermSelectFrontend}
+              onChange={selectFrontendHandler}
             />
             <AcceptTermSelectRole
               crossOrigin={""}
@@ -51,6 +82,8 @@ const AcceptTermForm = () => {
               size="lg"
               color="blue"
               required
+              value={selectedRole}
+              onChange={selectRoleHandler}
             />
 
             <div className=" flex justify-between ">

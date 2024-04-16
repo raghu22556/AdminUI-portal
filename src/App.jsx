@@ -13,10 +13,10 @@ const App = () => {
     <>
       <Loader isLoading={isLoading} />
       <Routes>
-        {AllRoutes.map((item) => {
+        {AllRoutes.map((item, index) => {
           const { name, path, element } = item;
           return (
-            <Route name={name} path={path} element={element} exact={true} />
+            <Route name={name} path={path} element={element} exact={true} key={index}/>
           );
         })}
       </Routes>

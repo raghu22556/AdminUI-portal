@@ -142,7 +142,7 @@ const Sidebar = (props) => {
       </section>
 
       {/* NavLinks */}
-      <nav className="my-7 grid gap-1 tracking-wide text-sm px-4 text-[rgb(145,145,145)]">
+      <nav className="my-7 grid gap-1 tracking-wide  text-sm px-4  text-[rgb(145,145,145)]">
         {navLinks.map((item) => {
           return (
             <div key={item.name}>
