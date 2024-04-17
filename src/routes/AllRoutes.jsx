@@ -12,7 +12,7 @@ import Screen3 from "../common/Screen3";
 import ProjectTablePage from "../pages/dashboard/ProjectTablePage";
 import Dashboard from "../pages/dashboard/Dashboard";
 import { Forms } from "../maiden-core";
-import MuiComponents from "../Material-UI";
+
 const AllRoutes = [
   { name: "Login", path: "/", element: <LoginPage />, private: false },
   { name: "Signup", path: "/signup", element: <SignupPage />, private: false },
