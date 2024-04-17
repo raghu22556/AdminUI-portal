@@ -19,7 +19,7 @@ export const welcomePage = (RenderComponent) => {
               <div className="flex justify-center items-center bg-gradient-to-r from-[#DC216D] to-[#336AEA] h-screen">
                 <div className="text-start m-4">
                   <Typography variant="h5" color="white">
-                    MaidanCube
+                    MaidenCube
                   </Typography>
                   <Typography variant="h1" color="white" className="mt-4">
                     Your gateway
@@ -39,7 +39,7 @@ export const welcomePage = (RenderComponent) => {
                   style={{ color: "#6499E9" }}
                   className=" font-poppinss font-black  mobileM:items-center laptopM:text-start laptop:text-3xl  mobile:text-2xl"
                 >
-                  MaidanCube
+                  MaidenCube
                 </Typography>
                 <Typography
                   variant="h5"
