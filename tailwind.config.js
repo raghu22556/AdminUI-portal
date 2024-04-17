@@ -1,5 +1,4 @@
-
-import  { Config } from "tailwindcss";
+import { Config } from "tailwindcss";
 import colors from "tailwindcss/colors";
 import withMT from "@material-tailwind/react/utils/withMT";
 
@@ -10,20 +9,16 @@ const config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-
-    fontFamily: {
-      'poppins': ['Poppins'],
-   },
     extend: {
-      // backgroundImage: {
-      //   "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-      //   "gradient-conic":
-      //     "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-      // },
- 
+      fontFamily: {
+        poppins: ["Poppins"],
+      },
+      fontWeight: {
+        normal: 400,
+        bold: 800,
+      },
       colors: {
         primary: "#6499E9",
-        // sky: colors.sky,
       },
       screens: {
         mobile: "320px",
@@ -35,9 +30,7 @@ const config = {
         laptop: "1024px",
         laptopM: "1280px",
       },
-     
     },
-
     screens: {
       mobile: "320px",
       mobileM: "475px",
@@ -51,4 +44,5 @@ const config = {
   },
   plugins: [],
 };
+
 export default withMT(config);

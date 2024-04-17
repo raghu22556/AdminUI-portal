@@ -5,11 +5,11 @@ import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
 const CustomInput_Old = (props) => <Input {...props} />;
 
 const CustomInput = (props) => {
-  const { label } = props;
+  const { label, isValid } = props;
 
   return (
     <div
-      className=" flex flex-col border border-gray-300 p-2 rounded-md laptopM:w-full  laptopM:ml-0"
+      className=" flex flex-col border border-gray-300 p-2 rounded-md laptopM:w-full  laptopM:ml-0 "
       style={{ height: 57 }}
     >
       {label && (

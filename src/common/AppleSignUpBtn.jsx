@@ -5,9 +5,15 @@ const AppleSignUpBtn = () => {
   return (
     <div>
       <Button
-        shadow={false}
-        className="flex items-center gap-3 text-sm lowercase  laptopM:w-full "
-        style={{ backgroundColor: "#eceff1", color: "black" }}
+        // shadow={false}
+        className="flex items-center gap-3 text-sm mobile:text-[11px] mobile:flex mobile:justify-center  lowercase  laptopM:w-full "
+        style={{
+          background: "rgba(28, 28, 28, 0.05)",
+          border: "1px solid rgba(28, 28, 28, 0.1)",
+          color: "black",
+          width: "230px",
+          boxShadow: "none",
+        }}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

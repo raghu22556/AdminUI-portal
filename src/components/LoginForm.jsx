@@ -1,131 +1,199 @@
-import { FormEvent, useState, useEffect } from "react";
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
 import {
   Card,
-  CardHeader,
   CardBody,
   CardFooter,
   Typography,
-  Input,
   Checkbox,
   Button,
+  Alert,
 } from "@material-tailwind/react";
-
-import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
-import AppleSignUpBtn from "../common/AppleSignUpBtn";
-import GoogleSignUpBtn from "../common/GoogleSignUpBtn";
 import {
   CustomEmailInput,
   CustomPasswordInput,
 } from "../maiden-core/ui-components";
 import axios from "axios";
-
-// import LoginForm from "../../../components/LoginForm";
-//import Divider from '@mui/material/Divider';
+import AppleSignUpBtn from "../common/AppleSignUpBtn";
+import GoogleSignUpBtn from "../common/GoogleSignUpBtn";
 
 const LoginForm = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(null);
+  const [typing, setTyping] = useState(false);
+  const [loginSuccess, setLoginSuccess] = useState(false); // New state for login success
+
+  const handleEmailChange = (event) => {
+    const value = event.target.value.toLowerCase();
+    setEmail(value);
+    setError(null);
+  };
+
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+    setError(null);
+    setTyping(true);
+  };
+
+  const handleBlur = () => {
+    if (!email.trim() || !email.includes("@")) {
+      setError("Email is required");
+    } else if (password.length < 8) {
+      setError("Password must be at least 8 characters long");
+    }
+    setTyping(false);
+  };
 
   const onLoginClick = () => {
-    const userData = {
-      email: email,
-      password: password,
-    };
-    const userDataJSON = JSON.stringify(userData);
-    alert(userDataJSON);
+    if (!email.trim() || !email.includes("@")) {
+      setError("Email is required");
+      return;
+    }
 
-    var params = {
+    if (password.length < 8) {
+      setError("Password must be at least 8 characters long");
+      return;
+    }
+
+    const numberRegex = /\d/;
+    const specialCharRegex = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/;
+
+    if (!numberRegex.test(password)) {
+      setError("Password must contain at least one number");
+      return;
+    }
+
+    if (!specialCharRegex.test(password)) {
+      setError("Password must contain at least one special character");
+      return;
+    }
+
+    const params = {
       email: "webuser@confess.com",
       password: "Demo@145",
       OrganizationId: "2f6eca88-278d-49ee-8c25-e916a24c6019",
     };
+
     axios
       .post(
         "https://maidenconfessapp.azurewebsites.net/api/v1/Registration/VerifyAdminUser",
-        params,
+        params
       )
       .then((response) => {
         localStorage.setItem("menu", JSON.stringify(response.data.menu));
-
-        navigate("/screen3");
+        setLoginSuccess(true); // Set login success state to true
+        setTimeout(() => {
+          navigate("/screen3");
+        }, 2000); // Navigate after 2 seconds
+      })
+      .catch((error) => {
+        console.error("Login failed:", error);
+        setError("Login failed. Please try again.");
       });
   };
 
   return (
-    <div className="">
+    <div>
       <Card
-        className="px-4  max-w-lg laptopM:w-full "
+        className="px-4 laptopM:w-[550px] mobileM:w-[95vw] mobileM:mt-2"
         color="transparent"
         shadow={false}
       >
-        <CardBody className="flex flex-col laptopM:gap-3 ">
+        <CardBody className="flex flex-col laptopM:gap-3 mobile:gap-3">
           <CustomEmailInput
-            onChange={(event) => setEmail(event.target.value)}
+            value={email}
+            onChange={handleEmailChange}
+            onBlur={handleBlur}
+            onFocus={() => {
+              setError(null);
+              setLoginSuccess(false); // Reset login success state on focus
+            }}
           />
           <CustomPasswordInput
-            onChange={(event) => setPassword(event.target.value)}
+            value={password}
+            onChange={handlePasswordChange}
+            onBlur={handleBlur}
+            onFocus={() => {
+              setError(null);
+              setLoginSuccess(false); // Reset login success state on focus
+            }}
           />
-          <div className=" flex justify-between mobile:text-xs mobile:text-center laptop:text-sm mobile:-ml-4  laptop:flex-row  ">
+          {error && !typing && (
+            <Alert
+              style={{
+                background: "#DF4A4A",
+                padding: "5px",
+                fontSize: "10px",
+                opacity: "1",
+                transition: "opacity 0.2s ease-in-out",
+              }}
+            >
+              {error}
+            </Alert>
+          )}
+          {loginSuccess && (
+            <Alert
+              style={{
+                background: "#4CAF50",
+                padding: "5px",
+                fontSize: "10px",
+                opacity: "1",
+                transition: "opacity 0.2s ease-in-out",
+              }}
+            >
+              Login successful!
+            </Alert>
+          )}
+          <Typography className=" m-[-5px] flex justify-between items-center laptop:text-sm mobile:text-xs text-black font-medium">
             <Checkbox
               variant="paragraph"
-              label="Keep Me Login"
-              className="text-sm mobile:h-4 mobile:w-4"
+              label="Keep Me Logged In"
+              className="text-xs"
               color="blue"
             />
-
-            <Typography
-              className="laptop:text-sm laptop:mt-2.5 laptop:ml-16 mobile:text-start  mobile:text-xs  mt-3  "
-              style={{ color: "#6499E9" }}
-            >
+            <Link to="/forgot-password" className="text-[#056EE9]">
               Forgot Password?
-            </Typography>
-          </div>
+            </Link>
+          </Typography>
         </CardBody>
-
         <CardFooter className="pt-0">
           <div>
             <Button
-              className=" bg-primary font-poppins laptopM:w-full mobile:w-80 mobile:justify-center laptopM:ml-0"
+              className="bg-[#056EE9] font-poppins laptopM:w-full mobileM:w-[100%] mobile:w-[90vw] mobile:justify-center laptopM:ml-0"
               type="submit"
               shadow={false}
-              // color="blue"
               disabled={false}
               onClick={onLoginClick}
             >
               Log In
             </Button>
-            <Typography className="mt-3 flex laptopM:justify-center laptop:ml-8  laptop:text-sm mobile:text-xs mobile:justify-center ">
+            <Typography className="mt-3 flex laptopM:justify-center laptop:ml-8 laptop:text-sm mobile:text-xs mobile:justify-center text-black font-bold">
               Don&apos;t have an account?
-              <Link to="/signup" className="ml-1 font-bold text-blue-500">
+              <Link to="/signup" className="ml-1 font-normal text-[#056EE9]">
                 Create Account
               </Link>
             </Typography>
           </div>
 
-          <Typography className="mt-5 flex laptopM:justify-center laptop:text-sm mobile:text-xs  mobile:justify-center ">
+          <Typography className="mt-5 flex laptopM:justify-center laptop:text-sm mobile:text-xs mobile:justify-center">
             OR Login With
           </Typography>
-
-          <div className="flex gap-3 mt-4 mobile:flex-col  laptopM:flex-row mobile:items-center  ">
+          <div className="flex gap-3 mt-4 mobile:flex-col laptop:w-[100%] laptopM:flex-row mobile:items-center">
             <AppleSignUpBtn />
             <GoogleSignUpBtn />
           </div>
         </CardFooter>
-      </Card>
-
-      <div className="mt-12  mobile:items-center ">
-        <div className="flex laptop:justify-between  items-center w-full mobile:flex-col laptopM:flex-row laptop:-ml-24">
-          <div className="text-black laptop:text-xs  mt-3 mobile:text-[11px]">
-            Copyright © 2022 Maiden Cube Pvt Ltd . All rights reserved.
-          </div>
-          <div className="laptop:text-xs laptop:mt-3 mobile:text-[11px] ">
-            Privacy Policy terms & Condition
-          </div>
+        <div className="border-t border-gray-300 w-[100%]">
+          <CardFooter className="pt-0">
+            <Typography className="flex justify-between text-black font-poppins font-medium laptop:text-[10px] mobile:text-[7px] mobile:mt-4 mt-2">
+              Copyright © 2022 Your Company. All rights reserved.
+              <div>Privacy Policy Terms & Condition</div>
+            </Typography>
+          </CardFooter>
         </div>
-      </div>
+      </Card>
     </div>
   );
 };

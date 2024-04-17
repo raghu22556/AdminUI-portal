@@ -5,9 +5,15 @@ const GoogleSignUpBtn = () => {
   return (
     <div>
       <Button
-        className="flex items-center gap-3 text-sm lowercase"
-        shadow={false}
-        style={{ backgroundColor: "#eceff1", color: "black", width: "210px" }}
+        className="flex items-center gap-3 text-sm lowercase mobile:text-[11px] mobile:flex mobile:justify-center"
+        shadow={true}
+        style={{
+          background: "rgba(28, 28, 28, 0.05)",
+          border: "1px solid rgba(28, 28, 28, 0.1)",
+          color: "black",
+          width: "230px",
+          boxShadow: "none",
+        }}
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
