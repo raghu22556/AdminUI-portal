@@ -2,8 +2,14 @@ import React, { useState } from "react";
 import { Typography, Select, Option } from "@material-tailwind/react";
 
 const AcceptTermSelectRole = (props) => {
-  const { label, icon, action } = props;
+  const { label, onChange } = props;
   const [selectedValue, setSelectedValue] = useState("");
+
+  const selectRoleHandler = (event) => {
+    const selectedValue = event;
+    setSelectedValue(selectedValue);
+    onChange(selectedValue);
+  };
 
   return (
     <>
@@ -22,13 +28,14 @@ const AcceptTermSelectRole = (props) => {
           containerProps={{ className: "w-[100px]" }}
           style={{ border: "none", padding: 0, margin: 0 }}
           value={selectedValue}
+          onChange={selectRoleHandler}
         >
           <Option value="" disabled>
             Select
           </Option>
-          <Option value="">Student</Option>
-          <Option value="">Organization</Option>
-          <Option value="">Researcher</Option>
+          <Option value="Student">Student</Option>
+          <Option value="Organization">Organization</Option>
+          <Option value="Researcher">Researcher</Option>
         </Select>
       </div>
     </>
