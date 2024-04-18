@@ -11,6 +11,8 @@ import SignupPage from "../pages/auth/SignupPage";
 import Screen3 from "../common/Screen3";
 import ProjectTablePage from "../pages/dashboard/ProjectTablePage";
 import Dashboard from "../pages/dashboard/Dashboard";
+import MuiComponents from "../Material-UI";
+
 import { Forms } from "../maiden-core";
 
 const AllRoutes = [
