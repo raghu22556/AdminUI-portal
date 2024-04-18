@@ -11,11 +11,13 @@ import SignupPage from "../pages/auth/SignupPage";
 import Screen3 from "../common/Screen3";
 import ProjectTablePage from "../pages/dashboard/ProjectTablePage";
 import Dashboard from "../pages/dashboard/Dashboard";
+import { Forms } from "../maiden-core";
 
 const AllRoutes = [
   { name: "Login", path: "/", element: <LoginPage />, private: false },
   { name: "Signup", path: "/signup", element: <SignupPage />, private: false },
   { name: "Scree3", path: "/screen3", element: <Screen3 />, private: false },
+  { name: "Forms", path: "/forms", element: <Forms />, private: false },
   {
     name: "NewOrganization",
     path: "/neworganization",
