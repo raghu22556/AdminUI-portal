@@ -12,10 +12,10 @@ export const welcomePage = (RenderComponent) => {
   return (
     <>
       <main className="h-screen w-full flex flex-col ">
-        <div class="lg:flex h-full">
-          <div class="lg:w-1/2   h-full hidden sm:block ">
+        <div className="lg:flex h-full">
+          <div className="lg:w-1/2   h-full hidden sm:block ">
             {/* <Card   variant="gradient" color="red" className="h-full w-full"></Card> */}
-            <div class="w-full h-full bg-white shadow-lg  overflow-hidden">
+            <div className="w-full h-full bg-white shadow-lg  overflow-hidden">
               <div className="flex justify-center items-center bg-gradient-to-r from-[#DC216D] to-[#336AEA] h-screen">
                 <div className="text-start m-4">
                   <Typography variant="h5" color="white">
@@ -32,7 +32,7 @@ export const welcomePage = (RenderComponent) => {
             </div>
           </div>
 
-          <div class="lg:w-1/2 laptopM:h-full">
+          <div className="lg:w-1/2 laptopM:h-full">
             <main className="h-screen w-full flex flex-col bg-sky-300  justify-center items-center ">
               <div className="laptop:text-start laptopM:-ml-20 laptop:mt-20 mobile:text-center ">
                 <Typography

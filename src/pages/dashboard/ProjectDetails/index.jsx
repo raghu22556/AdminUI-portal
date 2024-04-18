@@ -1,13 +1,12 @@
 import React from "react";
 import Layout from "../../../components/Layout";
-import ProjectCardsData from "../../../data/ProjectCardsData";
-import { ProjectCard } from "../../../widgets/cards";
+
 import { Button, Typography } from "@material-tailwind/react";
 import { GrAdd } from "react-icons/gr";
 import { AgGridReact } from "ag-grid-react";
 
-import "ag-grid-community/styles//ag-grid.css";
-import "ag-grid-community/styles//ag-theme-quartz.css";
+// import "ag-grid-community/styles//ag-grid.css";
+// import "ag-grid-community/styles//ag-theme-quartz.css";
 
 const ProjectDetailsPage = () => {
   const rowData = [

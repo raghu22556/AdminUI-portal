@@ -3,8 +3,13 @@ import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
 import { Typography, Select, Option } from "@material-tailwind/react";
 
 const AcceptTermSelectBackend = (props) => {
-  const { label, icon, action } = props;
+  const { label, icon, action, onChange } = props;
   const [selectedValue, setSelectedValue] = useState("");
+
+  const selectbackendChangeHandler = (event) => {
+    setSelectedValue(selectedValue);
+    onChange(event);
+  };
 
   return (
     <>
@@ -23,6 +28,7 @@ const AcceptTermSelectBackend = (props) => {
           containerProps={{ className: "w-[100px]" }}
           style={{ border: "none", padding: 0, margin: 0 }}
           value={selectedValue}
+          onChange={selectbackendChangeHandler}
         >
           <Option value="" disabled>
             Select
