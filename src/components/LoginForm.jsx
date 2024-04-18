@@ -22,33 +22,26 @@ const LoginForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
-  const [typing, setTyping] = useState(false);
-  const [loginSuccess, setLoginSuccess] = useState(false); // New state for login success
+  const [loginSuccess, setLoginSuccess] = useState(false);
 
   const handleEmailChange = (event) => {
     const value = event.target.value.toLowerCase();
     setEmail(value);
-    setError(null);
+    setError(null); // Clear error when typing in email input
   };
 
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
-    setError(null);
-    setTyping(true);
+    setError(null); // Clear error when typing in password input
   };
 
   const handleBlur = () => {
-    if (!email.trim() || !email.includes("@")) {
-      setError("Email is required");
-    } else if (password.length < 8) {
-      setError("Password must be at least 8 characters long");
-    }
-    setTyping(false);
+    // Do nothing on blur for now
   };
 
   const onLoginClick = () => {
     if (!email.trim() || !email.includes("@")) {
-      setError("Email is required");
+      setError("Email is invalid");
       return;
     }
 
@@ -83,10 +76,10 @@ const LoginForm = () => {
       )
       .then((response) => {
         localStorage.setItem("menu", JSON.stringify(response.data.menu));
-        setLoginSuccess(true); // Set login success state to true
+        setLoginSuccess(true);
         setTimeout(() => {
           navigate("/screen3");
-        }, 2000); // Navigate after 2 seconds
+        }, 2000);
       })
       .catch((error) => {
         console.error("Login failed:", error);
@@ -108,7 +101,7 @@ const LoginForm = () => {
             onBlur={handleBlur}
             onFocus={() => {
               setError(null);
-              setLoginSuccess(false); // Reset login success state on focus
+              setLoginSuccess(false);
             }}
           />
           <CustomPasswordInput
@@ -117,10 +110,10 @@ const LoginForm = () => {
             onBlur={handleBlur}
             onFocus={() => {
               setError(null);
-              setLoginSuccess(false); // Reset login success state on focus
+              setLoginSuccess(false);
             }}
           />
-          {error && !typing && (
+          {error && (
             <Alert
               style={{
                 background: "#DF4A4A",
@@ -163,13 +156,13 @@ const LoginForm = () => {
             <Button
               className="bg-[#056EE9] font-poppins laptopM:w-full mobileM:w-[100%] mobile:w-[90vw] mobile:justify-center laptopM:ml-0"
               type="submit"
-              shadow={false}
               disabled={false}
               onClick={onLoginClick}
+              style={{ shadow: "none" }}
             >
               Log In
             </Button>
-            <Typography className="mt-3 flex laptopM:justify-center laptop:ml-8 laptop:text-sm mobile:text-xs mobile:justify-center text-black font-bold">
+            <Typography className="mt-3 flex laptopM:justify-center laptop:ml-8 laptop:text-sm mobile:text-xs mobile:justify-center text-black font-medium">
               Don&apos;t have an account?
               <Link to="/signup" className="ml-1 font-normal text-[#056EE9]">
                 Create Account
