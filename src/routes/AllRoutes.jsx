@@ -30,12 +30,12 @@ const AllRoutes = [
     element: <Dashboard />,
     private: false,
   },
-  // {
-  //   name: "MuiComponents",
-  //   path: "/muiComponents",
-  //   element: <MuiComponents />,
-  //   private: false,
-  // },
+  {
+    name: "MuiComponents",
+    path: "/muiComponents",
+    element: <MuiComponents />,
+    private: false,
+  },
   {
     name: "AcceptTerm",
     path: "/acceptterm",
