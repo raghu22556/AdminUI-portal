@@ -22,7 +22,7 @@ export const welcomePage = (RenderComponent) => {
                     color="white"
                     className="font-poppins"
                   >
-                    MaidanCube
+                    MaidenCube
                   </Typography>
                   <Typography
                     variant="h1"
@@ -50,7 +50,7 @@ export const welcomePage = (RenderComponent) => {
                   style={{ color: "#056EE9" }}
                   className=" font-poppinss font-black  mobileM:items-center laptopM:text-start  laptop:text-3xl  mobile:text-2xl"
                 >
-                  MaidanCube
+                  MaidenCube
                 </Typography>
                 <Typography
                   variant="h5"

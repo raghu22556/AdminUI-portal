@@ -81,7 +81,7 @@ export default function Screen3() {
             className="text-lg font-semibold"
             style={{ color: "#5c8ed5", fontSize: "18px" }}
           >
-            MaidanCube
+            MaidenCube
           </h2>
           <nav className="mt-2">
             <a
