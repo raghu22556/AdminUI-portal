@@ -12,6 +12,7 @@ const AppleSignUpBtn = () => {
           border: "1px solid rgba(28, 28, 28, 0.1)",
           color: "black",
           width: "230px",
+          fontWeight : "600",
           boxShadow: "none",
         }}
       >

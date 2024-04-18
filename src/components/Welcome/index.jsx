@@ -55,7 +55,7 @@ export const welcomePage = (RenderComponent) => {
                 <Typography
                   variant="h5"
                   style={{ color: "black" }}
-                  className=" laptop:font-bold font-poppinss mobileM:text-center laptopM:text-start laptop:mt-8 mobile:mt-3 mobile:text-sm"
+                  className="font-poppinss mobileM:text-center laptopM:text-start laptop:mt-8 mobile:mt-3 mobile:text-sm"
                 >
                   {text}
                 </Typography>
