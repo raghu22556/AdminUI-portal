@@ -148,11 +148,7 @@ const Sidebar = (props) => {
             <div key={item.name}>
               <div
                 type="button"
-                onClick={() =>
-                  !item.child
-                    ? handleNavigate(item.path)
-                    : handleDrop(item.name)
-                }
+                onClick={() => handleNavigate(item.path)}
                 className={`flex cursor-pointer font-medium   items-center gap-2 ${
                   (item.name === dropValue || item.path === pathname) &&
                   "text-[#6499E9] bg-[#E5ECF680]"
@@ -164,19 +160,19 @@ const Sidebar = (props) => {
                   <span className="text-lg">{item?.icon}</span>
                 )}
                 <span className=" font-poppins text-sm">{item.name}</span>
-                {item.child && (
+                {/*item.child && (
                   <span className="ml-auto">
                     {item.name === dropValue ? (
                       <BsChevronUp />
                     ) : (
                       <BsChevronDown />
                     )}
-                    {/* <BsChevronUp /> */}
+                     <BsChevronUp /> }
                   </span>
-                )}
+                )*/}
               </div>
               {/* Child Links */}
-              {item.name === dropValue && (
+              {/*item.name === dropValue && (
                 <div className="ml-8 grid gap-2 my-2.5">
                   {item?.child?.map((subItem) => {
                     return (
@@ -197,7 +193,7 @@ const Sidebar = (props) => {
                     );
                   })}
                 </div>
-              )}
+              )*/}
             </div>
           );
         })}

@@ -12,6 +12,7 @@ import Screen3 from "../common/Screen3";
 import ProjectTablePage from "../pages/dashboard/ProjectTablePage";
 import Dashboard from "../pages/dashboard/Dashboard";
 import MuiComponents from "../Material-UI";
+import CardsLayout from "../components/CardsLayout";
 
 import { Forms } from "../maiden-core";
 
@@ -83,4 +84,11 @@ const AllRoutes = [
     private: false,
   },
 ];
+
+let menu = JSON.parse(localStorage.getItem("menu"));
+
+menu.forEach((menuItem) => {
+  AllRoutes.push({ name: menuItem.displayText, path:"/" + menuItem.url, element: <CardsLayout item={menuItem}/>, private: false });
+});
+
 export default AllRoutes;

@@ -3,7 +3,7 @@ import Sidebar from "../Sidebar";
 import Navbar from "../Navbar";
 
 const Layout = (Child) => {
-  return function Component() {
+  return function Component(props) {
     const [drawer, setDrawer] = useState(false);
     const handleToggle = () => setDrawer(!drawer);
     return (
@@ -25,7 +25,7 @@ const Layout = (Child) => {
         <section className="overflow-auto h-full w-full bg-[rgb(247,245,250)]">
           <Navbar handleToggle={handleToggle} drawer={drawer} />
           <div className="p-4 h-auto">
-            <Child />
+            <Child {...props}/>
           </div>
         </section>
       </div>
