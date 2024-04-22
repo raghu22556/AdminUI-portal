@@ -73,44 +73,46 @@ const Sidebar = (props) => {
       path: "/Reports",
     },
 
-    {
-      name: "Masters",
-      icon: <DashbordIcon />,
-      activeIcon: <DashbordIconActive />,
-      path: "/UserManagement",
-      child: [
-        {
-          name: "User Management",
-          path: "/userpage",
-          icon: <SubIcons />,
-          activeIcon: <SubIcons />,
-        },
-        {
-          name: "Designations",
-          path: "/Masters/UserManagement",
-          icon: <SubIcons />,
-          activeIcon: <SubIcons />,
-        },
-        {
-          name: "Roles",
-          path: "/Masters/UserManagement",
-          icon: <SubIcons />,
-          activeIcon: <SubIcons />,
-        },
-        {
-          name: "Access Control",
-          path: "/Masters/UserManagement",
-          icon: <SubIcons />,
-          activeIcon: <SubIcons />,
-        },
-      ],
-    },
+    // {
+    //   name: "Masters",
+    //   icon: <DashbordIcon />,
+    //   activeIcon: <DashbordIconActive />,
+    //   path: "/UserManagement",
+    //   child: [
+    //     {
+    //       name: "User Management",
+    //       path: "/userpage",
+    //       icon: <SubIcons />,
+    //       activeIcon: <SubIcons />,
+    //     },
+    //     {
+    //       name: "Designations",
+    //       path: "/Masters/UserManagement",
+    //       icon: <SubIcons />,
+    //       activeIcon: <SubIcons />,
+    //     },
+    //     {
+    //       name: "Roles",
+    //       path: "/Masters/UserManagement",
+    //       icon: <SubIcons />,
+    //       activeIcon: <SubIcons />,
+    //     },
+    //     {
+    //       name: "Access Control",
+    //       path: "/Masters/UserManagement",
+    //       icon: <SubIcons />,
+    //       activeIcon: <SubIcons />,
+    //     },
+    //   ],
+    // },
   ];
 
   menu.forEach((menuItem) => {
     let newNavItem = {
       name: menuItem.cardText,
       path: "/" + menuItem.url,
+      icon: <DashbordIcon />,
+      activeIcon: <DashbordIconActive />,
     };
 
     if (menuItem.children && menuItem.children.length > 0) {
@@ -142,7 +144,7 @@ const Sidebar = (props) => {
       </section>
 
       {/* NavLinks */}
-      <nav className="my-7 grid gap-1 tracking-wide  text-sm px-4  text-[rgb(145,145,145)]">
+      <nav className="my-7 grid gap-1 tracking-wide text-sm px-4  text-[rgb(145,145,145)]">
         {navLinks.map((item) => {
           return (
             <div key={item.name}>

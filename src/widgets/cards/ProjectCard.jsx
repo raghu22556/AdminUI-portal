@@ -7,14 +7,14 @@ export function ProjectCard({ title, discription, onClick }) {
       <CardBody className="p-4 text-right ">
         <Typography
           variant="small"
-          className=" font-poppins text-black text-lg"
+          className=" font-poppins text-black text-lg text-left font-bold"
         >
           {title}
         </Typography>
         <Typography
           variant="small"
           color="blue-gray"
-          className="text-sm mt-2 text-blue-gray-400 tracking-normal font-poppins"
+          className="mt-2 text-blue-gray-400 tracking-[.5px] font-poppins text-left text-[12px] "
         >
           {discription}
         </Typography>

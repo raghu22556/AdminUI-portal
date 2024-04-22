@@ -11,10 +11,10 @@ const OrganizationPage = () => {
   return (
     <div>
       <div className="flex justify-between mt-4">
-        <Typography className="text-xl text-black font-bold">
+        <Typography className="text-xl text-black font-poppins font-bold">
           Projects
         </Typography>
-        <Button className="flex gap-3 bg-[#056EE9] capitalize">
+        <Button className="flex gap-2 items-center font-poppins bg-[#056EE9] capitalize">
           <GrAdd />
           Create Project
         </Button>

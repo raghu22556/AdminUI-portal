@@ -88,7 +88,14 @@ const AllRoutes = [
 let menu = JSON.parse(localStorage.getItem("menu"));
 
 menu.forEach((menuItem) => {
-  AllRoutes.push({ name: menuItem.displayText, path:"/" + menuItem.url, element: <CardsLayout item={menuItem}/>, private: false });
+  console.log(menuItem.displayText);
+
+  AllRoutes.push({
+    name: menuItem.displayText,
+    path: "/" + menuItem.url,
+    element: <CardsLayout item={menuItem} />,
+    private: false,
+  });
 });
 
 export default AllRoutes;

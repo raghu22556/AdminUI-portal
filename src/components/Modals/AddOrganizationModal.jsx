@@ -21,7 +21,8 @@ const AddOrganizationModal = () => {
   return (
     <>
       <Button
-        className="flex bg-[#056EE9] capitalize"
+        style={{ background: "#056EE9" }}
+        className="flex items-center gap-2 capitalize font-poppins"
         onClick={handleOpen}
         variant="gradient"
       >
