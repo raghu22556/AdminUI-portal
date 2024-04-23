@@ -6,6 +6,8 @@ import { BrowserRouter } from "react-router-dom";
 import { ThemeProvider } from "@material-tailwind/react";
 import theme from "./utils/theme.js";
 import { MaterialTailwindControllerProvider } from "./context/index.jsx";
+import { I18nextProvider } from 'react-i18next';
+import i18n from './i18n';
 
 // const theme = {
 //   typography: {
@@ -234,6 +236,7 @@ import { MaterialTailwindControllerProvider } from "./context/index.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
+     <I18nextProvider i18n={i18n}>
     <BrowserRouter>
       <ThemeProvider value={theme}>
         <MaterialTailwindControllerProvider>
@@ -241,5 +244,6 @@ ReactDOM.createRoot(document.getElementById("root")).render(
         </MaterialTailwindControllerProvider>
       </ThemeProvider>
     </BrowserRouter>
+    </I18nextProvider>
   </React.StrictMode>,
 );

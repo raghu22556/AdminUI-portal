@@ -6,17 +6,20 @@ import ProgresBar from "./Charts/ProgresBar";
 import Cards from "./Cards";
 import BarChart from "./Charts/BarChart";
 import PieChart from "./Charts/PieChart";
+import { withTranslation } from 'react-i18next';
+
 
 // import "ag-grid-community/styles//ag-grid.css";
 // import "ag-grid-community/styles//ag-theme-quartz.css";
 
-const Dashboard = () => {
+const Dashboard = (props) => {
+  const { t } = props;
   return (
     <div>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 overflow-hidden">
         <div className="flex flex-col lg:flex-row justify-between mt-4">
           <Typography className="text-xl font-poppins text-black font-bold text-center  lg:text-left mb-4 lg:mb-0">
-            Dashboard
+            {t("Dashboard")}
           </Typography>
           {/* Dashboard */}
           <div className="flex flex-col lg:flex-row gap-2">
@@ -62,4 +65,4 @@ const Dashboard = () => {
   );
 };
 
-export default Layout(Dashboard);
+export default withTranslation()(Layout(Dashboard));
