@@ -43,19 +43,19 @@ export const welcomePage = (RenderComponent) => {
             </div>
           </div>
 
-          <div className="lg:w-1/2 laptopM:h-full laptop:mt-8  mobile:mt-20 ">
+          <div className="lg:w-1/2  laptop:mt-[-10px] mobile:mt-2 p-6">
             <main className="h-screen w-full flex flex-col bg-sky-300  justify-center items-center ">
-              <div className="laptop:text-start laptopM:-ml-20 laptop:mt-0 mobile:text-center ">
+              <div className="laptop:text-start laptopM:-mr-[-110px] laptop:mt-0 mobile:text-center ">
                 <Typography
                   style={{ color: "#056EE9" }}
-                  className=" font-poppinss font-black  mobileM:items-center laptopM:text-start  laptop:text-3xl  mobile:text-2xl"
+                  className=" font-poppinss font-black mb-[-20px]  mobileM:items-center laptopM:text-start  laptop:text-[20px]  mobile:text-2xl"
                 >
                   MaidenCube
                 </Typography>
                 <Typography
                   variant="h5"
                   style={{ color: "black" }}
-                  className="font-poppinss mobileM:text-center laptopM:text-start laptop:mt-8 mobile:mt-3 mobile:text-sm"
+                  className="font-poppinss mobileM:text-center laptopM:text-start laptop:mt-8 mobile:mt-6 mobile:text-sm"
                 >
                   {text}
                 </Typography>

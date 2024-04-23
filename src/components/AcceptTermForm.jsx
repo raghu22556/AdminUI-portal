@@ -1,5 +1,5 @@
 import { FormEvent, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import AcceptTermSelectBackend from "../common/AcceptTermSelectBackend";
 import AcceptTermSelectFrontend from "../common/AcceptTermSelectFrontend";
 import AcceptTermSelectRole from "../common/AcceptTermSelectRole";
@@ -21,6 +21,7 @@ const AcceptTermForm = () => {
   const [acceptTermSelectBackend, setAcceptTermSelectBackend] = useState("");
   const [acceptTermSelectFrontend, setAcceptTermSelectFrontend] = useState("");
   const [selectedRole, setSelectedRole] = useState("");
+  const navigate = useNavigate();
 
   const selectBackendHandler = (selectedValue) => {
     setAcceptTermSelectBackend(selectedValue);
@@ -46,16 +47,12 @@ const AcceptTermForm = () => {
     const jsonData = JSON.stringify(selectedData);
 
     alert(jsonData);
+    navigate("/neworganization");
   };
 
   return (
-    <div className="">
-      <Card
-        className="px-4  max-w-lg w-full "
-        color="transparent"
-        shadow={false}
-        style={{ width: "800px" }}
-      >
+    <div className="w-[100%]">
+      <Card className="px-4" color="transparent" shadow={false}>
         <form onSubmit={formSubmitHandler}>
           <CardBody className="flex flex-col gap-3 ">
             <AcceptTermSelectBackend
@@ -98,11 +95,10 @@ const AcceptTermForm = () => {
 
           <CardFooter className="pt-0 flex">
             <Button
-              className=" bg-primary font-poppins  "
+              className=" bg-[#056EE9] font-poppins  "
               type="submit"
               shadow={false}
               fullWidth
-              // color="blue"
               disabled={false}
             >
               Create Account
@@ -110,17 +106,6 @@ const AcceptTermForm = () => {
           </CardFooter>
         </form>
       </Card>
-
-      <div className="lg:mt-12  ">
-        <div className="flex justify-between items-center lg:w-full">
-          <div className="text-black text-xs text-start mt-3 -ml-18">
-            Copyright © 2022 Maiden Cube Pvt Ltd . All rights reserved.
-          </div>
-          <div className="text-xs mt-3 -mr-14">
-            Privacy Policy terms & Condition
-          </div>
-        </div>
-      </div>
     </div>
   );
 };

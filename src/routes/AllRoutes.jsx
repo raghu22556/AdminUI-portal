@@ -85,17 +85,19 @@ const AllRoutes = [
   },
 ];
 
-let menu = JSON.parse(localStorage.getItem("menu"));
+if (localStorage.getItem("menu") !== null) {
+  let menu = JSON.parse(localStorage.getItem("menu"));
 
-menu.forEach((menuItem) => {
-  console.log(menuItem.displayText);
+  menu.forEach((menuItem) => {
+    console.log(menuItem.displayText);
 
-  AllRoutes.push({
-    name: menuItem.displayText,
-    path: "/" + menuItem.url,
-    element: <CardsLayout item={menuItem} />,
-    private: false,
+    AllRoutes.push({
+      name: menuItem.displayText,
+      path: "/" + menuItem.url,
+      element: <CardsLayout item={menuItem} />,
+      private: false,
+    });
   });
-});
+}
 
 export default AllRoutes;

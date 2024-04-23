@@ -5,7 +5,7 @@ const GoogleSignUpBtn = () => {
   return (
     <div>
       <Button
-        className="flex items-center gap-3 text-sm lowercase mobile:text-[11px] mobile:flex mobile:justify-center"
+        className="flex items-center gap-1 text-[12px] py-3  lowercase mobile:text-[11px] mobile:flex mobile:justify-center"
         shadow={true}
         style={{
           background: "rgba(28, 28, 28, 0.05)",

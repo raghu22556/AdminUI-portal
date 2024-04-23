@@ -25,7 +25,6 @@ const AcceptTermSelectBackend = (props) => {
           variant="static"
           className="bg-white ring-4 ring-transparent"
           labelProps={{ className: "hidden" }}
-          containerProps={{ className: "w-[100px]" }}
           style={{ border: "none", padding: 0, margin: 0 }}
           value={selectedValue}
           onChange={selectbackendChangeHandler}
