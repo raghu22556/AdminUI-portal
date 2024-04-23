@@ -6,13 +6,13 @@ const AppleSignUpBtn = () => {
     <div>
       <Button
         // shadow={false}
-        className="flex items-center gap-3 text-sm mobile:text-[11px] mobile:flex mobile:justify-center  lowercase  laptopM:w-full "
+        className="flex items-center gap-1 text-[12px] py-3 mobile:text-[11px] mobile:flex mobile:justify-center  lowercase  laptopM:w-full "
         style={{
           background: "rgba(28, 28, 28, 0.05)",
           border: "1px solid rgba(28, 28, 28, 0.1)",
           color: "black",
           width: "230px",
-          fontWeight : "600",
+          fontWeight: "600",
           boxShadow: "none",
         }}
       >

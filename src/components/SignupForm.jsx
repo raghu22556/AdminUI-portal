@@ -25,7 +25,7 @@ import GoogleSignUpBtn from "../common/GoogleSignUpBtn";
 import { Password } from "@mui/icons-material";
 const SignupForm = () => {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("hello");
+  const [password, setPassword] = useState("");
   const [confirmPass, setConfirPass] = useState("");
 
   const continueHandler = () => {
@@ -40,7 +40,7 @@ const SignupForm = () => {
   };
 
   return (
-    <Card className="px-4  max-w-lg w-full " color="transparent" shadow={false}>
+    <Card className="laptopM:w-[550px]" color="transparent" shadow={false}>
       <form onSubmit={(value) => {}}>
         <CardBody className="flex flex-col gap-3">
           <OrganizationNameInput
@@ -70,33 +70,31 @@ const SignupForm = () => {
         </CardBody>
 
         <CardFooter className="pt-0">
-          <Link to="/acceptterm" className="ml-1 font-bold text-blue-500">
+          <Link to="/acceptterm" className=" font-bold text-blue-500">
             <Button
-              className=" bg-primary font-poppins "
+              className=" bg-[#056EE9] font-poppins "
               type="submit"
               onClick={continueHandler}
               shadow={false}
               fullWidth
-              // color="blue"
               disabled={false}
               color="rose"
-              // style={{ backgroundColor: '#6499E9' }}
             >
               Continue
             </Button>
           </Link>
-          <Typography variant="small" className="mt-6 flex justify-center ">
+          <Typography className="mt-4 flex justify-center text-[14x]">
             Already have an Account ?
-            <Link to="/signup" className="ml-1 font-bold text-blue-500">
+            <Link to="/signup" className="ml-1 font-[600] text-[#056EE9]">
               Sign in
             </Link>
           </Typography>
 
-          <Typography variant="small" className="mt-10 flex justify-center">
+          <Typography className="mt-4 flex justify-center text-[12px]">
             OR Create With
           </Typography>
 
-          <div className="flex gap-3 mt-4 ">
+          <div className="flex justify-center gap-3 mt-4">
             <AppleSignUpBtn />
             <GoogleSignUpBtn />
           </div>

@@ -39,7 +39,8 @@ const Modal = ({ open, onClose, onSave, title }) => {
       <DialogTitle style={{ marginBottom: "-10px" }}>
         <Typography
           variant="h6"
-          style={{ fontWeight: "bold", fontSize: "18px" }}
+          className="text-sm"
+          style={{ fontWeight: "bold", fontSize: "12px" }}
         >
           {title}
         </Typography>
