@@ -13,6 +13,7 @@ import {
   CustomEmailInput,
   CustomPasswordInput,
 } from "../maiden-core/ui-components";
+
 import axios from "axios";
 import AppleSignUpBtn from "../common/AppleSignUpBtn";
 import GoogleSignUpBtn from "../common/GoogleSignUpBtn";
@@ -78,7 +79,7 @@ const LoginForm = () => {
         localStorage.setItem("menu", JSON.stringify(response.data.menu));
         setLoginSuccess(true);
         setTimeout(() => {
-          navigate("/screen3");
+          navigate("/neworganization");
         }, 2000);
       })
       .catch((error) => {
@@ -90,7 +91,7 @@ const LoginForm = () => {
   return (
     <div>
       <Card
-        className="px-4 laptopM:w-[550px] mobileM:w-[95vw] mobileM:mt-2"
+        className=" laptopM:w-[550px] mobileM:w-[95vw] mobileM:mt-2"
         color="transparent"
         shadow={false}
       >
@@ -173,19 +174,11 @@ const LoginForm = () => {
           <Typography className="mt-5 flex laptopM:justify-center laptop:text-sm mobile:text-xs mobile:justify-center">
             OR Login With
           </Typography>
-          <div className="flex gap-3 mt-4 mobile:flex-col laptop:w-[100%] laptopM:flex-row mobile:items-center">
+          <div className="flex justify-center gap-3 mt-3 mobile:flex-col laptop:w-[100%] laptopM:flex-row mobile:items-center">
             <AppleSignUpBtn />
             <GoogleSignUpBtn />
           </div>
         </CardFooter>
-        <div className="border-t border-gray-300 w-[100%]">
-          <CardFooter className="pt-0">
-            <Typography className="flex justify-between text-black font-poppins font-medium laptop:text-[10px] mobile:text-[7px] mobile:mt-4 mt-2">
-              Copyright © 2022 Your Company. All rights reserved.
-              <div>Privacy Policy Terms & Condition</div>
-            </Typography>
-          </CardFooter>
-        </div>
       </Card>
     </div>
   );

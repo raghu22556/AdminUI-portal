@@ -25,7 +25,6 @@ const CustomInput = (props) => {
         labelProps={{
           className: "hidden",
         }}
-        containerProps={{ className: "w-[100px]  " }}
         style={{ border: "none", padding: 0, margin: 0 }}
       />
     </div>
