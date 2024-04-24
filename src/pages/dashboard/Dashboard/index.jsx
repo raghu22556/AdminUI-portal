@@ -24,17 +24,17 @@ const Dashboard = (props) => {
           <div className="flex flex-col lg:flex-row gap-2">
             <Button className="flex items-center gap-3 border border-[#6499E9] text-[#6499E9] bg-transparent mb-2 lg:mb-0 font-normal font-semibold">
               <GrAdd />
-              Create Table
+              {t("Create Table")}
             </Button>
 
             <Button className="flex items-center gap-3 bg-[#95A4FC] mb-2 lg:mb-0  font-semibold">
               <GrAdd />
-              Add Module
+              {t("Add Module")}
             </Button>
 
             <Button className="flex items-center gap-3 bg-[#6499E9] mb-2 lg:mb-0 font-semibold">
               <GrAdd />
-              Create Project
+              {t("Create Project")}
             </Button>
           </div>
         </div>

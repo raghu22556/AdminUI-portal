@@ -1,3 +1,10 @@
-[{"Organizations": "Organizações"}
-  
-]
+{
+  "Organizations": "المنظمات",
+  "Dashboard": "لوحة القيادة",
+  "Create Table": "اصنع جدول",
+  "Add Module": "إضافة وحدة",
+  "Create Project": "إنشاء مشروع",
+  "Add Organizations": "إضافة المنظمات",
+  "Projects": "المشاريع",
+  "Language": "لغة"
+}
