@@ -1,0 +1,88 @@
+import { all, put, takeLatest, call } from 'redux-saga/effects';
+import { ActionTypes } from '../constants';
+import API from '../requests';
+import createHistory from 'history/createBrowserHistory';
+
+export function* genericFunction(action) {
+  const { payload, successType, failureType } = action;
+  try {
+    var { api, controller } = action;
+    if (payload.localGridPreferences) {
+      yield put({
+        type: successType,
+        payload: payload.gridPreferences,
+      });
+    } else if (api) {
+      const response = yield call(api, payload);
+      yield put({
+        type: successType,
+        payload: response.data,
+      });
+    } else {
+      const response = yield call(API.triggerPost, controller, payload);
+      if (response.data.combos && Object.keys(response.data.combos).length > 0) {
+        var filterCombos = {};
+        var actionsTypes = ActionTypes;
+        var combos = response.data.combos;
+        for (var key in combos) {
+          var combo = combos[key];
+          if (combo) {
+            var allSelected = new Map();
+            var deSelected = new Map();
+            for (var item of combo) {
+              allSelected.set(item.LookupId, true);
+              deSelected.set(item.LookupId, false);
+            }
+            filterCombos[key + '_select'] = allSelected;
+            filterCombos[key + '_deselect'] = deSelected;
+          }
+        }
+        yield put({
+          type: actionsTypes.successActions.LIST_COMBOS_SUCCESS,
+          payload: { ...combos, ...filterCombos },
+        });
+      }
+      yield put({
+        type: successType,
+        payload: response.data,
+      });
+    }
+  } catch (error) {
+    yield put({
+      type: ActionTypes.HANDLE_ERRORS_REQUEST,
+      successType: successType,
+      successAction: action,
+      error: error,
+      failedAction: failureType,
+    });
+  }
+}
+
+export function* handleError(action) {
+  const { error, successAction, failedAction, successType } = action;
+  if (error && error.response && error.response.status && error.response.status == 401) {
+    alert('UnAuthorized');
+    const history = createHistory();
+    history.push('/');
+    window.location.reload(true);
+  }
+  yield put({
+    type: successType,
+    payload: [],
+  });
+}
+
+export default function* root() {
+  var APIs = [takeLatest(ActionTypes.HANDLE_ERRORS_REQUEST, handleError)];
+  var actionsTypes = ActionTypes;
+  console.debug(actionsTypes);
+  for (var key in actionsTypes.requestActions) {
+    APIs.push(takeLatest(key, genericFunction));
+  }
+  yield all([...APIs]);
+}
+
+export const sagaGenerator = actionReq =>
+  function* sagaFunc() {
+    yield takeLatest(actionReq, genericFunction);
+  };

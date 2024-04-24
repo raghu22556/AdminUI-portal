@@ -13,8 +13,13 @@ import ProjectTablePage from "../pages/dashboard/ProjectTablePage";
 import Dashboard from "../pages/dashboard/Dashboard";
 import MuiComponents from "../Material-UI";
 import CardsLayout from "../components/CardsLayout";
+import LookUpType from "../pages/views/LookUpType"
 
 import { Forms } from "../maiden-core";
+
+const pages = {
+  LookUpType: <LookUpType/>
+}
 
 const AllRoutes = [
   { name: "Login", path: "/", element: <LoginPage />, private: false },
@@ -90,14 +95,24 @@ if (localStorage.getItem("menu") !== null) {
 
   menu.forEach((menuItem) => {
     console.log(menuItem.displayText);
-
+    if (menuItem.children) {
+      AllRoutes.push(...menuItem.children.map(chItem => {
+        return{
+          name: menuItem.displayText,
+          path: "/" + menuItem.url + "/" + chItem.url,
+          element: pages[chItem.url],
+          private: false,
+        }
+      }));
+    }
     AllRoutes.push({
       name: menuItem.displayText,
       path: "/" + menuItem.url,
       element: <CardsLayout item={menuItem} />,
       private: false,
     });
+    
   });
 }
-
+debugger
 export default AllRoutes;
