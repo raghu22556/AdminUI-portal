@@ -17,6 +17,7 @@ import {
 import axios from "axios";
 import AppleSignUpBtn from "../common/AppleSignUpBtn";
 import GoogleSignUpBtn from "../common/GoogleSignUpBtn";
+import Footer from "../common/Footer";
 
 const LoginForm = () => {
   const navigate = useNavigate();
@@ -180,6 +181,9 @@ const LoginForm = () => {
           </div>
         </CardFooter>
       </Card>
+      <div className="mt-8">
+        <Footer />
+      </div>
     </div>
   );
 };
