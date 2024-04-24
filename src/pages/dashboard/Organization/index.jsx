@@ -7,12 +7,15 @@ import { GrAdd } from "react-icons/gr";
 import OrganizatiopnCardsData from "../../../data/OrganizatiopnCardsData";
 import AddModuleModal from "../../../components/Modals/AddModuleModal";
 import AddOrganizationModal from "../../../components/Modals/AddOrganizationModal";
-const ProjectPage = () => {
+import { withTranslation } from "react-i18next";
+
+const ProjectPage = (props) => {
+  const { t } = props;
   return (
     <div>
       <div className="flex justify-between mt-4">
         <Typography className="text-xl text-black font-poppins font-bold">
-          Organizations
+          {t("Organizations")}
         </Typography>
 
         <AddOrganizationModal />
@@ -27,4 +30,4 @@ const ProjectPage = () => {
   );
 };
 
-export default Layout(ProjectPage);
+export default withTranslation()(Layout(ProjectPage));

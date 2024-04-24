@@ -5,11 +5,32 @@ import { HiOutlineMenu, HiOutlineSearch } from "react-icons/hi";
 
 import { useNavigate } from "react-router-dom";
 import { Typography } from "@material-tailwind/react";
+import ClickAwayListener from "@material-ui/core/ClickAwayListener";
+import Paper from "@material-ui/core/Paper";
+import Grow from "@material-ui/core/Grow";
+import Badge from "@material-ui/core/Badge";
+import Hidden from "@material-ui/core/Hidden";
+import Popper from "@material-ui/core/Popper";
+import { withTranslation } from "react-i18next";
+import moment from "moment";
 
 const Navbar = (props) => {
   const navigate = useNavigate();
   const [pop, setPop] = useState(false);
-  const { handleToggle, drawer } = props;
+  const [open, setOpen] = useState(false);
+  const { handleToggle, drawer, t } = props;
+  const handleToggles = () => {
+    setOpen({ open: true });
+  };
+  const onLanguageChange = (e) => {
+    if (e) {
+      let selectedLang = e.target.value;
+      props.i18n.changeLanguage(selectedLang);
+      localStorage.selectedLanguage = selectedLang;
+      moment.locale(selectedLang);
+      window.location.reload();
+    }
+  };
 
   return (
     <div className="p-4 bg-white sticky z-40 border-b top-0 left-0 shadow-sm flex items-center">
@@ -69,9 +90,123 @@ const Navbar = (props) => {
             </span>
           </div>
         )}
+        <Popper
+          open={open}
+          role={undefined}
+          transition
+          // disablePortal
+          style={{
+            position: "absolute",
+            left: "unset !important",
+            top: "unset !important",
+          }}
+        >
+          {({ TransitionProps, placement }) => (
+            <Grow
+              {...TransitionProps}
+              style={{
+                position: "absolute",
+                transformOrigin:
+                  placement === "bottom" ? "center top" : "center bottom",
+                left: "unset !important",
+                top: "unset !important",
+              }}
+            >
+              <Paper>
+                <ClickAwayListener onClickAway={handleToggles}>
+                  <div
+                    autoFocusItem={open}
+                    style={{
+                      position: "fixed",
+                      backgroundColor: "#eeeeee",
+                      borderRadius: "3px",
+                      right: "25px",
+                      top: "50px",
+                      width: "250px",
+                      padding: "10px",
+                      boxShadow: "rgba(51, 51, 51, 0.45) 1px 1px 3px 1px",
+                      zIndex: "9",
+                      padding: "15px",
+                    }}
+                  >
+                    <div>
+                      <p style={{ fontWeight: "bold", margin: "2px 0px" }}>
+                        Rohit Sharma
+                      </p>
+                      {/* <p style={{ fontWeight: 'bold', margin: '2px' }}>lastName</p> */}
+                      <p style={{ fontSize: "smaller", fontWeight: "500px" }}>
+                        rohitz93
+                      </p>
+                      <div
+                        id="google_translate_element"
+                        style={{
+                          display: "flex",
+                        }}
+                      >
+                        <div
+                          style={{
+                            color: "black",
+                            marginRight: "1em",
+                          }}
+                        >
+                          {t("Language")}
+                        </div>
+                        <select
+                          defaultValue={
+                            localStorage.selectedLanguage
+                              ? localStorage.selectedLanguage
+                              : "1"
+                          }
+                          style={{ width: 130 }}
+                          onChange={onLanguageChange}
+                        >
+                          <option value="1" hidden="hidden">
+                            English
+                          </option>
+                          <option value="en">English</option>
+                          <option value="es">{t("Spanish")}</option>
+                          <option value="pt">{t("Portuguese")}</option>
+                          <option value="ar">{t("Arabic")}</option>
+                          <option value="cn">{t("Chinese")}</option>
+                        </select>
+                      </div>
+                      <br></br>
+                    </div>
+                  </div>
+                </ClickAwayListener>
+              </Paper>
+            </Grow>
+          )}
+        </Popper>
+        <button
+          style={{
+            backgroundColor: "#FFF",
+            borderRadius: "50px",
+          }}
+          aria-label="Person"
+          justIcon
+          onClick={handleToggles}
+        >
+          <span style={{ color: "black", fontWeight: "bold" }}>{t("NF")}</span>
+          {/* <Person
+            className={
+              classes.headerLinksSvg +
+              " " +
+              (rtlActive
+                ? classes.links + " " + classes.linksRTL
+                : classes.links)
+            }
+
+          /> */}
+          {/* <Hidden mdUp implementation="css">
+            <span className={classes.linkText}>
+              {rtlActive ? "الملف الشخصي" : "Profile"}
+            </span>
+          </Hidden> */}
+        </button>
       </section>
     </div>
   );
 };
 
-export default Navbar;
+export default withTranslation()(Navbar);

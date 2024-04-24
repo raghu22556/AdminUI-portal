@@ -22,11 +22,10 @@ const AcceptTermSelectRole = (props) => {
         </Typography>
 
         <Select
-      
           variant="static"
           className="bg-white ring-4 ring-transparent w-3"
           labelProps={{ className: "hidden" }}
-          style={{ border: "none", padding: 0, margin: 0, width : '100%' }}
+          style={{ border: "none", padding: 0, margin: 0, width: "100%" }}
           value={selectedValue}
           onChange={selectRoleHandler}
         >

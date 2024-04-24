@@ -16,7 +16,13 @@ const App = () => {
         {AllRoutes.map((item, index) => {
           const { name, path, element } = item;
           return (
-            <Route name={name} path={path} element={element} exact={true} key={index}/>
+            <Route
+              name={name}
+              path={path}
+              element={element}
+              exact={true}
+              key={index}
+            />
           );
         })}
       </Routes>

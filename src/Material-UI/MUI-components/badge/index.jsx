@@ -25,13 +25,13 @@ export function CustomColorBadge() {
         <MailIcon color="action" />
       </Badge>
       <Badge badgeContent={4} color="primary">
-        <Button variant="contained" color="success">
+        <Button variant="outlined" color="success">
           Success
         </Button>
       </Badge>
 
       <Badge badgeContent={4} color="success">
-        <Button variant="contained" color="error">
+        <Button variant="outlined" color="error">
           error
         </Button>
       </Badge>

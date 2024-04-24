@@ -13,6 +13,7 @@ const OrganizationNameInput = (props) => {
       </Typography>
 
       <Input
+        {...props}
         shadow={false}
         type={`${false ? "text" : "Organization Name"}`}
         placeholder="Enter Name"
