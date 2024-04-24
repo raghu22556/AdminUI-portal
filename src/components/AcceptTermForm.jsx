@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import AcceptTermSelectBackend from "../common/AcceptTermSelectBackend";
 import AcceptTermSelectFrontend from "../common/AcceptTermSelectFrontend";
 import AcceptTermSelectRole from "../common/AcceptTermSelectRole";
+import Footer from "../common/Footer";
 
 import {
   Card,
@@ -106,6 +107,9 @@ const AcceptTermForm = () => {
           </CardFooter>
         </form>
       </Card>
+      <div className="mt-16 flex justify-cente ml-7">
+        <Footer />
+      </div>
     </div>
   );
 };

@@ -9,7 +9,7 @@ import {
 
 const Navbar = () => {
   return (
-    <AppBar position="static" style={{ background: "#FFF" }} elevation={1}>
+    <AppBar position="fixed" style={{ background: "#FFF" }} elevation={1}>
       <Toolbar className="flex flex-col md:flex-row justify-between items-center">
         <div className="flex items-center h-full">
           <Typography className="text-black  font-poppins mt-4 md:mt-0">
