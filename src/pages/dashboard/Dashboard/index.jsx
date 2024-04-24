@@ -6,8 +6,7 @@ import ProgresBar from "./Charts/ProgresBar";
 import Cards from "./Cards";
 import BarChart from "./Charts/BarChart";
 import PieChart from "./Charts/PieChart";
-import { withTranslation } from 'react-i18next';
-
+import { withTranslation } from "react-i18next";
 
 // import "ag-grid-community/styles//ag-grid.css";
 // import "ag-grid-community/styles//ag-theme-quartz.css";

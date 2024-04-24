@@ -73,7 +73,7 @@ const LoginForm = () => {
     axios
       .post(
         "https://maidenconfessapp.azurewebsites.net/api/v1/Registration/VerifyAdminUser",
-        params
+        params,
       )
       .then((response) => {
         localStorage.setItem("menu", JSON.stringify(response.data.menu));

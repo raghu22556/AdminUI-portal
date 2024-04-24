@@ -25,7 +25,7 @@ const Layout = (Child) => {
         <section className="overflow-auto h-full w-full bg-[rgb(247,245,250)]">
           <Navbar handleToggle={handleToggle} drawer={drawer} />
           <div className="p-4 h-auto">
-            <Child {...props}/>
+            <Child {...props} />
           </div>
         </section>
       </div>
