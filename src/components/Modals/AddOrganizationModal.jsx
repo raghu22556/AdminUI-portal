@@ -12,8 +12,10 @@ import { HiChevronLeft } from "react-icons/hi";
 import { HiChevronRight } from "react-icons/hi";
 import EmailAddressInputModal from "../../common/EmailAddressInputModal";
 import DescriptionModal from "../../common/DescriptionModal";
+import { withTranslation } from "react-i18next";
 
-const AddOrganizationModal = () => {
+const AddOrganizationModal = (props) => {
+  const { t } = props;
   const [open, setOpen] = React.useState(false);
 
   const handleOpen = () => setOpen(!open);
@@ -27,7 +29,7 @@ const AddOrganizationModal = () => {
         variant="gradient"
       >
         <GrAdd />
-        Add Organizations
+        {t("Add Organizations")}
       </Button>
 
       <Dialog open={open} handler={handleOpen}>
@@ -35,7 +37,7 @@ const AddOrganizationModal = () => {
           <div className="flex justify-between items-center ">
             <Typography className="text-left text-lg text-black font-bold">
               {" "}
-              Add Organizations
+              {t("Add Organizations")}
             </Typography>
             <div className="flex items-center">
               <Button
@@ -67,4 +69,4 @@ const AddOrganizationModal = () => {
   );
 };
 
-export default AddOrganizationModal;
+export default withTranslation()(AddOrganizationModal);

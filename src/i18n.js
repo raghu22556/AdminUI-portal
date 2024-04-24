@@ -3,6 +3,9 @@ import LanguageDetector from "i18next-browser-languagedetector";
 import { initReactI18next } from "react-i18next";
 import XHR from "i18next-xhr-backend";
 import translationPt from "./language/translation.pt.json";
+import translationAr from "./language/translation.ar.json";
+import translationCn from "./language/translation.cn.json";
+import translationEs from "./language/translation.es.json";
 
 i18n
   .use(XHR)
@@ -12,6 +15,15 @@ i18n
     resources: {
       pt: {
         translations: translationPt, // Portuguese translation
+      },
+      ar: {
+        translations: translationAr, // Arabic translation
+      },
+      cn: {
+        translations: translationCn, // Chinese translation
+      },
+      es: {
+        translations: translationEs, // Spanish translation
       },
     },
     /* default language when load the website in browser */

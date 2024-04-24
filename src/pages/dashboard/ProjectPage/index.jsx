@@ -5,18 +5,20 @@ import { ProjectCard } from "../../../widgets/cards";
 import { Button, Typography } from "@material-tailwind/react";
 import { GrAdd } from "react-icons/gr";
 import { useNavigate } from "react-router-dom";
+import { withTranslation } from "react-i18next";
 
-const OrganizationPage = () => {
+const OrganizationPage = (props) => {
+  const { t } = props;
   const navigate = useNavigate();
   return (
     <div>
       <div className="flex justify-between mt-4">
         <Typography className="text-xl text-black font-poppins font-bold">
-          Projects
+          {t("Projects")}
         </Typography>
         <Button className="flex gap-2 items-center font-poppins bg-[#056EE9] capitalize">
           <GrAdd />
-          Create Project
+          {t("Create Project")}
         </Button>
       </div>
 
@@ -36,4 +38,4 @@ const OrganizationPage = () => {
   );
 };
 
-export default Layout(OrganizationPage);
+export default withTranslation()(Layout(OrganizationPage));
