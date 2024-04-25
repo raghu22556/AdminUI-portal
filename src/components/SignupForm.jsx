@@ -9,6 +9,7 @@ import {
   Alert,
 } from "@material-tailwind/react";
 
+import Footer from "../common/Footer";
 import OrganizationNameInput from "../common/OrganizationNameInput";
 
 import {
@@ -16,9 +17,6 @@ import {
   CustomPasswordInput,
   CustomConfirmPasswordInput,
 } from "../maiden-core/ui-components";
-
-import AppleSignUpBtn from "../common/AppleSignUpBtn";
-import GoogleSignUpBtn from "../common/GoogleSignUpBtn";
 
 const SignupForm = () => {
   const navigate = useNavigate();
@@ -165,15 +163,11 @@ const SignupForm = () => {
               Sign in
             </Link>
           </Typography>
-          <Typography className="mt-4 flex justify-center text-[12px]">
-            OR Create With
-          </Typography>
-          <div className="flex justify-center gap-3 mt-4">
-            <AppleSignUpBtn />
-            <GoogleSignUpBtn />
-          </div>
         </CardFooter>
       </form>
+      <div className="mt-4">
+        <Footer />
+      </div>
     </Card>
   );
 };
