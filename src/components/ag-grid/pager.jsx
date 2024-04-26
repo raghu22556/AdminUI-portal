@@ -208,7 +208,7 @@ export default class Pager extends React.PureComponent {
                   class="ag-icon ag-icon-first"
                   style={{ margin: pagination == 'compressed' ? 'inherit' : '0px 8px' }}
                 ></span>
-                <button type="button">First</button>
+                {/* <button type="button">First</button> */}
               </div>
               <div
                 class={`ag-paging-button ${
@@ -220,7 +220,7 @@ export default class Pager extends React.PureComponent {
                   class="ag-icon ag-icon-previous"
                   style={{ margin: pagination == 'compressed' ? 'inherit' : '0px 8px' }}
                 ></span>
-                <button type="button">Previous</button>
+                {/* <button type="button">Previous</button> */}
               </div>
               Page <span>{currentPage + 1}</span> of <span>{totalPage}</span>
               <div
@@ -233,7 +233,7 @@ export default class Pager extends React.PureComponent {
                   class="ag-icon ag-icon-next"
                   style={{ margin: pagination == 'compressed' ? 'inherit' : '0px 8px' }}
                 ></span>
-                <button type="button">Next</button>
+                {/* <button type="button">Next</button> */}
               </div>
               <div
                 class={`ag-paging-button ${
@@ -245,10 +245,10 @@ export default class Pager extends React.PureComponent {
                   class="ag-icon ag-icon-last"
                   style={{ margin: pagination == 'compressed' ? 'inherit' : '0px 8px' }}
                 ></span>
-                <button type="button">Last</button>
+                {/* <button type="button">Last</button> */}
               </div>
             </span>
-            <div style={{ marginRight: '-15px' }}>
+            <div>
               <span>
                 <Tooltip title={'Refresh'}>
                   <span>

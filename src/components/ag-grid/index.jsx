@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import { AgGridReact } from "@ag-grid-community/react";
 import { ModuleRegistry } from "@ag-grid-community/core";
-//import 'ag-grid-community/dist/styles/ag-grid.css';
-//import 'ag-grid-community/dist/styles/ag-theme-material.css';
+// import 'ag-grid-community/styles/ag-grid.css';
+// import 'ag-grid-community/styles/ag-theme-material.css';
 //import 'ag-grid-enterprise';
 import "@ag-grid-community/styles/ag-grid.css";
-import "@ag-grid-community/styles/ag-theme-quartz.css";
+import "@ag-grid-community/styles/ag-theme-material.css";
 import { ClientSideRowModelModule } from "@ag-grid-community/client-side-row-model";
 import Pager from './pager';
 import { isSingleReset } from '../../app-config';

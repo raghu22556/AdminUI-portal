@@ -14,15 +14,15 @@ import ProjectTablePage from "../pages/dashboard/ProjectTablePage";
 import Dashboard from "../pages/dashboard/Dashboard";
 import MuiComponents from "../Material-UI";
 import CardsLayout from "../components/CardsLayout";
-import LookUpType from "../pages/views/LookUpType"
+// import LookUpType from "../pages/views/LookUpType"
 import DynamicBaseView from "../components/DynamicBaseView";
 import { Forms } from "../maiden-core";
 import Sidebar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
 
-const pages = {
-  LookUpType: <LookUpType/>
-}
+// const pages = {
+//   LookUpType: <LookUpType/>
+// }
 
 const AllRoutes = [
   { name: "Login", path: "/", element: <LoginPage />, private: false },
@@ -123,8 +123,8 @@ if (localStorage.getItem("menu") !== null) {
     );
   };
   
-  let menu = JSON.parse(localStorage.getItem("menu"));
-  let masterConfig = JSON.parse(localStorage.entityMapping);
+  let menu = JSON.parse(localStorage.getItem("menu") || "[]");
+  let masterConfig = JSON.parse(localStorage.entityMapping || "{}");
   menu.forEach((menuItem) => {
     console.log(menuItem.displayText);
     if (menuItem.children) {

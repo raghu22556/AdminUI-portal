@@ -1,7 +1,7 @@
 import ReduxHandler from '../../core/handler';
 import { CONFIG } from '../../store/config';
 import store from '../../store';
-import { sagaGenerator } from '../../store/sagas/core';
+// import { sagaGenerator } from '../../store/sagas/core';
 
 var handler = new ReduxHandler(CONFIG);
 
@@ -35,13 +35,13 @@ const injectTOStore = newConfig => {
   let newReducers = newHandler.getReducers();
   Reducers = { ...Reducers, ...newReducers };
 
-  Object.keys(newReducers).map(key => {
-    store.injectReducer(key, newReducers[key]);
-  });
+  // Object.keys(newReducers).map(key => {
+  //   store.injectReducer(key, newReducers[key]);
+  // });
 
-  Object.values(newActionTypes.requestActions).map(key => {
-    store.injectSaga(key, sagaGenerator(key));
-  });
+  // Object.values(newActionTypes.requestActions).map(key => {
+  //   store.injectSaga(key, sagaGenerator(key));
+  // });
 
   console.debug(Actions);
   console.debug(ActionTypes);

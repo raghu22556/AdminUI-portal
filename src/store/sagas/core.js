@@ -72,16 +72,6 @@ export function* handleError(action) {
   });
 }
 
-export default function* root() {
-  var APIs = [takeLatest(ActionTypes.HANDLE_ERRORS_REQUEST, handleError)];
-  var actionsTypes = ActionTypes;
-  console.debug(actionsTypes);
-  for (var key in actionsTypes.requestActions) {
-    APIs.push(takeLatest(key, genericFunction));
-  }
-  yield all([...APIs]);
-}
-
 export const sagaGenerator = actionReq =>
   function* sagaFunc() {
     yield takeLatest(actionReq, genericFunction);

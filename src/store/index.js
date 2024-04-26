@@ -1,11 +1,11 @@
 import { createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import rootReducer from './reducer';
-import rootSaga, { createSagaInjector } from './sagas';
+// import rootSaga, { createSagaInjector } from './sagas';
 
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(rootReducer({}), applyMiddleware(sagaMiddleware));
-store.injectSaga = createSagaInjector(sagaMiddleware.run, rootSaga);
+// store.injectSaga = createSagaInjector(sagaMiddleware.run, rootSaga);
 
 store.asyncReducers = {};
 

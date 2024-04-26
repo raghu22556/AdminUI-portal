@@ -9,3 +9,4 @@ export const disableRippleEffect = false;
 export const titleVisibility = false;
 export const isGuidSystem = true;
 export const defaultActions = ['list', 'gridpreference'];
+export const isNewBackend = true;
