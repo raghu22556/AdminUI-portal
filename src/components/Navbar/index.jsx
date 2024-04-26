@@ -18,10 +18,25 @@ const Navbar = (props) => {
   const navigate = useNavigate();
   const [pop, setPop] = useState(false);
   const [open, setOpen] = useState(false);
+  const [selectedProject, setSelectedProject] = useState("");
   const { handleToggle, drawer, t } = props;
-  const handleToggles = () => {
-    setOpen({ open: true });
+
+  const handleClick = () => {
+    // check is the previous drop-down is open or closed and do opposite
+    setOpen((prev) => !prev);
   };
+
+  const handleToggles = () => {
+    setOpen(false); // if you click away anywhere then it will close the drop-down
+  };
+
+  const handlePop = () => {
+    setPop((prev) => !prev);
+  };
+  const handleTogglePop = () => {
+    setPop(false);
+  };
+
   const onLanguageChange = (e) => {
     if (e) {
       let selectedLang = e.target.value;
@@ -29,6 +44,15 @@ const Navbar = (props) => {
       localStorage.selectedLanguage = selectedLang;
       moment.locale(selectedLang);
       window.location.reload();
+    }
+  };
+
+  const onProjectChange = (e) => {
+    let projectOnSelect = e.target.value;
+    setSelectedProject(projectOnSelect);
+
+    if (projectOnSelect) {
+      navigate("/" + projectOnSelect);
     }
   };
 
@@ -64,13 +88,17 @@ const Navbar = (props) => {
             <span className="text-color font-semibold">Admin</span>
             <span className="text-gray-500 text-xs">MaidenCube.in</span>
           </div>
-          <button onClick={() => setPop(!pop)}>
-            {pop ? (
-              <BsChevronUp className="text-color text-sm cursor-pointer" />
-            ) : (
-              <BsChevronDown className="text-color text-sm cursor-pointer" />
-            )}
-          </button>
+
+          {/* By clicking outside, the drop-down will be closed */}
+          <ClickAwayListener onClickAway={handleTogglePop}>
+            <button onClick={handlePop}>
+              {pop ? (
+                <BsChevronUp className="text-color text-sm cursor-pointer" />
+              ) : (
+                <BsChevronDown className="text-color text-sm cursor-pointer" />
+              )}
+            </button>
+          </ClickAwayListener>
         </section>
 
         {/* Popup */}
@@ -122,7 +150,7 @@ const Navbar = (props) => {
                       borderRadius: "3px",
                       right: "25px",
                       top: "50px",
-                      width: "250px",
+                      width: "300px",
                       padding: "10px",
                       boxShadow: "rgba(51, 51, 51, 0.45) 1px 1px 3px 1px",
                       zIndex: "9",
@@ -137,39 +165,80 @@ const Navbar = (props) => {
                       <p style={{ fontSize: "smaller", fontWeight: "500px" }}>
                         rohitz93
                       </p>
+
                       <div
-                        id="google_translate_element"
                         style={{
                           display: "flex",
+                          flexDirection: "column",
                         }}
                       >
                         <div
+                          id="google_translate_element"
                           style={{
-                            color: "black",
-                            marginRight: "1em",
+                            display: "flex",
                           }}
                         >
-                          {t("Language")}
+                          <div
+                            style={{
+                              color: "black",
+                              marginRight: "1em",
+                              width: "50%",
+                            }}
+                          >
+                            {t("Language")}
+                          </div>
+                          <select
+                            defaultValue={
+                              localStorage.selectedLanguage
+                                ? localStorage.selectedLanguage
+                                : "1"
+                            }
+                            style={{ width: "50%" }}
+                            onChange={onLanguageChange}
+                          >
+                            <option value="1" hidden="hidden">
+                              English
+                            </option>
+                            <option value="en">English</option>
+                            <option value="es">{t("Spanish")}</option>
+                            <option value="pt">{t("Portuguese")}</option>
+                            <option value="ar">{t("Arabic")}</option>
+                            <option value="cn">{t("Chinese")}</option>
+                          </select>
                         </div>
-                        <select
-                          defaultValue={
-                            localStorage.selectedLanguage
-                              ? localStorage.selectedLanguage
-                              : "1"
-                          }
-                          style={{ width: 130 }}
-                          onChange={onLanguageChange}
+                        <br></br>
+                        <div
+                          id="project_lists"
+                          style={{
+                            display: "flex",
+                          }}
                         >
-                          <option value="1" hidden="hidden">
-                            English
-                          </option>
-                          <option value="en">English</option>
-                          <option value="es">{t("Spanish")}</option>
-                          <option value="pt">{t("Portuguese")}</option>
-                          <option value="ar">{t("Arabic")}</option>
-                          <option value="cn">{t("Chinese")}</option>
-                        </select>
+                          <div
+                            style={{
+                              color: "black",
+                              marginRight: "1em",
+                              width: "50%",
+                            }}
+                          >
+                            {"Project"}
+                          </div>
+                          <select
+                            value={selectedProject}
+                            style={{ width: "50%" }}
+                            onChange={onProjectChange}
+                          >
+                            <option value="" disabled hidden>
+                              View Projects
+                            </option>
+                            <option value="projectTable">Project 01</option>
+                            <option value="userpage">Project 02</option>
+                            <option value="Project03">Project 03</option>
+                            <option value="Project04">Project 04</option>
+                            <option value="Project05">Project 05</option>
+                          </select>
+                        </div>
                       </div>
+
                       <br></br>
                     </div>
                   </div>
@@ -185,7 +254,7 @@ const Navbar = (props) => {
           }}
           aria-label="Person"
           justIcon
-          onClick={handleToggles}
+          onClick={handleClick}
         >
           <span style={{ color: "black", fontWeight: "bold" }}>{t("NF")}</span>
           {/* <Person
