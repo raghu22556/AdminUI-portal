@@ -4,6 +4,10 @@ import { Card, CardBody, Typography } from "@material-tailwind/react";
 import LaunchIcon from "@mui/icons-material/Launch";
 import { useNavigate } from "react-router-dom";
 
+import { injectTOStore } from "../../core/redux-helper";
+import { newConfig } from '../../store/config';
+
+injectTOStore(newConfig);
 const WidgetCard = ({ title, onClick }) => {
   return (
     <Card className="rounded-md cursor-pointer " onClick={onClick}>

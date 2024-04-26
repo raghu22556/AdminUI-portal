@@ -79,11 +79,18 @@ const LoginForm = () => {
         params
       )
       .then((response) => {
-        const { menu, dynamicConfig, masterDataList } = response.data;
+        const { access_token, menu, dynamicConfig, masterDataList } = response.data;
         var entityMapping = {};
         for (var item of JSON.parse(masterDataList)) {
           entityMapping[item.table] = item;
         }
+        var token = {
+          //expires_in: expires_in,
+          access_token: access_token,
+          //refresh_token: refresh_token,
+          created: Date.now(),
+        };
+        localStorage.setItem('cube:token', JSON.stringify(token));
         localStorage.setItem("menu", JSON.stringify(menu));
         localStorage.setItem("dynamicConfig", dynamicConfig);
         localStorage.setItem("entityMapping", JSON.stringify(entityMapping));

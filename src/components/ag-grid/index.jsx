@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
-import { AgGridReact } from 'ag-grid-react';
+import { AgGridReact } from "@ag-grid-community/react";
+import { ModuleRegistry } from "@ag-grid-community/core";
 //import 'ag-grid-community/dist/styles/ag-grid.css';
 //import 'ag-grid-community/dist/styles/ag-theme-material.css';
 //import 'ag-grid-enterprise';
+import "@ag-grid-community/styles/ag-grid.css";
+import "@ag-grid-community/styles/ag-theme-quartz.css";
+import { ClientSideRowModelModule } from "@ag-grid-community/client-side-row-model";
 import Pager from './pager';
 import { isSingleReset } from '../../app-config';
 import {
@@ -28,6 +32,7 @@ import moment from 'moment';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { connect } from 'react-redux';
 
+ModuleRegistry.registerModules([ClientSideRowModelModule]);
 class CustomLoadingOverlay extends Component {
   render() {
     return (
@@ -318,9 +323,14 @@ class AgGrid extends Component {
   };
 
   getSortInfo = sortInfo => {
-    return sortInfo.map(item => {
-      return { sort: item.colId, dir: item.sort };
-    });
+    if(sortInfo){
+      return sortInfo.map(item => {
+        return { sort: item.colId, dir: item.sort };
+      });
+    } else {
+      return null;
+    }
+    
   };
 
   getOptions = api => {
@@ -329,7 +339,7 @@ class AgGrid extends Component {
       currentPage: this.state.currentPage,
       limit: this.state.pageSize,
       filter: this.getFilter(api.getFilterModel()),
-      sortInfo: this.getSortInfo(api.getSortModel()),
+      sortInfo: this.getSortInfo(api.getSortModel ? api.getSortModel(): null),
     };
   };
 
@@ -339,7 +349,7 @@ class AgGrid extends Component {
 
   loadData = enableForceRefresh => {
     let defaultSort = null;
-    if (this.gridApi.getSortModel() == 0 && this.props.gridPreferences) {
+    if ((this.gridApi.getSortModel &&this.gridApi.getSortModel() == 0) && this.props.gridPreferences) {
       const { sortInfo } = JSON.parse(this.props.gridPreferences || '{}');
 
       if (sortInfo && sortInfo.length > 0) {
@@ -356,9 +366,9 @@ class AgGrid extends Component {
     }
     var requestOptions = this.getOptions(this.gridApi);
 
-    if (this.gridApi.getSortModel() == 0 && defaultSort) {
+    /*if (this.gridApi.getSortModel() == 0 && defaultSort) {
       requestOptions.sortInfo.push(defaultSort);
-    }
+    }*/
     if (
       this.requestOptions != JSON.stringify(requestOptions) ||
       this.props.enableAdvanceSearch ||
@@ -373,6 +383,7 @@ class AgGrid extends Component {
     this.state.currentPage = 0;
     this.loadData();
   };
+  
 
   onGridReady = params => {
     const agGridReady = this;
