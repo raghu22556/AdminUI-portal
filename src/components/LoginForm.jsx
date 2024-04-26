@@ -13,6 +13,8 @@ import {
   CustomEmailInput,
   CustomPasswordInput,
 } from "../maiden-core/ui-components";
+import { Actions, injectTOStore } from "../core/redux-helper";
+import { defaultActions } from "../app-config";
 
 import axios from "axios";
 import AppleSignUpBtn from "../common/AppleSignUpBtn";
@@ -74,10 +76,25 @@ const LoginForm = () => {
     axios
       .post(
         "https://maidenconfessapp.azurewebsites.net/api/v1/Registration/VerifyAdminUser",
-        params,
+        params
       )
       .then((response) => {
-        localStorage.setItem("menu", JSON.stringify(response.data.menu));
+        const { menu, dynamicConfig, masterDataList } = response.data;
+        var entityMapping = {};
+        for (var item of JSON.parse(masterDataList)) {
+          entityMapping[item.table] = item;
+        }
+        localStorage.setItem("menu", JSON.stringify(menu));
+        localStorage.setItem("dynamicConfig", dynamicConfig);
+        localStorage.setItem("entityMapping", JSON.stringify(entityMapping));
+        let dynamicConfigJson = JSON.parse(response.data.dynamicConfig);
+        let newConfig = [];
+        if (null != dynamicConfigJson) {
+          newConfig = dynamicConfigJson.map((item) => {
+            return { ...item, actions: [...defaultActions] };
+          });
+        }
+        injectTOStore(newConfig);
         setLoginSuccess(true);
         setTimeout(() => {
           navigate("/neworganization");

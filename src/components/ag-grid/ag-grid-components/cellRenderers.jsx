@@ -1,13 +1,13 @@
 import React, { PureComponent } from 'react';
-import DropOption from 'components/DropOption';
-import Dates from '../../../util/date';
+import DropOption from '../../../components/DropOption';
+import Dates from '../../../core/utils/date';
 
 class CustomCellRenderer extends PureComponent {
   render() {
     const { value } = this.props;
     return <span title={value}>{value}</span>;
   }
-}
+} 
 
 class IconCellRenderer extends PureComponent {
   render() {

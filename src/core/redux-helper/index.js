@@ -1,7 +1,7 @@
 import ReduxHandler from '../../core/handler';
 import { CONFIG } from '../../store/config';
 import store from '../../store';
-import { sagaGenerator } from 'store/sagas/core';
+import { sagaGenerator } from '../../store/sagas/core';
 
 var handler = new ReduxHandler(CONFIG);
 

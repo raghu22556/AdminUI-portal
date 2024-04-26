@@ -1,7 +1,7 @@
 import { all, put, takeLatest, call } from 'redux-saga/effects';
 import { ActionTypes } from '../constants';
 import API from '../requests';
-import createHistory from 'history/createBrowserHistory';
+import { useNavigate } from "react-router-dom";
 
 export function* genericFunction(action) {
   const { payload, successType, failureType } = action;
@@ -62,8 +62,8 @@ export function* handleError(action) {
   const { error, successAction, failedAction, successType } = action;
   if (error && error.response && error.response.status && error.response.status == 401) {
     alert('UnAuthorized');
-    const history = createHistory();
-    history.push('/');
+    const navigate = useNavigate();
+    navigate('/');
     window.location.reload(true);
   }
   yield put({

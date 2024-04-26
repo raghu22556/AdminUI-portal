@@ -1,14 +1,13 @@
 import React from 'react';
 //import { Button, DropdownButton, MenuItem } from 'react-bootstrap';
-import { Button, Menu, Dropdown, Icon } from 'antd';
-import { paginationDropDownColor } from 'assets/jss/custom-styles.jsx';
+import { Button, Menu } from 'antd';
 import GridConfig from './config';
-import Pagination from '../Pagination/Pagination';
 import { textAlign } from '@material-ui/system';
 import { Paper, Grid } from '@material-ui/core';
 import Tooltip from '@material-ui/core/Tooltip';
 const { strings, paging } = GridConfig;
 
+const Pagination = () => <div>Need to implement</div>;
 export default class Pager extends React.PureComponent {
   constructor(props) {
     super(props);

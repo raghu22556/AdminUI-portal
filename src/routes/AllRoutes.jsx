@@ -14,7 +14,7 @@ import Dashboard from "../pages/dashboard/Dashboard";
 import MuiComponents from "../Material-UI";
 import CardsLayout from "../components/CardsLayout";
 import LookUpType from "../pages/views/LookUpType"
-
+import DynamicBaseView from "../components/DynamicBaseView";
 import { Forms } from "../maiden-core";
 
 const pages = {
@@ -91,16 +91,22 @@ const AllRoutes = [
 ];
 
 if (localStorage.getItem("menu") !== null) {
+  const DynamicComponent = tableName => {
+    return <DynamicBaseView {...tableName} />;
+  };
+  
   let menu = JSON.parse(localStorage.getItem("menu"));
-
+  let masterConfig = JSON.parse(localStorage.entityMapping);
   menu.forEach((menuItem) => {
     console.log(menuItem.displayText);
     if (menuItem.children) {
-      AllRoutes.push(...menuItem.children.map(chItem => {
+      AllRoutes.push(...menuItem.children.map(childItem => {
         return{
           name: menuItem.displayText,
-          path: "/" + menuItem.url + "/" + chItem.url,
-          element: pages[chItem.url],
+          path: "/" + menuItem.url + "/" + childItem.url,
+          element: masterConfig[childItem.tableName]
+          ? <DynamicComponent tableName={childItem.tableName} />
+          : (() => () => <div>Welcome to Demo</div>),
           private: false,
         }
       }));
@@ -114,5 +120,4 @@ if (localStorage.getItem("menu") !== null) {
     
   });
 }
-debugger
 export default AllRoutes;

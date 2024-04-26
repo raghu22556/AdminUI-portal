@@ -1,0 +1,11 @@
+//export const URL = window.location.origin;
+export const URL = 'https://cubeapp.azurewebsites.net'
+export const EnableLogs = false;
+export const isJWTAuthentication = true;
+export const isOAUTHAuthentication = false;
+export const APIVersion = '/api/v1/';
+export const isSingleReset = false;
+export const disableRippleEffect = false;
+export const titleVisibility = false;
+export const isGuidSystem = true;
+export const defaultActions = ['list', 'gridpreference'];

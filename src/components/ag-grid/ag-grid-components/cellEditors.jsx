@@ -2,7 +2,8 @@
 import { Component } from 'react';
 import API from '../../../store/requests';
 import { AutoComplete, Select } from 'antd';
-import CustomSelectLarge from 'components/CustomSelect/Select';
+
+const CustomSelectLarge = () => <div>Need to implement</div>;
 
 class SelectCellEditor extends Component {
   constructor(props) {

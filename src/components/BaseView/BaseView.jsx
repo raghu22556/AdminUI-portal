@@ -1,30 +1,39 @@
 import { PureComponent } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { withRouter } from "react-router-dom";
+import { useNavigate } from 'react-router';
 import { Actions } from "../../core/redux-helper";
 import { Menu, Modal, Input, Tooltip } from "antd";
 // import SimpleForm from "./simple-form";
-import DialogForm from "./DialogForm";
+//import DialogForm from "./DialogForm";
 import AgGrid from "../ag-grid";
 // import NavPills from 'components/NavPills/NavPills.jsx';
 import Button from "@material-ui/core/Button";
-import API from "../store/requests";
-import { isNewBackend, EnableLogs } from "../app-config";
+import API from "../../store/requests";
+import { EnableLogs } from "../../app-config";
 // import Snackbar from 'components/Snackbar/Snackbar.jsx';
 import AddIcon from "@material-ui/icons/AddCircleSharp";
 import CardView from "../CardsLayout";
-import { CONFIG, newConfig } from "store/config";
+import { CONFIG, newConfig } from "../../store/config";
 // import Accordion from "components/Accordion/Accordion.jsx";
 import { withTranslation } from "react-i18next";
 
 const modal = Modal;
 const { confirm } = Modal;
 
-const NavPills = () => <div>Need to implement</div>;
-const Snackbar = () => <div>Need to implement</div>;
-const Accordion = () => <div>Need to implement</div>;
-const SimpleForm = () => <div>Need to implement</div>;
+const DialogForm = () => <div>Need to implement1</div>;
+const NavPills = () => <div>Need to implement2</div>;
+const Snackbar = () => <div>Need to implement3</div>;
+const Accordion = () => <div>Need to implement4</div>;
+const SimpleForm = () => <div>Need to implement5</div>;
+
+export const withRouter = (Component) =>{
+  const Wrapper = (props) =>{
+      const history = useNavigate();
+      return <Component history={history} {...props}/>
+  } 
+  return Wrapper;
+}
 
 export default class BaseView extends PureComponent {
   constructor(props) {
@@ -702,122 +711,87 @@ class GridPanel extends PureComponent {
         gridPanel: this,
       });
     else {
-      var options = {};
-
-      if (isNewBackend) {
-        let newFilterInfo = [];
-        if (filterInfo) {
-          for (var index in filterInfo) {
-            if (!newFilterInfo) {
-              newFilterInfo = [];
-            }
-            newFilterInfo.push({
-              filterTerm:
-                filterInfo[index].filterValue || filterInfo[index].filterTerm,
-              filterBy: filterInfo[index].filterBy,
-            });
+      let newFilterInfo = [];
+      if (filterInfo) {
+        for (var index in filterInfo) {
+          if (!newFilterInfo) {
+            newFilterInfo = [];
           }
+          newFilterInfo.push({
+            filterTerm:
+              filterInfo[index].filterValue || filterInfo[index].filterTerm,
+            filterBy: filterInfo[index].filterBy,
+          });
         }
-        if (filter) {
-          for (var item of filter) {
-            if (!newFilterInfo) {
-              newFilterInfo = [];
-            }
-            var filterType = "EQUALS";
-            if (item.data.type == "string") {
-              filterType = "CONTAINS";
-            } else if (item.data.type == "boolean") {
-              item.data.value = item.data.value ? 1 : 0;
-            } else if (item.data.type == "numeric") {
-              if (item.data.comparison == "gt") {
-                filterType = "GREATERTHANEQUAL";
-              } else if (item.data.comparison == "lt") {
-                filterType = "LESSERTHANEQUAL";
-              } else if (item.data.comparison == "eq") {
-                filterType = "EQUALS";
-              }
-            } else if (item.data.type == "date") {
-              if (item.data.comparison == "gt") {
-                filterType = "GREATERTHANEQUAL";
-              } else if (item.data.comparison == "lt") {
-                filterType = "LESSERTHANEQUAL";
-              } else if (item.data.comparison == "eq") {
-                filterType = "DATEEQUALS";
-              }
-            } else if (item.data.type == "list") {
-              filterType = "MULTI";
-            }
-            newFilterInfo.push({
-              filterTerm: item.data.value,
-              filterBy: item.field,
-              filterType,
-            });
-          }
-        }
-
-        options = {
-          pageNo: currentPage,
-          pageSize: limit,
-          filterInfo: newFilterInfo,
-          action: "list",
-          sortInfo: sortInfo && sortInfo.length === 0 ? null : sortInfo,
-          identifier: this.props.config.identifier,
-          apiIdentifier: this.props.config.apiIdentifier,
-        };
-
-        if (this.props.config.comboTypes) {
-          var combos = [];
-          for (var combo of this.props.config.comboTypes) {
-            if (!combo.loaded) {
-              //combo.loaded = true;
-              combos.push(combo);
-            }
-          }
-          options.comboTypes = combos;
-        }
-        if (this.props.config.isChild) {
-          let parentEntity = this.props.config.identifier.split("_");
-          parentEntity = parentEntity[parentEntity.length - 2];
-          options.PageNo = 0;
-          options.PageSize = 50;
-          options.ParentEntity = parentEntity;
-          options.ParentEntityField = this.props.config.parentIdColumn;
-          options.ParentId =
-            this.props.selectedRowParent[this.props.config.parentIdColumn];
-        }
-      } else {
-        options = {
-          start: currentPage * limit,
-          limit: limit,
-          action: "list",
-          asArray: 0,
-          sortInfo: sortInfo && sortInfo.length === 0 ? null : sortInfo,
-        };
-        if (filter) {
-          options.filter = filter;
-        }
-        if (this.props.config.extraFilters) {
-          var extraFilters = this.props.config.extraFilters();
-          for (var extraFitler of extraFilters) {
-            options.filter.push(extraFitler);
-          }
-        }
-        if (this.props.config.comboTypes) {
-          var combos = [];
-          for (var combo of this.props.config.comboTypes) {
-            if (!combo.loaded && this.props.combos[combo.type]) {
-              combo.loaded = true;
-            }
-            if (!combo.loaded) {
-              //combo.loaded = true;
-              combos.push(combo);
-            }
-          }
-          options.comboTypes = JSON.stringify(combos);
-        }
-        options.identifier = this.props.config.identifier;
-        options.apiIdentifier = this.props.config.apiIdentifier;
       }
+      if (filter) {
+        for (var item of filter) {
+          if (!newFilterInfo) {
+            newFilterInfo = [];
+          }
+          var filterType = "EQUALS";
+          if (item.data.type == "string") {
+            filterType = "CONTAINS";
+          } else if (item.data.type == "boolean") {
+            item.data.value = item.data.value ? 1 : 0;
+          } else if (item.data.type == "numeric") {
+            if (item.data.comparison == "gt") {
+              filterType = "GREATERTHANEQUAL";
+            } else if (item.data.comparison == "lt") {
+              filterType = "LESSERTHANEQUAL";
+            } else if (item.data.comparison == "eq") {
+              filterType = "EQUALS";
+            }
+          } else if (item.data.type == "date") {
+            if (item.data.comparison == "gt") {
+              filterType = "DATEGREATERTHANEQUAL";
+            } else if (item.data.comparison == "lt") {
+              filterType = "DATELESSERTHANEQUAL";
+            } else if (item.data.comparison == "eq") {
+              filterType = "DATEEQUALS";
+            }
+          } else if (item.data.type == "list") {
+            filterType = "MULTI";
+          }
+          newFilterInfo.push({
+            filterTerm: item.data.value,
+            filterBy: item.field,
+            filterType,
+          });
+        }
+      }
+
+      var options = {
+        pageNo: currentPage,
+        pageSize: limit,
+        filterInfo: newFilterInfo,
+        action: "list",
+        sortInfo: sortInfo && sortInfo.length === 0 ? null : sortInfo,
+        identifier: this.props.config.identifier,
+        apiIdentifier: this.props.config.apiIdentifier,
+      };
+
+      if (this.props.config.comboTypes) {
+        var combos = [];
+        for (var combo of this.props.config.comboTypes) {
+          if (!combo.loaded) {
+            //combo.loaded = true;
+            combos.push(combo);
+          }
+        }
+        options.comboTypes = combos;
+      }
+      if (this.props.config.isChild) {
+        let parentEntity = this.props.config.identifier.split("_");
+        parentEntity = parentEntity[parentEntity.length - 2];
+        options.PageNo = 0;
+        options.PageSize = 50;
+        options.ParentEntity = parentEntity;
+        options.ParentEntityField = this.props.config.parentIdColumn;
+        options.ParentId =
+          this.props.selectedRowParent[this.props.config.parentIdColumn];
+      }
+      
       this.props.dispatch(
         Actions["list" + options.identifier]({
           ...options,
@@ -881,21 +855,11 @@ class GridPanel extends PureComponent {
     var row = this.props.data[index];
     var activeRecordId = row[idColumn];
 
-    var payload = null;
-
-    if (isNewBackend) {
-      payload = {
-        action: "delete",
-        [idColumn]: activeRecordId,
-        identifier: this.props.config.identifier,
-      };
-    } else {
-      payload = {
-        action: "delete",
-        ids: activeRecordId,
-        identifier: this.props.config.identifier,
-      };
-    }
+    var payload = {
+      action: "delete",
+      [idColumn]: activeRecordId,
+      identifier: this.props.config.identifier,
+    };
 
     // TO DO: Need to Show Modal Popup to ask for Delete
     API.triggerPost(this.props.config.apiIdentifier, payload)
@@ -1511,21 +1475,9 @@ const mapStateToProps = (state, props) => {
     var data = [];
     var count = 0;
     if (gridData.data) {
-      if (isNewBackend) {
-        if (gridData.data && gridData.data.data) {
-          data = gridData.data.data;
-          count = gridData.data.total;
-        }
-      } else {
-        listErrorMessage = gridData.data.info || "";
-        if (props.config.mapper) {
-          var result = props.config.mapper(gridData.data);
-          data = result.records;
-          count = result.recordCount;
-        } else if (gridData.data.records) {
-          data = gridData.data.records;
-          count = gridData.data.recordCount;
-        }
+      if (gridData.data && gridData.data.data) {
+        data = gridData.data.data;
+        count = gridData.data.total;
       }
     }
 
@@ -1628,6 +1580,15 @@ class GridContainer extends PureComponent {
         </>
       );
     }
+    return (
+      <ReduxGridPanel
+                  config={config}
+                  activeRecordId={activeRecordId}
+                  parentRecordId={this.props.parentRecordId}
+                  updateState={this.updateState}
+                  parentIdColumn={this.props.parentIdColumn}
+                />
+    );
     return (
       <>
         <Accordion
