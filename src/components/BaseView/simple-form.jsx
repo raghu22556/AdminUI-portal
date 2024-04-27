@@ -1,30 +1,24 @@
-import React, { PureComponent } from 'react';
-import { Form, Col, Row, Button, Input, Collapse } from 'antd';
-import { connect } from 'react-redux';
-import API from '../../store/requests';
-import Snackbar from '../Snackbar/Snackbar.jsx';
-import DateFormat, { Util } from '../../utils/date';
-import moment from 'moment';
-import { isGuidSystem, isNewBackend } from '../../app-config';
-import Guid from 'guid';
-import { Modal } from 'antd';
-import withStyles from '@material-ui/core/styles/withStyles';
-import Tooltip from '@material-ui/core/Tooltip';
-import {
-  CircularProgress,
-  TextField,
-  MenuItem,
-  Select,
-  FormControl,
-  InputLabel,
-} from '@material-ui/core';
-import 'moment//locale/es';
-import AttachmentIcon from '@material-ui/icons/Attachment';
-import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
-import ErrorOutlineIcon from '@material-ui/icons/ErrorOutline';
-import Tab from '@material-ui/core/Tab';
-import Tabs from '@material-ui/core/Tabs';
-import InfoIcon from '@material-ui/icons/Info';
+/* eslint-disable react/prop-types */
+import React, { PureComponent } from "react";
+import { Form, Col, Row, Button, Input, Collapse } from "antd";
+import { connect } from "react-redux";
+import API from "../../store/requests";
+import Snackbar from "../Snackbar/Snackbar.jsx";
+import DateFormat, { Util } from "../../utils/date";
+import moment from "moment";
+import { isGuidSystem, isNewBackend } from "../../app-config";
+import Guid from "guid";
+import { Modal } from "antd";
+import withStyles from "@material-ui/core/styles/withStyles";
+import Tooltip from "@material-ui/core/Tooltip";
+import { CircularProgress, Select } from "@material-ui/core";
+import "moment//locale/es";
+import AttachmentIcon from "@material-ui/icons/Attachment";
+import CheckCircleOutlineIcon from "@material-ui/icons/CheckCircleOutline";
+import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
+import Tab from "@material-ui/core/Tab";
+import Tabs from "@material-ui/core/Tabs";
+import InfoIcon from "@material-ui/icons/Info";
 
 import {
   InputComponent,
@@ -39,58 +33,58 @@ import {
   VideoUpload,
   MultiInput,
   CustomReduxAutoComplete,
-} from '../maiden-core/ui-components';
+} from "../maiden-core/ui-components";
 
 const { Panel } = Collapse;
 
 const modal = Modal;
-var buttonClickChild = '';
+var buttonClickChild = "";
 var datevalidationobj = {};
 
 const { TextArea } = Input;
 const { Option } = Select;
 export const FieldTypes = {
-  String: 'string',
-  Amount: 'float',
+  String: "string",
+  Amount: "float",
   // Need to handle
-  Text: 'text',
-  Date: 'date',
+  Text: "text",
+  Date: "date",
   // Need to handle
-  DateTime: 'datetime',
+  DateTime: "datetime",
   // Need to handle
-  Lookup: 'combo',
-  Toggle: 'boolean',
-  Number: 'int',
-  TextArea: 'textarea',
-  AutoFill: 'autofill',
-  Password: 'password',
-  ImageUpload: 'imageUpload',
-  MultiImageUpload: 'multiImageUpload',
-  MultiInput: 'multiInput',
-  Url: 'url',
-  Email: 'email',
-  LatLong: 'latlong',
-  Percentage: 'percentage',
-  MacAddress: 'macAddress',
-  Numeric: 'numeric',
-  Float: 'float',
-  Alphanumeric: 'alphanumeric',
-  FileUpload: 'fileupload',
-  RefMediaUpload: 'refmediaupload',
-  AjaxSelect: 'ajaxSelect',
-  SearchAjax: 'searchAjax',
-  MinMax: 'minmax',
-  Dragger: 'dragger',
-  Button: 'button',
-  VideoUpload: 'videoUpload',
+  Lookup: "combo",
+  Toggle: "boolean",
+  Number: "int",
+  TextArea: "textarea",
+  AutoFill: "autofill",
+  Password: "password",
+  ImageUpload: "imageUpload",
+  MultiImageUpload: "multiImageUpload",
+  MultiInput: "multiInput",
+  Url: "url",
+  Email: "email",
+  LatLong: "latlong",
+  Percentage: "percentage",
+  MacAddress: "macAddress",
+  Numeric: "numeric",
+  Float: "float",
+  Alphanumeric: "alphanumeric",
+  FileUpload: "fileupload",
+  RefMediaUpload: "refmediaupload",
+  AjaxSelect: "ajaxSelect",
+  SearchAjax: "searchAjax",
+  MinMax: "minmax",
+  Dragger: "dragger",
+  Button: "button",
+  VideoUpload: "videoUpload",
 };
 
 const getThemeColor = () => {
-  return '';
+  return "";
 };
 
 CustomSelect.defaultProps = {
-  mappingId: 'LookupId',
+  mappingId: "LookupId",
 };
 
 /*
@@ -143,21 +137,20 @@ const ReturnComponent = ({
   recProps,
   recState,
 }) => {
- 
   if (item.type == FieldTypes.Number) {
     if (item.disabledOnEdit) {
-      if (typeof recProps.activeRecordId == 'number') {
+      if (typeof recProps.activeRecordId == "number") {
         disabled = true;
       }
     }
-    
+
     return (
       <CustomInput
         type="text"
         name={name}
         value={value}
         maxLength={item.maxLength ? item.maxLength : 250}
-        onChange={event => {
+        onChange={(event) => {
           let value = event.target.value;
           if (/^-?\d*[.,]?\d*$/.test(value)) {
             if (item.allowNegatives || value >= 0) {
@@ -181,7 +174,7 @@ const ReturnComponent = ({
     );
   } else if (item.type == FieldTypes.Amount) {
     if (item.disabledOnEdit) {
-      if (typeof recProps.activeRecordId == 'number') {
+      if (typeof recProps.activeRecordId == "number") {
         disabled = true;
       }
     }
@@ -192,7 +185,7 @@ const ReturnComponent = ({
         disabled={disabled}
         maxLength={item.maxLength ? item.maxLength : 250}
         value={value != null ? value?.toString() : item.defaultValue}
-        onChange={event => {
+        onChange={(event) => {
           let value = event.target.value;
           if (/^-?\d*[.,]?\d*$/.test(value)) onChange(value);
         }}
@@ -207,10 +200,10 @@ const ReturnComponent = ({
         value={value}
         format="DD-MM-YYYY"
         onChange={onChange}
-        style={{ width: '100%' }}
+        style={{ width: "100%" }}
         label={item.title}
         disbled={disabled}
-        getCalendarContainer={trigger => trigger.parentNode}
+        getCalendarContainer={(trigger) => trigger.parentNode}
       />
     );
   } else if (item.type == FieldTypes.DateTime) {
@@ -221,17 +214,17 @@ const ReturnComponent = ({
         format="YYYY-MM-DD HH:mm:ss"
         name={name}
         onChange={onChange}
-        style={{ width: '100%' }}
+        style={{ width: "100%" }}
         value={value}
         disbled={disabled}
-        disabledDate={current => {
+        disabledDate={(current) => {
           if (item.disablePastDate) {
             return current && current < item.disablePastDate;
           } else {
             return false;
           }
         }}
-        getCalendarContainer={trigger => trigger.parentNode}
+        getCalendarContainer={(trigger) => trigger.parentNode}
       />
     );
   } else if (item.type == FieldTypes.Toggle) {
@@ -246,7 +239,10 @@ const ReturnComponent = ({
     );
   } else if (item.type == FieldTypes.TextArea || item.type == FieldTypes.Text) {
     let props = {};
-    if (item.rowSpan) props = { autoSize: { minRows: item.rowSpan - 2, maxRows: item.rowSpan } };
+    if (item.rowSpan)
+      props = {
+        autoSize: { minRows: item.rowSpan - 2, maxRows: item.rowSpan },
+      };
 
     return (
       <CustomTextAreaInput
@@ -275,11 +271,11 @@ const ReturnComponent = ({
     return (
       <CustomSelect
         name={name}
-        value={item.mode == 'multiple' ? (value ? value : []) : value}
+        value={item.mode == "multiple" ? (value ? value : []) : value}
         onChange={onChange}
         options={data}
         allowZeros={item.allowZeros}
-        mode={item.mode || 'default'}
+        mode={item.mode || "default"}
         mappingId={item.mappingId}
         title={item.title}
         disabled={disabled}
@@ -297,10 +293,18 @@ const ReturnComponent = ({
     );
   } else if (item.type == FieldTypes.ImageUpload) {
     return (
-      <ImageUpload onChange={onChange} name={name} value={value} item={item} disbled={disabled} />
+      <ImageUpload
+        onChange={onChange}
+        name={name}
+        value={value}
+        item={item}
+        disbled={disabled}
+      />
     );
   } else if (item.type == FieldTypes.VideoUpload) {
-    return <VideoUpload onChange={onChange} name={name} value={value} item={item} />;
+    return (
+      <VideoUpload onChange={onChange} name={name} value={value} item={item} />
+    );
   } else if (item.type == FieldTypes.MultiInput) {
     return <MultiInput onChange={onChange} name={name} value={value} />;
   } else {
@@ -311,7 +315,7 @@ const ReturnComponent = ({
 class SimpleForm extends PureComponent {
   constructor(props) {
     super(props);
-    const { selectedRow, columns, activeRecordId, apiIdentifier } = props;
+    const { selectedRow, columns } = props;
     this.state = {
       applyLocalChange: false,
       snackBarVisible: false,
@@ -320,7 +324,7 @@ class SimpleForm extends PureComponent {
       columns: [],
       validForm: {},
       selectedTabs: 0,
-      collapseViewShow: ['active'],
+      collapseViewShow: ["active"],
       isDisabledField: false,
     };
     this.defaultColSpan = 6;
@@ -340,7 +344,7 @@ class SimpleForm extends PureComponent {
     this.afterDataLoad();
   }
 
-  isValidLookUp = value => {
+  isValidLookUp = (value) => {
     if (!isNaN(value)) {
       return value > 0;
     }
@@ -362,15 +366,18 @@ class SimpleForm extends PureComponent {
         var formKey = col.dataIndex;
         if (col.type == FieldTypes.Toggle) {
           this.state[formKey] =
-            selectedRow[key] == 'Y' ||
-            selectedRow[key] == 'true' ||
-            selectedRow[key] == 'Active' ||
+            selectedRow[key] == "Y" ||
+            selectedRow[key] == "true" ||
+            selectedRow[key] == "Active" ||
             selectedRow[key] == 1
               ? true
               : false;
-        } else if (col.type == FieldTypes.Text || col.type == FieldTypes.String) {
+        } else if (
+          col.type == FieldTypes.Text ||
+          col.type == FieldTypes.String
+        ) {
           if (selectedRow[key] == null) {
-            this.state[formKey] = '';
+            this.state[formKey] = "";
           } else {
             this.state[formKey] = selectedRow[key];
           }
@@ -388,28 +395,31 @@ class SimpleForm extends PureComponent {
           }
         } else if (col.type == FieldTypes.MultiInput) {
           if (selectedRow[key]) {
-            this.state[formKey] = selectedRow[key].split(',');
+            this.state[formKey] = selectedRow[key].split(",");
           } else {
             this.state[formKey] = [];
           }
-        } else if (col.type === FieldTypes.AutoFill || col.type === FieldTypes.Lookup) {
-          if (col.mode == 'multiple') {
+        } else if (
+          col.type === FieldTypes.AutoFill ||
+          col.type === FieldTypes.Lookup
+        ) {
+          if (col.mode == "multiple") {
             if (selectedRow[key]) {
               this.state[formKey] = selectedRow[key]
-                .split(',')
-                .map(item => parseInt(item))
-                .filter(item => item);
+                .split(",")
+                .map((item) => parseInt(item))
+                .filter((item) => item);
             } else {
               this.state[formKey] = [];
             }
           } else if (
             this.isValidLookUp(selectedRow[key]) ||
             col.allowZeros ||
-            (col.allowIdAsString && selectedRow[key] !== '')
+            (col.allowIdAsString && selectedRow[key] !== "")
           ) {
             this.state[formKey] = selectedRow[key];
           } else {
-            this.state[formKey] = '';
+            this.state[formKey] = "";
           }
         } else {
           this.state[formKey] = selectedRow[key];
@@ -430,11 +440,11 @@ class SimpleForm extends PureComponent {
   checkCollapseError(errors) {
     let { columns } = this.props;
     if (errors) {
-      columns.forEach(fields => {
+      columns.forEach((fields) => {
         if (fields.isCollapse) {
           var sectionValid = true;
-          fields.columns.forEach(columnsFiled => {
-            Object.keys(errors).forEach(ele => {
+          fields.columns.forEach((columnsFiled) => {
+            Object.keys(errors).forEach((ele) => {
               if (columnsFiled.title == ele) {
                 if (errors[ele].errors.length !== 0) {
                   sectionValid = false;
@@ -454,7 +464,8 @@ class SimpleForm extends PureComponent {
     if (
       selectedRow &&
       JSON.stringify(selectedRow) !== JSON.stringify(this.props.selectedRow) &&
-      (!this.state.applyLocalChange || this.props.activeRecordId != activeRecordId)
+      (!this.state.applyLocalChange ||
+        this.props.activeRecordId != activeRecordId)
     ) {
       this.updateState({ selectedRow, columns });
       this.setState({ activeRecordId }, this.afterDataLoad);
@@ -467,15 +478,18 @@ class SimpleForm extends PureComponent {
       }
       this.setState({});
       this.files = [];
-      if (this.props.config.resetFormFields) this.props.config.resetFormFields();
+      if (this.props.config.resetFormFields)
+        this.props.config.resetFormFields();
     }
   }
   success = () => {
     const { t } = this.props;
     modal.destroyAll();
     modal.success({
-      title: t('Record Saved Successfully') + '...',
-      okButtonProps: { style: { backgroundColor: '#24b5ee', border: 'none', display: 'none' } },
+      title: t("Record Saved Successfully") + "...",
+      okButtonProps: {
+        style: { backgroundColor: "#24b5ee", border: "none", display: "none" },
+      },
     });
     setTimeout(() => {
       modal.destroyAll();
@@ -487,7 +501,7 @@ class SimpleForm extends PureComponent {
     const { t } = this.props;
     // eslint-disable-next-line no-lone-blocks
     {
-      this.props.form.validateFields(err => {
+      this.props.form.validateFields((err) => {
         if (!err) {
           this.setState({ loading: true });
           this.files = [];
@@ -500,7 +514,10 @@ class SimpleForm extends PureComponent {
             activeRecordId,
           } = this.props;
           var values = this.state;
-          var json = { action: 'save', apiIdentifier: this.props.apiIdentifier };
+          var json = {
+            action: "save",
+            apiIdentifier: this.props.apiIdentifier,
+          };
           var columns = this.props.columns;
           for (var col of columns) {
             var fieldId = col.dataIndex;
@@ -513,10 +530,12 @@ class SimpleForm extends PureComponent {
               continue;
             }
 
-            if (activeRecordId == 'NEW_RECORD') {
+            if (activeRecordId == "NEW_RECORD") {
               if (values[fieldId]) {
                 if (col.type == FieldTypes.DateTime) {
-                  json[fieldId] = values[fieldId].format(Util.dateTimeParamFormat);
+                  json[fieldId] = values[fieldId].format(
+                    Util.dateTimeParamFormat
+                  );
                 } else if (col.type == FieldTypes.Date) {
                   json[fieldId] = values[fieldId].format(Util.dateParamFormat);
                 } else if (col.type == FieldTypes.MultiInput) {
@@ -524,7 +543,10 @@ class SimpleForm extends PureComponent {
                 } else if (col.type == FieldTypes.ImageUpload) {
                   json[fieldId] = values[fieldId];
                   this.files.push(values[fieldId]);
-                } else if (col.type == FieldTypes.Lookup && col.mode == 'multiple') {
+                } else if (
+                  col.type == FieldTypes.Lookup &&
+                  col.mode == "multiple"
+                ) {
                   if (values[fieldId].length == 0) {
                     // Not sending key value pair
                   } else {
@@ -532,7 +554,7 @@ class SimpleForm extends PureComponent {
                   }
                 } else {
                   if (
-                    typeof values[fieldId] !== 'undefined' &&
+                    typeof values[fieldId] !== "undefined" &&
                     (values[fieldId] || values[fieldId] === 0)
                   ) {
                     json[fieldId] = values[fieldId];
@@ -546,58 +568,72 @@ class SimpleForm extends PureComponent {
                 // Value exists
                 if (values[fieldId]) {
                   if (col.type == FieldTypes.DateTime) {
-                    json[fieldId] = values[fieldId].format(Util.dateTimeParamFormat);
+                    json[fieldId] = values[fieldId].format(
+                      Util.dateTimeParamFormat
+                    );
                   } else if (col.type == FieldTypes.Date) {
-                    json[fieldId] = values[fieldId].format(Util.dateParamFormat);
+                    json[fieldId] = values[fieldId].format(
+                      Util.dateParamFormat
+                    );
                   } else if (col.type == FieldTypes.MultiInput) {
                     json[fieldId] = values[fieldId].toString();
                   } else if (col.type == FieldTypes.ImageUpload) {
                     json[fieldId] = values[fieldId];
                     this.files.push(values[fieldId]);
-                  } else if (col.type == FieldTypes.Lookup && col.mode == 'multiple') {
+                  } else if (
+                    col.type == FieldTypes.Lookup &&
+                    col.mode == "multiple"
+                  ) {
                     if (values[fieldId].length == 0) {
                       // exists in old record but modified to empty in current state
-                      json[fieldId] = 'NULL';
+                      json[fieldId] = "NULL";
                     } else {
                       json[fieldId] = values[fieldId];
                     }
                   } else {
                     if (
-                      typeof values[fieldId] !== 'undefined' &&
+                      typeof values[fieldId] !== "undefined" &&
                       (values[fieldId] || values[fieldId] === 0)
                     ) {
                       json[fieldId] = values[fieldId];
                     } else {
                       if (selectedRow[fieldId]) {
                         // exists in old record but modified to empty in current state
-                        json[fieldId] = 'NULL';
+                        json[fieldId] = "NULL";
                       }
                     }
                   }
                 } else {
                   // exists in old record but modified to empty in current state
-                  json[fieldId] = 'NULL';
+                  json[fieldId] = "NULL";
                 }
               } else {
                 // Value not exists earlier
                 if (values[fieldId]) {
                   if (col.type == FieldTypes.DateTime) {
-                    json[fieldId] = values[fieldId].format(Util.dateTimeParamFormat);
+                    json[fieldId] = values[fieldId].format(
+                      Util.dateTimeParamFormat
+                    );
                   } else if (col.type == FieldTypes.Date) {
-                    json[fieldId] = values[fieldId].format(Util.dateParamFormat);
+                    json[fieldId] = values[fieldId].format(
+                      Util.dateParamFormat
+                    );
                   } else if (col.type == FieldTypes.MultiInput) {
                     json[fieldId] = values[fieldId].toString();
                   } else if (col.type == FieldTypes.ImageUpload) {
                     json[fieldId] = values[fieldId];
                     this.files.push(values[fieldId]);
-                  } else if (col.type == FieldTypes.Lookup && col.mode == 'multiple') {
+                  } else if (
+                    col.type == FieldTypes.Lookup &&
+                    col.mode == "multiple"
+                  ) {
                     if (values[fieldId].length == 0) {
                     } else {
                       json[fieldId] = values[fieldId];
                     }
                   } else {
                     if (
-                      typeof values[fieldId] !== 'undefined' &&
+                      typeof values[fieldId] !== "undefined" &&
                       (values[fieldId] || values[fieldId] === 0)
                     ) {
                       json[fieldId] = values[fieldId];
@@ -605,7 +641,7 @@ class SimpleForm extends PureComponent {
                   }
                 } else {
                   if (
-                    typeof values[fieldId] !== 'undefined' &&
+                    typeof values[fieldId] !== "undefined" &&
                     (values[fieldId] || values[fieldId] === 0)
                   ) {
                     json[fieldId] = values[fieldId];
@@ -622,17 +658,17 @@ class SimpleForm extends PureComponent {
             json[parentIdColumn] = selectedRowParent[parentIdColumn];
           }
           if (isNewBackend) {
-            if (this.props.activeRecordId == 'NEW_RECORD') {
-              json.action = 'insert';
+            if (this.props.activeRecordId == "NEW_RECORD") {
+              json.action = "insert";
               if (isGuidSystem) {
                 delete json.id;
               }
             } else {
-              json.action = 'update';
+              json.action = "update";
               json[this.props.config.idColumn] = this.props.activeRecordId;
             }
           } else {
-            if (this.props.activeRecordId == 'NEW_RECORD') {
+            if (this.props.activeRecordId == "NEW_RECORD") {
               json.id = 0;
             } else {
               json.id = this.props.activeRecordId;
@@ -645,30 +681,42 @@ class SimpleForm extends PureComponent {
           }
 
           API.triggerMultiPartPost(request.apiIdentifier, request, this.files)
-            .then(response => {
+            .then((response) => {
               this.setState({ loading: false });
               var data = response.data;
               if (data.success) {
                 this.props.form.resetFields();
                 for (var col of columns) {
                   var formKey = col.dataIndex;
-                  if (!this.props.shouldNotResetFields) me.onChange(formKey, null);
+                  if (!this.props.shouldNotResetFields)
+                    me.onChange(formKey, null);
                 }
                 this.files = [];
-                if (this.props.config.resetFormFields) this.props.config.resetFormFields();
+                if (this.props.config.resetFormFields)
+                  this.props.config.resetFormFields();
                 if (callBack) callBack(data);
                 if (closeable) toggle(true);
                 else resetProps();
                 this.success();
               } else if (data.info) {
-                this.setState({ snackBarVisible: true, message: data.info, color: 'danger' }, () =>
-                  setTimeout(() => this.setState({ snackBarVisible: false, message: '' }), 5000),
+                this.setState(
+                  {
+                    snackBarVisible: true,
+                    message: data.info,
+                    color: "danger",
+                  },
+                  () =>
+                    setTimeout(
+                      () =>
+                        this.setState({ snackBarVisible: false, message: "" }),
+                      5000
+                    )
                 );
               } else {
-                alert(t('Failed'));
+                alert(t("Failed"));
               }
             })
-            .catch(error => {
+            .catch((error) => {
               this.setState({ loading: false });
               if (error.response) alert(error.response.data.Message);
             });
@@ -678,45 +726,48 @@ class SimpleForm extends PureComponent {
   };
 
   onChange = (field, control, type) => {
-    if (type == 'file' || type == 'multiInput') {
+    if (type == "file" || type == "multiInput") {
       this.setState({ [field]: control });
     } else if (control == null) {
       this.setState({ [field]: control, applyLocalChange: true });
     } else if (control._isAMomentObject) {
-      var value = '';
-      if (typeof control === 'object') value = control; //.format('YYYY-MM-DD hh:mm:ss');
+      var value = "";
+      if (typeof control === "object") value = control; //.format('YYYY-MM-DD hh:mm:ss');
       this.setState({ [field]: value, applyLocalChange: true });
     } else {
-      var value = '';
-      if (typeof control === 'object') {
+      var value = "";
+      if (typeof control === "object") {
         if (control.length >= 0) {
           value = control;
         } else value = control.target.value;
       } else if (
-        typeof control === 'boolean' ||
-        typeof control === 'string' ||
-        typeof control === 'number'
+        typeof control === "boolean" ||
+        typeof control === "string" ||
+        typeof control === "number"
       )
         value = control;
-      if (value.charAt && value.charAt(0) == ' ') value = value.trim();
-      if (typeof this.props.setShowConfMsg === 'function') this.props.setShowConfMsg(true);
+      if (value.charAt && value.charAt(0) == " ") value = value.trim();
+      if (typeof this.props.setShowConfMsg === "function")
+        this.props.setShowConfMsg(true);
       this.setState({ [field]: value, applyLocalChange: true });
     }
   };
 
-  getFieldRules = item => {
+  getFieldRules = (item) => {
     const { notRequiredFields } = this.state;
     const id = item.dataIndex;
     const { t, selectedRow } = this.props;
     return [
       {
         required:
-          item.type == FieldTypes.Toggle ? false : !notRequiredFields[id] && !!item.isRequired,
-        message: `${item.title}` + ' ' + 'is required',
-        transform: value => (value && value.trim && value.trim()) || value,
+          item.type == FieldTypes.Toggle
+            ? false
+            : !notRequiredFields[id] && !!item.isRequired,
+        message: `${item.title}` + " " + "is required",
+        transform: (value) => (value && value.trim && value.trim()) || value,
         validator: (rule, value, callback) => {
           if (rule.required && !notRequiredFields[id]) {
-            if (value == null || typeof value == 'undefined') {
+            if (value == null || typeof value == "undefined") {
               return callback(true);
             } else if (
               (item.type === FieldTypes.String ||
@@ -728,12 +779,13 @@ class SimpleForm extends PureComponent {
                 item.type === FieldTypes.Float ||
                 item.type === FieldTypes.AjaxSelect ||
                 item.type === FieldTypes.SearchAjax) &&
-              (value == '' || value == ' ') &&
+              (value == "" || value == " ") &&
               !item.allowZeros
             ) {
               return callback(true);
             } else if (
-              (item.type === FieldTypes.Number || item.type === FieldTypes.Amount) &&
+              (item.type === FieldTypes.Number ||
+                item.type === FieldTypes.Amount) &&
               !/^-?\d*[.,]?\d*$/.test(value)
             ) {
               return callback(true);
@@ -741,27 +793,32 @@ class SimpleForm extends PureComponent {
               item.type === FieldTypes.Url &&
               !/^(ftp|http|https):\/\/[^ "]+$/.test(value)
             ) {
-              rule.message = item.title + ' ' + 'must be a valid url';
+              rule.message = item.title + " " + "must be a valid url";
               return callback(true);
             } else if (
               item.type === FieldTypes.MacAddress &&
-              !/^([0-9a-fA-F][0-9a-fA-F]:){5}([0-9a-fA-F][0-9a-fA-F])$/.test(value)
+              !/^([0-9a-fA-F][0-9a-fA-F]:){5}([0-9a-fA-F][0-9a-fA-F])$/.test(
+                value
+              )
             ) {
-              rule.message = item.title + ' ' + 'must be a valid Mac Address';
+              rule.message = item.title + " " + "must be a valid Mac Address";
               return callback(true);
             } else if (
               item.type === FieldTypes.Email &&
               !/^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1, 3}\.[0-9]{1, 3}\.[0-9]{1, 3}\.[0-9]{1, 3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
-                value,
+                value
               )
             ) {
-              rule.message = item.title + ' ' + 'must be a valid email';
+              rule.message = item.title + " " + "must be a valid email";
               return callback(true);
-            } else if (item.type === FieldTypes.AutoFill || item.type === FieldTypes.Lookup) {
+            } else if (
+              item.type === FieldTypes.AutoFill ||
+              item.type === FieldTypes.Lookup
+            ) {
               if (value === 0 && !item.allowZeros) {
                 return callback(true);
               }
-              if (value === '' || value.length == 0) {
+              if (value === "" || value.length == 0) {
                 return callback(true);
               } else return callback();
             } else if (item.type === FieldTypes.MultiInput) {
@@ -779,13 +836,21 @@ class SimpleForm extends PureComponent {
         },
       },
       {
-        daterange: item.type == 'date' ? true : false,
-        message: "Program's to date can not be less than max to date of program item",
-        transform: value => (value && value.trim && value.trim()) || value,
+        daterange: item.type == "date" ? true : false,
+        message:
+          "Program's to date can not be less than max to date of program item",
+        transform: (value) => (value && value.trim && value.trim()) || value,
         validator: (rule, value, callback) => {
-          if (rule.daterange && !notRequiredFields[id] && value && selectedRow.ChildMaxDate) {
-            if (rule.field === 'Valid To') {
-              let momentchildMaxDate = moment(DateFormat.parse(selectedRow.ChildMaxDate));
+          if (
+            rule.daterange &&
+            !notRequiredFields[id] &&
+            value &&
+            selectedRow.ChildMaxDate
+          ) {
+            if (rule.field === "Valid To") {
+              let momentchildMaxDate = moment(
+                DateFormat.parse(selectedRow.ChildMaxDate)
+              );
               let childMaxDate = momentchildMaxDate.valueOf();
               let selectedToDate = value.valueOf();
               if (childMaxDate > selectedToDate) {
@@ -799,27 +864,27 @@ class SimpleForm extends PureComponent {
         },
       },
       {
-        daterange: item.type == 'date' ? true : false,
+        daterange: item.type == "date" ? true : false,
         message: "Valid To can't be less than Valid From",
-        transform: value => (value && value.trim && value.trim()) || value,
+        transform: (value) => (value && value.trim && value.trim()) || value,
         validator: (rule, value, callback) => {
           if (rule.daterange && !notRequiredFields[id] && value) {
-            if (rule.field === 'Valid From' || rule.field === 'Valid To') {
-              if (rule.field === 'Valid From') {
-                datevalidationobj['lower'] = value;
-              } else if (rule.field === 'Valid To') {
-                datevalidationobj['upper'] = value;
+            if (rule.field === "Valid From" || rule.field === "Valid To") {
+              if (rule.field === "Valid From") {
+                datevalidationobj["lower"] = value;
+              } else if (rule.field === "Valid To") {
+                datevalidationobj["upper"] = value;
                 // if(selectedRow.ValidFrom){;
                 //   let momentValidFrmDate = moment(DateFormat.parse(selectedRow.ValidFrom));
                 //    datevalidationobj['lower'] = momentValidFrmDate.valueOf();
                 // }
               }
               if (
-                datevalidationobj.hasOwnProperty('lower') &&
-                datevalidationobj.hasOwnProperty('upper')
+                datevalidationobj.hasOwnProperty("lower") &&
+                datevalidationobj.hasOwnProperty("upper")
               ) {
-                let date1 = datevalidationobj['lower'].valueOf();
-                let date2 = datevalidationobj['upper'].valueOf();
+                let date1 = datevalidationobj["lower"].valueOf();
+                let date2 = datevalidationobj["upper"].valueOf();
                 if (date1 > date2) {
                   return callback(true);
                 } else {
@@ -833,42 +898,52 @@ class SimpleForm extends PureComponent {
         },
       },
       {
-        daterange: item.type == 'date' ? true : false,
-        message: "Valid To and Valid From should be in range of Program's date Interval",
-        transform: value => (value && value.trim && value.trim()) || value,
+        daterange: item.type == "date" ? true : false,
+        message:
+          "Valid To and Valid From should be in range of Program's date Interval",
+        transform: (value) => (value && value.trim && value.trim()) || value,
         validator: (rule, value, callback) => {
-          let isProgramItemScreen = window.location.href.indexOf('ProgramItem') > -1;
+          let isProgramItemScreen =
+            window.location.href.indexOf("ProgramItem") > -1;
           if (isProgramItemScreen) {
             let datevalidationparentobj = JSON.parse(
-              localStorage.getItem('datevalidationparentobj'),
+              localStorage.getItem("datevalidationparentobj")
             )
-              ? JSON.parse(localStorage.getItem('datevalidationparentobj'))
+              ? JSON.parse(localStorage.getItem("datevalidationparentobj"))
               : {};
             if (rule.daterange && !notRequiredFields[id] && value) {
-              if (rule.field === 'Valid From' || rule.field === 'Valid To') {
-                if (rule.field === 'Valid From') {
-                  datevalidationparentobj['ProgramItemValidFrom'] = value.startOf('day').valueOf();
+              if (rule.field === "Valid From" || rule.field === "Valid To") {
+                if (rule.field === "Valid From") {
+                  datevalidationparentobj["ProgramItemValidFrom"] = value
+                    .startOf("day")
+                    .valueOf();
                   localStorage.setItem(
-                    'datevalidationparentobj',
-                    JSON.stringify(datevalidationparentobj),
+                    "datevalidationparentobj",
+                    JSON.stringify(datevalidationparentobj)
                   );
-                } else if (rule.field === 'Valid To') {
-                  datevalidationparentobj['ProgramItemValidTo'] = value.startOf('day').valueOf();
+                } else if (rule.field === "Valid To") {
+                  datevalidationparentobj["ProgramItemValidTo"] = value
+                    .startOf("day")
+                    .valueOf();
                   localStorage.setItem(
-                    'datevalidationparentobj',
-                    JSON.stringify(datevalidationparentobj),
+                    "datevalidationparentobj",
+                    JSON.stringify(datevalidationparentobj)
                   );
                 }
                 if (
-                  datevalidationparentobj.hasOwnProperty('ProgramItemValidFrom') ||
-                  datevalidationparentobj.hasOwnProperty('ProgramItemValidTo')
+                  datevalidationparentobj.hasOwnProperty(
+                    "ProgramItemValidFrom"
+                  ) ||
+                  datevalidationparentobj.hasOwnProperty("ProgramItemValidTo")
                 ) {
-                  let programitemvalidFrom = datevalidationparentobj['ProgramItemValidFrom'];
-                  let programitemvalidTo = datevalidationparentobj['ProgramItemValidTo'];
+                  let programitemvalidFrom =
+                    datevalidationparentobj["ProgramItemValidFrom"];
+                  let programitemvalidTo =
+                    datevalidationparentobj["ProgramItemValidTo"];
 
-                  if (rule.field === 'Valid From') {
+                  if (rule.field === "Valid From") {
                     return callback();
-                  } else if (rule.field === 'Valid To') {
+                  } else if (rule.field === "Valid To") {
                     return callback();
                   }
                 }
@@ -881,9 +956,12 @@ class SimpleForm extends PureComponent {
         },
       },
       {
-        maxLengthExceed: item.type == FieldTypes.String && item.maxLimitExceeded ? true : false,
-        message: `${item.title}` + ' ' + 'should be a valid % value',
-        transform: value => (value && value.trim && value.trim()) || value,
+        maxLengthExceed:
+          item.type == FieldTypes.String && item.maxLimitExceeded
+            ? true
+            : false,
+        message: `${item.title}` + " " + "should be a valid % value",
+        transform: (value) => (value && value.trim && value.trim()) || value,
         validator: (rule, value, callback) => {
           if (rule.maxLengthExceed) {
             if (!parseFloat(value) && value != 0) {
@@ -900,12 +978,13 @@ class SimpleForm extends PureComponent {
         },
       },
       {
-        commaRestrict: item.type == FieldTypes.String && item.commaRestricted ? true : false,
-        message: `${item.title}` + ' ' + 'cant have commas in it.',
-        transform: value => (value && value.trim && value.trim()) || value,
+        commaRestrict:
+          item.type == FieldTypes.String && item.commaRestricted ? true : false,
+        message: `${item.title}` + " " + "cant have commas in it.",
+        transform: (value) => (value && value.trim && value.trim()) || value,
         validator: (rule, value, callback) => {
           if (rule.commaRestrict) {
-            if (value.indexOf(',') > -1) {
+            if (value.indexOf(",") > -1) {
               return callback(true);
             }
           }
@@ -913,9 +992,10 @@ class SimpleForm extends PureComponent {
         },
       },
       {
-        minLength: item.type == FieldTypes.String && item.minLimit ? true : false,
-        message: `${item.title}` + ' ' + 'should be a valid % value',
-        transform: value => (value && value.trim && value.trim()) || value,
+        minLength:
+          item.type == FieldTypes.String && item.minLimit ? true : false,
+        message: `${item.title}` + " " + "should be a valid % value",
+        transform: (value) => (value && value.trim && value.trim()) || value,
         validator: (rule, value, callback) => {
           if (rule.minLength == 0) {
             if (parseFloat(value) < item.minLimit) {
@@ -930,24 +1010,35 @@ class SimpleForm extends PureComponent {
         validator: (rule, value, callback) => {
           if (rule.validateMsg) {
             if (item.maxValueValidate < value) {
-              return callback('Max supported limit is' + ' ' + item.maxValueValidate);
+              return callback(
+                "Max supported limit is" + " " + item.maxValueValidate
+              );
             }
             if (item.minValueValidate > value) {
-              return callback('Min supported limit is' + ' ' + item.minValueValidate);
+              return callback(
+                "Min supported limit is" + " " + item.minValueValidate
+              );
             }
           }
           return callback();
         },
       },
       {
-        validateMsg: item.validateMsg && item.type === FieldTypes.Float && item.checkFloatValue,
+        validateMsg:
+          item.validateMsg &&
+          item.type === FieldTypes.Float &&
+          item.checkFloatValue,
         validator: (rule, value, callback) => {
           if (rule.validateMsg) {
             if (item.maxValueValidate < value) {
-              return callback('Max supported limit is' + ' ' + item.maxValueValidate);
+              return callback(
+                "Max supported limit is" + " " + item.maxValueValidate
+              );
             }
             if (item.minValueValidate > value) {
-              return callback('Min supported limit is' + ' ' + item.minValueValidate);
+              return callback(
+                "Min supported limit is" + " " + item.minValueValidate
+              );
             }
           }
           return callback();
@@ -955,26 +1046,32 @@ class SimpleForm extends PureComponent {
       },
 
       {
-        validateMsg: item.validateMsg && item.type === FieldTypes.Numeric && item.checkIntValue,
+        validateMsg:
+          item.validateMsg &&
+          item.type === FieldTypes.Numeric &&
+          item.checkIntValue,
         validator: (rule, value, callback) => {
           if (rule.validateMsg) {
             if (!(value % 1 === 0)) {
-              return callback('Value must be a integer number');
+              return callback("Value must be a integer number");
             }
           }
           return callback();
         },
       },
       {
-        validateMsg: item.validateMsg && item.type === FieldTypes.Float && item.checkFloatValue,
+        validateMsg:
+          item.validateMsg &&
+          item.type === FieldTypes.Float &&
+          item.checkFloatValue,
         validator: (rule, value, callback) => {
           if (rule.validateMsg) {
             if (
               !/(^-?\d\d*\.\d\d*$)|(^-?\.[0-9]\d\d*$)/.test(value) &&
-              value !== '' &&
+              value !== "" &&
               value !== null
             ) {
-              return callback('Value must be a decimal number');
+              return callback("Value must be a decimal number");
             }
           }
           return callback();
@@ -986,14 +1083,14 @@ class SimpleForm extends PureComponent {
   defaultButtonsRender = () => {
     const { mode } = this.props;
     return (
-      mode != 'view' && (
+      mode != "view" && (
         <Row>
-          <Col span={24} style={{ textAlign: 'right' }}>
-            {this.defaultButton().map(item => {
+          <Col span={24} style={{ textAlign: "right" }}>
+            {this.defaultButton().map((item) => {
               return (
                 <Tooltip title={item.buttonText}>
                   <Button
-                    style={{ marginRight: '10px', marginTop: '45px' }}
+                    style={{ marginRight: "10px", marginTop: "45px" }}
                     onClick={() => item.onClick({ formPanel: this })}
                   >
                     {item.buttonText}
@@ -1029,29 +1126,29 @@ class SimpleForm extends PureComponent {
     let saveAndNextButtonObj = saveAndNextButton
       ? [
           {
-            buttonText: t('Save & New'),
+            buttonText: t("Save & New"),
             onClick: () => this.onSave(false),
           },
         ]
       : [];
 
-    if (saveButtonText == 'Add' && buttonClick == 'EDIT') {
-      saveButtonText = 'Save';
+    if (saveButtonText == "Add" && buttonClick == "EDIT") {
+      saveButtonText = "Save";
     }
-    if (buttonClick == 'CLONE') {
-      saveButtonText = 'Clone';
+    if (buttonClick == "CLONE") {
+      saveButtonText = "Clone";
     }
 
     let buttonsToMap = [
       ...saveAndNextButtonObj,
       ...(buttonsInForm.beforeSaveButton || []),
       {
-        buttonText: saveButtonText || 'Save',
+        buttonText: saveButtonText || "Save",
         onClick: () => this.onSave(true),
       },
       ...(buttonsInForm.afterSaveButton || []),
       {
-        buttonText: 'Cancel',
+        buttonText: "Cancel",
         onClick: () => toggle(this.props.shouldRefresh || false),
       },
       ...(buttonsInForm.afterCancelButton || []),
@@ -1060,7 +1157,7 @@ class SimpleForm extends PureComponent {
     return buttonsToMap;
   };
 
-  formItemStyles = item => {
+  formItemStyles = (item) => {
     return item.customStyle;
   };
 
@@ -1068,14 +1165,14 @@ class SimpleForm extends PureComponent {
     this.setState({ selectedTabs: newValue });
   };
 
-  a11yProps = index => {
+  a11yProps = (index) => {
     return {
       id: `simple-tab-${index}`,
-      'aria-controls': `simple-tabpanel-${index}`,
+      "aria-controls": `simple-tabpanel-${index}`,
     };
   };
 
-  renderFieldCompoenent = item => {
+  renderFieldCompoenent = (item) => {
     if (item.hideInForm) {
       return <></>;
     }
@@ -1083,28 +1180,28 @@ class SimpleForm extends PureComponent {
     const { hideField } = this.state;
     const { combos, buttonClick, apiIdentifier } = this.props;
     var id = item.dataIndex;
-    var index = hideField.findIndex(hideItem => hideItem === id);
+    var index = hideField.findIndex((hideItem) => hideItem === id);
     if (index >= 0) return;
 
-    if (apiIdentifier === 'planogram') {
-      if (buttonClick === 'ADD' || buttonClick === 'EDIT') {
+    if (apiIdentifier === "planogram") {
+      if (buttonClick === "ADD" || buttonClick === "EDIT") {
         if (item.showForBulk) {
           return;
         }
       }
-      if (buttonClick === 'BULK') {
+      if (buttonClick === "BULK") {
         if (item.showForAdd) {
           return;
         }
 
-        if (item.showOnImportToggle && !this.state['IsImportDefinition']) {
+        if (item.showOnImportToggle && !this.state["IsImportDefinition"]) {
           return;
         }
       }
     }
 
-    var value = '';
-    value = typeof this.state[id] === 'undefined' ? null : this.state[id];
+    var value = "";
+    value = typeof this.state[id] === "undefined" ? null : this.state[id];
     var data = [],
       params = {};
     if (item.ParentRecordType) {
@@ -1121,20 +1218,27 @@ class SimpleForm extends PureComponent {
     if (item.comboType) {
       data = combos[item.comboType] || [];
       if (item.filterBy && this.state[item.filterBy]) {
-        data = data.filter(dataitem => dataitem[item.filterBy] === this.state[item.filterBy]);
+        data = data.filter(
+          (dataitem) => dataitem[item.filterBy] === this.state[item.filterBy]
+        );
       }
       if (item.filterWithParent) {
         let { mappingId } = item;
-        if (!mappingId) mappingId = 'LookupId';
-        let { combo, value, indexTofilter, parentMappingId } = item.filterWithParent;
-        if (!parentMappingId) parentMappingId = 'LookupId';
-        if (this.state[value] && this.state[value] !== '') {
+        if (!mappingId) mappingId = "LookupId";
+        let { combo, value, indexTofilter, parentMappingId } =
+          item.filterWithParent;
+        if (!parentMappingId) parentMappingId = "LookupId";
+        if (this.state[value] && this.state[value] !== "") {
           let parentCombo = combos[combo].filter(
-            filterItem => filterItem[parentMappingId] === this.state[value],
+            (filterItem) => filterItem[parentMappingId] === this.state[value]
           );
           if (parentCombo.length > 0) {
-            parentCombo = parentCombo[0][indexTofilter].split(',').map(item => parseInt(item));
-            data = data.filter(item => parentCombo.indexOf(item[mappingId]) >= 0);
+            parentCombo = parentCombo[0][indexTofilter]
+              .split(",")
+              .map((item) => parseInt(item));
+            data = data.filter(
+              (item) => parentCombo.indexOf(item[mappingId]) >= 0
+            );
           }
         }
       }
@@ -1144,70 +1248,75 @@ class SimpleForm extends PureComponent {
 
   renderReturnComponent = (item, id, value, data, params) => {
     const { t, activeRecordId, combos, stringComboVal } = this.props;
-    const { getFieldDecorator } = this.props.form;
+    // const { getFieldDecorator } = this.props.form;
     let disabledFields = item.disabledField
       ? item.disabledField
       : item.disabledFieldBasedonCondition && this.state.isDisabledField
-      ? this.state.isDisabledField
-      : false;
+        ? this.state.isDisabledField
+        : false;
     if (item.enableisNewRecordCanBeAdded) {
       item.isNewRecordCanBeAdded = item.enableisNewRecordCanBeAdded();
     }
-    return item.title == 'gutter' ? (
+    return item.title == "gutter" ? (
       <Col
         span={item.colSpan || this.defaultColSpan}
-        style={{ height: (item.rowSpan && item.rowSpan * 25) || this.defaultMinHeight }}
+        style={{
+          height: (item.rowSpan && item.rowSpan * 25) || this.defaultMinHeight,
+        }}
       />
     ) : (
       <Col
         span={item.colSpan || this.defaultColSpan}
         key={item.title}
         className={`formitem_${item.dataIndex}`}
-        style={{ minHeight: (item.rowSpan && item.rowSpan * 25) || this.defaultMinHeight }}
+        style={{
+          minHeight:
+            (item.rowSpan && item.rowSpan * 25) || this.defaultMinHeight,
+        }}
       >
         <Form.Item
           label={item.hideLabel ? undefined : item.title}
           style={this.formItemStyles(item)}
+          name={item.title}
+          rules={this.getFieldRules(item, t, id)}
+          initialValue={value}
         >
           <div
             className={
-              item.isNewRecordCanBeAdded || item.InfoIconLabel || item.informationIcon
-                ? 'has-plus'
-                : ''
+              item.isNewRecordCanBeAdded ||
+              item.InfoIconLabel ||
+              item.informationIcon
+                ? "has-plus"
+                : ""
             }
           >
-            {getFieldDecorator(item.title, {
-              rules: this.getFieldRules(item, t, id),
-              initialValue: value,
-            })(
-              <ReturnComponent
-                item={item}
-                disabled={disabledFields}
-                recProps={this.props}
-                recState={this.state}
-                data={data}
-                comboType={item.comboType}
-                name={id}
-                fieldValue={value}
-                activeRecordId={activeRecordId}
-                stringComboVal={stringComboVal}
-                onChange={(newValue, type, options) => {
-                  if (item.onChange) {
-                    item.onChange(
-                      newValue,
-                      value,
-                      this.onChange.bind(null, id),
-                      {
-                        formPanel: this,
-                      },
-                      options,
-                    );
-                  } else this.onChange(id, newValue, type);
-                }} //this.onChange.bind(null, id)
-                params={params}
-                translate={t}
-              />,
-            )}
+            <ReturnComponent
+              item={item}
+              disabled={disabledFields}
+              recProps={this.props}
+              recState={this.state}
+              data={data}
+              comboType={item.comboType}
+              name={id}
+              fieldValue={value}
+              activeRecordId={activeRecordId}
+              stringComboVal={stringComboVal}
+              onChange={(newValue, type, options) => {
+                if (item.onChange) {
+                  item.onChange(
+                    newValue,
+                    value,
+                    this.onChange.bind(null, id),
+                    {
+                      formPanel: this,
+                    },
+                    options
+                  );
+                } else this.onChange(id, newValue, type);
+              }} //this.onChange.bind(null, id)
+              params={params}
+              translate={t}
+            />
             {item.informationIcon && (
               <Tooltip title={item.information}>
                 <InfoIcon className={`add-record ${item.title}`} />
@@ -1218,7 +1327,7 @@ class SimpleForm extends PureComponent {
             )}             */}
             {item.isNewRecordCanBeAdded && (
               <>
-              plus-circle
+                plus-circle
                 {/* <Icon
                   type="plus-circle"
                   className="add-record"
@@ -1246,13 +1355,14 @@ class SimpleForm extends PureComponent {
                     isChild
                     selectedRow={{}}
                     selectedRows={[{}]}
-                    activeRecordId={'NEW_RECORD'}
+                    activeRecordId={"NEW_RECORD"}
                     {...item.modalProps}
                     config={item.modalProps}
                     t={t}
                     toggle={() =>
                       this.setState({
-                        [item.modalProps.stateValue]: !this.state[item.modalProps.stateValue],
+                        [item.modalProps.stateValue]:
+                          !this.state[item.modalProps.stateValue],
                       })
                     }
                   />
@@ -1270,7 +1380,7 @@ class SimpleForm extends PureComponent {
       <TabPanel value={selectedTabs} index={key}>
         {prop.component(this.props.selectedRow, this.props.setShouldRefresh, {
           formPanel: this,
-        }) == 'default'
+        }) == "default"
           ? columns && (
               <>
                 <Row gutter={12}>
@@ -1285,9 +1395,13 @@ class SimpleForm extends PureComponent {
                 {this.defaultButtonsRender()}
               </>
             )
-          : prop.component(this.props.selectedRow, this.props.setShouldRefresh, {
-              formPanel: this,
-            })}
+          : prop.component(
+              this.props.selectedRow,
+              this.props.setShouldRefresh,
+              {
+                formPanel: this,
+              }
+            )}
       </TabPanel>
     );
   };
@@ -1295,25 +1409,36 @@ class SimpleForm extends PureComponent {
   getTabView = () => {
     const { selectedTabs } = this.state;
     const { columns, formChilds, activeRecordId } = this.props;
-    let x = document.getElementsByClassName('ant-modal-header');
+    let x = document.getElementsByClassName("ant-modal-header");
     if (x.length > 0) {
       x[0].style.backgroundColor = getThemeColor();
     }
 
     return (
       <>
-        <Tabs value={selectedTabs} onChange={this.handleChange} aria-label="mat-tabs-custome">
+        <Tabs
+          value={selectedTabs}
+          onChange={this.handleChange}
+          aria-label="mat-tabs-custome"
+        >
           {formChilds.map((prop, key) => {
             // if ((prop.showOnEditForm && activeRecordId !== 'NEW_RECORD') || !prop.showOnEditForm) {
             let disabledTab = false;
             if (prop.handleDisableTab) {
-              disabledTab = prop.handleDisableTab(this.props.selectedRow, this.props);
+              disabledTab = prop.handleDisableTab(
+                this.props.selectedRow,
+                this.props
+              );
             }
 
             if (prop.disableTabRender) {
-              return prop.component(this.props.selectedRow, this.props.setShouldRefresh, {
-                formPanel: this,
-              });
+              return prop.component(
+                this.props.selectedRow,
+                this.props.setShouldRefresh,
+                {
+                  formPanel: this,
+                }
+              );
             }
 
             return (
@@ -1321,12 +1446,16 @@ class SimpleForm extends PureComponent {
                 key={key}
                 disabled={
                   !(
-                    (prop.showOnEditForm && activeRecordId !== 'NEW_RECORD') ||
+                    (prop.showOnEditForm && activeRecordId !== "NEW_RECORD") ||
                     !prop.showOnEditForm
                   ) || disabledTab
                 }
                 label={prop.title}
-                style={selectedTabs == key ? { backgroundColor: getThemeColor() } : {}}
+                style={
+                  selectedTabs == key
+                    ? { backgroundColor: getThemeColor() }
+                    : {}
+                }
                 {...this.a11yProps(key)}
               ></Tab>
             );
@@ -1335,10 +1464,17 @@ class SimpleForm extends PureComponent {
         </Tabs>
         {formChilds.map((prop, key) => {
           if (
-            ((prop.showOnEditForm && activeRecordId !== 'NEW_RECORD') || !prop.showOnEditForm) &&
+            ((prop.showOnEditForm && activeRecordId !== "NEW_RECORD") ||
+              !prop.showOnEditForm) &&
             !prop.disableTabRender
           ) {
-            return this.renderTabs(selectedTabs, key, columns, prop, activeRecordId);
+            return this.renderTabs(
+              selectedTabs,
+              key,
+              columns,
+              prop,
+              activeRecordId
+            );
           }
         })}
       </>
@@ -1355,24 +1491,29 @@ class SimpleForm extends PureComponent {
               <div className="header-title">{item.header}</div>
               <div className="header-second">
                 {validForm[item.header] && (
-                  <CheckCircleOutlineIcon style={{ color: '#10d210', float: 'right' }} />
+                  <CheckCircleOutlineIcon
+                    style={{ color: "#10d210", float: "right" }}
+                  />
                 )}
-                {validForm[item.header] !== undefined && !validForm[item.header] && (
-                  <ErrorOutlineIcon style={{ color: 'yellow', float: 'right' }} />
-                )}
+                {validForm[item.header] !== undefined &&
+                  !validForm[item.header] && (
+                    <ErrorOutlineIcon
+                      style={{ color: "yellow", float: "right" }}
+                    />
+                  )}
               </div>
             </div>
           }
-          style={{ background: getThemeColor(), color: '#ffffff' }}
+          style={{ background: getThemeColor(), color: "#ffffff" }}
           key={
             index == 0 && !validForm[item.header]
-              ? 'active'
+              ? "active"
               : validForm[item.header] !== undefined && !validForm[item.header]
-              ? 'active'
-              : 'deactive'
+                ? "active"
+                : "deactive"
           }
         >
-          {item.columns.map(ele => this.renderFieldCompoenent(ele))}
+          {item.columns.map((ele) => this.renderFieldCompoenent(ele))}
         </Panel>
       </Collapse>
     );
@@ -1386,8 +1527,12 @@ class SimpleForm extends PureComponent {
         color={color}
         message={message}
         open={snackBarVisible}
-        close={color == 'danger' ? true : undefined}
-        closeNotification={color == 'danger' ? () => this.setState({ snackBarVisible: false }) : ''}
+        close={color == "danger" ? true : undefined}
+        closeNotification={
+          color == "danger"
+            ? () => this.setState({ snackBarVisible: false })
+            : ""
+        }
       />
     );
   };
@@ -1395,20 +1540,22 @@ class SimpleForm extends PureComponent {
   renderBanner = () => {
     const { editBanner } = this.props.config;
     const { t } = this.props;
-    let infoIconColor = editBanner?.infoIconColor || 'red';
-    let backgroundColor = editBanner?.background || '#f2e3e3';
-    let bannerText = editBanner?.text || '';
+    let infoIconColor = editBanner?.infoIconColor || "red";
+    let backgroundColor = editBanner?.background || "#f2e3e3";
+    let bannerText = editBanner?.text || "";
     return (
-      <div style={{ display: 'flex', padding: '5px', background: backgroundColor }}>
+      <div
+        style={{ display: "flex", padding: "5px", background: backgroundColor }}
+      >
         <div>
           <InfoIcon style={{ color: infoIconColor }}></InfoIcon>
         </div>
         <div
           style={{
-            fontSize: '15px',
+            fontSize: "15px",
             color: infoIconColor,
-            fontWeight: 'bold',
-            paddingLeft: '10px',
+            fontWeight: "bold",
+            paddingLeft: "10px",
           }}
         >
           {bannerText}
@@ -1421,10 +1568,10 @@ class SimpleForm extends PureComponent {
     return (
       <div
         style={{
-          height: '100%',
-          width: '100%',
-          backgroundColor: 'rgba(0,0,0,0.3)',
-          position: 'absolute',
+          height: "100%",
+          width: "100%",
+          backgroundColor: "rgba(0,0,0,0.3)",
+          position: "absolute",
           top: 0,
           left: 0,
           zIndex: 2,
@@ -1432,7 +1579,7 @@ class SimpleForm extends PureComponent {
       >
         <CircularProgress
           color="secondary"
-          style={{ position: 'absolute', top: '50%', left: '50%' }}
+          style={{ position: "absolute", top: "50%", left: "50%" }}
         />
       </div>
     );
@@ -1463,116 +1610,167 @@ class SimpleForm extends PureComponent {
 
     buttonClickChild = buttonClick;
 
-    if (buttonClick === 'ADD' && this.props.apiIdentifier === 'locationgroupdefinition') {
-      hideField.push('SubClientId');
-      hideField.push('LocationHierarchyId');
-      hideField.push('ClientId');
-      hideField.push('StartDate');
-      hideField.push('EndDate');
+    if (
+      buttonClick === "ADD" &&
+      this.props.apiIdentifier === "locationgroupdefinition"
+    ) {
+      hideField.push("SubClientId");
+      hideField.push("LocationHierarchyId");
+      hideField.push("ClientId");
+      hideField.push("StartDate");
+      hideField.push("EndDate");
     }
 
-    if (this.props.apiIdentifier === 'planogram') {
-      if (buttonClick === 'ADD' || buttonClick === 'EDIT') {
-        hideField.push('dragDrop');
+    if (this.props.apiIdentifier === "planogram") {
+      if (buttonClick === "ADD" || buttonClick === "EDIT") {
+        hideField.push("dragDrop");
       }
-      if (buttonClick === 'BULK') {
-        hideField.push('PlanogramPSAFileName');
-        hideField.push('PlanogramMediaPath');
+      if (buttonClick === "BULK") {
+        hideField.push("PlanogramPSAFileName");
+        hideField.push("PlanogramMediaPath");
       }
     }
 
-    if (buttonClick === 'ADD' && this.props.apiIdentifier === 'programitem') {
-      let upcolindex = columns.findIndex(col => col.dataIndex === 'ProgramAreaId');
+    if (buttonClick === "ADD" && this.props.apiIdentifier === "programitem") {
+      let upcolindex = columns.findIndex(
+        (col) => col.dataIndex === "ProgramAreaId"
+      );
       columns[upcolindex].disabledField = false;
-    } else if (buttonClick === 'EDIT' && this.props.apiIdentifier === 'programitem') {
-      let upcolindex = columns.findIndex(col => col.dataIndex === 'ProgramAreaId');
+    } else if (
+      buttonClick === "EDIT" &&
+      this.props.apiIdentifier === "programitem"
+    ) {
+      let upcolindex = columns.findIndex(
+        (col) => col.dataIndex === "ProgramAreaId"
+      );
       columns[upcolindex].disabledField = false;
     }
 
-    if (buttonClick === 'ADD' && this.props.apiIdentifier === 'programarea') {
-      let upcolindex = columns.findIndex(col => col.dataIndex === 'Area');
+    if (buttonClick === "ADD" && this.props.apiIdentifier === "programarea") {
+      let upcolindex = columns.findIndex((col) => col.dataIndex === "Area");
       columns[upcolindex].disabledField = false;
-      upcolindex = columns.findIndex(col => col.dataIndex === 'AreaType');
+      upcolindex = columns.findIndex((col) => col.dataIndex === "AreaType");
       columns[upcolindex].disabledField = false;
-    } else if (buttonClick === 'EDIT' && this.props.apiIdentifier === 'programarea') {
+    } else if (
+      buttonClick === "EDIT" &&
+      this.props.apiIdentifier === "programarea"
+    ) {
       // let upcolindex = columns.findIndex(col => col.dataIndex === 'Area');
       // columns[upcolindex].disabledField = true;
-      let upcolindex = columns.findIndex(col => col.dataIndex === 'AreaType');
+      let upcolindex = columns.findIndex((col) => col.dataIndex === "AreaType");
       columns[upcolindex].disabledField = true;
     }
-    if (buttonClick === 'ADD' && this.props.apiIdentifier === 'program') {
+    if (buttonClick === "ADD" && this.props.apiIdentifier === "program") {
       let updatecolindexadd;
-      updatecolindexadd = columns.findIndex(col => col.dataIndex === 'ValidFrom');
+      updatecolindexadd = columns.findIndex(
+        (col) => col.dataIndex === "ValidFrom"
+      );
       columns[updatecolindexadd].disabledField = false;
-      updatecolindexadd = columns.findIndex(col => col.dataIndex === 'ValidTo');
+      updatecolindexadd = columns.findIndex(
+        (col) => col.dataIndex === "ValidTo"
+      );
       columns[updatecolindexadd].disabledField = false;
-    } else if (buttonClick === 'EDIT' && this.props.apiIdentifier === 'program') {
+    } else if (
+      buttonClick === "EDIT" &&
+      this.props.apiIdentifier === "program"
+    ) {
       let updatecolindexadd;
       columns = JSON.parse(JSON.stringify(columns));
-      updatecolindexadd = columns.findIndex(col => col.dataIndex === 'ValidFrom');
+      updatecolindexadd = columns.findIndex(
+        (col) => col.dataIndex === "ValidFrom"
+      );
       columns[updatecolindexadd].disabledField = true;
-      updatecolindexadd = columns.findIndex(col => col.dataIndex === 'ValidTo');
+      updatecolindexadd = columns.findIndex(
+        (col) => col.dataIndex === "ValidTo"
+      );
       // columns[updatecolindexadd].disabledField = true;
       columns[updatecolindexadd].disabledPastDateFromToday = false;
-    } else if (buttonClick === 'CLONE' && this.props.apiIdentifier === 'program') {
-      isFormTitle = 'Clone Program - ' + selectedRows[0].Name;
+    } else if (
+      buttonClick === "CLONE" &&
+      this.props.apiIdentifier === "program"
+    ) {
+      isFormTitle = "Clone Program - " + selectedRows[0].Name;
       let updatecloneindexadd;
-      updatecloneindexadd = columns.findIndex(col => col.dataIndex === 'ValidFrom');
+      updatecloneindexadd = columns.findIndex(
+        (col) => col.dataIndex === "ValidFrom"
+      );
       columns[updatecloneindexadd].disabledField = false;
-      updatecloneindexadd = columns.findIndex(col => col.dataIndex === 'ValidTo');
+      updatecloneindexadd = columns.findIndex(
+        (col) => col.dataIndex === "ValidTo"
+      );
       columns[updatecloneindexadd].disabledField = false;
-    } else if (buttonClick === 'CLONE' && this.props.apiIdentifier === 'programitem') {
-      isFormTitle = 'Clone Program Item - ' + selectedRows[0].Name;
+    } else if (
+      buttonClick === "CLONE" &&
+      this.props.apiIdentifier === "programitem"
+    ) {
+      isFormTitle = "Clone Program Item - " + selectedRows[0].Name;
       let updatecloneindexadd;
-      updatecloneindexadd = columns.findIndex(col => col.dataIndex === 'ProgramAreaId');
+      updatecloneindexadd = columns.findIndex(
+        (col) => col.dataIndex === "ProgramAreaId"
+      );
       columns[updatecloneindexadd].disabledField = true;
     }
 
-    if (buttonClick === 'ADD' && this.props.apiIdentifier === 'programitemquestion') {
+    if (
+      buttonClick === "ADD" &&
+      this.props.apiIdentifier === "programitemquestion"
+    ) {
       //add
-      columns = columns.filter(col => {
-        return col.dataIndex === 'ProgramQuestionLibraryId';
+      columns = columns.filter((col) => {
+        return col.dataIndex === "ProgramQuestionLibraryId";
       });
-    } else if (buttonClick === 'EDIT' && this.props.apiIdentifier === 'programitemquestion') {
+    } else if (
+      buttonClick === "EDIT" &&
+      this.props.apiIdentifier === "programitemquestion"
+    ) {
       let optionHide = [14399, 14402, 4204, 4206, 14403, 14404, 14405, 4202];
       let maxValHide = [14399, 14400, 14401, 4204, 14405, 4202];
       let minValHide = [14399, 14400, 14401, 14402, 4204, 14405, 4202];
-      hideField.push('ProgramQuestionLibraryId');
+      hideField.push("ProgramQuestionLibraryId");
       //scenetype appear
       if (this.state.QuestionLevelId === 2) {
-        hideField.push('QuestionSubSceneIds');
+        hideField.push("QuestionSubSceneIds");
       } else if (this.state.QuestionLevelId === 1) {
-        let subIndex = hideField.findIndex(item => item == 'QuestionSubSceneIds');
+        let subIndex = hideField.findIndex(
+          (item) => item == "QuestionSubSceneIds"
+        );
         if (subIndex > -1) hideField.splice(subIndex, 1);
       }
 
       if (optionHide.indexOf(this.state.QuestionTypeId) > -1) {
         //hide options
-        hideField.push('Options');
+        hideField.push("Options");
       }
       if (minValHide.indexOf(this.state.QuestionTypeId) > -1) {
         //hide min value
 
-        hideField.push('MinValue');
+        hideField.push("MinValue");
       }
       if (maxValHide.indexOf(this.state.QuestionTypeId) > -1) {
         //hide max value
-        hideField.push('MaxValue');
+        hideField.push("MaxValue");
       }
-      isFormTitle = 'Edit Question'; //for edit
+      isFormTitle = "Edit Question"; //for edit
     }
-    const { getFieldDecorator } = this.props.form;
     return (
-      <div style={{ margin: '5px 16px' }} className={classes ? classes.antdIcon : ''}>
+      <div
+        style={{ margin: "5px 16px" }}
+        className={classes ? classes.antdIcon : ""}
+      >
         {loading && this.defaultLoader()}
         {this.renderSnackbar()}
         {this.props.config?.editBanner && this.renderBanner()}
-        {!formChilds && <h5 style={{ fontSize: '20px' }}>{isFormTitle ? isFormTitle : ''}</h5>}
+        {!formChilds && (
+          <h5 style={{ fontSize: "20px" }}>{isFormTitle ? isFormTitle : ""}</h5>
+        )}
         {formChilds && formChilds.length > 0 && this.getTabView()}
         {!formChilds && (
           <>
             <Row gutter={12}>
-              <Form className={`login-form collapse-style formidentifier_${this.props.identifier}`}>
+              <Form
+                className={`login-form collapse-style formidentifier_${this.props.identifier}`}
+                name="simpleForm"
+              >
                 {columns &&
                   columns.map((item, index) => {
                     return item.isCollapse
@@ -1590,22 +1788,20 @@ class SimpleForm extends PureComponent {
 }
 
 SimpleForm.defaultProps = {
-  identifier: '220',
+  identifier: "220",
   columns: [],
 };
 
 const ChildForm = connect()(
-  Form.create({ name: 'ChildForm' })(
-    class extends React.Component {
-      render() {
-        return <SimpleForm {...this.props} />;
-      }
-    },
-  ),
+  class extends React.Component {
+    render() {
+      return <SimpleForm {...this.props} name="ChildForm" />;
+    }
+  }
 );
 const simpleFormStyle = {
   antdIcon: () => ({
-    '& .anticon ': {
+    "& .anticon ": {
       color: getThemeColor(),
     },
   }),
@@ -1615,7 +1811,7 @@ const mapsStateToProps = ({ combos }) => {
 };
 
 export default connect(mapsStateToProps)(
-  Form.create({ name: 'simpleForm' })(withStyles(simpleFormStyle)(SimpleForm)),
+  withStyles(simpleFormStyle)(SimpleForm)
 );
 
 export { SimpleForm as SimpleFormClass, ReturnComponent };

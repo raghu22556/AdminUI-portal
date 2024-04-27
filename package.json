@@ -30,7 +30,7 @@
     "@mui/x-charts": "^7.1.1",
     "ag-grid": "^18.1.2",
     "ag-grid-react": "^31.2.1",
-    "antd": "3.23.1",
+    "antd": "^5.16.4",
     "apexcharts": "^3.48.0",
     "autoprefixer": "^10.4.19",
     "axios": "^1.6.8",
