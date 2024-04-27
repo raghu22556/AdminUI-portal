@@ -4,6 +4,6 @@ import { TextField } from '@material-ui/core';
 
 export class CustomInput extends InputComponent {
   render() {
-    return <TextField style={{ width: '100%' }} {...this.props} />;
+    return <TextField style={{ width: 200 }} {...this.props} />;
   }
 }
