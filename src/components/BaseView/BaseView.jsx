@@ -973,15 +973,19 @@ class GridPanel extends PureComponent {
           colId: item.sort,
           sort: item.dir,
         }));
-        this.gridApi.setSortModel(sort);
+        if(this.gridApi.setSortModel){
+          this.gridApi.setSortModel(sort);
+        }
       }
       if (filterInfo && filterInfo.length > 0) {
         // TO DO : need to handle for grid prferences
       }
       if (pref[(uniqueIdentifier || identifier) + "columns"]) {
-        this.gridColumnApi.setColumnState(
-          pref[(uniqueIdentifier || identifier) + "columns"]
-        );
+        if(this.gridColumnApi.setColumnState){
+          this.gridColumnApi.setColumnState(
+            pref[(uniqueIdentifier || identifier) + "columns"]
+          );
+        }
       }
     }
   };
