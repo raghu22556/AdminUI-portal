@@ -1,4 +1,4 @@
-import { ActionTypes } from '../constants';
+import { ActionTypes } from '../';
 
 // Custom Actions
 const login = payload => {

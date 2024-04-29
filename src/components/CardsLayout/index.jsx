@@ -4,7 +4,7 @@ import { Card, CardBody, Typography } from "@material-tailwind/react";
 import LaunchIcon from "@mui/icons-material/Launch";
 import { useNavigate } from "react-router-dom";
 
-import { injectTOStore } from "../../core/redux-helper";
+import { injectTOStore } from "../../core/redux-helper/injectTOStore";
 import { newConfig } from '../../store/config';
 
 injectTOStore(newConfig);

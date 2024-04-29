@@ -10,6 +10,7 @@ import { MaterialTailwindControllerProvider } from "./context/index.jsx";
 import { I18nextProvider } from "react-i18next";
 import i18n from "./i18n";
 import { Provider } from 'react-redux';
+import "./core/redux-helper";
 import store from './store/index';
 
 // const theme = {

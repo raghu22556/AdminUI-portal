@@ -1,9 +1,9 @@
-import { ActionTypes } from '../constants';
+import { ReduxHelper } from "../../core/redux-helper";
 
 var staticCombos = {};
 
 export default function(state = {}, action) {
-  const actionTypes = ActionTypes;
+  const actionTypes = ReduxHelper.ActionTypes;
   if(actionTypes){
     switch (action.type) {
       case actionTypes.successActions.LIST_COMBOS_REQUEST:

@@ -117,42 +117,36 @@ export default class ReduxHandler {
 
     var actions = {};
 
-    for (var key in this.apis) {
+    for (let key in this.apis) {
       var api = this.apis[key];
       if (api) {
-        var requestKey = key.charAt(0).toLowerCase() + key.slice(1);
-        var resetKey = 'reset' + key.charAt(0).toUpperCase() + key.slice(1);
-        var setKey = 'set' + key.charAt(0).toUpperCase() + key.slice(1);
+        let requestKey = key.charAt(0).toLowerCase() + key.slice(1);
+        let resetKey = 'reset' + key.charAt(0).toUpperCase() + key.slice(1);
+        let setKey = 'set' + key.charAt(0).toUpperCase() + key.slice(1);
+
+        let keyUpper = key.toUpperCase();
+        
         actions[requestKey] = payload => {
-          const identifier = payload.identifier;
-          var actionUpper = identifier.toUpperCase();
-          var action = identifier.charAt(0).toUpperCase() + identifier.slice(1);
           return {
-            type: ActionTypes.requestActions[actionUpper + '_REQUEST'],
+            type: ActionTypes.requestActions[keyUpper + '_REQUEST'],
             payload: payload,
-            api: this.apis[action],
-            successType: ActionTypes.successActions[actionUpper + '_SUCCESS'],
-            failureType: ActionTypes.failureActions[actionUpper + '_FAILURE'],
-            setType: ActionTypes.setActions[actionUpper + '_SET'],
+            api: this.apis[key],
+            successType: ActionTypes.successActions[keyUpper + '_SUCCESS'],
+            failureType: ActionTypes.failureActions[keyUpper + '_FAILURE'],
+            setType: ActionTypes.setActions[keyUpper + '_SET'],
           };
         };
 
         actions[resetKey] = payload => {
-          const identifier = payload.identifier;
-          var actionUpper = identifier.toUpperCase();
           return {
-            type: ActionTypes.resetActions[actionUpper + '_RESET'],
+            type: ActionTypes.resetActions[keyUpper + '_RESET'],
             payload: payload,
           };
         };
 
         actions[setKey] = payload => {
-          const identifier = payload.identifier;
-          var actionUpper = identifier.toUpperCase();
-          delete payload.identifier;
-          delete payload.action;
           return {
-            type: ActionTypes.setActions[actionUpper + '_SET'],
+            type: ActionTypes.setActions[keyUpper + '_SET'],
             payload: payload,
           };
         };

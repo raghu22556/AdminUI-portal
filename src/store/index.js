@@ -13,6 +13,6 @@ store.injectReducer = (key, asyncReducer) => {
   store.asyncReducers[key] = asyncReducer;
   store.replaceReducer(rootReducer(store.asyncReducers));
 };
-sagaMiddleware.run(rootSaga);
+//sagaMiddleware.run(rootSaga);
 
 export default store;

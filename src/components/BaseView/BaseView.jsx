@@ -2,7 +2,7 @@ import { PureComponent } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router";
-import { Actions } from "../../core/redux-helper";
+import { ReduxHelper } from "../../core/redux-helper";
 import { Menu, Modal, Input, Tooltip } from "antd";
 import SimpleForm from "./simple-form";
 //import DialogForm from "./DialogForm";
@@ -20,6 +20,7 @@ import { withTranslation } from "react-i18next";
 
 const modal = Modal;
 const { confirm } = Modal;
+const Actions = ReduxHelper.Actions;
 
 const DialogForm = () => <div>Need to implement1</div>;
 const NavPills = () => <div>Need to implement2</div>;

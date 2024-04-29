@@ -1,7 +1,9 @@
 import { all, put, takeLatest, call } from 'redux-saga/effects';
-import { ActionTypes } from '../constants';
+import { ReduxHelper } from '../../core/redux-helper';
 import API from '../requests';
 import { useNavigate } from "react-router-dom";
+
+const ActionTypes = ReduxHelper.ActionTypes;
 
 export function* genericFunction(action) {
   const { payload, successType, failureType } = action;
