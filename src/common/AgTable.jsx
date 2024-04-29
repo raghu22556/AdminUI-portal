@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useEffect } from "react";
 import { AgGridReact } from "@ag-grid-community/react";
 import { ModuleRegistry } from "@ag-grid-community/core";
 import { ClientSideRowModelModule } from "@ag-grid-community/client-side-row-model";
@@ -19,7 +19,7 @@ const TableAgGrid = () => {
 
   function randomDate(start, end) {
     return new Date(
-      start.getTime() + Math.random() * (end.getTime() - start.getTime()),
+      start.getTime() + Math.random() * (end.getTime() - start.getTime())
     ).toLocaleDateString();
   }
 
@@ -84,6 +84,20 @@ const TableAgGrid = () => {
   }, [rowData]);
 
   const [columnDefs, setColumnDefs] = useState(InventoryConfig.columnDefs);
+  useEffect(() => {
+    let needsUpdate = false;
+    const updatedColumnDefs = columnDefs.map((colDef) => {
+      //fetching each column headerName
+      if (colDef.headerName === "Action" && !colDef.pinned) {
+        needsUpdate = true;
+        return { ...colDef, pinned: "right" };
+      }
+      return colDef;
+    });
+    if (needsUpdate) {
+      setColumnDefs(updatedColumnDefs); // updating columnDefs
+    }
+  }, [columnDefs]);
 
   const overlayLoadingTemplate = `<span className="ag-overlay-loading-center">Please wait while your rows are loading...</span>`;
   const overlayNoRowsTemplate = `<span className="ag-overlay-loading-center">No data found to display.</span>`;
