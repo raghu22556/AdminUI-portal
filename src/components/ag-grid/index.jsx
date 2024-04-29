@@ -179,7 +179,7 @@ class AgGrid extends Component {
         enableFilter: true,
         onFilterChanged: this.onFilterChanged,
         onSortChanged: this.onSortChanged,
-        frameworkComponents: {
+        components : {
           customCellRenderer: CustomCellRenderer,
           oparationCellRenderer: OparationCellRenderer,
           comboCellRenderer: ComboCellRenderer,
