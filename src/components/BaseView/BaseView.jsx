@@ -7,7 +7,7 @@ import { Menu, Modal, Input, Tooltip } from "antd";
 import SimpleForm from "./simple-form";
 //import DialogForm from "./DialogForm";
 import AgGrid from "../ag-grid";
-// import NavPills from 'components/NavPills/NavPills.jsx';
+import NavPills from '../Tabs';
 import Button from "@material-ui/core/Button";
 import API from "../../store/requests";
 import { EnableLogs } from "../../app-config";
@@ -15,7 +15,7 @@ import Snackbar from "../../components/Snackbar/Snackbar.jsx";
 import AddIcon from "@material-ui/icons/AddCircleSharp";
 import CardView from "../CardsLayout";
 import { CONFIG, newConfig } from "../../store/config";
-// import Accordion from "components/Accordion/Accordion.jsx";
+import Accordion from '../Accordion';
 import { withTranslation } from "react-i18next";
 
 const modal = Modal;
@@ -23,10 +23,6 @@ const { confirm } = Modal;
 const Actions = ReduxHelper.Actions;
 
 const DialogForm = () => <div>Need to implement1</div>;
-const NavPills = () => <div>Need to implement2</div>;
-// const Snackbar = () => <div>Need to implement3</div>;
-const Accordion = () => <div>Need to implement4</div>;
-// const SimpleForm = () => <div>Need to implement5</div>;
 
 export const withRouter = (Component) => {
   const Wrapper = (props) => {
@@ -1581,15 +1577,6 @@ class GridContainer extends PureComponent {
         </>
       );
     }
-    return (
-      <ReduxGridPanel
-        config={config}
-        activeRecordId={activeRecordId}
-        parentRecordId={this.props.parentRecordId}
-        updateState={this.updateState}
-        parentIdColumn={this.props.parentIdColumn}
-      />
-    );
     return (
       <>
         <Accordion
