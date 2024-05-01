@@ -200,7 +200,7 @@ const LoginForm = () => {
           </div>
         </CardFooter>
       </Card>
-      <div className="mt-8">
+      <div className="mt-12">
         <Footer />
       </div>
     </div>
