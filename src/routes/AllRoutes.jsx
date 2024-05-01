@@ -1,4 +1,5 @@
 // import Dashboard from "../layouts/dashboard";
+import React, { useState } from "react";
 import LoginPage from "../pages/auth/LoginPage";
 import AcceptTermPage from "../pages/auth/AcceptTermPage";
 import Organization from "../pages/dashboard/Organization";
@@ -13,8 +14,15 @@ import ProjectTablePage from "../pages/dashboard/ProjectTablePage";
 import Dashboard from "../pages/dashboard/Dashboard";
 import MuiComponents from "../Material-UI";
 import CardsLayout from "../components/CardsLayout";
-
+// import LookUpType from "../pages/views/LookUpType"
+import DynamicBaseView from "../components/DynamicBaseView";
 import { Forms } from "../maiden-core";
+import Sidebar from "../components/Sidebar";
+import Navbar from "../components/Navbar";
+
+// const pages = {
+//   LookUpType: <LookUpType/>
+// }
 
 const AllRoutes = [
   { name: "Login", path: "/", element: <LoginPage />, private: false },
@@ -86,18 +94,58 @@ const AllRoutes = [
 ];
 
 if (localStorage.getItem("menu") !== null) {
-  let menu = JSON.parse(localStorage.getItem("menu"));
+  const DynamicComponent = tableName => {
+    const [drawer, setDrawer] = useState(false);
+    const handleToggle = () => setDrawer(!drawer);
+    return (
+      <div className="flex relative h-screen overflow-hidden">
+        {/* Sidebar */}
+        <section
+          id="sidebar"
+          // className={`w-80 z-50 lg:w-80 overflow-y-auto md:w-96 shadow border-gray-200 bg-white p-2 md:static absolute h-full transition-all duration-50 ${
+          //   drawer ? "md:hidden left-0" : "-left-full"
+          // }`}
+          className={`w-60 z-50 lg:w-60 overflow-y-auto md:w-60  border-gray-200 bg-white p-2 md:static absolute h-full transition-all duration-50 ${
+            drawer ? "md:hidden left-0" : "-left-full"
+          }`}
+        >
+          <Sidebar handleToggle={handleToggle} />
+        </section>
 
+        {/* Navbar & Child */}
+        <section className="overflow-auto h-full w-full bg-[rgb(247,245,250)]">
+          <Navbar handleToggle={handleToggle} drawer={drawer} />
+          <div className="p-4 h-auto">
+          <DynamicBaseView {...tableName} />
+          </div>
+        </section>
+      </div>
+    );
+  };
+  
+  let menu = JSON.parse(localStorage.getItem("menu") || "[]");
+  let masterConfig = JSON.parse(localStorage.entityMapping || "{}");
   menu.forEach((menuItem) => {
     console.log(menuItem.displayText);
-
+    if (menuItem.children) {
+      AllRoutes.push(...menuItem.children.map(childItem => {
+        return{
+          name: menuItem.displayText,
+          path: "/" + menuItem.url + "/" + childItem.url,
+          element: masterConfig[childItem.tableName]
+          ? <DynamicComponent tableName={childItem.tableName} />
+          : (() => () => <div>Welcome to Demo</div>),
+          private: false,
+        }
+      }));
+    }
     AllRoutes.push({
       name: menuItem.displayText,
       path: "/" + menuItem.url,
       element: <CardsLayout item={menuItem} />,
       private: false,
     });
+    
   });
 }
-
 export default AllRoutes;

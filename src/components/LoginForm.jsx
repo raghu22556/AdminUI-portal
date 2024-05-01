@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import {
   Card,
   CardBody,
@@ -13,14 +14,48 @@ import {
   CustomEmailInput,
   CustomPasswordInput,
 } from "../maiden-core/ui-components";
-
-import axios from "axios";
+import { ReduxHelper } from "../core/redux-helper";
+import { injectTOStore } from "../core/redux-helper/injectTOStore";
+import { defaultActions } from "../app-config";
 import AppleSignUpBtn from "../common/AppleSignUpBtn";
 import GoogleSignUpBtn from "../common/GoogleSignUpBtn";
 import Footer from "../common/Footer";
 
 const LoginForm = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const login_result = useSelector((state) => state?.login);
+
+  useEffect(() => {
+    if (login_result.data) {
+      localStorage.clear();
+      const { token, menu, dynamicConfig, masterDataList } = login_result.data;
+      var entityMapping = {};
+      for (var item of JSON.parse(masterDataList)) {
+        entityMapping[item.table] = item;
+      }
+      var tokenObject = {
+        //expires_in: expires_in,
+        access_token: token,
+        //refresh_token: refresh_token,
+        created: Date.now(),
+      };
+      localStorage.setItem("cube:token", JSON.stringify(tokenObject));
+      localStorage.setItem("menu", JSON.stringify(menu));
+      localStorage.setItem("dynamicConfig", dynamicConfig);
+      localStorage.setItem("entityMapping", JSON.stringify(entityMapping));
+      let dynamicConfigJson = JSON.parse(dynamicConfig);
+      let newConfig = [];
+      if (null != dynamicConfigJson) {
+        newConfig = dynamicConfigJson.map((item) => {
+          return { ...item, actions: [...defaultActions] };
+        });
+      }
+      injectTOStore(newConfig);
+      navigate("/dashboard");
+    }
+  }, [login_result]);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
@@ -65,28 +100,12 @@ const LoginForm = () => {
       return;
     }
 
-    const params = {
-      email: "webuser@confess.com",
-      password: "Demo@145",
-      OrganizationId: "2f6eca88-278d-49ee-8c25-e916a24c6019",
+    var params = {
+      email,
+      password,
     };
 
-    axios
-      .post(
-        "https://maidenconfessapp.azurewebsites.net/api/v1/Registration/VerifyAdminUser",
-        params
-      )
-      .then((response) => {
-        localStorage.setItem("menu", JSON.stringify(response.data.menu));
-        setLoginSuccess(true);
-        setTimeout(() => {
-          navigate("/neworganization");
-        }, 2000);
-      })
-      .catch((error) => {
-        console.error("Login failed:", error);
-        setError("Login failed. Please try again.");
-      });
+    dispatch(ReduxHelper.Actions.login(params));
   };
 
   return (
@@ -181,7 +200,7 @@ const LoginForm = () => {
           </div>
         </CardFooter>
       </Card>
-      <div className="mt-12">
+      <div className="mt-8">
         <Footer />
       </div>
     </div>

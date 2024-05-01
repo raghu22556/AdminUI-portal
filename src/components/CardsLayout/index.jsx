@@ -3,6 +3,10 @@ import Layout from "../../components/Layout";
 import { Card, CardBody, Typography } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
 
+import { injectTOStore } from "../../core/redux-helper/injectTOStore";
+import { newConfig } from '../../store/config';
+
+injectTOStore(newConfig);
 const WidgetCard = ({ title, onClick }) => {
   return (
     <Card
