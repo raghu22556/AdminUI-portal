@@ -74,7 +74,7 @@ const LoginForm = () => {
     axios
       .post(
         "https://maidenconfessapp.azurewebsites.net/api/v1/Registration/VerifyAdminUser",
-        params,
+        params
       )
       .then((response) => {
         localStorage.setItem("menu", JSON.stringify(response.data.menu));
@@ -181,7 +181,7 @@ const LoginForm = () => {
           </div>
         </CardFooter>
       </Card>
-      <div className="mt-8">
+      <div className="mt-12">
         <Footer />
       </div>
     </div>

@@ -12,7 +12,7 @@ const Index = () => {
   return (
     <div className="mobile:overflow-hidden">
       <Layout>
-        <div className="flex flex-col items-center mt-6 h-[75vh] ">
+        <div className="flex flex-col items-center mt-6 h-[90vh] ">
           <div className="laptop:mt-11 w-[100%] mobile:mt-20 ">
             <h1 className="font-bold lg:text-left text-center  mt-4 lg:mt-0 lg:ml-4 md:mt-12 xl:mt-8 font-poppins">
               Organization

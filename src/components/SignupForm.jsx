@@ -165,7 +165,7 @@ const SignupForm = () => {
           </Typography>
         </CardFooter>
       </form>
-      <div className="mt-4">
+      <div className="mt-8">
         <Footer />
       </div>
     </Card>
