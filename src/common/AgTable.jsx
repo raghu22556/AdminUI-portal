@@ -84,6 +84,19 @@ const TableAgGrid = () => {
   }, [rowData]);
 
   const [columnDefs, setColumnDefs] = useState(InventoryConfig.columnDefs);
+
+  const moduleCellRenderer = ({ value, data }) => {
+    const handleModuleOnClick = () => {
+      const JSONRowData = JSON.stringify(data, null, 5);
+      alert(JSONRowData);
+    };
+    return (
+      <div style={{ cursor: "pointer" }} onClick={handleModuleOnClick}>
+        {value}
+      </div>
+    );
+  };
+
   useEffect(() => {
     let needsUpdate = false;
     const updatedColumnDefs = columnDefs.map((colDef) => {
@@ -91,6 +104,12 @@ const TableAgGrid = () => {
       if (colDef.headerName === "Action" && !colDef.pinned) {
         needsUpdate = true;
         return { ...colDef, pinned: "right" };
+      } else if (colDef.field === "Module") {
+        return {
+          ...colDef,
+          cellStyle: { color: "blue" },
+          cellRenderer: moduleCellRenderer,
+        };
       }
       return colDef;
     });
