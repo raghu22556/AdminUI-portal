@@ -52,65 +52,60 @@ const AcceptTermForm = () => {
   };
 
   return (
-    <div className="w-[100%]">
-      <Card className="px-4" color="transparent" shadow={false}>
-        <form onSubmit={formSubmitHandler}>
-          <CardBody className="flex flex-col gap-3 ">
-            <AcceptTermSelectBackend
-              crossOrigin={""}
-              label="Hands on Backend Language"
-              size="lg"
-              color="blue"
-              required
-              value={acceptTermSelectBackend}
-              onChange={selectBackendHandler}
-            />
-            <AcceptTermSelectFrontend
-              crossOrigin={""}
-              label="Hands on Frontend Language"
-              size="lg"
-              color="blue"
-              required
-              value={acceptTermSelectFrontend}
-              onChange={selectFrontendHandler}
-            />
-            <AcceptTermSelectRole
-              crossOrigin={""}
-              label="Whats Your Role"
-              size="lg"
-              color="blue"
-              required
-              value={selectedRole}
-              onChange={selectRoleHandler}
-            />
+    <Card className="px-4" color="transparent" shadow={false}>
+      <form onSubmit={formSubmitHandler}>
+        <CardBody className="flex flex-col gap-3 ">
+          <AcceptTermSelectBackend
+            crossOrigin={""}
+            label="Hands on Backend Language"
+            size="lg"
+            color="blue"
+            required
+            value={acceptTermSelectBackend}
+            onChange={selectBackendHandler}
+          />
+          <AcceptTermSelectFrontend
+            crossOrigin={""}
+            label="Hands on Frontend Language"
+            size="lg"
+            color="blue"
+            required
+            value={acceptTermSelectFrontend}
+            onChange={selectFrontendHandler}
+          />
+          <AcceptTermSelectRole
+            crossOrigin={""}
+            label="Whats Your Role"
+            size="lg"
+            color="blue"
+            required
+            value={selectedRole}
+            onChange={selectRoleHandler}
+          />
 
-            <div className=" flex justify-between ">
-              <Checkbox
-                variant="paragraph"
-                label="Accept to terms & condition"
-                className="text-sm"
-                color="blue"
-              />
-            </div>
-          </CardBody>
+          <div className=" flex justify-between ">
+            <Checkbox
+              variant="paragraph"
+              label="Accept to terms & condition"
+              className="text-sm"
+              color="blue"
+            />
+          </div>
+        </CardBody>
 
-          <CardFooter className="pt-0 flex">
-            <Button
-              className=" bg-[#056EE9] font-poppins  "
-              type="submit"
-              shadow={false}
-              fullWidth
-              disabled={false}
-            >
-              Create Account
-            </Button>
-          </CardFooter>
-        </form>
-      </Card>
-      <div className="mt-16 flex justify-cente ml-7">
-        <Footer />
-      </div>
-    </div>
+        <CardFooter className="pt-0 flex">
+          <Button
+            className=" bg-[#056EE9] font-poppins  "
+            type="submit"
+            shadow={false}
+            fullWidth
+            disabled={false}
+          >
+            Create Account
+          </Button>
+        </CardFooter>
+      </form>
+    </Card>
   );
 };
 

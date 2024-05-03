@@ -1,6 +1,11 @@
 import { Typography } from "@material-tailwind/react";
+import Footer from "../../common/Footer";
+import { useState } from "react";
+import Loader from "../../common/Loader";
 
 export const welcomePage = (RenderComponent) => {
+  const [isLoading, setIsLoading] = useState(false);
+
   let text = "";
   if (RenderComponent.name == "LoginForm") {
     text += "Welcome Back ";
@@ -11,6 +16,7 @@ export const welcomePage = (RenderComponent) => {
   }
   return (
     <>
+      <Loader isLoading={isLoading} />
       <main className="h-screen w-full flex flex-col laptop:overflow-hidden mobile:overflow-x-hidden">
         <div className="lg:flex h-full">
           <div className="lg:w-1/2   h-full  sm:block ">
@@ -69,7 +75,10 @@ export const welcomePage = (RenderComponent) => {
                 </Typography>
               </div>
               <div className="w-full mx-auto flex justify-center items-center">
-                <RenderComponent />
+                <RenderComponent setIsLoading={setIsLoading}/>
+              </div>
+              <div className="mt-12">
+                <Footer />
               </div>
             </main>
           </div>

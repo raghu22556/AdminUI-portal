@@ -18,6 +18,8 @@ import {
   CustomConfirmPasswordInput,
 } from "../maiden-core/ui-components";
 
+//import WelcomeLayout from "../components/WelcomeLayout/index";
+
 const SignupForm = () => {
   const navigate = useNavigate();
   const [organization, setOrganization] = useState("");
@@ -100,74 +102,69 @@ const SignupForm = () => {
 
   return (
     <Card className="laptopM:w-[550px]" color="transparent" shadow={false}>
-      <form>
-        <CardBody className="flex flex-col gap-3">
-          <OrganizationNameInput
-            crossOrigin=""
-            label="Organization Name"
-            size="lg"
-            color="blue"
-            required
-            value={organization}
-            onChange={handleOrganizationChange}
-            onFocus={() => setError(null)}
-          />
-          <CustomEmailInput
-            value={email}
-            onChange={handleEmailChange}
-            required
-            onFocus={() => setError(null)}
-          />
-          <CustomPasswordInput
-            value={password}
-            label="Create Password"
-            required
-            onChange={handlePasswordChange}
-            onFocus={() => setError(null)}
-          />
-          <CustomConfirmPasswordInput
-            value={confirmPass}
-            label="Confirm Password"
-            required
-            onChange={handleConfirmPasswordChange}
-            onFocus={() => setError(null)}
-          />
-          {error && (
-            <Alert
-              style={{
-                background: "#DF4A4A",
-                padding: "5px",
-                fontSize: "10px",
-                opacity: "1",
-                transition: "opacity 0.2s ease-in-out",
-              }}
-            >
-              {error}
-            </Alert>
-          )}
-        </CardBody>
-        <CardFooter className="pt-0">
-          <Button
-            className="bg-[#056EE9] font-poppins"
-            type="submit"
-            shadow={false}
-            fullWidth
-            color="rose"
-            onClick={handleSubmit}
+      <CardBody className="flex flex-col gap-3">
+        <OrganizationNameInput
+          crossOrigin=""
+          label="Organization Name"
+          size="lg"
+          color="blue"
+          required
+          value={organization}
+          onChange={handleOrganizationChange}
+          onFocus={() => setError(null)}
+        />
+        <CustomEmailInput
+          value={email}
+          onChange={handleEmailChange}
+          required
+          onFocus={() => setError(null)}
+        />
+        <CustomPasswordInput
+          value={password}
+          label="Create Password"
+          required
+          onChange={handlePasswordChange}
+          onFocus={() => setError(null)}
+        />
+        <CustomConfirmPasswordInput
+          value={confirmPass}
+          label="Confirm Password"
+          required
+          onChange={handleConfirmPasswordChange}
+          onFocus={() => setError(null)}
+        />
+        {error && (
+          <Alert
+            style={{
+              background: "#DF4A4A",
+              padding: "5px",
+              fontSize: "10px",
+              opacity: "1",
+              transition: "opacity 0.2s ease-in-out",
+            }}
           >
-            Continue
-          </Button>
-          <Typography className="mt-4 flex justify-center text-[14x]">
-            Already have an Account ?
-            <Link to="/" className="ml-1 font-[600] text-[#056EE9]">
-              Sign in
-            </Link>
-          </Typography>
-        </CardFooter>
-      </form>
-      <div className="mt-8">
-        <Footer />
-      </div>
+            {error}
+          </Alert>
+        )}
+      </CardBody>
+      <CardFooter className="pt-0">
+        <Button
+          className="bg-[#056EE9] font-poppins"
+          type="submit"
+          shadow={false}
+          fullWidth
+          color="rose"
+          onClick={handleSubmit}
+        >
+          Continue
+        </Button>
+        <Typography className="mt-4 flex justify-center text-[14x]">
+          Already have an Account ?
+          <Link to="/" className="ml-1 font-[600] text-[#056EE9]">
+            Sign in
+          </Link>
+        </Typography>
+      </CardFooter>
     </Card>
   );
 };

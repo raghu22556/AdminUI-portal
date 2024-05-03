@@ -19,9 +19,8 @@ import { injectTOStore } from "../core/redux-helper/injectTOStore";
 import { defaultActions } from "../app-config";
 import AppleSignUpBtn from "../common/AppleSignUpBtn";
 import GoogleSignUpBtn from "../common/GoogleSignUpBtn";
-import Footer from "../common/Footer";
 
-const LoginForm = () => {
+const LoginForm = ({setIsLoading}) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const login_result = useSelector((state) => state?.login);
@@ -104,106 +103,94 @@ const LoginForm = () => {
       email,
       password,
     };
-
+    
+    setIsLoading(true);
     dispatch(ReduxHelper.Actions.login(params));
   };
 
   return (
-    <div>
-      <Card
-        className=" laptopM:w-[550px] mobileM:w-[95vw] mobileM:mt-2"
-        color="transparent"
-        shadow={false}
-      >
-        <CardBody className="flex flex-col laptopM:gap-3 mobile:gap-3">
-          <CustomEmailInput
-            value={email}
-            onChange={handleEmailChange}
-            onBlur={handleBlur}
-            onFocus={() => {
-              setError(null);
-              setLoginSuccess(false);
+    <Card
+      className=" laptopM:w-[550px] mobileM:w-[95vw] mobileM:mt-2"
+      color="transparent"
+      shadow={false}
+    >
+      <CardBody className="flex flex-col laptopM:gap-3 mobile:gap-3">
+        <CustomEmailInput
+          value={email}
+          onChange={handleEmailChange}
+          onBlur={handleBlur}
+          onFocus={() => {
+            setError(null);
+            setLoginSuccess(false);
+          }}
+        />
+        <CustomPasswordInput
+          value={password}
+          onChange={handlePasswordChange}
+          onBlur={handleBlur}
+          onFocus={() => {
+            setError(null);
+            setLoginSuccess(false);
+          }}
+        />
+        {error && (
+          <Alert
+            style={{
+              background: "#DF4A4A",
+              padding: "5px",
+              fontSize: "10px",
+              opacity: "1",
+              transition: "opacity 0.2s ease-in-out",
             }}
-          />
-          <CustomPasswordInput
-            value={password}
-            onChange={handlePasswordChange}
-            onBlur={handleBlur}
-            onFocus={() => {
-              setError(null);
-              setLoginSuccess(false);
+          >
+            {error}
+          </Alert>
+        )}
+        {loginSuccess && (
+          <Alert
+            style={{
+              background: "#4CAF50",
+              padding: "5px",
+              fontSize: "10px",
+              opacity: "1",
+              transition: "opacity 0.2s ease-in-out",
             }}
+          >
+            Login successful!
+          </Alert>
+        )}
+        <Typography className=" m-[-5px] flex justify-between items-center laptop:text-sm mobile:text-xs text-black font-medium">
+          <Checkbox
+            variant="paragraph"
+            label="Keep Me Logged In"
+            className="text-xs"
+            color="blue"
           />
-          {error && (
-            <Alert
-              style={{
-                background: "#DF4A4A",
-                padding: "5px",
-                fontSize: "10px",
-                opacity: "1",
-                transition: "opacity 0.2s ease-in-out",
-              }}
-            >
-              {error}
-            </Alert>
-          )}
-          {loginSuccess && (
-            <Alert
-              style={{
-                background: "#4CAF50",
-                padding: "5px",
-                fontSize: "10px",
-                opacity: "1",
-                transition: "opacity 0.2s ease-in-out",
-              }}
-            >
-              Login successful!
-            </Alert>
-          )}
-          <Typography className=" m-[-5px] flex justify-between items-center laptop:text-sm mobile:text-xs text-black font-medium">
-            <Checkbox
-              variant="paragraph"
-              label="Keep Me Logged In"
-              className="text-xs"
-              color="blue"
-            />
-            <Link to="/forgot-password" className="text-[#056EE9]">
-              Forgot Password?
+          <Link to="/forgot-password" className="text-[#056EE9]">
+            Forgot Password?
+          </Link>
+        </Typography>
+      </CardBody>
+      <CardFooter className="pt-0">
+        <div>
+          <Button
+            className="bg-[#056EE9] font-poppins laptopM:w-full mobileM:w-[100%] mobile:w-[90vw] mobile:justify-center laptopM:ml-0"
+            type="submit"
+            disabled={false}
+            onClick={onLoginClick}
+            style={{ shadow: "none" }}
+          >
+            Log In
+          </Button>
+          <Typography className="mt-3 flex laptopM:justify-center laptop:ml-8 laptop:text-sm mobile:text-xs mobile:justify-center text-black font-medium">
+            Don&apos;t have an account?
+            <Link to="/signup" className="ml-1 font-normal text-[#056EE9]">
+              Create Account
             </Link>
           </Typography>
-        </CardBody>
-        <CardFooter className="pt-0">
-          <div>
-            <Button
-              className="bg-[#056EE9] font-poppins laptopM:w-full mobileM:w-[100%] mobile:w-[90vw] mobile:justify-center laptopM:ml-0"
-              type="submit"
-              disabled={false}
-              onClick={onLoginClick}
-              style={{ shadow: "none" }}
-            >
-              Log In
-            </Button>
-            <Typography className="mt-3 flex laptopM:justify-center laptop:ml-8 laptop:text-sm mobile:text-xs mobile:justify-center text-black font-medium">
-              Don&apos;t have an account?
-              <Link to="/signup" className="ml-1 font-normal text-[#056EE9]">
-                Create Account
-              </Link>
-            </Typography>
-          </div>
-
-          <Typography className="mt-5 flex laptopM:justify-center laptop:text-sm mobile:text-xs mobile:justify-center">
-            OR Login With
-          </Typography>
-          <div className="flex justify-center gap-3 mt-3 mobile:flex-col laptop:w-[100%] laptopM:flex-row mobile:items-center">
-            <AppleSignUpBtn />
-            <GoogleSignUpBtn />
-          </div>
-        </CardFooter>
-      </Card>
-      <div className="mt-12">
-        <Footer />
-      </div>
-    </div>
+        </div>
+      </CardFooter>
+    </Card>
   );
 };
 
