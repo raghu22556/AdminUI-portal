@@ -380,7 +380,7 @@ class DateFilter extends PureComponent {
           placeholder="Before"
           onChange={this.onEndChange}
           // onOpenChange={this.handleStartOpenChange}
-          dropdownClassName="ag-custom-component-popup"
+          popupClassName ="ag-custom-component-popup"
         />
         <br />
         <br />
@@ -389,7 +389,7 @@ class DateFilter extends PureComponent {
           value={startValue}
           placeholder="After"
           onChange={this.onStartChange}
-          dropdownClassName="ag-custom-component-popup"
+          popupClassName ="ag-custom-component-popup"
         />
         <br />
         <br />
@@ -399,7 +399,7 @@ class DateFilter extends PureComponent {
           placeholder="On"
           onChange={this.onEqualChange}
           // onOpenChange={this.handleStartOpenChange}
-          dropdownClassName="ag-custom-component-popup"
+          popupClassName ="ag-custom-component-popup"
         />
         <br />
         <br />
