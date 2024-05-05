@@ -973,6 +973,7 @@ class GridPanel extends PureComponent {
           colId: item.sort,
           sort: item.dir,
         }));
+        // To Do: need to handle sort model if needed
         if (this.gridApi.setSortModel) {
           this.gridApi.setSortModel(sort);
         }
