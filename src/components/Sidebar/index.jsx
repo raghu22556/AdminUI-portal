@@ -45,12 +45,12 @@ export default function Sidebar(props) {
       activeIcon: <DashbordIconActive />,
       path: "/projects",
     },
-    {
-      name: "Reports",
-      icon: <DashbordIcon />,
-      activeIcon: <DashbordIconActive />,
-      path: "/Reports",
-    },
+    //{
+    //  name: "Reports",
+     // icon: <DashbordIcon />,
+     // activeIcon: <DashbordIconActive />,
+     // path: "/Reports",
+    //},
 
     // {
     //   name: "Masters",
@@ -206,67 +206,7 @@ export default function Sidebar(props) {
           );
         })}
       </div>
-      <div className="space-y-2 px-3 py-4" style={{ width: "100%" }}>
-        <h2
-          className="text-lg font-semibold"
-          style={{ fontWeight: "600", fontSize: "12px", lineHeight: "18px" }}
-        >
-          Settings
-        </h2>
-        <Button
-          style={{
-            backgroundColor: "rgb(229, 228, 226)",
-            width: "220px",
-            height: "44px",
-            borderRadius: "8px",
-            border: "1px solid #E5E4E2",
-            padding: "12px, 16px, 12px, 16px",
-          }}
-          className="flex items-center space-x-2"
-        >
-          <BellIcon style={{ color: "rgb(138 134 134)	" }} className="h-5 w-5" />
-          <span
-            style={{
-              fontWeight: 500,
-              fontSize: "12px",
-              lineHeight: "18px",
-              color: "rgb(138 134 134)",
-              textTransform: "capitalize",
-            }}
-          >
-            Notification Settings
-          </span>
-        </Button>
-        <Button
-          style={{
-            backgroundColor: "rgb(229, 228, 226)",
-            width: "220px",
-            height: "44px",
-            borderRadius: "8px",
-            border: "1px solid #E5E4E2",
-            padding: "12px, 16px, 12px, 16px",
-            color: "#A9A9A9 ",
-          }}
-          className="flex items-center space-x-2 w-full"
-          variant="default"
-        >
-          <UserCircleIcon
-            style={{ color: "rgb(138 134 134)	" }}
-            className="h-5 w-5"
-          />
-          <span
-            style={{
-              fontWeight: 500,
-              fontSize: "12px",
-              lineHeight: "18px",
-              color: "rgb(138 134 134)",
-              textTransform: "capitalize",
-            }}
-          >
-            Profile Setting
-          </span>
-        </Button>
-      </div>
+
       <div className="space-y-2 px-3 py-4" style={{ width: "100%" }}>
         <h2
           className="text-lg font-semibold"
@@ -336,6 +276,69 @@ export default function Sidebar(props) {
           </span>
         </span>
       </div>
+      
+      <div className="space-y-2 px-3 py-4" style={{ width: "100%" }}>
+        <h2
+          className="text-lg font-semibold"
+          style={{ fontWeight: "600", fontSize: "12px", lineHeight: "18px" }}
+        >
+          Settings
+        </h2>
+        <Button
+          style={{
+            backgroundColor: "rgb(229, 228, 226)",
+            width: "220px",
+            height: "44px",
+            borderRadius: "8px",
+            border: "1px solid #E5E4E2",
+            padding: "12px, 16px, 12px, 16px",
+          }}
+          className="flex items-center space-x-2"
+        >
+          <BellIcon style={{ color: "rgb(138 134 134)	" }} className="h-5 w-5" />
+          <span
+            style={{
+              fontWeight: 500,
+              fontSize: "12px",
+              lineHeight: "18px",
+              color: "rgb(138 134 134)",
+              textTransform: "capitalize",
+            }}
+          >
+            Notification Settings
+          </span>
+        </Button>
+        <Button
+          style={{
+            backgroundColor: "rgb(229, 228, 226)",
+            width: "220px",
+            height: "44px",
+            borderRadius: "8px",
+            border: "1px solid #E5E4E2",
+            padding: "12px, 16px, 12px, 16px",
+            color: "#A9A9A9 ",
+          }}
+          className="flex items-center space-x-2 w-full"
+          variant="default"
+        >
+          <UserCircleIcon
+            style={{ color: "rgb(138 134 134)	" }}
+            className="h-5 w-5"
+          />
+          <span
+            style={{
+              fontWeight: 500,
+              fontSize: "12px",
+              lineHeight: "18px",
+              color: "rgb(138 134 134)",
+              textTransform: "capitalize",
+            }}
+          >
+            Profile Setting
+          </span>
+        </Button>
+      </div>
+      
     </div>
   );
 }
