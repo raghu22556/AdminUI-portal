@@ -23,7 +23,7 @@ const AcceptTermForm = ({ setIsLoading }) => {
   const [acceptTermSelectBackend, setAcceptTermSelectBackend] = useState("");
   const [acceptTermSelectFrontend, setAcceptTermSelectFrontend] = useState("");
   const [selectedRole, setSelectedRole] = useState("");
-  let createSuperAdmin_result = useSelector((state) => state?.createSuperAdmin);
+  /*let createSuperAdmin_result = useSelector((state) => state?.createSuperAdmin);
 
   useEffect(() => {
     if (createSuperAdmin_result.data) {
@@ -33,7 +33,7 @@ const AcceptTermForm = ({ setIsLoading }) => {
       setIsLoading(false);
       alert(createSuperAdmin_result.error);
     }
-  }, [createSuperAdmin_result]);
+  }, [createSuperAdmin_result]);*/
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
