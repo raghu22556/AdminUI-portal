@@ -7,7 +7,7 @@ import { Menu, Modal, Input, Tooltip } from "antd";
 import SimpleForm from "./simple-form";
 //import DialogForm from "./DialogForm";
 import AgGrid from "../ag-grid";
-import NavPills from '../Tabs';
+import NavPills from "../Tabs";
 import Button from "@material-ui/core/Button";
 import API from "../../store/requests";
 import { EnableLogs } from "../../app-config";
@@ -15,7 +15,7 @@ import Snackbar from "../../components/Snackbar/Snackbar.jsx";
 import AddIcon from "@material-ui/icons/AddCircleSharp";
 import CardView from "../CardsLayout";
 import { CONFIG, newConfig } from "../../store/config";
-import Accordion from '../Accordion';
+import Accordion from "../Accordion";
 import { withTranslation } from "react-i18next";
 
 const modal = Modal;
@@ -973,7 +973,7 @@ class GridPanel extends PureComponent {
           colId: item.sort,
           sort: item.dir,
         }));
-        if(this.gridApi.setSortModel){
+        if (this.gridApi.setSortModel) {
           this.gridApi.setSortModel(sort);
         }
       }
@@ -981,7 +981,7 @@ class GridPanel extends PureComponent {
         // TO DO : need to handle for grid prferences
       }
       if (pref[(uniqueIdentifier || identifier) + "columns"]) {
-        if(this.gridColumnApi.setColumnState){
+        if (this.gridColumnApi.setColumnState) {
           this.gridColumnApi.setColumnState(
             pref[(uniqueIdentifier || identifier) + "columns"]
           );
@@ -1480,7 +1480,7 @@ const mapStateToProps = (state, props) => {
         data = gridData.data.data;
         count = gridData.data.total;
       }
-    } else if(gridData.error){
+    } else if (gridData.error) {
       listErrorMessage = gridData.error;
     }
 
