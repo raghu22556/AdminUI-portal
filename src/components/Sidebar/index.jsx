@@ -124,6 +124,7 @@ export default function Sidebar(props) {
           className="text-color text-xl md:hidden cursor-pointer"
         />
       </div>
+      {/*
       <div className="flex justify-center py-4" style={{ width: "100%" }}>
         <Button
           style={{
@@ -153,6 +154,7 @@ export default function Sidebar(props) {
           </span>
         </Button>
       </div>
+      */}
 
       <div className="space-y-2 px-3 py-4" style={{ width: "100%" }}>
         <h2

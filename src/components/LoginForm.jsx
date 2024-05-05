@@ -28,7 +28,7 @@ const LoginForm = ({setIsLoading}) => {
   useEffect(() => {
     if (login_result.data) {
       localStorage.clear();
-      const { token, menu, dynamicConfig, masterDataList } = login_result.data;
+      const { token, menu, dynamicConfig, masterDataList, userTable, localizedData, organizationId } = login_result.data;
       var entityMapping = {};
       for (var item of JSON.parse(masterDataList)) {
         entityMapping[item.table] = item;
@@ -43,6 +43,10 @@ const LoginForm = ({setIsLoading}) => {
       localStorage.setItem("menu", JSON.stringify(menu));
       localStorage.setItem("dynamicConfig", dynamicConfig);
       localStorage.setItem("entityMapping", JSON.stringify(entityMapping));
+      localStorage.setItem('userTable', userTable);
+      localStorage.setItem('languageData', JSON.stringify(localizedData));
+      localStorage.setItem('organizationId', organizationId);
+
       let dynamicConfigJson = JSON.parse(dynamicConfig);
       let newConfig = [];
       if (null != dynamicConfigJson) {

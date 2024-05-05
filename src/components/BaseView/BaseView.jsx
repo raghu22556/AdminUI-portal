@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router";
 import { ReduxHelper } from "../../core/redux-helper";
-import { Menu, Modal, Input, Tooltip } from "antd";
+import { Select, Menu, Modal, Input, Tooltip } from "antd";
 import SimpleForm from "./simple-form";
 //import DialogForm from "./DialogForm";
 import AgGrid from "../ag-grid";
@@ -17,7 +17,12 @@ import CardView from "../CardsLayout";
 import { CONFIG, newConfig } from "../../store/config";
 import Accordion from "../Accordion";
 import { withTranslation } from "react-i18next";
+import { triggerAPI, defaultLoader } from "../../core/utils";
+import * as FileSaver from "file-saver";
+import * as XLSX from "xlsx";
+import moment from "moment";
 
+const { Option } = Select;
 const modal = Modal;
 const { confirm } = Modal;
 const Actions = ReduxHelper.Actions;
@@ -30,6 +35,15 @@ export const withRouter = (Component) => {
     return <Component history={history} {...props} />;
   };
   return Wrapper;
+};
+
+const isTrue = (value) => {
+  if (typeof value != "undefined") {
+    if (value && value == true) {
+      return true;
+    }
+  }
+  return false;
 };
 
 export default class BaseView extends PureComponent {
@@ -211,7 +225,7 @@ export default class BaseView extends PureComponent {
       comboTypes: [
         ...entity.comboTypes,
         {
-          type: "User",
+          type: localStorage.userTable,
           ValueField: "Name",
           IDField: "UserId",
         },
@@ -694,6 +708,10 @@ class GridPanel extends PureComponent {
     }
   };
 
+  applyDateRangeFiler = () => {
+    let gridApi = this.gridApi;
+    alert("Need to Apply Filter on CreatedBy column");
+  };
   loadData = ({ filterInfo, sortInfo, currentPage, limit, filter }) => {
     /*if (!this.props.config.listAPI) {
       return;
@@ -1003,8 +1021,54 @@ class GridPanel extends PureComponent {
     console.debug("Row Data:", JSON.stringify(rowData));
   };
 
+  exportToXlsx = () => {
+    let me = this;
+
+    triggerAPI({
+      t: me.props.t,
+      controller: me.props.config.identifier,
+      params: {
+        action: "ExportData",
+      },
+      gridPanel: me,
+      addProgressBar: true,
+      resSuccessCallBack: (response) => {
+        var jsonArray = response.data.data;
+        if (jsonArray.length > 0) {
+          let key = "xlsx";
+          let fileType = {
+            csv: "text/plain;charset=UTF-8",
+            xlsx: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8",
+          };
+          var headers = [];
+          for (var objectKey in jsonArray[0]) {
+            headers.push(objectKey);
+          }
+          let timeStamp = moment().format("DD.MM.YY hh.mm");
+          const fileName = me.props.config.title + " " + timeStamp;
+          const ws = XLSX.utils.json_to_sheet(jsonArray, {
+            header: headers,
+          });
+          const wb = { Sheets: { data: ws }, SheetNames: ["data"] };
+          let excelBuffer = XLSX.write(wb, { bookType: key, type: "array" });
+          const data = new Blob([excelBuffer], { type: fileType[key] });
+          FileSaver.saveAs(data, fileName + "." + key);
+        } else {
+          modal.error({
+            title: me.props.t("No Entries for " + me.props.config.title),
+            maskClosable: false,
+            okButtonProps: {
+              style: { backgroundColor: "#C31D1D", border: "none" },
+            },
+          });
+        }
+      },
+    });
+  };
+
   gridHeader = () => {
     const { t } = this.props;
+    const { displayLoader } = this.state;
     if (this.props.config.gridHeader) {
       return this.props.config.gridHeader({
         gridPanel: this,
@@ -1094,6 +1158,7 @@ class GridPanel extends PureComponent {
       }
       return !this.props.config.isChild ? (
         <>
+          {displayLoader && defaultLoader()}
           <Tooltip title="Add">
             <Button
               variant="outlined"
@@ -1104,6 +1169,18 @@ class GridPanel extends PureComponent {
               onClick={this.createRow}
             >
               {t("Add")}
+            </Button>
+          </Tooltip>
+          <Tooltip title="Export">
+            <Button
+              variant="outlined"
+              color="primary"
+              className="main-button-color"
+              ghost
+              style={{ marginTop: 20, marginBottom: 20 }}
+              onClick={this.exportToXlsx}
+            >
+              {t("Export")}
             </Button>
           </Tooltip>
         </>
@@ -1274,6 +1351,7 @@ class GridPanel extends PureComponent {
       childs,
       getCardView,
       formChilds,
+      title,
     } = config;
 
     const GridPanelWrapper = GridPanelWrapperConfig || GridPanelWrapperProps;
@@ -1296,6 +1374,17 @@ class GridPanel extends PureComponent {
               <div className="child-view-section-header">{config.title}</div>
             )}
           {this.gridHeader()}
+          <Select
+            defaultValue="Select Range"
+            style={{ width: 150, marginLeft: "10px" }}
+            onChange={this.applyDateRangeFiler}
+          >
+            <Option value="today">Today</Option>
+            <Option value="yesterday">Yesterday</Option>
+            <Option value="last7days">Last 7 Days</Option>
+            <Option value="last30days">Last 30 Days</Option>
+            <Option value="lastMonth">Last Month</Option>
+          </Select>
           <Snackbar
             place="tc"
             color={color}
