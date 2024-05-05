@@ -137,8 +137,8 @@ export default class API {
       var sortInfo = [];
       for (var item of param.sortInfo) {
         sortInfo.push({
-          sortBy: item.sort,
-          sortDirection: item.dir,
+          sortBy: item.colId,
+          sortDirection: item.sort,
         });
       }
       param.sortInfo = sortInfo;

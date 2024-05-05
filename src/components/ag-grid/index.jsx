@@ -333,13 +333,26 @@ class AgGrid extends Component {
     
   };
 
+  getSortInfo = () => {
+    var colState = this.gridApi.getColumnState();
+    var sortState = colState
+      .filter(function (s) {
+        return s.sort != null;
+      })
+      .map(function (s) {
+        return { colId: s.colId, sort: s.sort, sortIndex: s.sortIndex };
+      });
+    return sortState;
+  }
+
+
   getOptions = api => {
     api.hidePopupMenu();
     return {
       currentPage: this.state.currentPage,
       limit: this.state.pageSize,
       filter: this.getFilter(api.getFilterModel()),
-      sortInfo: this.getSortInfo(api.getSortModel ? api.getSortModel(): null),
+      sortInfo: this.getSortInfo(this.getSortInfo()),
     };
   };
 
