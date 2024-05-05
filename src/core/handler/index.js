@@ -1,4 +1,5 @@
 import keyMirror from 'fbjs/lib/keyMirror';
+import { toVariableCase } from '../utils';
 
 const INITIAL_STATE = { isFetching: false, error: null, data: null };
 
@@ -81,7 +82,7 @@ export default class ReduxHandler {
         case successType:
           return { ...state, ...INITIAL_STATE, data: { ...action.payload } };
         case failedType:
-          return { ...state, ...INITIAL_STATE, error: action.error.response.data };
+          return { ...state, ...INITIAL_STATE, error: action.error.response.data.Message };
         case setType:
           return { ...state, ...INITIAL_STATE, data: { ...(state.data || {}), ...action.payload } };
         default:
@@ -95,7 +96,7 @@ export default class ReduxHandler {
     for (var key in this.apis) {
       var api = this.apis[key];
       if (api) {
-        var reducerKey = key.toLowerCase();
+        var reducerKey = toVariableCase(key);
         reducers[reducerKey] = this.constructReducer(reducerKey);
       }
     }
@@ -104,7 +105,7 @@ export default class ReduxHandler {
       var actionsList = this.actions[key];
       if (actionsList) {
         for (var action of actionsList) {
-          var reducerKey = action.toLowerCase() + '_' + key.toLowerCase();
+          var reducerKey = toVariableCase(action) + '_' + key;
           reducers[reducerKey] = this.constructReducer(reducerKey);
         }
       }

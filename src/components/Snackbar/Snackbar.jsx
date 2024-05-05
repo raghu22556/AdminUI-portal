@@ -9,8 +9,7 @@ import IconButton from "@material-ui/core/IconButton";
 
 // @material-ui/icons
 import Close from "@material-ui/icons/Close";
-
-// import snackbarContentStyle from "assets/jss/material-dashboard-pro-react/components/snackbarContentStyle.jsx";
+import snackbarContentStyle from './styles.jsx';
 
 function Snackbar({ ...props }) {
   const { classes, message, color, close, icon, place, open } = props;
@@ -95,4 +94,4 @@ Snackbar.propTypes = {
   open: PropTypes.bool
 };
 
-export default withStyles({})(Snackbar);
+export default withStyles(snackbarContentStyle)(Snackbar);

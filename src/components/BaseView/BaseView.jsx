@@ -1180,7 +1180,7 @@ class GridPanel extends PureComponent {
         () =>
           setTimeout(
             () => this.setState({ snackBarVisible: false, message: "" }),
-            1000
+            5000
           )
       );
     }
@@ -1480,6 +1480,8 @@ const mapStateToProps = (state, props) => {
         data = gridData.data.data;
         count = gridData.data.total;
       }
+    } else if(gridData.error){
+      listErrorMessage = gridData.error;
     }
 
     return {

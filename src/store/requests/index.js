@@ -48,29 +48,37 @@ const onResponseFail = error => {
 
 axios.interceptors.response.use(onResponseSuccess, onResponseFail);
 
+const TriggerAxiosPost = (apiUrl, param) => {
+  if (isJWTAuthentication) {
+    return axios.post(apiUrl, param);
+  } else if(isOAUTHAuthentication){
+    alert('Need to handle url for isOAUTHAuthentication');
+    const defaultOptions = {
+      baseURL: URL,
+      timeout: 36000,
+      headers: {
+        'content-type': 'application/x-www-form-urlencoded',
+      },
+    };
+    let instance = axios.create(defaultOptions);
+    //var loginData = `?username=` + param.username + `&password=` + param.password + `&grant_type=` + param.grant_type;
+    var formBody = [];
+    for (var property in param) {
+      var encodedKey = encodeURIComponent(property);
+      var encodedValue = encodeURIComponent(param[property]);
+      formBody.push(encodedKey + '=' + encodedValue);
+    }
+    formBody = formBody.join('&');
+    return instance.post('connect/token', formBody);
+  }
+}
+
 export default class API {
   static login = param => {
-    if (isJWTAuthentication) {
-      return axios.post(URL + APIVersion + 'Registration/VerifyAdminUser', param);
-    } else if(isOAUTHAuthentication){
-      const defaultOptions = {
-        baseURL: URL,
-        timeout: 36000,
-        headers: {
-          'content-type': 'application/x-www-form-urlencoded',
-        },
-      };
-      let instance = axios.create(defaultOptions);
-      //var loginData = `?username=` + param.username + `&password=` + param.password + `&grant_type=` + param.grant_type;
-      var formBody = [];
-      for (var property in param) {
-        var encodedKey = encodeURIComponent(property);
-        var encodedValue = encodeURIComponent(param[property]);
-        formBody.push(encodedKey + '=' + encodedValue);
-      }
-      formBody = formBody.join('&');
-      return instance.post('connect/token', formBody);
-    }
+    return TriggerAxiosPost(URLs.login, param);
+  };
+  static createSuperAdmin = param => {
+    return TriggerAxiosPost(URLs.createSuperAdmin, param);
   };
 
   static refreshToken = param => {
@@ -180,16 +188,5 @@ export default class API {
     formBody = formBody.join('&');
 
     return axios.post(url, formBody);
-  };
-
-  static listAssets = param => {
-    return axios.post(URLs.listAssets, param);
-  };
-
-  static listAssetsRequest = (param, onSucess, onFailure) => {
-    return axios
-      .post(URLs.listAssets, param)
-      .then(onSucess)
-      .catch(onFailure);
   };
 }

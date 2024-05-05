@@ -55,23 +55,31 @@ export function* genericFunction(action) {
       successType: successType,
       successAction: action,
       error: error,
-      failedAction: failureType,
+      failureType: failureType,
     });
   }
 }
 
 export function* handleError(action) {
-  const { error, successAction, failedAction, successType } = action;
-  if (error && error.response && error.response.status && error.response.status == 401) {
-    alert('UnAuthorized');
-    const navigate = useNavigate();
-    navigate('/');
-    window.location.reload(true);
+  const { error, successAction, failureType, successType } = action;
+  if (error && error.response && error.response.status) {
+    if(error.response.status == 401){
+      alert('UnAuthorized');
+      const navigate = useNavigate();
+      navigate('/');
+      window.location.reload(true);
+    } else if(error.response.status == 400 || error.response.status == 500){
+      yield put({
+        type: failureType,
+        error: error,
+      });
+    }
+  } else {
+    yield put({
+      type: successType,
+      payload: [],
+    });
   }
-  yield put({
-    type: successType,
-    payload: [],
-  });
 }
 
 export const sagaGenerator = actionReq =>

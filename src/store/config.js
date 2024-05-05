@@ -9,6 +9,7 @@ const defaultActions = ['list', 'gridpreference'];
 // mostly controller is the key name.
 export const CONFIG = [
   { key: 'Login', api: API.login },
+  { key: 'CreateSuperAdmin', api: API.createSuperAdmin },
   { key: 'RecoverPassword', api: API.recoverPassword },
   { key: 'Combos', actions: [...defaultActions] },
   { key: 'Activity', actions: [...defaultActions] },

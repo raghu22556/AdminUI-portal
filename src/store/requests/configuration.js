@@ -1,4 +1,6 @@
+import { URL, APIVersion } from "../../app-config";
+
 export const URLs = {
-  logDevice: `Login/LogDevice`,
-  listAssets: `/asset/List`,
+  login: URL + APIVersion + "Registration/VerifyAdminUser",
+  createSuperAdmin: URL + APIVersion + "Registration/CreateSuperAdmin",
 };

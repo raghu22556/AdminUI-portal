@@ -1,9 +1,10 @@
 import { FormEvent, useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import AcceptTermSelectBackend from "../common/AcceptTermSelectBackend";
 import AcceptTermSelectFrontend from "../common/AcceptTermSelectFrontend";
 import AcceptTermSelectRole from "../common/AcceptTermSelectRole";
-import Footer from "../common/Footer";
+import { ReduxHelper } from "../core/redux-helper";
 
 import {
   Card,
@@ -18,12 +19,25 @@ import {
   Option,
 } from "@material-tailwind/react";
 
-const AcceptTermForm = () => {
+const AcceptTermForm = ({ setIsLoading }) => {
   const [acceptTermSelectBackend, setAcceptTermSelectBackend] = useState("");
   const [acceptTermSelectFrontend, setAcceptTermSelectFrontend] = useState("");
   const [selectedRole, setSelectedRole] = useState("");
-  const navigate = useNavigate();
+  let createSuperAdmin_result = useSelector((state) => state?.createSuperAdmin);
 
+  useEffect(() => {
+    if (createSuperAdmin_result.data) {
+      alert('Organization Created Succesfully');
+      navigate("/dashboard");
+    } else if (createSuperAdmin_result.error) {
+      setIsLoading(false);
+      alert(createSuperAdmin_result.error);
+    }
+  }, [createSuperAdmin_result]);
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  
   const selectBackendHandler = (selectedValue) => {
     setAcceptTermSelectBackend(selectedValue);
   };
@@ -47,8 +61,16 @@ const AcceptTermForm = () => {
 
     const jsonData = JSON.stringify(selectedData);
 
-    alert(jsonData);
-    navigate("/neworganization");
+    setIsLoading(true);
+    dispatch(
+      ReduxHelper.Actions.createSuperAdmin({
+        Organization: "Demo1",
+        Email: "Test@Demo1.com",
+        Password: "123456",
+        BackendLanguge: "sql",
+        IsMobile: true,
+      })
+    );
   };
 
   return (
