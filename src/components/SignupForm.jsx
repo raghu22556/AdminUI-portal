@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect} from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 import {
   Card,
   CardBody,
@@ -8,8 +9,7 @@ import {
   Button,
   Alert,
 } from "@material-tailwind/react";
-
-import Footer from "../common/Footer";
+import { ReduxHelper } from "../core/redux-helper";
 import OrganizationNameInput from "../common/OrganizationNameInput";
 
 import {
@@ -20,13 +20,25 @@ import {
 
 //import WelcomeLayout from "../components/WelcomeLayout/index";
 
-const SignupForm = () => {
+const SignupForm = ({setIsLoading}) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [organization, setOrganization] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPass, setConfirmPass] = useState("");
   const [error, setError] = useState(null);
+  const createSuperAdmin_result = useSelector((state) => state?.createSuperAdmin);
+
+  useEffect(() => {
+    if (createSuperAdmin_result.data) {
+      alert('Organization Created Succesfully');
+      navigate("/acceptterm");
+    } else if (createSuperAdmin_result.error) {
+      setIsLoading(false);
+      setError(createSuperAdmin_result.error);
+    }
+  }, [createSuperAdmin_result]);
 
   const handleOrganizationChange = (event) => {
     setOrganization(event.target.value);
@@ -95,8 +107,14 @@ const SignupForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (validate()) {
-      // Validation succeeded, navigate to "/acceptterm"
-      navigate("/acceptterm");
+      setIsLoading(true);
+      dispatch(
+        ReduxHelper.Actions.createSuperAdmin({
+          organization,
+          email,
+          password
+        })
+      );
     }
   };
 
@@ -115,6 +133,7 @@ const SignupForm = () => {
         />
         <CustomEmailInput
           value={email}
+          label="Email"
           onChange={handleEmailChange}
           required
           onFocus={() => setError(null)}
@@ -156,7 +175,7 @@ const SignupForm = () => {
           color="rose"
           onClick={handleSubmit}
         >
-          Continue
+          Create
         </Button>
         <Typography className="mt-4 flex justify-center text-[14x]">
           Already have an Account ?

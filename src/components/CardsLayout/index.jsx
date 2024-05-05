@@ -48,8 +48,8 @@ const CardsLayout = ({ item }) => {
   const navigate = useNavigate();
   return (
     <div>
-      <h1 className="font-bold font-poppins">{item.url}</h1>
-      <p>{`Project Name / ${item.url}`}</p>
+      {/*<h1 className="font-bold font-poppins">{item.url}</h1>
+      <p>{`Project Name / ${item.url}`}</p>*/}
       <div className=" mb-12 grid gap-y-4 gap-x-1.5 md:grid-cols-2 xl:grid-cols-4 mt-6">
         {item.children.map(({ displayText, url, ...rest }) => (
           <WidgetCard
