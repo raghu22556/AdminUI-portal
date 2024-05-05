@@ -1,181 +1,109 @@
 import React, { useState } from "react";
 import { Button, Typography } from "@material-tailwind/react";
+import DashbordIcon from "../../assets/DashbordIcon";
+import DashbordIconActive from "../../assets/DashbordIconActive";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import {
+  MdCardGiftcard,
+  MdClose,
+  MdNotifications,
+  MdTouchApp,
+} from "react-icons/md";
 
-//   const navigate = useNavigate();
-//   const { handleToggle } = props;
-//   const { pathname } = useLocation();
-//   const [dropValue, setDropValue] = useState("");
+export default function Sidebar(props) {
+  const navigate = useNavigate();
+  const { handleToggle } = props;
+  const { pathname } = useLocation();
+  const [dropValue, setDropValue] = useState("");
 
-//   // Handle Navigate
-//   const handleNavigate = (path) => navigate(path);
+  // Handle Navigate
+  const handleNavigate = (path) => navigate(path);
 
-//   // Handle Dropdown
-//   const handleDrop = (value) => setDropValue(value === dropValue ? "" : value);
+  // Handle Dropdown
+  const handleDrop = (value) => setDropValue(value === dropValue ? "" : value);
 
-//   let menu = JSON.parse(localStorage.getItem("menu"));
+  let menu = JSON.parse(localStorage.getItem("menu"));
 
-//   // All Links & Nested Links
-//   const navLinks = [
-//     // Dashboard
-//     {
-//       name: "Dashboard",
-//       icon: <DashbordIcon />,
-//       activeIcon: <DashbordIconActive />,
-//       path: "/dashboard",
-//     },
-//     {
-//       name: "Organization",
-//       icon: <DashbordIcon />,
-//       activeIcon: <DashbordIconActive />,
-//       path: "/organization",
-//     },
-//     {
-//       name: "Projects",
-//       icon: <DashbordIcon />,
-//       activeIcon: <DashbordIconActive />,
-//       path: "/projects",
-//     },
-//     {
-//       name: "Reports",
-//       icon: <DashbordIcon />,
-//       activeIcon: <DashbordIconActive />,
-//       path: "/Reports",
-//     },
+  // All Links & Nested Links
+  const navLinks = [
+    // Dashboard
+    {
+      name: "Dashboard",
+      icon: <DashbordIcon />,
+      activeIcon: <DashbordIconActive />,
+      path: "/dashboard",
+    },
+    {
+      name: "Organization",
+      icon: <DashbordIcon />,
+      activeIcon: <DashbordIconActive />,
+      path: "/organization",
+    },
+    {
+      name: "Projects",
+      icon: <DashbordIcon />,
+      activeIcon: <DashbordIconActive />,
+      path: "/projects",
+    },
+    {
+      name: "Reports",
+      icon: <DashbordIcon />,
+      activeIcon: <DashbordIconActive />,
+      path: "/Reports",
+    },
 
-//     // {
-//     //   name: "Masters",
-//     //   icon: <DashbordIcon />,
-//     //   activeIcon: <DashbordIconActive />,
-//     //   path: "/UserManagement",
-//     //   child: [
-//     //     {
-//     //       name: "User Management",
-//     //       path: "/userpage",
-//     //       icon: <SubIcons />,
-//     //       activeIcon: <SubIcons />,
-//     //     },
-//     //     {
-//     //       name: "Designations",
-//     //       path: "/Masters/UserManagement",
-//     //       icon: <SubIcons />,
-//     //       activeIcon: <SubIcons />,
-//     //     },
-//     //     {
-//     //       name: "Roles",
-//     //       path: "/Masters/UserManagement",
-//     //       icon: <SubIcons />,
-//     //       activeIcon: <SubIcons />,
-//     //     },
-//     //     {
-//     //       name: "Access Control",
-//     //       path: "/Masters/UserManagement",
-//     //       icon: <SubIcons />,
-//     //       activeIcon: <SubIcons />,
-//     //     },
-//     //   ],
-//     // },
-//   ];
+    // {
+    //   name: "Masters",
+    //   icon: <DashbordIcon />,
+    //   activeIcon: <DashbordIconActive />,
+    //   path: "/UserManagement",
+    //   child: [
+    //     {
+    //       name: "User Management",
+    //       path: "/userpage",
+    //       icon: <SubIcons />,
+    //       activeIcon: <SubIcons />,
+    //     },
+    //     {
+    //       name: "Designations",
+    //       path: "/Masters/UserManagement",
+    //       icon: <SubIcons />,
+    //       activeIcon: <SubIcons />,
+    //     },
+    //     {
+    //       name: "Roles",
+    //       path: "/Masters/UserManagement",
+    //       icon: <SubIcons />,
+    //       activeIcon: <SubIcons />,
+    //     },
+    //     {
+    //       name: "Access Control",
+    //       path: "/Masters/UserManagement",
+    //       icon: <SubIcons />,
+    //       activeIcon: <SubIcons />,
+    //     },
+    //   ],
+    // },
+  ];
 
-//   menu.forEach((menuItem) => {
-//     let newNavItem = {
-//       name: menuItem.cardText,
-//       path: "/" + menuItem.url,
-//       icon: <DashbordIcon />,
-//       activeIcon: <DashbordIconActive />,
-//     };
+  const navLinksModules = [];
+  menu.forEach((menuItem) => {
+    let newNavItem = {
+      name: menuItem.cardText,
+      path: "/" + menuItem.url,
+      icon: <DashbordIcon />,
+      activeIcon: <DashbordIconActive />,
+    };
 
-//     if (menuItem.children && menuItem.children.length > 0) {
-//       newNavItem.child = menuItem.children.map((childItem) => ({
-//         name: childItem.cardText,
-//         path: "/" + menuItem.cardText + "/" + childItem.url,
-//       }));
-//     }
+    if (menuItem.children && menuItem.children.length > 0) {
+      newNavItem.child = menuItem.children.map((childItem) => ({
+        name: childItem.cardText,
+        path: "/" + menuItem.cardText + "/" + childItem.url,
+      }));
+    }
 
-//     navLinks.push(newNavItem);
-//   });
-
-//   return (
-//     <div>
-//       {/* Top Logo & Close */}
-//       <section className="flex py-2 items-center md:justify-center justify-between">
-//         {/* <img
-//           src={NavyRouteLogo}
-//           alt="sidebar-logo"
-//           className="w-28"
-//         /> */}
-//         <Typography className="text-[#6499E9] font-poppins font-bold text-xl">
-//           MaidenCube
-//         </Typography>
-//         <MdClose
-//           onClick={handleToggle}
-//           className="text-color text-xl md:hidden cursor-pointer"
-//         />
-//       </section>
-
-//       {/* NavLinks */}
-//       <nav className="my-7 grid gap-1 tracking-wide text-sm px-4  text-[rgb(145,145,145)]">
-//         {navLinks.map((item) => {
-//           return (
-//             <div key={item.name}>
-//               <div
-//                 type="button"
-//                 onClick={() => handleNavigate(item.path)}
-//                 className={`flex cursor-pointer font-medium   items-center gap-2 ${
-//                   (item.name === dropValue || item.path === pathname) &&
-//                   "text-[#6499E9] bg-[#E5ECF680]"
-//                 } lg:text-base cursor-pointer py-1.5 md:px-3 rounded items-center relative gap-2 `}
-//               >
-//                 {item.name === dropValue || item.path === pathname ? (
-//                   <span className="text-lg">{item.activeIcon}</span>
-//                 ) : (
-//                   <span className="text-lg">{item?.icon}</span>
-//                 )}
-//                 <span className=" font-poppins text-sm">{item.name}</span>
-//                 {/*item.child && (
-//                   <span className="ml-auto">
-//                     {item.name === dropValue ? (
-//                       <BsChevronUp />
-//                     ) : (
-//                       <BsChevronDown />
-//                     )}
-//                      <BsChevronUp /> }
-//                   </span>
-//                 )*/}
-//               </div>
-//               {/* Child Links */}
-//               {/*item.name === dropValue && (
-//                 <div className="ml-8 grid gap-2 my-2.5">
-//                   {item?.child?.map((subItem) => {
-//                     return (
-//                       <div
-//                         key={subItem.name}
-//                         onClick={() => handleNavigate(subItem.path)}
-//                         className={`flex font-normal  cursor-pointer text-hover gap-3 ${
-//                           subItem.path === pathname && "text-color"
-//                         }`}
-//                       >
-//                         {item.path === pathname ? (
-//                           <span className="text-lg">{subItem.activeIcon}</span>
-//                         ) : (
-//                           <span className="text-lg">{subItem.icon}</span>
-//                         )}
-//                         <span>{subItem.name}</span>
-//                       </div>
-//                     );
-//                   })}
-//                 </div>
-//               )*/}
-//             </div>
-//           );
-//         })}
-//       </nav>
-//     </div>
-//   );
-// };
-
-// export default Sidebar;
-
-export default function Sidebar() {
+    navLinksModules.push(newNavItem);
+  });
   return (
     <div className="flex flex-col w-full max-w-xs bg-white">
       <div className="px-6 py-4">
@@ -191,6 +119,10 @@ export default function Sidebar() {
         >
           MaidenCube
         </h1>
+        <MdClose
+          onClick={handleToggle}
+          className="text-color text-xl md:hidden cursor-pointer"
+        />
       </div>
       <div className="flex justify-center py-4" style={{ width: "100%" }}>
         <Button
@@ -222,9 +154,6 @@ export default function Sidebar() {
         </Button>
       </div>
 
-      {/* <div className="flex justify-center py-4" style={{width:'100%'}}>
-        
-      </div> */}
       <div className="space-y-2 px-3 py-4" style={{ width: "100%" }}>
         <h2
           className="text-lg font-semibold"
@@ -232,62 +161,48 @@ export default function Sidebar() {
         >
           Main
         </h2>
-        <Button
-          style={{
-            backgroundColor: "rgb(229, 228, 226)",
-            width: "220px",
-            height: "44px",
-            borderRadius: "8px",
-            border: "1px solid #E5E4E2",
-            padding: "12px, 16px, 12px, 16px",
-          }}
-          className="flex items-center space-x-2"
-        >
-          <CloudLightningIcon
-            style={{ color: "rgb(138 134 134)	" }}
-            className="h-5 w-5"
-          />
-          <span
-            style={{
-              fontWeight: 500,
-              fontSize: "12px",
-              lineHeight: "18px",
-              color: "rgb(138 134 134)",
-              textTransform: "capitalize",
-            }}
-          >
-            Onboarding
-          </span>
-        </Button>
-        <Button
-          style={{
-            backgroundColor: "rgb(229, 228, 226)",
-            width: "220px",
-            height: "44px",
-            borderRadius: "8px",
-            border: "1px solid #E5E4E2",
-            padding: "12px, 16px, 12px, 16px",
-            color: "#A9A9A9 ",
-          }}
-          className="flex items-center space-x-2 w-full"
-          variant="default"
-        >
-          <UsersIcon
-            style={{ color: "rgb(138 134 134)	" }}
-            className="h-5 w-5"
-          />
-          <span
-            style={{
-              fontWeight: 500,
-              fontSize: "12px",
-              lineHeight: "18px",
-              color: "rgb(138 134 134)",
-              textTransform: "capitalize",
-            }}
-          >
-            User Management
-          </span>
-        </Button>
+        {navLinks.map((item) => {
+          return (
+            <div key={item.name}>
+              <div
+                type="button"
+                onClick={() => handleNavigate(item.path)}
+                className={`flex cursor-pointer font-medium   items-center gap-2 ${
+                  (item.name === dropValue || item.path === pathname) &&
+                  "text-[#6499E9] bg-[#E5ECF680]"
+                } lg:text-base cursor-pointer py-1.5 md:px-3 rounded items-center relative gap-2 `}
+              >
+                <Button
+                  style={{
+                    backgroundColor:
+                      item.path === pathname ? "#056EE9" : "rgb(229, 228, 226)",
+                    width: "220px",
+                    height: "44px",
+                    borderRadius: "8px",
+                    border: "1px solid #E5E4E2",
+                    padding: "12px 16px",
+                  }}
+                  className="flex items-center space-x-2 w-full"
+                  variant="default"
+                >
+                  {item.icon}
+                  <span
+                    style={{
+                      fontWeight: 500,
+                      fontSize: "12px",
+                      lineHeight: "18px",
+                      color:
+                        item.path === pathname ? "#FFFFFF" : "rgb(138 134 134)",
+                      textTransform: "capitalize",
+                    }}
+                  >
+                    {item.name}
+                  </span>
+                </Button>
+              </div>
+            </div>
+          );
+        })}
       </div>
       <div className="space-y-2 px-3 py-4" style={{ width: "100%" }}>
         <h2
@@ -357,148 +272,48 @@ export default function Sidebar() {
         >
           Modules
         </h2>
-        <Button
-          style={{
-            backgroundColor: "rgb(229, 228, 226)",
-            width: "220px",
-            height: "44px",
-            borderRadius: "8px",
-            border: "1px solid #E5E4E2",
-            padding: "12px, 16px, 12px, 16px",
-          }}
-          className="flex items-center space-x-2 w-full"
-          variant="default"
-        >
-          <BarChartIcon
-            style={{ color: "rgb(138 134 134)	" }}
-            className="h-5 w-5"
-          />
-          <span
-            style={{
-              fontWeight: 500,
-              fontSize: "12px",
-              lineHeight: "18px",
-              color: "rgb(138 134 134)",
-              textTransform: "capitalize",
-            }}
-          >
-            Marketing
-          </span>
-        </Button>
-        <Button
-          style={{
-            backgroundColor: "rgb(229, 228, 226)",
-            width: "220px",
-            height: "44px",
-            borderRadius: "8px",
-            border: "1px solid #E5E4E2",
-            padding: "12px, 16px, 12px, 16px",
-          }}
-          className="flex items-center space-x-2 w-full"
-          variant="default"
-        >
-          <BarChartIcon
-            style={{ color: "rgb(138 134 134)	" }}
-            className="h-5 w-5"
-          />
-          <span
-            style={{
-              fontWeight: 500,
-              fontSize: "12px",
-              lineHeight: "18px",
-              color: "rgb(138 134 134)",
-            }}
-          >
-            HRMS
-          </span>
-        </Button>
-
-        <Button
-          style={{
-            backgroundColor: "rgb(229, 228, 226)",
-            width: "220px",
-            height: "44px",
-            borderRadius: "8px",
-            border: "1px solid #E5E4E2",
-            padding: "12px, 16px, 12px, 16px",
-          }}
-          className="flex items-center space-x-2 w-full"
-          variant="default"
-        >
-          <BarChartIcon
-            style={{ color: "rgb(138 134 134)	" }}
-            className="h-5 w-5"
-          />
-          <span
-            style={{
-              fontWeight: 500,
-              fontSize: "12px",
-              lineHeight: "18px",
-              color: "rgb(138 134 134)",
-              textTransform: "capitalize",
-            }}
-          >
-            Module Name
-          </span>
-        </Button>
-
-        <Button
-          style={{
-            backgroundColor: "rgb(229, 228, 226)",
-            width: "220px",
-            height: "44px",
-            borderRadius: "8px",
-            border: "1px solid #E5E4E2",
-            padding: "12px, 16px, 12px, 16px",
-          }}
-          className="flex items-center space-x-2 w-full"
-          variant="default"
-        >
-          <BarChartIcon
-            style={{ color: "rgb(138 134 134)	" }}
-            className="h-5 w-5"
-          />
-          <span
-            style={{
-              fontWeight: 500,
-              fontSize: "12px",
-              lineHeight: "18px",
-              color: "rgb(138 134 134)",
-              textTransform: "capitalize",
-            }}
-          >
-            Module Name
-          </span>
-        </Button>
-
-        <Button
-          style={{
-            backgroundColor: "rgb(229, 228, 226)",
-            width: "220px",
-            height: "44px",
-            borderRadius: "8px",
-            border: "1px solid #E5E4E2",
-            padding: "12px, 16px, 12px, 16px",
-          }}
-          className="flex items-center space-x-2 w-full"
-          variant="default"
-        >
-          <BarChartIcon
-            style={{ color: "rgb(138 134 134)	" }}
-            className="h-5 w-5"
-          />
-          <span
-            style={{
-              fontWeight: 500,
-              fontSize: "12px",
-              lineHeight: "18px",
-              color: "rgb(138 134 134)",
-              textTransform: "capitalize",
-            }}
-          >
-            Module Name
-          </span>
-        </Button>
+        {navLinksModules.map((item) => {
+          return (
+            <div key={item.name}>
+              <div
+                type="button"
+                onClick={() => handleNavigate(item.path)}
+                className={`flex cursor-pointer font-medium   items-center gap-2 ${
+                  (item.name === dropValue || item.path === pathname) &&
+                  "text-[#6499E9] bg-[#E5ECF680]"
+                } lg:text-base cursor-pointer py-1.5 md:px-3 rounded items-center relative gap-2 `}
+              >
+                <Button
+                  style={{
+                    backgroundColor:
+                      item.path === pathname ? "#056EE9" : "rgb(229, 228, 226)",
+                    width: "220px",
+                    height: "44px",
+                    borderRadius: "8px",
+                    border: "1px solid #E5E4E2",
+                    padding: "12px 16px",
+                  }}
+                  className="flex items-center space-x-2 w-full"
+                  variant="default"
+                >
+                  {item.icon}
+                  <span
+                    style={{
+                      fontWeight: 500,
+                      fontSize: "12px",
+                      lineHeight: "18px",
+                      color:
+                        item.path === pathname ? "#FFFFFF" : "rgb(138 134 134)",
+                      textTransform: "capitalize",
+                    }}
+                  >
+                    {item.name}
+                  </span>
+                </Button>
+              </div>
+            </div>
+          );
+        })}
 
         <span
           className="flex items-center space-x-2 w-full"
@@ -543,27 +358,6 @@ function ArrowLeftIcon(props) {
   );
 }
 
-function BarChartIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <line x1="12" x2="12" y1="20" y2="10" />
-      <line x1="18" x2="18" y1="20" y2="4" />
-      <line x1="6" x2="6" y1="20" y2="16" />
-    </svg>
-  );
-}
-
 function BellIcon(props) {
   return (
     <svg
@@ -580,26 +374,6 @@ function BellIcon(props) {
     >
       <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
       <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
-    </svg>
-  );
-}
-
-function CloudLightningIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M6 16.326A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 .5 8.973" />
-      <path d="m13 12-3 5h4l-3 5" />
     </svg>
   );
 }
@@ -641,28 +415,6 @@ function UserCircleIcon(props) {
       <circle cx="12" cy="12" r="10" />
       <circle cx="12" cy="10" r="3" />
       <path d="M7 20.662V19a2 2 0 0 1 2-2h6a2 2 0 0 1 2 2v1.662" />
-    </svg>
-  );
-}
-
-function UsersIcon(props) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-      <circle cx="9" cy="7" r="4" />
-      <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-      <path d="M16 3.13a4 4 0 0 1 0 7.75" />
     </svg>
   );
 }
