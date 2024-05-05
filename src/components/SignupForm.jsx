@@ -133,6 +133,7 @@ const SignupForm = ({setIsLoading}) => {
         />
         <CustomEmailInput
           value={email}
+          label="Email"
           onChange={handleEmailChange}
           required
           onFocus={() => setError(null)}

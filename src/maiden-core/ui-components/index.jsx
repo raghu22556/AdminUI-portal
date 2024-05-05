@@ -32,7 +32,7 @@ const CustomInput = (props) => {
 };
 
 const CustomEmailInput = (props) => {
-  return <CustomInput {...props} type="Email" placeholder="admin@gmail.com" />;
+  return <CustomInput {...props} type="Email" placeholder="Email" />;
 };
 
 const CustomPasswordInput = (props) => {
