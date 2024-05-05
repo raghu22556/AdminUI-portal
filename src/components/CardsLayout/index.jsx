@@ -4,7 +4,7 @@ import { Card, CardBody, Typography } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
 
 import { injectTOStore } from "../../core/redux-helper/injectTOStore";
-import { newConfig } from '../../store/config';
+import { newConfig } from "../../store/config";
 
 injectTOStore(newConfig);
 const WidgetCard = ({ title, onClick }) => {
@@ -49,6 +49,7 @@ const CardsLayout = ({ item }) => {
   return (
     <div>
       <h1 className="font-bold font-poppins">{item.url}</h1>
+      <p>{`Project Name / ${item.url}`}</p>
       <div className=" mb-12 grid gap-y-4 gap-x-1.5 md:grid-cols-2 xl:grid-cols-4 mt-6">
         {item.children.map(({ displayText, url, ...rest }) => (
           <WidgetCard

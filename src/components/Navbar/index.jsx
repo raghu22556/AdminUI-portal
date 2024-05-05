@@ -58,10 +58,17 @@ const Navbar = (props) => {
 
   return (
     <div className="p-4 bg-white sticky z-40 border-b top-0 left-0 shadow-sm flex items-center">
-      <HiOutlineMenu
+      {/* <HiOutlineMenu
         onClick={handleToggle}
         className="text-color text-xl cursor-pointer"
+      /> */}
+      <img
+        src="close.svg"
+        alt=""
+        onClick={handleToggle}
+        className="text-color text-xl cursor-pointer w-[30px]"
       />
+
       <div
         className={`sm:ml-5 ml-2.5 ${
           drawer ? "hidden md:flex" : "flex md:hidden"
