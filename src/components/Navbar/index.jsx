@@ -156,7 +156,7 @@ const Navbar = (props) => {
                       backgroundColor: "#eeeeee",
                       borderRadius: "3px",
                       right: "25px",
-                      top: "50px",
+                      top: "72px",
                       width: "300px",
                       padding: "10px",
                       boxShadow: "rgba(51, 51, 51, 0.45) 1px 1px 3px 1px",

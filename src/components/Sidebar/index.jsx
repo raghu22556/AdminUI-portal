@@ -47,9 +47,9 @@ export default function Sidebar(props) {
     },
     //{
     //  name: "Reports",
-     // icon: <DashbordIcon />,
-     // activeIcon: <DashbordIconActive />,
-     // path: "/Reports",
+    // icon: <DashbordIcon />,
+    // activeIcon: <DashbordIconActive />,
+    // path: "/Reports",
     //},
 
     // {
@@ -166,42 +166,34 @@ export default function Sidebar(props) {
         {navLinks.map((item) => {
           return (
             <div key={item.name}>
-              <div
-                type="button"
+              <Button
+                style={{
+                  backgroundColor:
+                    item.path === pathname ? "#056EE9" : "rgb(229, 228, 226)",
+                  width: "220px",
+                  height: "44px",
+                  borderRadius: "8px",
+                  border: "1px solid #E5E4E2",
+                  padding: "12px 16px",
+                }}
+                className="flex items-center space-x-2 w-full"
+                variant="default"
                 onClick={() => handleNavigate(item.path)}
-                className={`flex cursor-pointer font-medium   items-center gap-2 ${
-                  (item.name === dropValue || item.path === pathname) &&
-                  "text-[#6499E9] bg-[#E5ECF680]"
-                } lg:text-base cursor-pointer py-1.5 md:px-3 rounded items-center relative gap-2 `}
               >
-                <Button
+                {item.icon}
+                <span
                   style={{
-                    backgroundColor:
-                      item.path === pathname ? "#056EE9" : "rgb(229, 228, 226)",
-                    width: "220px",
-                    height: "44px",
-                    borderRadius: "8px",
-                    border: "1px solid #E5E4E2",
-                    padding: "12px 16px",
+                    fontWeight: 500,
+                    fontSize: "12px",
+                    lineHeight: "18px",
+                    color:
+                      item.path === pathname ? "#FFFFFF" : "rgb(138 134 134)",
+                    textTransform: "capitalize",
                   }}
-                  className="flex items-center space-x-2 w-full"
-                  variant="default"
                 >
-                  {item.icon}
-                  <span
-                    style={{
-                      fontWeight: 500,
-                      fontSize: "12px",
-                      lineHeight: "18px",
-                      color:
-                        item.path === pathname ? "#FFFFFF" : "rgb(138 134 134)",
-                      textTransform: "capitalize",
-                    }}
-                  >
-                    {item.name}
-                  </span>
-                </Button>
-              </div>
+                  {item.name}
+                </span>
+              </Button>
             </div>
           );
         })}
@@ -217,42 +209,34 @@ export default function Sidebar(props) {
         {navLinksModules.map((item) => {
           return (
             <div key={item.name}>
-              <div
-                type="button"
+              <Button
+                style={{
+                  backgroundColor:
+                    item.path === pathname ? "#056EE9" : "rgb(229, 228, 226)",
+                  width: "220px",
+                  height: "44px",
+                  borderRadius: "8px",
+                  border: "1px solid #E5E4E2",
+                  padding: "12px 16px",
+                }}
+                className="flex items-center space-x-2 w-full"
+                variant="default"
                 onClick={() => handleNavigate(item.path)}
-                className={`flex cursor-pointer font-medium   items-center gap-2 ${
-                  (item.name === dropValue || item.path === pathname) &&
-                  "text-[#6499E9] bg-[#E5ECF680]"
-                } lg:text-base cursor-pointer py-1.5 md:px-3 rounded items-center relative gap-2 `}
               >
-                <Button
+                {item.icon}
+                <span
                   style={{
-                    backgroundColor:
-                      item.path === pathname ? "#056EE9" : "rgb(229, 228, 226)",
-                    width: "220px",
-                    height: "44px",
-                    borderRadius: "8px",
-                    border: "1px solid #E5E4E2",
-                    padding: "12px 16px",
+                    fontWeight: 500,
+                    fontSize: "12px",
+                    lineHeight: "18px",
+                    color:
+                      item.path === pathname ? "#FFFFFF" : "rgb(138 134 134)",
+                    textTransform: "capitalize",
                   }}
-                  className="flex items-center space-x-2 w-full"
-                  variant="default"
                 >
-                  {item.icon}
-                  <span
-                    style={{
-                      fontWeight: 500,
-                      fontSize: "12px",
-                      lineHeight: "18px",
-                      color:
-                        item.path === pathname ? "#FFFFFF" : "rgb(138 134 134)",
-                      textTransform: "capitalize",
-                    }}
-                  >
-                    {item.name}
-                  </span>
-                </Button>
-              </div>
+                  {item.name}
+                </span>
+              </Button>
             </div>
           );
         })}
@@ -276,7 +260,7 @@ export default function Sidebar(props) {
           </span>
         </span>
       </div>
-      
+
       <div className="space-y-2 px-3 py-4" style={{ width: "100%" }}>
         <h2
           className="text-lg font-semibold"
@@ -338,7 +322,6 @@ export default function Sidebar(props) {
           </span>
         </Button>
       </div>
-      
     </div>
   );
 }
