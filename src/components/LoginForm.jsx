@@ -27,6 +27,11 @@ const LoginForm = ({setIsLoading}) => {
 
   useEffect(() => {
     if (login_result.data) {
+      if(login_result.data.message){
+        setError(login_result.data.message);
+        setIsLoading(false);
+        return;
+      }
       localStorage.clear();
       const { token, menu, dynamicConfig, masterDataList, userTable, localizedData, organizationId } = login_result.data;
       var entityMapping = {};
@@ -56,6 +61,10 @@ const LoginForm = ({setIsLoading}) => {
       }
       injectTOStore(newConfig);
       navigate("/dashboard");
+    } else if(login_result.error) {
+      setError(login_result.error);
+        setIsLoading(false);
+        return;
     }
   }, [login_result]);
 

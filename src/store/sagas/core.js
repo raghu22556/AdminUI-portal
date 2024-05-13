@@ -74,6 +74,11 @@ export function* handleError(action) {
         error: error,
       });
     }
+  } else if(error.code == 'ERR_NETWORK'){
+    yield put({
+      type: failureType,
+      error: error,
+    });
   } else {
     yield put({
       type: successType,

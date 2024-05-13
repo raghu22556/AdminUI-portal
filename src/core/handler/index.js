@@ -82,7 +82,7 @@ export default class ReduxHandler {
         case successType:
           return { ...state, ...INITIAL_STATE, data: { ...action.payload } };
         case failedType:
-          return { ...state, ...INITIAL_STATE, error: action.error.response.data.Message };
+          return { ...state, ...INITIAL_STATE, error: action.error.message || action.error.response.data.Message };
         case setType:
           return { ...state, ...INITIAL_STATE, data: { ...(state.data || {}), ...action.payload } };
         default:
