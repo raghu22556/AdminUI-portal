@@ -75,6 +75,12 @@ export function* handleError(action) {
       });
     }
   } else if(error.code == 'ERR_NETWORK'){
+    error.response = {
+      data: {
+        Message: error.message
+      }
+    };
+    delete error.message;
     yield put({
       type: failureType,
       error: error,
