@@ -1,18 +1,18 @@
-:where(.css-dev-only-do-not-override-1tkybi2).ant-row {
-  display: block !important;
+.ant-row {
+  display: block ;
 }
 
-:where(.css-dev-only-do-not-override-1tkybi2).ant-form-item
+.ant-form-item
   .ant-form-item-label {
   text-align: left !important;
   margin-bottom: -5px !important;
   margin-left: 10px !important;
 }
-:where(.css-dev-only-do-not-override-1tkybi2).ant-col {
+.ant-col {
   margin-left: 20px !important;
   margin-bottom: 20px !important;
 }
-:where(.css-dev-only-do-not-override-1tkybi2).ant-form-item
+.ant-form-item
   .ant-form-item-control-input-content {
   max-width: 93% !important;
 }
