@@ -19,6 +19,7 @@ import ErrorOutlineIcon from "@material-ui/icons/ErrorOutline";
 import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
 import InfoIcon from "@material-ui/icons/Info";
+import "./simple-form.css";
 
 import {
   InputComponent,
@@ -327,7 +328,7 @@ class SimpleForm extends PureComponent {
       collapseViewShow: ["active"],
       isDisabledField: false,
     };
-    this.defaultColSpan = 6;
+    this.defaultColSpan = 11;
     this.defaultMinHeight = 105;
     this.updateState({ selectedRow, columns });
 
@@ -1270,8 +1271,11 @@ class SimpleForm extends PureComponent {
         key={item.title}
         className={`formitem_${item.dataIndex}`}
         style={{
-          minHeight:
-            (item.rowSpan && item.rowSpan * 25) || this.defaultMinHeight,
+          height: "100px",
+          border: "1px solid #c1c0c0",
+          paddingRight: "300px !important",
+          backgroundColor: "#f7f7f7",
+          borderRadius: "7px",
         }}
       >
         <Form.Item
@@ -1289,6 +1293,7 @@ class SimpleForm extends PureComponent {
                 ? "has-plus"
                 : ""
             }
+            style={{ width: "266px !important" }}
           >
             <ReturnComponent
               item={item}
@@ -1766,10 +1771,17 @@ class SimpleForm extends PureComponent {
         {formChilds && formChilds.length > 0 && this.getTabView()}
         {!formChilds && (
           <>
-            <Row gutter={12}>
+            <Row gutter={12} style={{ display: "block" }}>
               <Form
                 className={`login-form collapse-style formidentifier_${this.props.identifier}`}
                 name="simpleForm"
+                style={{
+                  display: "flex",
+                  flexWrap: "wrap",
+                  border: "1px solid #c1c0c0",
+                  padding: "20px",
+                  borderRadius: "7px",
+                }}
               >
                 {columns &&
                   columns.map((item, index) => {
