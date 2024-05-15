@@ -1265,17 +1265,18 @@ class SimpleForm extends PureComponent {
         }}
       />
     ) : (
+    
       <Col
-        span={item.colSpan || this.defaultColSpan}
+        span={8}
         key={item.title}
-        className={`formitem_${item.dataIndex}`}
-        style={{
-          minHeight:
-            (item.rowSpan && item.rowSpan * 25) || this.defaultMinHeight,
-        }}
+        // className={`formitem_${item.dataIndex}`}
+        // style={{
+        //   minHeight:
+        //     (item.rowSpan && item.rowSpan * 25) || this.defaultMinHeight,
+        // }}
       >
         <Form.Item
-          label={item.hideLabel ? undefined : item.title}
+          // label={item.hideLabel ? undefined : item.title}
           style={this.formItemStyles(item)}
           name={item.title}
           rules={this.getFieldRules(item, t, id)}
@@ -1767,17 +1768,25 @@ class SimpleForm extends PureComponent {
         {!formChilds && (
           <>
             <Row gutter={12}>
+              <Col span={24}>
               <Form
                 className={`login-form collapse-style formidentifier_${this.props.identifier}`}
                 name="simpleForm"
               >
-                {columns &&
+                <Row gutter={16}>
+                {/* {columns &&
                   columns.map((item, index) => {
                     return item.isCollapse
                       ? this.getCollapseView(item, index)
                       : this.renderFieldCompoenent(item);
+                  })} */}
+                  {columns &&
+                  columns.map((item, index) => {
+                    return  this.renderFieldCompoenent(item);
                   })}
+                  </Row>
               </Form>
+              </Col>
             </Row>
             {this.defaultButtonsRender()}
           </>
