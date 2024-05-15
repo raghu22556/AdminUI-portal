@@ -708,10 +708,51 @@ class GridPanel extends PureComponent {
     }
   };
 
-  applyDateRangeFiler = () => {
+  applyDateRangeFilter = (value) => {
     let gridApi = this.gridApi;
-    alert("Need to Apply Filter on CreatedBy column");
+    let fromDate, toDate;
+    const today = new Date();
+    const yesterday = new Date();
+    yesterday.setDate(today.getDate() - 1);
+
+    switch (value) {
+      case "today":
+        fromDate = yesterday;
+        toDate = today;
+        break;
+      case "yesterday":
+        fromDate = new Date(yesterday);
+        fromDate.setDate(yesterday.getDate() - 1);
+        toDate = new Date(yesterday);
+        break;
+      case "last7days":
+        fromDate = new Date(today);
+        fromDate.setDate(today.getDate() - 7);
+        toDate = new Date(today);
+        break;
+      case "last30days":
+        fromDate = new Date(today);
+        fromDate.setDate(today.getDate() - 30);
+        toDate = new Date(today);
+        break;
+
+      default:
+        break;
+    }
+
+    if (gridApi) {
+      var filterModel = {
+        CreatedDate: {
+          type: "inRange",
+          dateFrom: moment(fromDate),
+          dateTo: moment(toDate),
+        },
+      };
+      gridApi.setFilterModel(filterModel);
+      gridApi.onFilterChanged();
+    }
   };
+
   loadData = ({ filterInfo, sortInfo, currentPage, limit, filter }) => {
     /*if (!this.props.config.listAPI) {
       return;
@@ -1377,7 +1418,7 @@ class GridPanel extends PureComponent {
           <Select
             defaultValue="Select Range"
             style={{ width: 150, marginLeft: "10px" }}
-            onChange={this.applyDateRangeFiler}
+            onChange={this.applyDateRangeFilter}
           >
             <Option value="today">Today</Option>
             <Option value="yesterday">Yesterday</Option>
