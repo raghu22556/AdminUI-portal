@@ -737,7 +737,7 @@ class GridPanel extends PureComponent {
         break;
       case 'lastMonth':
         fromDate = new Date(today.getFullYear(), today.getMonth() - 1, 1);
-        toDate = new Date(today.getFullYear(), today.getMonth(), 0);
+        toDate = new Date(today.getFullYear(), today.getMonth(), 0, 23, 59, 59);
         break;
       default:
         break;
