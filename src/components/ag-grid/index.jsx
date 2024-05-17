@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { Component } from "react";
 import { AgGridReact } from "@ag-grid-community/react";
 import { ModuleRegistry } from "@ag-grid-community/core";
 // import 'ag-grid-community/styles/ag-grid.css';
@@ -7,8 +7,8 @@ import { ModuleRegistry } from "@ag-grid-community/core";
 import "@ag-grid-community/styles/ag-grid.css";
 import "@ag-grid-community/styles/ag-theme-material.css";
 import { ClientSideRowModelModule } from "@ag-grid-community/client-side-row-model";
-import Pager from './pager';
-import { isSingleReset } from '../../app-config';
+import Pager from "./pager";
+import { isSingleReset } from "../../app-config";
 import {
   BooleanFilter,
   CustomCellRenderer,
@@ -27,16 +27,16 @@ import {
   FloatCellRenderer,
   DateTimeCellRenderer,
   IconCellRenderer,
-} from './ag-grid-components';
-import moment from 'moment';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import { connect } from 'react-redux';
+} from "./ag-grid-components";
+import moment from "moment";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import { connect } from "react-redux";
 
 ModuleRegistry.registerModules([ClientSideRowModelModule]);
 class CustomLoadingOverlay extends Component {
   render() {
     return (
-      <div style={{ height: '100%' }}>
+      <div style={{ height: "100%" }}>
         <CircularProgress color="secondary" />
       </div>
     );
@@ -49,7 +49,7 @@ class AgGrid extends Component {
     this.triggered = false;
     let columnDefs = [],
       isGridEditable = false;
-    props.columns.map(item => {
+    props.columns.map((item) => {
       const {
         type,
         //cellRenderer,
@@ -71,43 +71,44 @@ class AgGrid extends Component {
         checkValueBeforeChange,
       } = item;
       let sortable = true;
-      if (typeof notsortabletype == 'boolean' && notsortabletype) sortable = false;
+      if (typeof notsortabletype == "boolean" && notsortabletype)
+        sortable = false;
       let combos = this.props.combos[item.comboType];
       let decimal = null;
-      var cellRenderer = '';
-      if (type == 'combo' || type == 'autofill') {
-        cellRenderer = 'comboCellRenderer';
-        if (type === 'combo' && renderer === 'multiple') {
-          cellRenderer = 'comboCellRendererMulti';
+      var cellRenderer = "";
+      if (type == "combo" || type == "autofill") {
+        cellRenderer = "comboCellRenderer";
+        if (type === "combo" && renderer === "multiple") {
+          cellRenderer = "comboCellRendererMulti";
         }
-      } else if (type == 'date') {
-        cellRenderer = 'dateTimeCellRenderer';
-        if (renderer == 'date') {
-          cellRenderer = 'dateCellRenderer';
-        } else if (convert == 'DateLocalizer') {
-          cellRenderer = 'dateTimeWithTimeZoneCellRenderer';
+      } else if (type == "date") {
+        cellRenderer = "dateTimeCellRenderer";
+        if (renderer == "date") {
+          cellRenderer = "dateCellRenderer";
+        } else if (convert == "DateLocalizer") {
+          cellRenderer = "dateTimeWithTimeZoneCellRenderer";
         }
-      } else if (type == 'boolean') {
-        cellRenderer = 'booleanCellRenderer';
-      } else if (type == 'number') {
-        cellRenderer = 'customCellRenderer';
-        if (renderer && renderer.indexOf('C') >= 0) {
-          cellRenderer = 'floatCellRenderer';
-          decimal = renderer.replace('C', '');
+      } else if (type == "boolean") {
+        cellRenderer = "booleanCellRenderer";
+      } else if (type == "number") {
+        cellRenderer = "customCellRenderer";
+        if (renderer && renderer.indexOf("C") >= 0) {
+          cellRenderer = "floatCellRenderer";
+          decimal = renderer.replace("C", "");
         }
-      } else if (type == 'operation') {
-        cellRenderer = 'oparationCellRenderer';
-      } else if (type == 'Icon') {
-        cellRenderer = 'iconCellRenderer';
+      } else if (type == "operation") {
+        cellRenderer = "oparationCellRenderer";
+      } else if (type == "Icon") {
+        cellRenderer = "iconCellRenderer";
       } else {
-        cellRenderer = 'customCellRenderer';
+        cellRenderer = "customCellRenderer";
       }
       if (editable && !isGridEditable) isGridEditable = editable;
       var config = {
         hide: hideInTable,
-        headerClass: cellClass + '-header',
+        headerClass: cellClass + "-header",
         //width: item.width,
-        sortingOrder: sortingOrder || ['desc', 'asc', null],
+        sortingOrder: sortingOrder || ["desc", "asc", null],
         sortable,
         comboType: comboType,
         width: width || 130,
@@ -117,22 +118,22 @@ class AgGrid extends Component {
         editable: editable,
         cellRenderer: cellRenderer,
         cellEditor:
-          type == 'combo'
-            ? 'selectCellEditor'
-            : type == 'autofill'
-            ? 'autoFillCellEditor'
-            : 'agTextCellEditor',
+          type == "combo"
+            ? "selectCellEditor"
+            : type == "autofill"
+              ? "autoFillCellEditor"
+              : "agTextCellEditor",
         filter: nofiltertype
           ? false
-          : type == 'combo' || type == 'autofill'
-          ? 'listFilter'
-          : type == 'date'
-          ? 'dateFilter'
-          : type == 'boolean'
-          ? 'booleanFilter'
-          : type == 'number'
-          ? 'numberFilter'
-          : 'textFilter',
+          : type == "combo" || type == "autofill"
+            ? "listFilter"
+            : type == "date"
+              ? "dateFilter"
+              : type == "boolean"
+                ? "booleanFilter"
+                : type == "number"
+                  ? "numberFilter"
+                  : "textFilter",
         filterParams: {
           applyButton: true,
           clearButton: true,
@@ -149,19 +150,19 @@ class AgGrid extends Component {
       };
       if (comboType && combos)
         config.filterParams = {
-          values: combos.map(item => item.DisplayValue),
+          values: combos.map((item) => item.DisplayValue),
         };
-      if (type == 'date') config.filterParams.filterOptions = ['inRange'];
+      if (type == "date") config.filterParams.filterOptions = ["inRange"];
       columnDefs.push(config);
     });
     this.state = {
-      popupParent: document.querySelector('body'),
+      popupParent: document.querySelector("body"),
       isGridEditable,
       type: null,
       pageSize: props.pageSize || 50,
       currentPage: 0,
       columnDefs,
-      editType: 'fullRow',
+      editType: "fullRow",
       rowData: [],
       gridOptions: {
         singleClickEdit: true,
@@ -179,7 +180,7 @@ class AgGrid extends Component {
         enableFilter: true,
         onFilterChanged: this.onFilterChanged,
         onSortChanged: this.onSortChanged,
-        components : {
+        components: {
           customCellRenderer: CustomCellRenderer,
           oparationCellRenderer: OparationCellRenderer,
           comboCellRenderer: ComboCellRenderer,
@@ -200,30 +201,35 @@ class AgGrid extends Component {
           numberFilter: NumberFilter,
           iconCellRenderer: IconCellRenderer,
         },
-        noRowsOverlayComponent: 'customNoRowsOverlay',
-        loadingOverlayComponent: 'customLoadingOverlay',
+        noRowsOverlayComponent: "customNoRowsOverlay",
+        loadingOverlayComponent: "customLoadingOverlay",
         context: { componentParent: this },
       },
-      rowModelType: 'infinite',
+      rowModelType: "infinite",
       total: 0,
     };
-    this.requestOptions = '';
+    this.requestOptions = "";
   }
 
   CustomNoRowsOverlay = () => {
     const { isFetching } = this.props;
-    return <div style={{ height: '100%' }}>{!isFetching && <h3>No rows to show</h3>}</div>;
+    return (
+      <div style={{ height: "100%" }}>
+        {!isFetching && <h3>No rows to show</h3>}
+      </div>
+    );
   };
 
   componentWillReceiveProps({ isRefresh, total, isFetching, data }) {
     if (isRefresh && isRefresh != this.props.isRefresh) {
       this.loadData(true);
     }
-    if (total && total !== this.props.total && total > 0) this.setState({ total });
+    if (total && total !== this.props.total && total > 0)
+      this.setState({ total });
     if (isFetching !== this.props.isFetching && this.gridApi) {
       if (isFetching) {
         this.gridApi.showLoadingOverlay();
-        this.gridApi.ensureColumnVisible('Operation');
+        this.gridApi.ensureColumnVisible("Operation");
       } else if (!isFetching && data.length == 0) {
         this.setState({ total: 0 });
         this.gridApi.showNoRowsOverlay();
@@ -231,7 +237,7 @@ class AgGrid extends Component {
     }
   }
 
-  getFilter = filterInfo => {
+  getFilter = (filterInfo) => {
     let filter = [];
     for (var key in filterInfo) {
       const {
@@ -249,50 +255,65 @@ class AgGrid extends Component {
       let v = [];
       var column = this.gridApi.getColumnDef(key);
       // To Do: Need to handle other filter types
-      if (type == 'boolean') {
+      if (type == "boolean") {
         filter.push({ field: key, data: { type, value } });
-      } else if (type == 'text') {
-        filter.push({ field: key, data: { type: 'string', value: value } });
-      } else if (filterType == 'date') {
+      } else if (type == "text") {
+        filter.push({ field: key, data: { type: "string", value: value } });
+      } else if (filterType == "date") {
         if (dateFrom)
+          if (dateFrom) {
+            let fromValue = "";
+            if (key == "CreatedDate" || key == "ModifiedDate") {
+              fromValue = dateFrom.utc().format();
+            } else {
+              fromValue = moment(dateFrom).format("MM/DD/YYYY");
+            }
+            filter.push({
+              field: key,
+              data: {
+                comparison: "gt",
+                type: filterType,
+                value: fromValue,
+              },
+            });
+          }
+        if (dateTo) {
+          let toValue = "";
+          if (key == "CreatedDate" || key == "ModifiedDate") {
+            toValue = dateTo.utc().format();
+          } else {
+            toValue = moment(dateTo).format("MM/DD/YYYY");
+          }
           filter.push({
             field: key,
             data: {
-              comparison: 'gt',
+              comparison: "lt",
               type: filterType,
-              value: moment(dateFrom).format('MM/DD/YYYY'),
+              value: toValue,
             },
           });
-        if (dateTo)
-          filter.push({
-            field: key,
-            data: {
-              comparison: 'lt',
-              type: filterType,
-              value: moment(dateTo).format('MM/DD/YYYY'),
-            },
-          });
+        }
         if (dateEqual)
           filter.push({
             field: key,
             data: {
-              comparison: 'eq',
+              comparison: "eq",
               type: filterType,
-              value: moment(dateEqual).format('MM/DD/YYYY'),
+              value: moment(dateEqual).format("MM/DD/YYYY"),
             },
           });
-      } else if (type == 'listCustom') {
+      } else if (type == "listCustom") {
         filter.push({
           field: key,
-          data: { type: 'list', value: value },
+          data: { type: "list", value: value },
         });
-      } else if (type == 'number') {
+      } else if (type == "number") {
         if (gt) {
           filter.push({
             field: key,
             data: {
-              comparison: 'gt',
-              type: 'numeric',
+              comparison: "gt",
+              type: "numeric",
               value: gt,
             },
           });
@@ -301,8 +322,8 @@ class AgGrid extends Component {
           filter.push({
             field: key,
             data: {
-              comparison: 'lt',
-              type: 'numeric',
+              comparison: "lt",
+              type: "numeric",
               value: lt,
             },
           });
@@ -311,8 +332,8 @@ class AgGrid extends Component {
           filter.push({
             field: key,
             data: {
-              comparison: 'eq',
-              type: 'numeric',
+              comparison: "eq",
+              type: "numeric",
               value: eq,
             },
           });
@@ -322,15 +343,14 @@ class AgGrid extends Component {
     return filter;
   };
 
-  getSortInfo = sortInfo => {
-    if(sortInfo){
-      return sortInfo.map(item => {
+  getSortInfo = (sortInfo) => {
+    if (sortInfo) {
+      return sortInfo.map((item) => {
         return { sort: item.colId, dir: item.sort };
       });
     } else {
       return null;
     }
-    
   };
 
   getSortInfo = () => {
@@ -343,10 +363,9 @@ class AgGrid extends Component {
         return { colId: s.colId, sort: s.sort, sortIndex: s.sortIndex };
       });
     return sortState;
-  }
+  };
 
-
-  getOptions = api => {
+  getOptions = (api) => {
     api.hidePopupMenu();
     return {
       currentPage: this.state.currentPage,
@@ -356,14 +375,18 @@ class AgGrid extends Component {
     };
   };
 
-  onSortChanged = e => {
+  onSortChanged = (e) => {
     this.loadData();
   };
 
-  loadData = enableForceRefresh => {
+  loadData = (enableForceRefresh) => {
     let defaultSort = null;
-    if ((this.gridApi.getSortModel &&this.gridApi.getSortModel() == 0) && this.props.gridPreferences) {
-      const { sortInfo } = JSON.parse(this.props.gridPreferences || '{}');
+    if (
+      this.gridApi.getSortModel &&
+      this.gridApi.getSortModel() == 0 &&
+      this.props.gridPreferences
+    ) {
+      const { sortInfo } = JSON.parse(this.props.gridPreferences || "{}");
 
       if (sortInfo && sortInfo.length > 0) {
         defaultSort = sortInfo[0];
@@ -392,23 +415,27 @@ class AgGrid extends Component {
     }
   };
 
-  onFilterChanged = e => {
+  onFilterChanged = (e) => {
     this.state.currentPage = 0;
     this.loadData();
   };
-  
 
-  onGridReady = params => {
+  onGridReady = (params) => {
     const agGridReady = this;
     this.gridApi = params.api;
     this.columnApi = params.columnApi;
     const { gridPreferences } = this.props;
-    const { sortInfo, filterInfo } = JSON.parse(gridPreferences || '{}');
+    const { sortInfo, filterInfo } = JSON.parse(gridPreferences || "{}");
     let defaultSort = null;
     if (sortInfo && sortInfo.length > 0) {
-      defaultSort = sortInfo.map(item => ({ colId: item.sort, sort: item.dir }));
+      defaultSort = sortInfo.map((item) => ({
+        colId: item.sort,
+        sort: item.dir,
+      }));
     }
-    var column = defaultSort ? this.columnApi.getColumn(defaultSort[0].colId) : null;
+    var column = defaultSort
+      ? this.columnApi.getColumn(defaultSort[0].colId)
+      : null;
     if (column) {
       column.setSort(defaultSort[0].sort);
     }
@@ -418,20 +445,21 @@ class AgGrid extends Component {
       this.loadData();
     }
 
-    params.api.addGlobalListener(function(type, event) {
+    params.api.addGlobalListener(function (type, event) {
       /*if (type == 'sortChanged') {
         if (event.api.getSortModel() == 0 && defaultSort) {
           event.api.setSortModel(defaultSort);
         }
       }*/
-      if (type == 'columnVisible') {
+      if (type == "columnVisible") {
         if (event.columnApi.columnController.allDisplayedColumns.length == 0) {
-          const colId = event.columnApi.columnController.getAllGridColumns()[1].colId;
+          const colId =
+            event.columnApi.columnController.getAllGridColumns()[1].colId;
           params.api.columnController.setColumnVisible(colId, true);
           params.api.hidePopupMenu();
         }
       }
-      if (type == 'selectionChanged') {
+      if (type == "selectionChanged") {
         const {
           config: { child },
           dispatch,
@@ -440,8 +468,8 @@ class AgGrid extends Component {
           const { idColumn, identifier, actions } = agGridReady.props.config;
           const data = event.api.getSelectedRows()[0] || {};
           dispatch(actions.setList({ selectedRowParent: data }));
-          let ParentEntity = identifier.split('_');
-          child.map(item => {
+          let ParentEntity = identifier.split("_");
+          child.map((item) => {
             var options = {
               PageNo: 0,
               PageSize: 50,
@@ -468,12 +496,12 @@ class AgGrid extends Component {
     });
   };
 
-  onPageChange = currentPage => {
+  onPageChange = (currentPage) => {
     this.state.currentPage = currentPage;
     this.loadData();
   };
 
-  onPageSizeChange = pageSize => {
+  onPageSizeChange = (pageSize) => {
     var requestOptions = this.getOptions(this.gridApi);
     requestOptions.limit = pageSize;
     // To Do: need to send default Sort options when page size is changed
@@ -489,10 +517,10 @@ class AgGrid extends Component {
 
   getMainMenuItems = ({ defaultItems, columnApi, column }) => {
     const { gridPreferences } = this.props;
-    const { sortInfo, filterInfo } = JSON.parse(gridPreferences || '{}');
+    const { sortInfo, filterInfo } = JSON.parse(gridPreferences || "{}");
     let sort = null;
     if (sortInfo && sortInfo.length > 0) {
-      sort = sortInfo.map(item => ({ colId: item.sort, sort: item.dir }));
+      sort = sortInfo.map((item) => ({ colId: item.sort, sort: item.dir }));
     }
     if (filterInfo && filterInfo.length > 0) {
       // TO DO : need to handle for filtering
@@ -500,11 +528,11 @@ class AgGrid extends Component {
     if (isSingleReset) {
       let MenuItems = defaultItems.slice(0, 5);
       MenuItems.push({
-        name: 'Reset Columns',
+        name: "Reset Columns",
         action: () => {
           this.gridApi.setFilterModel(null);
           this.gridApi.setSortModel(sort);
-          columnApi.columnController.resetColumnState(false, 'contextMenu');
+          columnApi.columnController.resetColumnState(false, "contextMenu");
         },
       });
       return MenuItems;
@@ -512,7 +540,7 @@ class AgGrid extends Component {
       let MenuItems = defaultItems;
       if (column.colDef.sortable) {
         MenuItems.push({
-          name: 'Reset Filters',
+          name: "Reset Filters",
           action: () => {
             this.gridApi.setFilterModel(null);
             this.gridApi.setSortModel(sort);
@@ -524,7 +552,7 @@ class AgGrid extends Component {
     }
   };
 
-  tabToNextCell = params => {
+  tabToNextCell = (params) => {
     var previousCell = params.previousCellPosition;
     var lastRowIndex = previousCell.rowIndex;
     var nextRowIndex = params.backwards ? lastRowIndex - 1 : lastRowIndex + 1;
@@ -544,12 +572,19 @@ class AgGrid extends Component {
   };
 
   render() {
-    const { data, hidePaging, height, pagination, onRowDoubleClicked, onCellClicked } = this.props;
+    const {
+      data,
+      hidePaging,
+      height,
+      pagination,
+      onRowDoubleClicked,
+      onCellClicked,
+    } = this.props;
     const { pageSize, total, isGridEditable } = this.state;
 
     return (
       <div className="ag-theme-material">
-        <div style={{ height: height || 'calc(100vh - 300px)', width: '100%' }}>
+        <div style={{ height: height || "calc(100vh - 300px)", width: "100%" }}>
           <AgGridReact
             popupParent={this.state.popupParent}
             onGridReady={this.onGridReady}
@@ -566,20 +601,21 @@ class AgGrid extends Component {
             onSelectionChanged={this.onSelectionChanged}
             suppressContextMenu={true}
             tabToNextCell={this.tabToNextCell}
-            onCellValueChanged={node => {
-              if (isGridEditable && node.oldValue !== node.newValue) node.data.modified = true;
+            onCellValueChanged={(node) => {
+              if (isGridEditable && node.oldValue !== node.newValue)
+                node.data.modified = true;
             }}
-            onRowDoubleClicked={node => {
+            onRowDoubleClicked={(node) => {
               if (onRowDoubleClicked) onRowDoubleClicked(node);
             }}
-            onCellClicked={event => {
+            onCellClicked={(event) => {
               if (onCellClicked) onCellClicked(event);
             }}
           />
         </div>
         {!hidePaging && (
           <Pager
-            title={'table'}
+            title={"table"}
             currentPage={this.state.currentPage}
             pageSize={pageSize}
             loadData={this.loadData}
