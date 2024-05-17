@@ -159,7 +159,7 @@ const ReturnComponent = ({
             }
           }
         }}
-        label={item.title}
+        // label={item.title}
         disbled={disabled}
       />
     );
@@ -169,7 +169,7 @@ const ReturnComponent = ({
         name={name}
         value={value}
         onChange={onChange}
-        label={item.title}
+        // label={item.title}
         disbled={disabled}
       />
     );
@@ -190,7 +190,7 @@ const ReturnComponent = ({
           let value = event.target.value;
           if (/^-?\d*[.,]?\d*$/.test(value)) onChange(value);
         }}
-        label={item.title}
+        // label={item.title}
         disbled={disabled}
       />
     );
@@ -202,7 +202,7 @@ const ReturnComponent = ({
         format="DD-MM-YYYY"
         onChange={onChange}
         style={{ width: "100%" }}
-        label={item.title}
+        // label={item.title}
         disbled={disabled}
         getCalendarContainer={(trigger) => trigger.parentNode}
       />
@@ -234,7 +234,7 @@ const ReturnComponent = ({
         name={name}
         checked={value}
         onChange={onChange}
-        label={item.title}
+        // label={item.title}
         disbled={disabled}
       />
     );
@@ -248,7 +248,7 @@ const ReturnComponent = ({
     return (
       <CustomTextAreaInput
         rows={item.rowSpan || 1}
-        label={item.title}
+        // label={item.title}
         value={value}
         onChange={onChange}
         disabled={disabled}
@@ -278,7 +278,7 @@ const ReturnComponent = ({
         allowZeros={item.allowZeros}
         mode={item.mode || "default"}
         mappingId={item.mappingId}
-        title={item.title}
+        // title={item.title}
         disabled={disabled}
       />
     );
