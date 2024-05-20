@@ -500,36 +500,33 @@ class SimpleForm extends PureComponent {
 
   onSave = (closeable, callBack) => {
     const { t } = this.props;
-    // eslint-disable-next-line no-lone-blocks
-    {
-      this.props.form.validateFields((err) => {
-        if (!err) {
-          this.setState({ loading: true });
-          this.files = [];
-          const {
-            toggle,
-            resetProps,
-            config: { parentIdColumn },
-            selectedRow,
-            selectedRowParent,
-            activeRecordId,
-          } = this.props;
-          var values = this.state;
-          var json = {
-            action: "save",
-            apiIdentifier: this.props.apiIdentifier,
-          };
-          var columns = this.props.columns;
-          for (var col of columns) {
-            var fieldId = col.dataIndex;
-            if (col.type == FieldTypes.Toggle) {
-              if (values[fieldId]) {
-                json[fieldId] = true;
-              } else {
-                json[fieldId] = false;
-              }
-              continue;
-            }
+    this.props.form.validateFields({ validateOnly: true }).then(() => {
+      this.setState({ loading: true });
+      this.files = [];
+      const {
+        toggle,
+        resetProps,
+        config: { parentIdColumn },
+        selectedRow,
+        selectedRowParent,
+        activeRecordId,
+      } = this.props;
+      var values = this.state;
+      var json = {
+        action: "save",
+        apiIdentifier: this.props.apiIdentifier,
+      };
+      var columns = this.props.columns;
+      for (var col of columns) {
+        var fieldId = col.dataIndex;
+        if (col.type == FieldTypes.Toggle) {
+          if (values[fieldId]) {
+            json[fieldId] = true;
+          } else {
+            json[fieldId] = false;
+          }
+          continue;
+        }
 
             if (activeRecordId == "NEW_RECORD") {
               if (values[fieldId]) {
@@ -721,9 +718,7 @@ class SimpleForm extends PureComponent {
               this.setState({ loading: false });
               if (error.response) alert(error.response.data.Message);
             });
-        }
       });
-    }
   };
 
   onChange = (field, control, type) => {
@@ -1775,6 +1770,7 @@ class SimpleForm extends PureComponent {
               <Form
                 className={`login-form collapse-style formidentifier_${this.props.identifier}`}
                 name="simpleForm"
+		form={this.props.form}
                 style={{
                   display: "flex",
                   flexWrap: "wrap",
@@ -1823,7 +1819,10 @@ const mapsStateToProps = ({ combos }) => {
 };
 
 export default connect(mapsStateToProps)(
-  withStyles(simpleFormStyle)(SimpleForm)
+  withStyles(simpleFormStyle)((props) => {
+    const [form] = Form.useForm();
+    return <SimpleForm form={form} {...props}></SimpleForm>;
+  })
 );
 
 export { SimpleForm as SimpleFormClass, ReturnComponent };
