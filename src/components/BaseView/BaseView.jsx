@@ -1067,12 +1067,48 @@ class GridPanel extends PureComponent {
 
   exportToXlsx = () => {
     let me = this;
+    let filter = this.gridApi.getFilterData();
+    let filterInfo = [];
+    if (filter) {
+      for (var item of filter) {
+        var filterType = "EQUALS";
+        if (item.data.type == "string") {
+          filterType = "CONTAINS";
+        } else if (item.data.type == "boolean") {
+          item.data.value = item.data.value ? 1 : 0;
+        } else if (item.data.type == "numeric") {
+          if (item.data.comparison == "gt") {
+            filterType = "GREATERTHANEQUAL";
+          } else if (item.data.comparison == "lt") {
+            filterType = "LESSERTHANEQUAL";
+          } else if (item.data.comparison == "eq") {
+            filterType = "EQUALS";
+          }
+        } else if (item.data.type == "date") {
+          if (item.data.comparison == "gt") {
+            filterType = "DATEGREATERTHANEQUAL";
+          } else if (item.data.comparison == "lt") {
+            filterType = "DATELESSERTHANEQUAL";
+          } else if (item.data.comparison == "eq") {
+            filterType = "DATEEQUALS";
+          }
+        } else if (item.data.type == "list") {
+          filterType = "MULTI";
+        }
+        filterInfo.push({
+          filterTerm: item.data.value,
+          filterBy: item.field,
+          filterType,
+        });
+      }
+    }
 
     triggerAPI({
       t: me.props.t,
       controller: me.props.config.identifier,
       params: {
         action: "ExportData",
+        filterInfo: filterInfo,
       },
       gridPanel: me,
       addProgressBar: true,

@@ -365,6 +365,10 @@ class AgGrid extends Component {
     return sortState;
   };
 
+  getFilterData = () => {
+    return this.getFilter(this.gridApi.getFilterModel());
+  }
+
   getOptions = (api) => {
     api.hidePopupMenu();
     return {
@@ -423,6 +427,7 @@ class AgGrid extends Component {
   onGridReady = (params) => {
     const agGridReady = this;
     this.gridApi = params.api;
+    this.gridApi.getFilterData = this.getFilterData;
     this.columnApi = params.columnApi;
     const { gridPreferences } = this.props;
     const { sortInfo, filterInfo } = JSON.parse(gridPreferences || "{}");
