@@ -1,4 +1,4 @@
-import { useState, useEffect} from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -8,6 +8,7 @@ import {
   Typography,
   Button,
   Alert,
+  Checkbox,
 } from "@material-tailwind/react";
 import { ReduxHelper } from "../core/redux-helper";
 import OrganizationNameInput from "../common/OrganizationNameInput";
@@ -20,19 +21,22 @@ import {
 
 //import WelcomeLayout from "../components/WelcomeLayout/index";
 
-const SignupForm = ({setIsLoading}) => {
+const SignupForm = ({ setIsLoading }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [organization, setOrganization] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPass, setConfirmPass] = useState("");
+  const [acceptTerms, setAcceptTerms] = useState(false);
   const [error, setError] = useState(null);
-  const createSuperAdmin_result = useSelector((state) => state?.createSuperAdmin);
+  const createSuperAdmin_result = useSelector(
+    (state) => state?.createSuperAdmin
+  );
 
   useEffect(() => {
     if (createSuperAdmin_result.data) {
-      alert('Organization Created Succesfully');
+      alert("Organization Created Succesfully");
       navigate("/acceptterm");
     } else if (createSuperAdmin_result.error) {
       setIsLoading(false);
@@ -59,6 +63,10 @@ const SignupForm = ({setIsLoading}) => {
   const handleConfirmPasswordChange = (event) => {
     setConfirmPass(event.target.value);
     setError(null); // Clear error when typing  Confirm password input
+  };
+  const handleAcceptTerms = (event) => {
+    setAcceptTerms(event.target.checked);
+    setError(null);
   };
 
   const validate = () => {
@@ -101,6 +109,13 @@ const SignupForm = ({setIsLoading}) => {
       return false;
     }
 
+    if (!acceptTerms) {
+      setError(
+        "Please indicate that you have read and agree to the Terms and Conditions"
+      );
+      return false;
+    }
+
     return true; // Validation succeeded
   };
 
@@ -112,7 +127,7 @@ const SignupForm = ({setIsLoading}) => {
         ReduxHelper.Actions.createSuperAdmin({
           organization,
           email,
-          password
+          password,
         })
       );
     }
@@ -152,6 +167,24 @@ const SignupForm = ({setIsLoading}) => {
           onChange={handleConfirmPasswordChange}
           onFocus={() => setError(null)}
         />
+        <div style={{ display: "flex", alignItems: "center" }}>
+          <Checkbox
+            variant="paragraph"
+            className="text-sm"
+            color="blue"
+            onChange={handleAcceptTerms}
+            onFocus={() => setError(null)}
+          />
+          <label className="text-sm">
+            I agree to the{" "}
+            <a
+              href="/terms-and-conditions"
+              style={{ color: "blue", textDecoration: "underline" }}
+            >
+              terms & conditions
+            </a>
+          </label>
+        </div>
         {error && (
           <Alert
             style={{
