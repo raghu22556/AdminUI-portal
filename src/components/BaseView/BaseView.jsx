@@ -377,6 +377,7 @@ export default class BaseView extends PureComponent {
       return fields;
     }
     var gridColumns = [
+      ...fields,
       {
         dataIndex: "Operation",
         header: "Operation",
@@ -386,7 +387,6 @@ export default class BaseView extends PureComponent {
         nofiltertype: true,
         notsortabletype: true,
       },
-      ...fields,
     ];
     return gridColumns;
   };
@@ -735,7 +735,7 @@ class GridPanel extends PureComponent {
         fromDate.setDate(today.getDate() - 30);
         toDate = new Date(today);
         break;
-      case 'lastMonth':
+      case "lastMonth":
         fromDate = new Date(today.getFullYear(), today.getMonth() - 1, 1);
         toDate = new Date(today.getFullYear(), today.getMonth(), 0, 23, 59, 59);
         break;
