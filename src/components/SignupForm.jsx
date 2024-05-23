@@ -179,7 +179,7 @@ const SignupForm = ({ setIsLoading }) => {
             I agree to the{" "}
             <a
               href="/terms-and-conditions"
-              style={{ color: "blue", textDecoration: "underline" }}
+              style={{ color: "#056EE9", textDecoration: "underline" }}
             >
               terms & conditions
             </a>
@@ -207,10 +207,11 @@ const SignupForm = ({ setIsLoading }) => {
           fullWidth
           color="rose"
           onClick={handleSubmit}
+          style={{backgroundColor:'#056EE9'}}
         >
           Create
         </Button>
-        <Typography className="mt-4 flex justify-center text-[14x]">
+        <Typography style={{fontSize:'12px',fontWeight:'bold',color:'#1C1C1C'}} className="mt-4 flex justify-center text-[12x]">
           Already have an Account ?
           <Link to="/" className="ml-1 font-[600] text-[#056EE9]">
             Sign in

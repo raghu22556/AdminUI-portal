@@ -191,13 +191,13 @@ const LoginForm = ({setIsLoading}) => {
             type="submit"
             disabled={false}
             onClick={onLoginClick}
-            style={{ shadow: "none" }}
+            style={{ shadow: "none", backgroundColor:'#056EE9' }}
           >
             Log In
           </Button>
-          <Typography className="mt-3 flex laptopM:justify-center laptop:ml-8 laptop:text-sm mobile:text-xs mobile:justify-center text-black font-medium">
+          <Typography style={{fontSize:'12px',fontWeight:'bold',color:'#1C1C1C'}} className="mt-3 flex laptopM:justify-center laptop:ml-8 laptop:text-sm mobile:text-xs mobile:justify-center text-black font-medium">
             Don&apos;t have an account?
-            <Link to="/signup" className="ml-1 font-normal text-[#056EE9]">
+            <Link to="/signup" className="ml-1 font-normal text-[#056EE9]" style={{fontWeight:'bold'}}>
               Create Account
             </Link>
           </Typography>
