@@ -379,6 +379,7 @@ export default class BaseView extends PureComponent {
       return fields;
     }
     var gridColumns = [
+      ...fields,
       {
         dataIndex: "Operation",
         header: "Operation",
@@ -388,7 +389,6 @@ export default class BaseView extends PureComponent {
         nofiltertype: true,
         notsortabletype: true,
       },
-      ...fields,
     ];
     return gridColumns;
   };
