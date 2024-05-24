@@ -1,9 +1,9 @@
 import { Typography } from "@material-tailwind/react";
-import Footer from "../../common/Footer";
+// import Footer from "../../common/Footer";
 import { useState } from "react";
 import Loader from "../../common/Loader";
 
-export const welcomePage = (RenderComponent) => {
+export const welcomePage = (RenderComponent, Footer) => {
   const [isLoading, setIsLoading] = useState(false);
 
   let text = "";
@@ -18,7 +18,7 @@ export const welcomePage = (RenderComponent) => {
     <>
       <Loader isLoading={isLoading} />
       <main className="h-screen w-full flex flex-col laptop:overflow-hidden mobile:overflow-x-hidden">
-        <div className="lg:flex h-full">
+        <div className="lg:flex h-full" style={{height:'100vh'}}>
           <div className="lg:w-1/2   h-full  sm:block ">
             <div className="w-full h-full bg-white shadow-lg  overflow-hidden">
               <div className="flex justify-center items-center bg-gradient-to-r from-[#00CED1] to-[#056EE9] h-screen">
@@ -53,7 +53,7 @@ export const welcomePage = (RenderComponent) => {
             <main className="h-screen w-full flex flex-col bg-sky-300  justify-center items-center ">
               <div className="laptop:text-start laptopM:-mr-[-110px] laptop:mt-0 mobile:text-center ">
                 <Typography
-                  style={{ color: "#056EE9" }}
+                  style={{ color: "#056EE9", fontSize: "26px" }}
                   className=" font-poppinss font-black mb-[-20px]  mobileM:items-center laptopM:text-start  laptop:text-[20px]  mobile:text-2xl"
                 >
                   MaidenCube
@@ -75,9 +75,9 @@ export const welcomePage = (RenderComponent) => {
                 </Typography>
               </div>
               <div className="w-full mx-auto flex justify-center items-center">
-                <RenderComponent setIsLoading={setIsLoading}/>
+                <RenderComponent setIsLoading={setIsLoading} />
               </div>
-              <div className="mt-12">
+              <div className="w-full ">
                 <Footer />
               </div>
             </main>
