@@ -21,6 +21,8 @@ import { triggerAPI, defaultLoader } from "../../core/utils";
 import * as FileSaver from "file-saver";
 import * as XLSX from "xlsx";
 import moment from "moment";
+import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
+import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
 
 const { Option } = Select;
 const modal = Modal;
@@ -377,6 +379,7 @@ export default class BaseView extends PureComponent {
       return fields;
     }
     var gridColumns = [
+      ...fields,
       {
         dataIndex: "Operation",
         header: "Operation",
@@ -386,7 +389,6 @@ export default class BaseView extends PureComponent {
         nofiltertype: true,
         notsortabletype: true,
       },
-      ...fields,
     ];
     return gridColumns;
   };
@@ -735,7 +737,7 @@ class GridPanel extends PureComponent {
         fromDate.setDate(today.getDate() - 30);
         toDate = new Date(today);
         break;
-      case 'lastMonth':
+      case "lastMonth":
         fromDate = new Date(today.getFullYear(), today.getMonth() - 1, 1);
         toDate = new Date(today.getFullYear(), today.getMonth(), 0, 23, 59, 59);
         break;
@@ -1227,7 +1229,10 @@ class GridPanel extends PureComponent {
                 color="primary"
                 className="main-button-color"
                 ghost
-                style={{ marginTop: 20, marginBottom: 20 }}
+                style={{
+                  marginTop: 20,
+                  marginBottom: 20,
+                }}
                 onClick={this.createRow}
               >
                 {t("Add")}
@@ -1237,33 +1242,74 @@ class GridPanel extends PureComponent {
         );
       }
       return !this.props.config.isChild ? (
-        <>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "flex-end",
+            marginRight: "10px",
+            padding: "20px",
+          }}
+        >
           {displayLoader && defaultLoader()}
-          <Tooltip title="Add">
-            <Button
-              variant="outlined"
-              color="primary"
-              className="main-button-color"
-              ghost
-              style={{ marginTop: 20, marginBottom: 20 }}
-              onClick={this.createRow}
+          <div>
+            <Tooltip title="Add">
+              <Button
+                variant="outlined"
+                color="primary"
+                className="main-button-color"
+                ghost
+                onClick={this.createRow}
+                style={{
+                  marginRight: "5px",
+                  background: "#056EE9",
+                  color: "#FFF",
+                  borderRadius: "10px",
+                  border: "none",
+                  width: "100px",
+                  fontSize: "12px",
+                }}
+              >
+                <AddOutlinedIcon
+                  style={{ fontSize: "16px", marginRight: "5px" }}
+                />
+                {t("Add")}
+              </Button>
+            </Tooltip>
+            <Tooltip title="Export">
+              <Button
+                variant="outlined"
+                color="primary"
+                className="main-button-color"
+                ghost
+                onClick={this.exportToXlsx}
+                style={{
+                  color: "#95A4FC",
+                  borderRadius: "10px",
+                  border: "1px solid #95A4FC",
+                  width: "100px",
+                  fontSize: "12px",
+                }}
+              >
+                <ArrowUpwardIcon
+                  style={{ fontSize: "16px", marginRight: "5px" }}
+                />
+                {t("Export")}
+              </Button>
+            </Tooltip>
+
+            <Select
+              defaultValue="Select Range"
+              style={{ width: 150, marginLeft: "10px" }}
+              onChange={this.applyDateRangeFilter}
             >
-              {t("Add")}
-            </Button>
-          </Tooltip>
-          <Tooltip title="Export">
-            <Button
-              variant="outlined"
-              color="primary"
-              className="main-button-color"
-              ghost
-              style={{ marginTop: 20, marginBottom: 20 }}
-              onClick={this.exportToXlsx}
-            >
-              {t("Export")}
-            </Button>
-          </Tooltip>
-        </>
+              <Option value="today">Today</Option>
+              <Option value="yesterday">Yesterday</Option>
+              <Option value="last7days">Last 7 Days</Option>
+              <Option value="last30days">Last 30 Days</Option>
+              <Option value="lastMonth">Last Month</Option>
+            </Select>
+          </div>
+        </div>
       ) : (
         <>
           <Tooltip title="New">
@@ -1454,17 +1500,25 @@ class GridPanel extends PureComponent {
               <div className="child-view-section-header">{config.title}</div>
             )}
           {this.gridHeader()}
-          <Select
-            defaultValue="Select Range"
-            style={{ width: 150, marginLeft: "10px" }}
-            onChange={this.applyDateRangeFilter}
+          {/* <div
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "flex-end",
+            }}
           >
-            <Option value="today">Today</Option>
-            <Option value="yesterday">Yesterday</Option>
-            <Option value="last7days">Last 7 Days</Option>
-            <Option value="last30days">Last 30 Days</Option>
-            <Option value="lastMonth">Last Month</Option>
-          </Select>
+            <Select
+              defaultValue="Select Range"
+              style={{ width: 150, marginLeft: "10px" }}
+              onChange={this.applyDateRangeFilter}
+            >
+              <Option value="today">Today</Option>
+              <Option value="yesterday">Yesterday</Option>
+              <Option value="last7days">Last 7 Days</Option>
+              <Option value="last30days">Last 30 Days</Option>
+              <Option value="lastMonth">Last Month</Option>
+            </Select>
+          </div> */}
           <Snackbar
             place="tc"
             color={color}

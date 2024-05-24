@@ -18,7 +18,7 @@ export const welcomePage = (RenderComponent, Footer) => {
     <>
       <Loader isLoading={isLoading} />
       <main className="h-screen w-full flex flex-col laptop:overflow-hidden mobile:overflow-x-hidden">
-        <div className="lg:flex h-full">
+        <div className="lg:flex h-full" style={{height:'100vh'}}>
           <div className="lg:w-1/2   h-full  sm:block ">
             <div className="w-full h-full bg-white shadow-lg  overflow-hidden">
               <div className="flex justify-center items-center bg-gradient-to-r from-[#00CED1] to-[#056EE9] h-screen">
