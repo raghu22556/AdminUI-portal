@@ -207,12 +207,13 @@ class ListFilter extends PureComponent {
             onChange={this.search}
             placeholder="Search..."
             value={serachstr}
+            style={{padding:'10px'}}
           />
         </div>
-        <div style={{ height: '200px', width: '290px' }}>
+        <div style={{height: '99px', width: '290px', padding:'0px'}}>
           {searchCombos && showList && (
             <List
-              height={200}
+              height={110}
               itemCount={searchCombos.length}
               itemSize={42}
               width={290}
@@ -234,12 +235,13 @@ class ListFilter extends PureComponent {
                     onClick={e => this.onChange(e, searchCombos[index].LookupId)}
                   />
                   {searchCombos[index].DisplayValue}
-                </div>
+                  </div>
+                  
               )}
             </List>
           )}
         </div>
-        <p>
+        <p style={{display:'flex',justifyContent: 'space-between', padding:'10px'}}>
           <button
             onClick={() =>
               this.setState(
@@ -254,6 +256,7 @@ class ListFilter extends PureComponent {
               )
             }
             className="deselect-filter-btn"
+            style={{marginLeft:'10px', color:'#3f51b5'}}
           >
             Reset Filter
           </button>
@@ -263,6 +266,7 @@ class ListFilter extends PureComponent {
               this.setState({ isFilterActive: true }, this.props.filterChangedCallback)
             }
             className="apply-filter-btn"
+            style={{marginRight:'10px',color:'#3f51b5'}}
           >
             Apply Filter
           </button>
@@ -371,7 +375,7 @@ class DateFilter extends PureComponent {
       disableBtn = true;
     }
     return (
-      <div style={{ textAlign: 'center', width: '235px' }}>
+      <div style={{ textAlign: 'center', width: '235px',padding:'15px' }}>
         <br />
 
         <DatePicker
@@ -381,6 +385,7 @@ class DateFilter extends PureComponent {
           onChange={this.onEndChange}
           // onOpenChange={this.handleStartOpenChange}
           popupClassName ="ag-custom-component-popup"
+          style={{width:'100%'}}
         />
         <br />
         <br />
@@ -390,6 +395,7 @@ class DateFilter extends PureComponent {
           placeholder="After"
           onChange={this.onStartChange}
           popupClassName ="ag-custom-component-popup"
+          style={{width:'100%'}}
         />
         <br />
         <br />
@@ -400,10 +406,11 @@ class DateFilter extends PureComponent {
           onChange={this.onEqualChange}
           // onOpenChange={this.handleStartOpenChange}
           popupClassName ="ag-custom-component-popup"
+          style={{width:'100%'}}
         />
         <br />
         <br />
-        <p>
+        <p  style={{display:'flex',justifyContent: 'space-between'}}>
           <button
             disabled={disableBtn}
             onClick={() =>
@@ -413,6 +420,7 @@ class DateFilter extends PureComponent {
               )
             }
             className="deselect-filter-btn"
+            style={{marginLeft:'5px', color:'#3f51b5'}}
           >
             Reset Filter
           </button>
@@ -421,7 +429,8 @@ class DateFilter extends PureComponent {
             onClick={() =>
               this.setState({ isFilterActive: true }, this.props.filterChangedCallback)
             }
-            className="apply-filter-btn"
+            className="apply-filter-btn "
+            style={{marginRight:'5px',color:'#3f51b5'}}
           >
             Apply Filter
           </button>
@@ -465,7 +474,7 @@ class TextFilter extends PureComponent {
       disableBtn = true;
     }
     return (
-      <div ref="tabBody" class="ag-tab-body">
+      <div ref="tabBody" class="ag-tab-body" style={{width:'230px'}} >
         <div class="ag-filter">
           <div>
             <div class="ag-filter-body-wrapper">
@@ -473,17 +482,20 @@ class TextFilter extends PureComponent {
                 <div class="ag-input-wrapper" role="presentation">
                   <input
                     class="ag-filter-filter"
+                    style={{padding:'10px'}}
                     type="text"
                     placeholder="Filter..."
                     value={value}
                     onChange={({ target: { value } }) => this.setState({ value })}
+                    
                   />
                 </div>
               </div>
             </div>
-            <div class="ag-filter-apply-panel">
+            <div class="ag-filter-apply-panel" style={{display:'flex',justifyContent: 'space-between'}}>
               <button
                 disabled={disableBtn}
+                style={{marginLeft:'5px',color:'#3f51b5'}}
                 type="button"
                 onClick={() =>
                   this.setState({ value: '', isFilterActive: false }, () =>
@@ -496,6 +508,7 @@ class TextFilter extends PureComponent {
               </button>
               <button
                 type="button"
+                style={{marginRight:'5px', color:'#3f51b5'}}
                 disabled={disableBtn}
                 onClick={() =>
                   this.setState({ isFilterActive: true }, this.props.filterChangedCallback)
