@@ -13,13 +13,17 @@ import Hidden from "@material-ui/core/Hidden";
 import Popper from "@material-ui/core/Popper";
 import { withTranslation } from "react-i18next";
 import moment from "moment";
+import ModeEditSharpIcon from "@mui/icons-material/ModeEditSharp";
 
 const Navbar = (props) => {
   const navigate = useNavigate();
   const [pop, setPop] = useState(false);
   const [open, setOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState("");
+  const [isOpen, setIsOpen] = useState(false);
+
   const { handleToggle, drawer, t } = props;
+  let menu = JSON.parse(localStorage.getItem("menu"));
 
   const handleClick = () => {
     // check is the previous drop-down is open or closed and do opposite
@@ -77,26 +81,48 @@ const Navbar = (props) => {
         <Typography>MaidenCube</Typography>
       </div>
 
-      {/* Left Portion */}
       <section className="flex ml-auto gap-3 sm:gap-4 md:gap-5">
-        <div className="icon-bg text-color text-lg sm:text-xl  w-8 h-8 md:w-9 md:h-9 flex justify-center items-center rounded-full p-1.5 cursor-pointer">
-          <MdOutlineNotificationsActive />
+        <div className="relative ml-auto mr-2.5">
+          <div
+            className="bg-[#F7F9FB] p-2 px-5 border border-lightgray rounded-md cursor-pointer flex items-center justify-between"
+            style={{ width: "200px" }}
+            onClick={() => setIsOpen(!isOpen)}
+          >
+            <img src="./Projects.svg" alt="" /> <span>Project Name</span>
+            {isOpen ? (
+              <BsChevronUp className="ml-2" />
+            ) : (
+              <BsChevronDown className="ml-2" />
+            )}
+          </div>
+          {isOpen && (
+            <div
+              className="absolute bg-white border border-lightgray rounded-md mt-2 z-10"
+              style={{ marginTop: "10px" }}
+            >
+              {menu.map((item) => (
+                <div
+                  key={item.menuId}
+                  className="flex items-center p-2 cursor-pointer hover:bg-gray-200"
+                  onClick={() => onProjectChange(item)}
+                >
+                  {item.cardText}
+                </div>
+              ))}
+            </div>
+          )}
         </div>
+
         {/* <div className="icon-bg text-color text-lg sm:text-xl  w-8 h-8 md:w-9 md:h-9 flex justify-center items-center rounded-full p-1.5 cursor-pointer">
           <BsChatDots />
         </div> */}
         {/* Profile */}
         <section className="flex items-center gap-1.5 sm:gap-3">
-          <img
-            src="https://images.unsplash.com/photo-1682687220866-c856f566f1bd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHwxfHx8ZW58MHx8fHx8&auto=format&fit=crop&w=500&q=60"
-            className="icon-bg text-color text-xl w-8 h-8 md:w-9 md:h-9 flex justify-center items-center rounded-full cursor-pointer"
-          />
           <div className="text-sm hidden md:flex flex-col">
             <span className="text-color font-semibold">Admin</span>
             <span className="text-gray-500 text-xs">MaidenCube.in</span>
           </div>
 
-          {/* By clicking outside, the drop-down will be closed */}
           <ClickAwayListener onClickAway={handleTogglePop}>
             <button onClick={handlePop}>
               {pop ? (
@@ -106,6 +132,16 @@ const Navbar = (props) => {
               )}
             </button>
           </ClickAwayListener>
+
+          <img
+            src="https://s3-alpha-sig.figma.com/img/0eba/1822/f3b6e417139fd32b6e85460026150af7?Expires=1717372800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=P-QDZ8U9MASEc1BV-X5irII9q913cobryW92i29fBe1VFA16ZoTFMBzVTM-9wyjgh5dP7yBj8NFiXIZAyDuL3PIwdSpSXt0i459-cS7ueyqtQ6scZrjxBNter--9~IxQ-ZjO6mLlossbO~ayB5cafGwb08x8BtfvvnvcxzyZr17iDSZsHDOS1LNcxwRdoexZPGvsHyJLYYfhKgqfPf03BZIThKBPpXKk7zGjmzb~Jv6hfvvJi47nGq346aKbwRWU58Dce6MqDuuNQ7GgQHEZ2VlAVqoSuM3IIuYfdlzp8Mr9m~wv4~l1AeTL3mN-Wl-wSBjCG0tUYlcOjJ7Q8NVyEw__"
+            className="icon-bg text-color text-xl w-8 h-8 md:w-9 md:h-9 flex justify-center items-center rounded-md cursor-pointer"
+          />
+          <div className="icon-bg text-color text-lg sm:text-xl  w-8 h-8 md:w-9 md:h-9 flex justify-center items-center rounded-full p-1.5 cursor-pointer">
+            <img src="./Notifications.svg" alt="icon" />
+          </div>
+
+          {/* By clicking outside, the drop-down will be closed */}
         </section>
 
         {/* Popup */}
@@ -214,7 +250,7 @@ const Navbar = (props) => {
                           </select>
                         </div>
                         <br></br>
-                        <div
+                        {/* <div
                           id="project_lists"
                           style={{
                             display: "flex",
@@ -243,7 +279,7 @@ const Navbar = (props) => {
                             <option value="Project04">Project 04</option>
                             <option value="Project05">Project 05</option>
                           </select>
-                        </div>
+                        </div> */}
                       </div>
 
                       <br></br>
