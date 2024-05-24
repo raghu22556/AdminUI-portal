@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Button,
   Dialog,
@@ -6,11 +6,11 @@ import {
   DialogBody,
   DialogFooter,
   Typography,
-} from "@material-tailwind/react";
-import { GrAdd } from "react-icons/gr";
-import { CustomEmailInput } from "../../maiden-core/ui-components";
-import { HiChevronLeft } from "react-icons/hi";
-import { HiChevronRight } from "react-icons/hi";
+} from '@material-tailwind/react';
+import { GrAdd } from 'react-icons/gr';
+import { CustomEmailInput } from '../../maiden-core/ui-components';
+import { HiChevronLeft } from 'react-icons/hi';
+import { HiChevronRight } from 'react-icons/hi';
 
 const AddModuleModal = () => {
   const [open, setOpen] = React.useState(false);
@@ -31,9 +31,7 @@ const AddModuleModal = () => {
       <Dialog open={open} handler={handleOpen}>
         <DialogBody>
           <div className="flex justify-between items-center">
-            <Typography className="text-left text-lg text-black">
-              Add Module
-            </Typography>
+            <Typography className="text-left text-lg text-black">Add Module</Typography>
             <div className="flex items-center">
               <Button
                 className="mr-2 bg-[#F7F9FB] capitalize text-black flex text-xs h-10 w-24 hover:bg-blue-700 hover:text-white"
@@ -53,8 +51,8 @@ const AddModuleModal = () => {
         </DialogBody>
 
         <DialogBody>
-          <CustomEmailInput label={"Module Name"} />
-          <CustomEmailInput label={"Module Name"} />
+          <CustomEmailInput label={'Module Name'} />
+          <CustomEmailInput label={'Module Name'} />
         </DialogBody>
         <DialogFooter></DialogFooter>
       </Dialog>

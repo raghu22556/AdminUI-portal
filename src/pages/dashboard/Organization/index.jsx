@@ -1,13 +1,13 @@
-import React from "react";
-import Layout from "../../../components/Layout";
+import React from 'react';
+import Layout from '../../../components/Layout';
 
-import { ProjectCard } from "../../../widgets/cards";
-import { Button, Typography } from "@material-tailwind/react";
-import { GrAdd } from "react-icons/gr";
-import OrganizatiopnCardsData from "../../../data/OrganizatiopnCardsData";
-import AddModuleModal from "../../../components/Modals/AddModuleModal";
-import AddOrganizationModal from "../../../components/Modals/AddOrganizationModal";
-import { withTranslation } from "react-i18next";
+import { ProjectCard } from '../../../widgets/cards';
+import { Button, Typography } from '@material-tailwind/react';
+import { GrAdd } from 'react-icons/gr';
+import OrganizatiopnCardsData from '../../../data/OrganizatiopnCardsData';
+import AddModuleModal from '../../../components/Modals/AddModuleModal';
+import AddOrganizationModal from '../../../components/Modals/AddOrganizationModal';
+import { withTranslation } from 'react-i18next';
 
 const ProjectPage = (props) => {
   const { t } = props;
@@ -15,7 +15,7 @@ const ProjectPage = (props) => {
     <div>
       <div className="flex justify-between mt-4">
         <Typography className="text-xl text-black font-poppins font-bold">
-          {t("Organizations")}
+          {t('Organizations')}
         </Typography>
 
         <AddOrganizationModal />

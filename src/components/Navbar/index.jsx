@@ -1,29 +1,29 @@
-import React, { useState } from "react";
-import { BsChatDots, BsChevronDown, BsChevronUp } from "react-icons/bs";
-import { MdOutlineNotificationsActive } from "react-icons/md";
-import { HiOutlineMenu, HiOutlineSearch } from "react-icons/hi";
+import React, { useState } from 'react';
+import { BsChatDots, BsChevronDown, BsChevronUp } from 'react-icons/bs';
+import { MdOutlineNotificationsActive } from 'react-icons/md';
+import { HiOutlineMenu, HiOutlineSearch } from 'react-icons/hi';
 
-import { useNavigate } from "react-router-dom";
-import { Typography } from "@material-tailwind/react";
-import ClickAwayListener from "@material-ui/core/ClickAwayListener";
-import Paper from "@material-ui/core/Paper";
-import Grow from "@material-ui/core/Grow";
-import Badge from "@material-ui/core/Badge";
-import Hidden from "@material-ui/core/Hidden";
-import Popper from "@material-ui/core/Popper";
-import { withTranslation } from "react-i18next";
-import moment from "moment";
-import ModeEditSharpIcon from "@mui/icons-material/ModeEditSharp";
+import { useNavigate } from 'react-router-dom';
+import { Typography } from '@material-tailwind/react';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import Paper from '@material-ui/core/Paper';
+import Grow from '@material-ui/core/Grow';
+import Badge from '@material-ui/core/Badge';
+import Hidden from '@material-ui/core/Hidden';
+import Popper from '@material-ui/core/Popper';
+import { withTranslation } from 'react-i18next';
+import moment from 'moment';
+import ModeEditSharpIcon from '@mui/icons-material/ModeEditSharp';
 
 const Navbar = (props) => {
   const navigate = useNavigate();
   const [pop, setPop] = useState(false);
   const [open, setOpen] = useState(false);
-  const [selectedProject, setSelectedProject] = useState("");
+  const [selectedProject, setSelectedProject] = useState('');
   const [isOpen, setIsOpen] = useState(false);
 
   const { handleToggle, drawer, t } = props;
-  let menu = JSON.parse(localStorage.getItem("menu"));
+  let menu = JSON.parse(localStorage.getItem('menu'));
 
   const handleClick = () => {
     // check is the previous drop-down is open or closed and do opposite
@@ -56,7 +56,7 @@ const Navbar = (props) => {
     setSelectedProject(projectOnSelect);
 
     if (projectOnSelect) {
-      navigate("/" + projectOnSelect);
+      navigate('/' + projectOnSelect);
     }
   };
 
@@ -73,11 +73,7 @@ const Navbar = (props) => {
         className="text-color text-xl cursor-pointer w-[30px]"
       />
 
-      <div
-        className={`sm:ml-5 ml-2.5 ${
-          drawer ? "hidden md:flex" : "flex md:hidden"
-        }`}
-      >
+      <div className={`sm:ml-5 ml-2.5 ${drawer ? 'hidden md:flex' : 'flex md:hidden'}`}>
         <Typography>MaidenCube</Typography>
       </div>
 
@@ -85,20 +81,16 @@ const Navbar = (props) => {
         <div className="relative ml-auto mr-2.5">
           <div
             className="bg-[#F7F9FB] p-2 px-5 border border-lightgray rounded-md cursor-pointer flex items-center justify-between"
-            style={{ width: "200px" }}
+            style={{ width: '200px' }}
             onClick={() => setIsOpen(!isOpen)}
           >
             <img src="./Projects.svg" alt="" /> <span>Project Name</span>
-            {isOpen ? (
-              <BsChevronUp className="ml-2" />
-            ) : (
-              <BsChevronDown className="ml-2" />
-            )}
+            {isOpen ? <BsChevronUp className="ml-2" /> : <BsChevronDown className="ml-2" />}
           </div>
           {isOpen && (
             <div
               className="absolute bg-white border border-lightgray rounded-md mt-2 z-10"
-              style={{ marginTop: "10px" }}
+              style={{ marginTop: '10px' }}
             >
               {menu.map((item) => (
                 <div
@@ -152,7 +144,7 @@ const Navbar = (props) => {
             <span
               onClick={() => {
                 localStorage.clear();
-                navigate("/");
+                navigate('/');
                 // toast.success("LogOut Success!");
               }}
               className="cursor-pointer"
@@ -167,20 +159,19 @@ const Navbar = (props) => {
           transition
           // disablePortal
           style={{
-            position: "absolute",
-            left: "unset !important",
-            top: "unset !important",
+            position: 'absolute',
+            left: 'unset !important',
+            top: 'unset !important',
           }}
         >
           {({ TransitionProps, placement }) => (
             <Grow
               {...TransitionProps}
               style={{
-                position: "absolute",
-                transformOrigin:
-                  placement === "bottom" ? "center top" : "center bottom",
-                left: "unset !important",
-                top: "unset !important",
+                position: 'absolute',
+                transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom',
+                left: 'unset !important',
+                top: 'unset !important',
               }}
             >
               <Paper>
@@ -188,65 +179,59 @@ const Navbar = (props) => {
                   <div
                     autoFocusItem={open}
                     style={{
-                      position: "fixed",
-                      backgroundColor: "#eeeeee",
-                      borderRadius: "3px",
-                      right: "25px",
-                      top: "72px",
-                      width: "300px",
-                      padding: "10px",
-                      boxShadow: "rgba(51, 51, 51, 0.45) 1px 1px 3px 1px",
-                      zIndex: "9",
-                      padding: "15px",
+                      position: 'fixed',
+                      backgroundColor: '#eeeeee',
+                      borderRadius: '3px',
+                      right: '25px',
+                      top: '72px',
+                      width: '300px',
+                      padding: '10px',
+                      boxShadow: 'rgba(51, 51, 51, 0.45) 1px 1px 3px 1px',
+                      zIndex: '9',
+                      padding: '15px',
                     }}
                   >
                     <div>
-                      <p style={{ fontWeight: "bold", margin: "2px 0px" }}>
-                        Rohit Sharma
-                      </p>
+                      <p style={{ fontWeight: 'bold', margin: '2px 0px' }}>Rohit Sharma</p>
                       {/* <p style={{ fontWeight: 'bold', margin: '2px' }}>lastName</p> */}
-                      <p style={{ fontSize: "smaller", fontWeight: "500px" }}>
-                        rohitz93
-                      </p>
+                      <p style={{ fontSize: 'smaller', fontWeight: '500px' }}>rohitz93</p>
 
                       <div
                         style={{
-                          display: "flex",
-                          flexDirection: "column",
+                          display: 'flex',
+                          flexDirection: 'column',
                         }}
                       >
                         <div
                           id="google_translate_element"
                           style={{
-                            display: "flex",
+                            display: 'flex',
                           }}
                         >
                           <div
                             style={{
-                              color: "black",
-                              marginRight: "1em",
-                              width: "50%",
+                              color: 'black',
+                              marginRight: '1em',
+                              width: '50%',
                             }}
                           >
-                            {t("Language")}
+                            {t('Language')}
                           </div>
                           <select
                             defaultValue={
-                              localStorage.selectedLanguage
-                                ? localStorage.selectedLanguage
-                                : "1"
+                              localStorage.selectedLanguage ? localStorage.selectedLanguage : '1'
                             }
-                            style={{ width: "50%" }}
+                            style={{ width: '50%' }}
                             onChange={onLanguageChange}
                           >
                             <option value="1" hidden="hidden">
                               English
                             </option>
                             <option value="en">English</option>
-                            <option value="es">{t("Spanish")}</option>
-                            <option value="pt">{t("Portuguese")}</option>
-                            <option value="ar">{t("Arabic")}</option>
-                            <option value="cn">{t("Chinese")}</option>
+                            <option value="es">{t('Spanish')}</option>
+                            <option value="pt">{t('Portuguese')}</option>
+                            <option value="ar">{t('Arabic')}</option>
+                            <option value="cn">{t('Chinese')}</option>
                           </select>
                         </div>
                         <br></br>
@@ -292,14 +277,14 @@ const Navbar = (props) => {
         </Popper>
         <button
           style={{
-            backgroundColor: "#FFF",
-            borderRadius: "50px",
+            backgroundColor: '#FFF',
+            borderRadius: '50px',
           }}
           aria-label="Person"
           justIcon
           onClick={handleClick}
         >
-          <span style={{ color: "black", fontWeight: "bold" }}>{t("NF")}</span>
+          <span style={{ color: 'black', fontWeight: 'bold' }}>{t('NF')}</span>
           {/* <Person
             className={
               classes.headerLinksSvg +

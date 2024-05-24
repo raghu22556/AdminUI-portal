@@ -1,13 +1,13 @@
-import * as React from "react";
-import Box from "@mui/material/Box";
-import Stack from "@mui/material/Stack";
-import Slider from "@mui/material/Slider";
-import VolumeDown from "@mui/icons-material/VolumeDown";
-import VolumeUp from "@mui/icons-material/VolumeUp";
-import { styled } from "@mui/material/styles";
-import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
-import MuiInput from "@mui/material/Input";
+import * as React from 'react';
+import Box from '@mui/material/Box';
+import Stack from '@mui/material/Stack';
+import Slider from '@mui/material/Slider';
+import VolumeDown from '@mui/icons-material/VolumeDown';
+import VolumeUp from '@mui/icons-material/VolumeUp';
+import { styled } from '@mui/material/styles';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
+import MuiInput from '@mui/material/Input';
 
 // variants
 
@@ -65,7 +65,7 @@ export function InputSlider() {
   };
 
   const handleInputChange = (event) => {
-    setValue(event.target.value === "" ? 0 : Number(event.target.value));
+    setValue(event.target.value === '' ? 0 : Number(event.target.value));
   };
 
   const handleBlur = () => {
@@ -87,7 +87,7 @@ export function InputSlider() {
         </Grid>
         <Grid item xs>
           <Slider
-            value={typeof value === "number" ? value : 0}
+            value={typeof value === 'number' ? value : 0}
             onChange={handleSliderChange}
             aria-labelledby="input-slider"
           />
@@ -102,8 +102,8 @@ export function InputSlider() {
               step: 10,
               min: 0,
               max: 100,
-              type: "number",
-              "aria-labelledby": "input-slider",
+              type: 'number',
+              'aria-labelledby': 'input-slider',
             }}
           />
         </Grid>
@@ -113,7 +113,7 @@ export function InputSlider() {
 }
 
 function valueLabelFormat(value) {
-  const units = ["KB", "MB", "GB", "TB"];
+  const units = ['KB', 'MB', 'GB', 'TB'];
 
   let unitIndex = 0;
   let scaledValue = value;
@@ -134,7 +134,7 @@ export function NonLinearSlider() {
   const [value, setValue] = React.useState(10);
 
   const handleChange = (event, newValue) => {
-    if (typeof newValue === "number") {
+    if (typeof newValue === 'number') {
       setValue(newValue);
     }
   };

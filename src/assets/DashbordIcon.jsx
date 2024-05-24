@@ -1,12 +1,6 @@
-export default function DashbordIcon({ color = "#0D0E12" }) {
+export default function DashbordIcon({ color = '#0D0E12' }) {
   return (
-    <svg
-      width="20"
-      height="20"
-      viewBox="0 0 20 20"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         d="M4.16663 8.33317H5.83329C7.49996 8.33317 8.33329 7.49984 8.33329 5.83317V4.1665C8.33329 2.49984 7.49996 1.6665 5.83329 1.6665H4.16663C2.49996 1.6665 1.66663 2.49984 1.66663 4.1665V5.83317C1.66663 7.49984 2.49996 8.33317 4.16663 8.33317Z"
         stroke={color}

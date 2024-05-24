@@ -73,7 +73,7 @@ export default class ReduxHandler {
     const successType = `${actionName.toUpperCase()}_SUCCESS`;
     const failedType = `${actionName.toUpperCase()}_FAILURE`;
     const setType = `${actionName.toUpperCase()}_SET`;
-    return function(state = { ...INITIAL_STATE }, action) {
+    return function (state = { ...INITIAL_STATE }, action) {
       switch (action.type) {
         case resetType:
           return { ...state, ...INITIAL_STATE };
@@ -82,9 +82,17 @@ export default class ReduxHandler {
         case successType:
           return { ...state, ...INITIAL_STATE, data: { ...action.payload } };
         case failedType:
-          return { ...state, ...INITIAL_STATE, error: action.error.response.data.Message };
+          return {
+            ...state,
+            ...INITIAL_STATE,
+            error: action.error.response.data.Message,
+          };
         case setType:
-          return { ...state, ...INITIAL_STATE, data: { ...(state.data || {}), ...action.payload } };
+          return {
+            ...state,
+            ...INITIAL_STATE,
+            data: { ...(state.data || {}), ...action.payload },
+          };
         default:
           return state;
       }
@@ -126,8 +134,8 @@ export default class ReduxHandler {
         let setKey = 'set' + key.charAt(0).toUpperCase() + key.slice(1);
 
         let keyUpper = key.toUpperCase();
-        
-        actions[requestKey] = payload => {
+
+        actions[requestKey] = (payload) => {
           return {
             type: ActionTypes.requestActions[keyUpper + '_REQUEST'],
             payload: payload,
@@ -138,14 +146,14 @@ export default class ReduxHandler {
           };
         };
 
-        actions[resetKey] = payload => {
+        actions[resetKey] = (payload) => {
           return {
             type: ActionTypes.resetActions[keyUpper + '_RESET'],
             payload: payload,
           };
         };
 
-        actions[setKey] = payload => {
+        actions[setKey] = (payload) => {
           return {
             type: ActionTypes.setActions[keyUpper + '_SET'],
             payload: payload,
@@ -167,7 +175,7 @@ export default class ReduxHandler {
           let url = this.urls[key];
           let controller = this.controllers[key];
 
-          actions[requestKey] = payload => {
+          actions[requestKey] = (payload) => {
             payload = payload || {
               action: action,
             };
@@ -183,14 +191,14 @@ export default class ReduxHandler {
             return returnObject;
           };
 
-          actions[resetKey] = payload => {
+          actions[resetKey] = (payload) => {
             return {
               type: ActionTypes.resetActions[actionKeyMapper + '_RESET'],
               payload: payload,
             };
           };
 
-          actions[setKey] = payload => {
+          actions[setKey] = (payload) => {
             return {
               type: ActionTypes.setActions[actionKeyMapper + '_SET'],
               payload: payload,

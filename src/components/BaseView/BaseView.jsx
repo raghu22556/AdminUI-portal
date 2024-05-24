@@ -1,28 +1,28 @@
-import { PureComponent } from "react";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-import { useNavigate } from "react-router";
-import { ReduxHelper } from "../../core/redux-helper";
-import { Select, Menu, Modal, Input, Tooltip } from "antd";
-import SimpleForm from "./simple-form";
+import { PureComponent } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { useNavigate } from 'react-router';
+import { ReduxHelper } from '../../core/redux-helper';
+import { Select, Menu, Modal, Input, Tooltip } from 'antd';
+import SimpleForm from './simple-form';
 //import DialogForm from "./DialogForm";
-import AgGrid from "../ag-grid";
-import NavPills from "../Tabs";
-import Button from "@material-ui/core/Button";
-import API from "../../store/requests";
-import { EnableLogs } from "../../app-config";
-import Snackbar from "../../components/Snackbar/Snackbar.jsx";
-import AddIcon from "@material-ui/icons/AddCircleSharp";
-import CardView from "../CardsLayout";
-import { CONFIG, newConfig } from "../../store/config";
-import Accordion from "../Accordion";
-import { withTranslation } from "react-i18next";
-import { triggerAPI, defaultLoader } from "../../core/utils";
-import * as FileSaver from "file-saver";
-import * as XLSX from "xlsx";
-import moment from "moment";
-import ArrowUpwardIcon from "@mui/icons-material/ArrowUpward";
-import AddOutlinedIcon from "@mui/icons-material/AddOutlined";
+import AgGrid from '../ag-grid';
+import NavPills from '../Tabs';
+import Button from '@material-ui/core/Button';
+import API from '../../store/requests';
+import { EnableLogs } from '../../app-config';
+import Snackbar from '../../components/Snackbar/Snackbar.jsx';
+import AddIcon from '@material-ui/icons/AddCircleSharp';
+import CardView from '../CardsLayout';
+import { CONFIG, newConfig } from '../../store/config';
+import Accordion from '../Accordion';
+import { withTranslation } from 'react-i18next';
+import { triggerAPI, defaultLoader } from '../../core/utils';
+import * as FileSaver from 'file-saver';
+import * as XLSX from 'xlsx';
+import moment from 'moment';
+import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
+import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 
 const { Option } = Select;
 const modal = Modal;
@@ -40,7 +40,7 @@ export const withRouter = (Component) => {
 };
 
 const isTrue = (value) => {
-  if (typeof value != "undefined") {
+  if (typeof value != 'undefined') {
     if (value && value == true) {
       return true;
     }
@@ -55,14 +55,14 @@ export default class BaseView extends PureComponent {
       selectedRow: null,
       activeRecordId: null,
       gridPreferences: JSON.stringify({ filterInfo: [], sortInfo: [] }),
-      error: "",
-      startData: "",
-      endDate: "",
+      error: '',
+      startData: '',
+      endDate: '',
     };
   }
 
   isFunction = (func) => {
-    return func && typeof func == "function";
+    return func && typeof func == 'function';
   };
 
   generateAction = (identifier) => {
@@ -88,14 +88,14 @@ export default class BaseView extends PureComponent {
           action: item,
           ...payload,
         });
-      generatedAction["reset" + upperCase] = (payload) =>
-        Actions["reset" + upperCase + upperCaseKey]({
+      generatedAction['reset' + upperCase] = (payload) =>
+        Actions['reset' + upperCase + upperCaseKey]({
           identifier,
           action: item,
           ...payload,
         });
-      generatedAction["set" + upperCase] = (payload) =>
-        Actions["set" + upperCase + upperCaseKey]({
+      generatedAction['set' + upperCase] = (payload) =>
+        Actions['set' + upperCase + upperCaseKey]({
           identifier,
           action: item,
           ...payload,
@@ -108,24 +108,21 @@ export default class BaseView extends PureComponent {
     return parentTab.childs().map((child) => {
       var customViewMode = false;
       var childIsEditable = false;
-      if (typeof child.showCustomContent == "boolean") {
+      if (typeof child.showCustomContent == 'boolean') {
         customViewMode = child.showCustomContent;
       }
-      if (typeof child.isEditable == "boolean") {
+      if (typeof child.isEditable == 'boolean') {
         childIsEditable = child.isEditable;
       }
 
-      var formColumns = this.constructFormFields(
-        child.getFormColumns(),
-        child.onChange
-      );
+      var formColumns = this.constructFormFields(child.getFormColumns(), child.onChange);
       var gridColumns = this.constructGridColumns(
         child,
         child.getGridColumns(),
         childIsEditable,
         formColumns.length,
         child.filters,
-        child.sort
+        child.sort,
       );
 
       child.comboTypes = child.comboTypes || [];
@@ -134,9 +131,9 @@ export default class BaseView extends PureComponent {
         comboTypes: [
           ...child.comboTypes,
           {
-            type: "User",
-            ValueField: "Name",
-            IDField: "UserId",
+            type: 'User',
+            ValueField: 'Name',
+            IDField: 'UserId',
           },
         ],
         autoRefresh: false,
@@ -148,7 +145,7 @@ export default class BaseView extends PureComponent {
         key: child.key, //item.ad_window_id,
         tabId: child.key, //tabId,
         title: child.title, //item.title || item.windowname || item.name,
-        type: "grid",
+        type: 'grid',
         identifier: child.key, //identifier,
         idColumn: child.idColumn,
         hidePaging: child.hidePaging,
@@ -178,24 +175,21 @@ export default class BaseView extends PureComponent {
     var childs = this.constructChildWithParentConfig(entity);
     var showCustomContent = false;
     var isEditable = false;
-    if (typeof customView == "boolean") {
+    if (typeof customView == 'boolean') {
       showCustomContent = customView;
     }
-    if (typeof entity.isEditable == "boolean") {
+    if (typeof entity.isEditable == 'boolean') {
       isEditable = entity.isEditable;
     }
 
-    var formColumns = this.constructFormFields(
-      entity.getFormColumns(),
-      entity.onChange
-    );
+    var formColumns = this.constructFormFields(entity.getFormColumns(), entity.onChange);
     var gridColumns = this.constructGridColumns(
       entity,
       entity.getGridColumns(),
       isEditable,
       formColumns.length,
       entity.filters,
-      entity.sort
+      entity.sort,
     );
 
     let extraConfigs = {};
@@ -215,7 +209,7 @@ export default class BaseView extends PureComponent {
       extraConfigs = { ...extraConfigs, onRowSelection: this.onRowSelection };
     }
     var autoRefresh = true;
-    if (typeof entity.autoRefresh == "boolean") {
+    if (typeof entity.autoRefresh == 'boolean') {
       autoRefresh = entity.autoRefresh;
     }
     entity.overides = entity.overides || {};
@@ -228,8 +222,8 @@ export default class BaseView extends PureComponent {
         ...entity.comboTypes,
         {
           type: localStorage.userTable,
-          ValueField: "Name",
-          IDField: "UserId",
+          ValueField: 'Name',
+          IDField: 'UserId',
         },
       ],
       readOnlyGrid: entity.readOnlyGrid,
@@ -240,7 +234,7 @@ export default class BaseView extends PureComponent {
       key: entity.key, //item.ad_window_id,
       tabId: entity.key, //tabId,
       title: entity.title, //item.title || item.windowname || item.name,
-      type: "grid",
+      type: 'grid',
       identifier: entity.key,
       apiIdentifier: entity.key.toLowerCase(),
       idColumn: entity.idColumn,
@@ -248,9 +242,7 @@ export default class BaseView extends PureComponent {
       childView: entity.childView,
       hidePaging: entity.hidePaging,
       gridPreferences: entity.gridPreferences || {
-        sortInfo: [
-          { sort: entity.idColumn, dir: entity.idColumnSorting || "desc" },
-        ],
+        sortInfo: [{ sort: entity.idColumn, dir: entity.idColumnSorting || 'desc' }],
         filterInfo: [],
       },
       extraParams: entity.extraParams || {},
@@ -278,12 +270,12 @@ export default class BaseView extends PureComponent {
 
   constructChild = (child, parentIdentifier) => {
     var childs = this.constructChildWithParentConfig(child);
-    parentIdentifier = parentIdentifier || "";
-    var identifier = parentIdentifier + "_" + child.tabId;
+    parentIdentifier = parentIdentifier || '';
+    var identifier = parentIdentifier + '_' + child.tabId;
     return {
       ...child,
       key: child.tabId,
-      type: "grid", //change the gridonly in type to see only grid
+      type: 'grid', //change the gridonly in type to see only grid
       value: child.tabId,
       buttons: [],
       parentIdentifier,
@@ -303,14 +295,14 @@ export default class BaseView extends PureComponent {
       .map(({ header, ...rest }) => {
         var returnObject = {
           title: header,
-          type: rest.type || "string",
+          type: rest.type || 'string',
           ...rest,
         };
         if (onChange && onChange[rest.dataIndex]) {
           returnObject.onChange = onChange[rest.dataIndex];
         }
-        if (rest.type == "int") {
-          if (typeof rest.allowNegatives == "boolean") {
+        if (rest.type == 'int') {
+          if (typeof rest.allowNegatives == 'boolean') {
             returnObject.allowNegatives = rest.allowNegatives;
           } else {
             returnObject.allowNegatives = true;
@@ -322,69 +314,53 @@ export default class BaseView extends PureComponent {
     return formFields;
   };
 
-  constructGridColumns = (
-    entity,
-    items,
-    isEditable,
-    formItemCount,
-    entityFilters,
-    entitySort
-  ) => {
+  constructGridColumns = (entity, items, isEditable, formItemCount, entityFilters, entitySort) => {
     var fields = items
       .filter((item) => item.header)
       .filter((item) => !item.hidden)
-      .map(
-        ({
-          header,
-          dataIndex,
-          isEditable: isEditableCol,
-          filters,
-          sort,
-          ...rest
-        }) => {
-          var cellClass = null;
-          if (rest.type === "number") {
-            cellClass = "number-cell";
-            if (header.toLowerCase() === "id") {
-              cellClass = "left-number-cell";
-            }
+      .map(({ header, dataIndex, isEditable: isEditableCol, filters, sort, ...rest }) => {
+        var cellClass = null;
+        if (rest.type === 'number') {
+          cellClass = 'number-cell';
+          if (header.toLowerCase() === 'id') {
+            cellClass = 'left-number-cell';
           }
-
-          if (rest.type === "float") {
-            cellClass = "float-cell";
-          }
-
-          var notsortabletype = false;
-          if (entitySort === "none" || sort === "none") {
-            notsortabletype = true;
-          }
-
-          var returnObject = {
-            dataIndex,
-            cellClass,
-            title: header,
-            editable: isEditableCol || isEditable || false,
-            nofiltertype: (entityFilters || filters) === "none" ? true : false,
-            notsortabletype: notsortabletype,
-            ...rest,
-          };
-
-          if (dataIndex == entity.idColumn) {
-            returnObject.sortingOrder = ["desc", "asc"];
-          }
-          return returnObject;
         }
-      );
+
+        if (rest.type === 'float') {
+          cellClass = 'float-cell';
+        }
+
+        var notsortabletype = false;
+        if (entitySort === 'none' || sort === 'none') {
+          notsortabletype = true;
+        }
+
+        var returnObject = {
+          dataIndex,
+          cellClass,
+          title: header,
+          editable: isEditableCol || isEditable || false,
+          nofiltertype: (entityFilters || filters) === 'none' ? true : false,
+          notsortabletype: notsortabletype,
+          ...rest,
+        };
+
+        if (dataIndex == entity.idColumn) {
+          returnObject.sortingOrder = ['desc', 'asc'];
+        }
+        return returnObject;
+      });
     if (formItemCount == 0) {
       return fields;
     }
     var gridColumns = [
       ...fields,
       {
-        dataIndex: "Operation",
-        header: "Operation",
+        dataIndex: 'Operation',
+        header: 'Operation',
         width: 105,
-        type: "operation",
+        type: 'operation',
         editable: false,
         nofiltertype: true,
         notsortabletype: true,
@@ -431,9 +407,9 @@ export default class BaseView extends PureComponent {
   };
 
   render() {
-    let className = "";
-    if (this.config.childView == "flex" && !this.config.parentIdentifier) {
-      className = "grid-view-flex";
+    let className = '';
+    if (this.config.childView == 'flex' && !this.config.parentIdentifier) {
+      className = 'grid-view-flex';
     }
     return (
       <div className={className}>
@@ -480,7 +456,7 @@ const ModalForm = ({
         onCancel={() => {
           return toggle(false);
         }}
-        width={"70%"}
+        width={'70%'}
         style={{ top: 20 }}
         className="modal-container"
         destroyOnClose
@@ -505,12 +481,7 @@ const ModalForm = ({
   }
 };
 
-const PreferenceMenu = ({
-  allPreferences,
-  onPreferenceSelect,
-  visible,
-  toggle,
-}) => {
+const PreferenceMenu = ({ allPreferences, onPreferenceSelect, visible, toggle }) => {
   const { t } = this.props;
   var preferences = [];
   if (allPreferences) {
@@ -520,7 +491,7 @@ const PreferenceMenu = ({
           <a target="_blank" rel="noopener noreferrer">
             {item.key}
           </a>
-        </Menu.Item>
+        </Menu.Item>,
       );
     }
   }
@@ -532,31 +503,31 @@ const PreferenceMenu = ({
         <hr />
         <Menu.Item>
           <a target="_blank" rel="noopener noreferrer" onClick={toggle}>
-            {t("Add Preference")}
+            {t('Add Preference')}
           </a>
         </Menu.Item>
         <Modal
           visible={visible}
-          title={t("Preference")}
+          title={t('Preference')}
           footer={[
-            <Tooltip title={t("Cancel")}>
+            <Tooltip title={t('Cancel')}>
               <Button key="back" onClick={toggle}>
-                {t("Cancel")}
+                {t('Cancel')}
               </Button>
             </Tooltip>,
-            <Tooltip title={t("Submit")}>
+            <Tooltip title={t('Submit')}>
               <Button key="submit" type="primary" onClick={toggle}>
-                {t("Submit")}
+                {t('Submit')}
               </Button>
             </Tooltip>,
           ]}
         >
           <p>
-            {t("Name")}:
+            {t('Name')}:
             <Input placeholder="" />
           </p>
           <p>
-            {t("Description")}:
+            {t('Description')}:
             <Input placeholder="" />
           </p>
         </Modal>
@@ -601,10 +572,10 @@ class GridPanel extends PureComponent {
       selectedRow: null,
       selectedRowParent: null,
       tabId: this.props.config.tabId,
-      activeRecordId: "NEW_RECORD",
+      activeRecordId: 'NEW_RECORD',
       visible: false,
       isRefresh: false,
-      mode: "",
+      mode: '',
       showDialogForm: false,
     };
     const {
@@ -631,22 +602,15 @@ class GridPanel extends PureComponent {
     dispatch(actions.resetList());
     var preference = { ...this.props.config.gridPreferences };
     if (this.props.config.showCustomContent === false) {
-      preference[
-        (this.props.config.uniqueIdentifier || identifier) + "columns"
-      ] = this.gridColumnApi.getColumnState();
+      preference[(this.props.config.uniqueIdentifier || identifier) + 'columns'] =
+        this.gridColumnApi.getColumnState();
     }
     dispatch(actions.setGridpreference(preference));
   }
 
   createRow = () => {
     const {
-      config: {
-        loadAPI,
-        identifier,
-        apiIdentifier,
-        comboTypes,
-        isLoadFetching,
-      },
+      config: { loadAPI, identifier, apiIdentifier, comboTypes, isLoadFetching },
       dispatch,
       combos,
       selectedRowParent,
@@ -654,7 +618,7 @@ class GridPanel extends PureComponent {
 
     if (loadAPI) {
       var options = {
-        action: "load",
+        action: 'load',
         identifier,
         apiIdentifier,
         id: 0,
@@ -681,9 +645,9 @@ class GridPanel extends PureComponent {
         this.setState({
           selectedRowParent: { ...selectedRowParent },
           selectedRow: {},
-          activeRecordId: "NEW_RECORD",
+          activeRecordId: 'NEW_RECORD',
           visible: true,
-          mode: "edit",
+          mode: 'edit',
         });
       }, 1000);
     }
@@ -702,7 +666,7 @@ class GridPanel extends PureComponent {
       } else {
         this.setState(
           { visible: false, isRefresh: true, activeRecordId: null },
-          () => (this.state.isRefresh = false)
+          () => (this.state.isRefresh = false),
         );
       }
     } else {
@@ -718,26 +682,26 @@ class GridPanel extends PureComponent {
     yesterday.setDate(today.getDate() - 1);
 
     switch (value) {
-      case "today":
+      case 'today':
         fromDate = yesterday;
         toDate = today;
         break;
-      case "yesterday":
+      case 'yesterday':
         fromDate = new Date(yesterday);
         fromDate.setDate(yesterday.getDate() - 1);
         toDate = new Date(yesterday);
         break;
-      case "last7days":
+      case 'last7days':
         fromDate = new Date(today);
         fromDate.setDate(today.getDate() - 7);
         toDate = new Date(today);
         break;
-      case "last30days":
+      case 'last30days':
         fromDate = new Date(today);
         fromDate.setDate(today.getDate() - 30);
         toDate = new Date(today);
         break;
-      case "lastMonth":
+      case 'lastMonth':
         fromDate = new Date(today.getFullYear(), today.getMonth() - 1, 1);
         toDate = new Date(today.getFullYear(), today.getMonth(), 0, 23, 59, 59);
         break;
@@ -748,7 +712,7 @@ class GridPanel extends PureComponent {
     if (gridApi) {
       var filterModel = {
         CreatedDate: {
-          type: "inRange",
+          type: 'inRange',
           dateFrom: moment(fromDate),
           dateTo: moment(toDate),
         },
@@ -779,8 +743,7 @@ class GridPanel extends PureComponent {
             newFilterInfo = [];
           }
           newFilterInfo.push({
-            filterTerm:
-              filterInfo[index].filterValue || filterInfo[index].filterTerm,
+            filterTerm: filterInfo[index].filterValue || filterInfo[index].filterTerm,
             filterBy: filterInfo[index].filterBy,
           });
         }
@@ -790,29 +753,29 @@ class GridPanel extends PureComponent {
           if (!newFilterInfo) {
             newFilterInfo = [];
           }
-          var filterType = "EQUALS";
-          if (item.data.type == "string") {
-            filterType = "CONTAINS";
-          } else if (item.data.type == "boolean") {
+          var filterType = 'EQUALS';
+          if (item.data.type == 'string') {
+            filterType = 'CONTAINS';
+          } else if (item.data.type == 'boolean') {
             item.data.value = item.data.value ? 1 : 0;
-          } else if (item.data.type == "numeric") {
-            if (item.data.comparison == "gt") {
-              filterType = "GREATERTHANEQUAL";
-            } else if (item.data.comparison == "lt") {
-              filterType = "LESSERTHANEQUAL";
-            } else if (item.data.comparison == "eq") {
-              filterType = "EQUALS";
+          } else if (item.data.type == 'numeric') {
+            if (item.data.comparison == 'gt') {
+              filterType = 'GREATERTHANEQUAL';
+            } else if (item.data.comparison == 'lt') {
+              filterType = 'LESSERTHANEQUAL';
+            } else if (item.data.comparison == 'eq') {
+              filterType = 'EQUALS';
             }
-          } else if (item.data.type == "date") {
-            if (item.data.comparison == "gt") {
-              filterType = "DATEGREATERTHANEQUAL";
-            } else if (item.data.comparison == "lt") {
-              filterType = "DATELESSERTHANEQUAL";
-            } else if (item.data.comparison == "eq") {
-              filterType = "DATEEQUALS";
+          } else if (item.data.type == 'date') {
+            if (item.data.comparison == 'gt') {
+              filterType = 'DATEGREATERTHANEQUAL';
+            } else if (item.data.comparison == 'lt') {
+              filterType = 'DATELESSERTHANEQUAL';
+            } else if (item.data.comparison == 'eq') {
+              filterType = 'DATEEQUALS';
             }
-          } else if (item.data.type == "list") {
-            filterType = "MULTI";
+          } else if (item.data.type == 'list') {
+            filterType = 'MULTI';
           }
           newFilterInfo.push({
             filterTerm: item.data.value,
@@ -826,7 +789,7 @@ class GridPanel extends PureComponent {
         pageNo: currentPage,
         pageSize: limit,
         filterInfo: newFilterInfo,
-        action: "list",
+        action: 'list',
         sortInfo: sortInfo && sortInfo.length === 0 ? null : sortInfo,
         identifier: this.props.config.identifier,
         apiIdentifier: this.props.config.apiIdentifier,
@@ -843,21 +806,20 @@ class GridPanel extends PureComponent {
         options.comboTypes = combos;
       }
       if (this.props.config.isChild) {
-        let parentEntity = this.props.config.identifier.split("_");
+        let parentEntity = this.props.config.identifier.split('_');
         parentEntity = parentEntity[parentEntity.length - 2];
         options.PageNo = 0;
         options.PageSize = 50;
         options.ParentEntity = parentEntity;
         options.ParentEntityField = this.props.config.parentIdColumn;
-        options.ParentId =
-          this.props.selectedRowParent[this.props.config.parentIdColumn];
+        options.ParentId = this.props.selectedRowParent[this.props.config.parentIdColumn];
       }
 
       this.props.dispatch(
-        Actions["list" + options.identifier]({
+        Actions['list' + options.identifier]({
           ...options,
           ...this.props.config.extraParams,
-        })
+        }),
       );
     }
   };
@@ -876,13 +838,13 @@ class GridPanel extends PureComponent {
   updatePreference = (existingPreferences) => {
     // TO DO - Need to move to NOTON Components
     var identifier = this.props.config.tabId;
-    var type = identifier + "_GRIDPREFERENCE_REQUEST";
+    var type = identifier + '_GRIDPREFERENCE_REQUEST';
 
     this.props.dispatch({
       type: type,
       payload: existingPreferences,
       identifier: identifier,
-      request: "SET_PREFERENCE",
+      request: 'SET_PREFERENCE',
     });
   };
 
@@ -890,9 +852,9 @@ class GridPanel extends PureComponent {
     const { t } = this.props;
     modal.destroyAll();
     modal.success({
-      title: t("Please wait") + "..",
+      title: t('Please wait') + '..',
       okButtonProps: {
-        style: { backgroundColor: "#24b5ee", border: "none", display: "none" },
+        style: { backgroundColor: '#24b5ee', border: 'none', display: 'none' },
       },
     });
   };
@@ -901,9 +863,9 @@ class GridPanel extends PureComponent {
     const { t } = this.props;
     modal.destroyAll();
     modal.success({
-      title: t("Deleted Successfully") + "...",
+      title: t('Deleted Successfully') + '...',
       okButtonProps: {
-        style: { backgroundColor: "#24b5ee", border: "none", display: "none" },
+        style: { backgroundColor: '#24b5ee', border: 'none', display: 'none' },
       },
     });
     setTimeout(() => {
@@ -917,7 +879,7 @@ class GridPanel extends PureComponent {
     var activeRecordId = row[idColumn];
 
     var payload = {
-      action: "delete",
+      action: 'delete',
       [idColumn]: activeRecordId,
       identifier: this.props.config.identifier,
     };
@@ -927,12 +889,9 @@ class GridPanel extends PureComponent {
       .then((response) => {
         var data = response.data;
         if (data.success) {
-          this.setState(
-            { isRefresh: true },
-            () => (this.state.isRefresh = false)
-          );
+          this.setState({ isRefresh: true }, () => (this.state.isRefresh = false));
         } else {
-          alert(t("Failed"));
+          alert(t('Failed'));
         }
       })
       .catch((error) => {
@@ -942,12 +901,12 @@ class GridPanel extends PureComponent {
   selectRow = (index, type) => {
     const { t } = this.props;
     this.selectedRowType = type;
-    if (type === "Delete") {
+    if (type === 'Delete') {
       const {
         config: { idColumn },
       } = this.props;
       confirm({
-        title: t("Are you sure you want to delete this record?"),
+        title: t('Are you sure you want to delete this record?'),
         // content: 'Some descriptions',
         onOk: () => {
           this.confirmDelete(index, idColumn);
@@ -957,7 +916,7 @@ class GridPanel extends PureComponent {
           return;
         },
       });
-    } else if (type === "Reply") {
+    } else if (type === 'Reply') {
       this.setState({ showDialogForm: true });
     } else {
       const {
@@ -971,7 +930,7 @@ class GridPanel extends PureComponent {
       var activeRecordId = row[idColumn];
       if (loadAPI) {
         var options = {
-          action: "load",
+          action: 'load',
           identifier,
           apiIdentifier,
           id: activeRecordId,
@@ -1005,8 +964,8 @@ class GridPanel extends PureComponent {
           {
             mode: this.selectedRowType,
             visible: true,
-            selectedRow: type === "Create" ? {} : initialValues,
-            activeRecordId: "NEW_RECORD",
+            selectedRow: type === 'Create' ? {} : initialValues,
+            activeRecordId: 'NEW_RECORD',
           },
           () => {
             this.setState({
@@ -1014,7 +973,7 @@ class GridPanel extends PureComponent {
               activeRecordId,
               selectedRowParent: this.props.selectedRowParent,
             });
-          }
+          },
         );
       }
     }
@@ -1045,11 +1004,9 @@ class GridPanel extends PureComponent {
       if (filterInfo && filterInfo.length > 0) {
         // TO DO : need to handle for grid prferences
       }
-      if (pref[(uniqueIdentifier || identifier) + "columns"]) {
+      if (pref[(uniqueIdentifier || identifier) + 'columns']) {
         if (this.gridColumnApi.setColumnState) {
-          this.gridColumnApi.setColumnState(
-            pref[(uniqueIdentifier || identifier) + "columns"]
-          );
+          this.gridColumnApi.setColumnState(pref[(uniqueIdentifier || identifier) + 'columns']);
         }
       }
     }
@@ -1064,7 +1021,7 @@ class GridPanel extends PureComponent {
     this.gridApi.forEachNode(function (node) {
       rowData.push(node.data);
     });
-    console.debug("Row Data:", JSON.stringify(rowData));
+    console.debug('Row Data:', JSON.stringify(rowData));
   };
 
   exportToXlsx = () => {
@@ -1073,29 +1030,29 @@ class GridPanel extends PureComponent {
     let filterInfo = [];
     if (filter) {
       for (var item of filter) {
-        var filterType = "EQUALS";
-        if (item.data.type == "string") {
-          filterType = "CONTAINS";
-        } else if (item.data.type == "boolean") {
+        var filterType = 'EQUALS';
+        if (item.data.type == 'string') {
+          filterType = 'CONTAINS';
+        } else if (item.data.type == 'boolean') {
           item.data.value = item.data.value ? 1 : 0;
-        } else if (item.data.type == "numeric") {
-          if (item.data.comparison == "gt") {
-            filterType = "GREATERTHANEQUAL";
-          } else if (item.data.comparison == "lt") {
-            filterType = "LESSERTHANEQUAL";
-          } else if (item.data.comparison == "eq") {
-            filterType = "EQUALS";
+        } else if (item.data.type == 'numeric') {
+          if (item.data.comparison == 'gt') {
+            filterType = 'GREATERTHANEQUAL';
+          } else if (item.data.comparison == 'lt') {
+            filterType = 'LESSERTHANEQUAL';
+          } else if (item.data.comparison == 'eq') {
+            filterType = 'EQUALS';
           }
-        } else if (item.data.type == "date") {
-          if (item.data.comparison == "gt") {
-            filterType = "DATEGREATERTHANEQUAL";
-          } else if (item.data.comparison == "lt") {
-            filterType = "DATELESSERTHANEQUAL";
-          } else if (item.data.comparison == "eq") {
-            filterType = "DATEEQUALS";
+        } else if (item.data.type == 'date') {
+          if (item.data.comparison == 'gt') {
+            filterType = 'DATEGREATERTHANEQUAL';
+          } else if (item.data.comparison == 'lt') {
+            filterType = 'DATELESSERTHANEQUAL';
+          } else if (item.data.comparison == 'eq') {
+            filterType = 'DATEEQUALS';
           }
-        } else if (item.data.type == "list") {
-          filterType = "MULTI";
+        } else if (item.data.type == 'list') {
+          filterType = 'MULTI';
         }
         filterInfo.push({
           filterTerm: item.data.value,
@@ -1109,7 +1066,7 @@ class GridPanel extends PureComponent {
       t: me.props.t,
       controller: me.props.config.identifier,
       params: {
-        action: "ExportData",
+        action: 'ExportData',
         filterInfo: filterInfo,
       },
       gridPanel: me,
@@ -1117,30 +1074,30 @@ class GridPanel extends PureComponent {
       resSuccessCallBack: (response) => {
         var jsonArray = response.data.data;
         if (jsonArray.length > 0) {
-          let key = "xlsx";
+          let key = 'xlsx';
           let fileType = {
-            csv: "text/plain;charset=UTF-8",
-            xlsx: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8",
+            csv: 'text/plain;charset=UTF-8',
+            xlsx: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8',
           };
           var headers = [];
           for (var objectKey in jsonArray[0]) {
             headers.push(objectKey);
           }
-          let timeStamp = moment().format("DD.MM.YY hh.mm");
-          const fileName = me.props.config.title + " " + timeStamp;
+          let timeStamp = moment().format('DD.MM.YY hh.mm');
+          const fileName = me.props.config.title + ' ' + timeStamp;
           const ws = XLSX.utils.json_to_sheet(jsonArray, {
             header: headers,
           });
-          const wb = { Sheets: { data: ws }, SheetNames: ["data"] };
-          let excelBuffer = XLSX.write(wb, { bookType: key, type: "array" });
+          const wb = { Sheets: { data: ws }, SheetNames: ['data'] };
+          let excelBuffer = XLSX.write(wb, { bookType: key, type: 'array' });
           const data = new Blob([excelBuffer], { type: fileType[key] });
-          FileSaver.saveAs(data, fileName + "." + key);
+          FileSaver.saveAs(data, fileName + '.' + key);
         } else {
           modal.error({
-            title: me.props.t("No Entries for " + me.props.config.title),
+            title: me.props.t('No Entries for ' + me.props.config.title),
             maskClosable: false,
             okButtonProps: {
-              style: { backgroundColor: "#C31D1D", border: "none" },
+              style: { backgroundColor: '#C31D1D', border: 'none' },
             },
           });
         }
@@ -1160,11 +1117,11 @@ class GridPanel extends PureComponent {
       if (this.props.config.readOnlyGrid) {
         return <div class="empty-grid-header" />;
       }
-      var isFullAccess = sessionStorage.getItem("fullAccess");
+      var isFullAccess = sessionStorage.getItem('fullAccess');
       if (isFullAccess == 0) {
         return <div class="empty-grid-header" />;
       }
-      if (this.props.config.key == "Activity") {
+      if (this.props.config.key == 'Activity') {
         return (
           <>
             <Tooltip title="Risks">
@@ -1176,25 +1133,25 @@ class GridPanel extends PureComponent {
                 style={{ marginTop: 20, marginBottom: 20 }}
                 onClick={() => {
                   var scope = this;
-                  var activityTypeCombos = scope.props.combos["ActivityType"];
+                  var activityTypeCombos = scope.props.combos['ActivityType'];
                   var filterList = [];
                   activityTypeCombos
-                    .filter((item) => item.Type == "Risks")
+                    .filter((item) => item.Type == 'Risks')
                     .forEach((item) => {
                       filterList.push(item.LookupId);
                     });
                   var model = {
                     ActivityTypeId: {
-                      type: "listCustom",
-                      value: filterList.join(","),
+                      type: 'listCustom',
+                      value: filterList.join(','),
                     },
                   };
                   scope.gridApi.setFilterModel(model);
                 }}
               >
-                {t("Risks")}
+                {t('Risks')}
               </Button>
-            </Tooltip>{" "}
+            </Tooltip>{' '}
             <Tooltip title="Risks">
               <Button
                 variant="outlined"
@@ -1204,25 +1161,25 @@ class GridPanel extends PureComponent {
                 style={{ marginTop: 20, marginBottom: 20 }}
                 onClick={() => {
                   var scope = this;
-                  var activityTypeCombos = scope.props.combos["ActivityType"];
+                  var activityTypeCombos = scope.props.combos['ActivityType'];
                   var filterList = [];
                   activityTypeCombos
-                    .filter((item) => item.Type == "Controls")
+                    .filter((item) => item.Type == 'Controls')
                     .forEach((item) => {
                       filterList.push(item.LookupId);
                     });
                   var model = {
                     ActivityTypeId: {
-                      type: "listCustom",
-                      value: filterList.join(","),
+                      type: 'listCustom',
+                      value: filterList.join(','),
                     },
                   };
                   scope.gridApi.setFilterModel(model);
                 }}
               >
-                {t("Controls")}
+                {t('Controls')}
               </Button>
-            </Tooltip>{" "}
+            </Tooltip>{' '}
             <Tooltip title="Add">
               <Button
                 variant="outlined"
@@ -1235,7 +1192,7 @@ class GridPanel extends PureComponent {
                 }}
                 onClick={this.createRow}
               >
-                {t("Add")}
+                {t('Add')}
               </Button>
             </Tooltip>
           </>
@@ -1244,10 +1201,10 @@ class GridPanel extends PureComponent {
       return !this.props.config.isChild ? (
         <div
           style={{
-            display: "flex",
-            justifyContent: "flex-end",
-            marginRight: "10px",
-            padding: "20px",
+            display: 'flex',
+            justifyContent: 'flex-end',
+            marginRight: '10px',
+            padding: '20px',
           }}
         >
           {displayLoader && defaultLoader()}
@@ -1260,19 +1217,17 @@ class GridPanel extends PureComponent {
                 ghost
                 onClick={this.createRow}
                 style={{
-                  marginRight: "5px",
-                  background: "#056EE9",
-                  color: "#FFF",
-                  borderRadius: "10px",
-                  border: "none",
-                  width: "100px",
-                  fontSize: "12px",
+                  marginRight: '5px',
+                  background: '#056EE9',
+                  color: '#FFF',
+                  borderRadius: '10px',
+                  border: 'none',
+                  width: '100px',
+                  fontSize: '12px',
                 }}
               >
-                <AddOutlinedIcon
-                  style={{ fontSize: "16px", marginRight: "5px" }}
-                />
-                {t("Add")}
+                <AddOutlinedIcon style={{ fontSize: '16px', marginRight: '5px' }} />
+                {t('Add')}
               </Button>
             </Tooltip>
             <Tooltip title="Export">
@@ -1283,23 +1238,21 @@ class GridPanel extends PureComponent {
                 ghost
                 onClick={this.exportToXlsx}
                 style={{
-                  color: "#95A4FC",
-                  borderRadius: "10px",
-                  border: "1px solid #95A4FC",
-                  width: "100px",
-                  fontSize: "12px",
+                  color: '#95A4FC',
+                  borderRadius: '10px',
+                  border: '1px solid #95A4FC',
+                  width: '100px',
+                  fontSize: '12px',
                 }}
               >
-                <ArrowUpwardIcon
-                  style={{ fontSize: "16px", marginRight: "5px" }}
-                />
-                {t("Export")}
+                <ArrowUpwardIcon style={{ fontSize: '16px', marginRight: '5px' }} />
+                {t('Export')}
               </Button>
             </Tooltip>
 
             <Select
               defaultValue="Select Range"
-              style={{ width: 150, marginLeft: "10px" }}
+              style={{ width: 150, marginLeft: '10px' }}
               onChange={this.applyDateRangeFilter}
             >
               <Option value="today">Today</Option>
@@ -1319,12 +1272,10 @@ class GridPanel extends PureComponent {
               className="main-button-color"
               ghost
               style={{ marginTop: 20, marginBottom: 20 }}
-              onClick={
-                this.props.config.isEditable ? this.onAddRow : this.createRow
-              }
+              onClick={this.props.config.isEditable ? this.onAddRow : this.createRow}
             >
-              {t("New")}
-            </Button>{" "}
+              {t('New')}
+            </Button>{' '}
           </Tooltip>
           {this.props.config.isEditable && (
             <Tooltip title="Save">
@@ -1336,7 +1287,7 @@ class GridPanel extends PureComponent {
                 style={{ marginTop: 20, marginBottom: 20 }}
                 onClick={this.getRowData}
               >
-                {t("Save")}
+                {t('Save')}
               </Button>
             </Tooltip>
           )}
@@ -1355,47 +1306,31 @@ class GridPanel extends PureComponent {
     return <></>;
   };
 
-  componentWillReceiveProps({
-    combos: newCombos,
-    errorMessage,
-    selectedRow,
-    isLoadFetching,
-  }) {
+  componentWillReceiveProps({ combos: newCombos, errorMessage, selectedRow, isLoadFetching }) {
     if (this.props.config.comboTypes && newCombos) {
       const { combos: oldCombos } = this.props;
-      if (
-        oldCombos &&
-        Object.keys(oldCombos).length != Object.keys(newCombos).length
-      ) {
+      if (oldCombos && Object.keys(oldCombos).length != Object.keys(newCombos).length) {
         var comboTypes = this.props.config.comboTypes;
         for (var comboType of comboTypes) {
-          if (
-            newCombos[comboType.type] &&
-            newCombos[comboType.type].length > 0
-          ) {
+          if (newCombos[comboType.type] && newCombos[comboType.type].length > 0) {
             comboType.loaded = true;
           }
         }
       }
     }
     if (errorMessage && errorMessage != this.props.errorMessage) {
-      this.setState(
-        { snackBarVisible: true, message: errorMessage, color: "danger" },
-        () =>
-          setTimeout(
-            () => this.setState({ snackBarVisible: false, message: "" }),
-            5000
-          )
+      this.setState({ snackBarVisible: true, message: errorMessage, color: 'danger' }, () =>
+        setTimeout(() => this.setState({ snackBarVisible: false, message: '' }), 5000),
       );
     }
 
     if (selectedRow && this.props.selectedRow != selectedRow) {
-      var mode = "edit";
-      if (this.selectedRowType === "View") {
-        mode = "view";
+      var mode = 'edit';
+      if (this.selectedRowType === 'View') {
+        mode = 'view';
       }
 
-      var activeRecordId = selectedRow["Id"];
+      var activeRecordId = selectedRow['Id'];
       var initialValues = {};
       var selectRowValues = {};
       for (var key in selectedRow) {
@@ -1409,18 +1344,18 @@ class GridPanel extends PureComponent {
       this.loadFetchingModal();
     }
     if (!isLoadFetching && isLoadFetching != this.props.isLoadFetching) {
-      var activeRecordId = selectedRow["Id"];
+      var activeRecordId = selectedRow['Id'];
       modal.destroyAll();
       this.setState(
         {
           mode: mode,
           visible: true,
-          selectedRow: this.selectedRowType === "Create" ? {} : initialValues,
-          activeRecordId: "NEW_RECORD",
+          selectedRow: this.selectedRowType === 'Create' ? {} : initialValues,
+          activeRecordId: 'NEW_RECORD',
         },
         () => {
           this.setState({ selectedRow: selectRowValues, activeRecordId });
-        }
+        },
       );
     }
   }
@@ -1437,7 +1372,7 @@ class GridPanel extends PureComponent {
             onClick={this.createRow}
             disabled={isFetching}
           >
-            {t("Add")}
+            {t('Add')}
           </Button>
         </span>
       </>
@@ -1484,18 +1419,18 @@ class GridPanel extends PureComponent {
     return (
       <GridPanelWrapper>
         <div
-          className={identifier + "-class"}
+          className={identifier + '-class'}
           style={{
-            width: "100%",
-            marginLeft: "5px",
-            marginRight: "5px",
-            border: "1px solid #F0F0F0",
-            height: "600px",
+            width: '100%',
+            marginLeft: '5px',
+            marginRight: '5px',
+            border: '1px solid #F0F0F0',
+            height: '600px',
           }}
         >
           {isChild &&
             !hideTitle &&
-            (childView == "section" || childView == "flex") &&
+            (childView == 'section' || childView == 'flex') &&
             !config.parentIdentifier && (
               <div className="child-view-section-header">{config.title}</div>
             )}
@@ -1519,12 +1454,7 @@ class GridPanel extends PureComponent {
               <Option value="lastMonth">Last Month</Option>
             </Select>
           </div> */}
-          <Snackbar
-            place="tc"
-            color={color}
-            message={message}
-            open={snackBarVisible}
-          />
+          <Snackbar place="tc" color={color} message={message} open={snackBarVisible} />
           {showCustomContent ? (
             <CardView
               loadData={this.loadData}
@@ -1535,9 +1465,7 @@ class GridPanel extends PureComponent {
               isRefresh={isRefresh}
               isFetching={isFetching}
               total={total}
-              gridPreferences={
-                gridPreferences || JSON.stringify(config.gridPreferences)
-              }
+              gridPreferences={gridPreferences || JSON.stringify(config.gridPreferences)}
               autoRefresh={autoRefresh}
               config={config}
               onGridReady={this.onGridReady}
@@ -1546,9 +1474,7 @@ class GridPanel extends PureComponent {
             <AgGrid
               columns={
                 parentIdColumn
-                  ? gridColumns.filter(
-                      (item) => item.dataIndex !== parentIdColumn
-                    )
+                  ? gridColumns.filter((item) => item.dataIndex !== parentIdColumn)
                   : gridColumns
               }
               loadData={this.loadData}
@@ -1566,9 +1492,7 @@ class GridPanel extends PureComponent {
               height={gridHeight}
               pagination={pagination}
               onRowDoubleClicked={config.onRowDoubleClicked}
-              gridPreferences={
-                gridPreferences || JSON.stringify(config.gridPreferences)
-              }
+              gridPreferences={gridPreferences || JSON.stringify(config.gridPreferences)}
               pageSize={config.pageSize}
               onCellClicked={onCellClicked}
               childs={childs}
@@ -1587,9 +1511,7 @@ class GridPanel extends PureComponent {
             mode={this.state.mode}
             columns={
               parentIdColumn
-                ? config.formFields.filter(
-                    (item) => item.dataIndex !== parentIdColumn
-                  )
+                ? config.formFields.filter((item) => item.dataIndex !== parentIdColumn)
                 : config.formFields
             }
             activeRecordId={this.state.activeRecordId}
@@ -1613,15 +1535,13 @@ GridPanel.defaultProps = {
 };
 
 const mapStateToProps = (state, props) => {
-  var listIdentifier = "list_" + props.config.identifier.toLowerCase();
-  var loadIdentifier = "load_" + props.config.identifier.toLowerCase();
-  var gridPreferenceIdentifier =
-    "gridpreference_" + props.config.identifier.toLowerCase();
+  var listIdentifier = 'list_' + props.config.identifier.toLowerCase();
+  var loadIdentifier = 'load_' + props.config.identifier.toLowerCase();
+  var gridPreferenceIdentifier = 'gridpreference_' + props.config.identifier.toLowerCase();
 
   let selectedRowParent = {};
   if (props.config.isChild && props.config.parentIdentifier) {
-    var listparentIdentifier =
-      "list_" + props.config.parentIdentifier.toLowerCase();
+    var listparentIdentifier = 'list_' + props.config.parentIdentifier.toLowerCase();
     if (state[listparentIdentifier].data)
       selectedRowParent = {
         ...(state[listparentIdentifier].data.selectedRowParent || {}),
@@ -1631,8 +1551,8 @@ const mapStateToProps = (state, props) => {
   var rowData = state[loadIdentifier];
   var gridPreferenceState = state[gridPreferenceIdentifier] || {};
 
-  var listErrorMessage = "";
-  var loadErrorMessage = "";
+  var listErrorMessage = '';
+  var loadErrorMessage = '';
 
   var isLoadFetching = false;
 
@@ -1651,7 +1571,7 @@ const mapStateToProps = (state, props) => {
     filterInfo: [],
   });*/
 
-  var gridPreferences = "";
+  var gridPreferences = '';
 
   if (gridPreferenceState && gridPreferenceState.data) {
     gridPreferences = JSON.stringify(gridPreferenceState.data);
@@ -1733,9 +1653,7 @@ const mapStateToProps = (state, props) => {
     gridPreferences: gridPreferences,
   };
 };
-const ReduxGridPanel = withTranslation()(
-  connect(mapStateToProps)(withRouter(GridPanel))
-);
+const ReduxGridPanel = withTranslation()(connect(mapStateToProps)(withRouter(GridPanel)));
 
 class GridContainer extends PureComponent {
   constructor(props) {
@@ -1744,7 +1662,7 @@ class GridContainer extends PureComponent {
       selectedRow: null,
       tabId: this.props.config.tabId,
       activeRecordId: null,
-      title: "",
+      title: '',
       activePanel: 0,
     };
   }
@@ -1757,12 +1675,12 @@ class GridContainer extends PureComponent {
         })
         .map((key) => {
           console.debug(
-            "GridContainer - changed property:",
+            'GridContainer - changed property:',
             key,
-            "from",
+            'from',
             this.props[key],
-            "to",
-            nextProps[key]
+            'to',
+            nextProps[key],
           );
         });
     }
@@ -1775,18 +1693,17 @@ class GridContainer extends PureComponent {
   render() {
     const { config } = this.props;
     const { selectedRow, activeRecordId, toogle, activePanel } = this.state;
-    let title = ""; //config.title;
+    let title = ''; //config.title;
     if (selectedRow) {
       if (config.tabTitle && config.tabTitle.length > 0) {
         config.tabTitle.forEach((column) => {
-          title += column + ": " + selectedRow[column] + " ";
+          title += column + ': ' + selectedRow[column] + ' ';
         });
       }
     }
     if (
       config.child.length == 0 ||
-      ((config.childView == "flex" || config.childView == "section") &&
-        !config.parentIdentifier)
+      ((config.childView == 'flex' || config.childView == 'section') && !config.parentIdentifier)
     ) {
       return (
         <>
@@ -1877,10 +1794,10 @@ class FormContainer extends PureComponent {
 
   loadTabData = (
     { actions, parentIdentifier, parentIdColumn, type, comboTypes },
-    { filterInfo, sortInfo, currentPage, limit }
+    { filterInfo, sortInfo, currentPage, limit },
   ) => {
     const { selectedRow } = this.props;
-    if (type === "form-panel") return;
+    if (type === 'form-panel') return;
     if (Object.keys(selectedRow).length === 0) return;
     let newFilterInfo = null;
     if (filterInfo) {
@@ -1889,13 +1806,12 @@ class FormContainer extends PureComponent {
           newFilterInfo = [];
         }
         newFilterInfo.push({
-          filterTerm:
-            filterInfo[index].filterValue || filterInfo[index].filterTerm,
+          filterTerm: filterInfo[index].filterValue || filterInfo[index].filterTerm,
           filterBy: filterInfo[index].filterBy,
         });
       }
     }
-    let parentEntity = parentIdentifier.split("_");
+    let parentEntity = parentIdentifier.split('_');
     var options = {
       PageNo: 0,
       PageSize: 50,
@@ -1950,7 +1866,7 @@ class FormContainer extends PureComponent {
 const mapStateToPropsFrom = (state, props) => {
   let selectedRowParent = {};
   if (props.config.isChild && props.config.identifier) {
-    var listIdentifier = "list_" + props.config.identifier.toLowerCase();
+    var listIdentifier = 'list_' + props.config.identifier.toLowerCase();
     if (state[listIdentifier].data)
       selectedRowParent = {
         ...(state[listIdentifier].data.selectedRowParent || {}),
@@ -1975,7 +1891,7 @@ class TabContainer extends PureComponent {
     if (!newPreferences[item.key]) {
       newPreferences[item.key] = {};
     }
-    newPreferences[item.key]["tabIndex"] = tabIndex;
+    newPreferences[item.key]['tabIndex'] = tabIndex;
     this.setState({ preferences: newPreferences });
   };
 
@@ -1992,7 +1908,7 @@ class TabContainer extends PureComponent {
     }
     */
 
-    if (item.type === "grid") {
+    if (item.type === 'grid') {
       return (
         <GridContainer
           config={item}
@@ -2000,13 +1916,11 @@ class TabContainer extends PureComponent {
           parentIdColumn={item.parentIdColumn}
         />
       );
-    } else if (item.type === "form-panel") {
+    } else if (item.type === 'form-panel') {
       return (
         <SimpleForm
           selectedRow={selectedRow}
-          columns={item.columns.filter(
-            (column) => column.dataIndex !== item.parentIdColumn
-          )}
+          columns={item.columns.filter((column) => column.dataIndex !== item.parentIdColumn)}
           identifier={config.identifier}
           apiIdentifier={config.apiIdentifier}
           toggle={toogle}
@@ -2018,7 +1932,7 @@ class TabContainer extends PureComponent {
           resetProps={() => {}}
         />
       );
-    } else if (item.type === "gridonly") {
+    } else if (item.type === 'gridonly') {
       //return <OnlyGridContainer config={item} />;
     } else {
       return <div>Need to Implement</div>;
@@ -2033,12 +1947,12 @@ class TabContainer extends PureComponent {
         })
         .map((key) => {
           console.debug(
-            "TabContainer - changed property:",
+            'TabContainer - changed property:',
             key,
-            "from",
+            'from',
             this.props[key],
-            "to",
-            nextProps[key]
+            'to',
+            nextProps[key],
           );
         });
     }
@@ -2049,7 +1963,7 @@ class TabContainer extends PureComponent {
     // TO DO: need to implement close button when tabs are showing in parent container
     return (
       <>
-        {childView == "section" || childView == "flex"
+        {childView == 'section' || childView == 'flex'
           ? items &&
             items.length > 0 &&
             items.map((item) => {

@@ -1,14 +1,14 @@
-import * as React from "react";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-import { useTheme } from "@mui/material/styles";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import FormHelperText from "@mui/material/FormHelperText";
+import * as React from 'react';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import { useTheme } from '@mui/material/styles';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import FormHelperText from '@mui/material/FormHelperText';
 
 export function SelectVariants() {
-  const [age, setAge] = React.useState("");
+  const [age, setAge] = React.useState('');
 
   const handleChange = (event) => {
     setAge(event.target.value);
@@ -67,16 +67,16 @@ const MenuProps = {
 };
 
 const names = [
-  "Oliver Hansen",
-  "Van Henry",
-  "April Tucker",
-  "Ralph Hubbard",
-  "Omar Alexander",
-  "Carlos Abbott",
-  "Miriam Wagner",
-  "Bradley Wilkerson",
-  "Virginia Andrews",
-  "Kelly Snyder",
+  'Oliver Hansen',
+  'Van Henry',
+  'April Tucker',
+  'Ralph Hubbard',
+  'Omar Alexander',
+  'Carlos Abbott',
+  'Miriam Wagner',
+  'Bradley Wilkerson',
+  'Virginia Andrews',
+  'Kelly Snyder',
 ];
 
 function getStyles(name, personName, theme) {
@@ -98,7 +98,7 @@ export function MultipleSelectPlaceholder() {
     } = event;
     setPersonName(
       // On autofill we get a stringified value.
-      typeof value === "string" ? value.split(",") : value,
+      typeof value === 'string' ? value.split(',') : value,
     );
   };
 
@@ -116,20 +116,16 @@ export function MultipleSelectPlaceholder() {
               return <em>Placeholder</em>;
             }
 
-            return selected.join(", ");
+            return selected.join(', ');
           }}
           MenuProps={MenuProps}
-          inputProps={{ "aria-label": "Without label" }}
+          inputProps={{ 'aria-label': 'Without label' }}
         >
           <MenuItem disabled value="">
             <em>Placeholder</em>
           </MenuItem>
           {names.map((name) => (
-            <MenuItem
-              key={name}
-              value={name}
-              style={getStyles(name, personName, theme)}
-            >
+            <MenuItem key={name} value={name} style={getStyles(name, personName, theme)}>
               {name}
             </MenuItem>
           ))}
@@ -140,7 +136,7 @@ export function MultipleSelectPlaceholder() {
 }
 
 export function SelectSmall() {
-  const [age, setAge] = React.useState("");
+  const [age, setAge] = React.useState('');
 
   const handleChange = (event) => {
     setAge(event.target.value);
@@ -168,7 +164,7 @@ export function SelectSmall() {
 }
 
 export function SelectOtherProps() {
-  const [age, setAge] = React.useState("");
+  const [age, setAge] = React.useState('');
 
   const handleChange = (event) => {
     setAge(event.target.value);

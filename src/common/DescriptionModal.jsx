@@ -1,6 +1,6 @@
-import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/solid";
-import { Typography, Input, Textarea } from "@material-tailwind/react";
-import React, { useState } from "react";
+import { EyeIcon, EyeSlashIcon } from '@heroicons/react/24/solid';
+import { Typography, Input, Textarea } from '@material-tailwind/react';
+import React, { useState } from 'react';
 
 const DescriptionModal = (props) => {
   const { label, icon, action } = props;
@@ -14,15 +14,15 @@ const DescriptionModal = (props) => {
 
       <Textarea
         shadow={false}
-        type={`${false ? "text" : "Sort Description"}`}
+        type={`${false ? 'text' : 'Sort Description'}`}
         placeholder="Enter here"
         variant="static"
         className=" bg-white p-0 m-0  ring-4 ring-transparent  "
         labelProps={{
-          className: "hidden",
+          className: 'hidden',
         }}
-        containerProps={{ className: "min-w-[100px] -mt-5" }}
-        style={{ border: "none", padding: 0, margin: 0 }}
+        containerProps={{ className: 'min-w-[100px] -mt-5' }}
+        style={{ border: 'none', padding: 0, margin: 0 }}
       />
     </div>
   );

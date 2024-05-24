@@ -9,7 +9,7 @@ import { ImageUpload } from './image-upload';
 import { VideoUpload } from './video-upload';
 import { MultiInput } from './multi-inputs';
 import { CustomReduxAutoComplete } from './custom-redux-auto-complete';
-import { CustomDateTimeInput } from './custom-date-time'
+import { CustomDateTimeInput } from './custom-date-time';
 
 export {
   InputComponent,
@@ -23,5 +23,5 @@ export {
   VideoUpload,
   MultiInput,
   CustomReduxAutoComplete,
-  CustomDateTimeInput
+  CustomDateTimeInput,
 };

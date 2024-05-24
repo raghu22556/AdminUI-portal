@@ -1,32 +1,27 @@
-import * as React from "react";
-import ViewListIcon from "@mui/icons-material/ViewList";
-import ViewModuleIcon from "@mui/icons-material/ViewModule";
-import ViewQuiltIcon from "@mui/icons-material/ViewQuilt";
-import ToggleButton from "@mui/material/ToggleButton";
-import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
-import FormatAlignLeftIcon from "@mui/icons-material/FormatAlignLeft";
-import FormatAlignCenterIcon from "@mui/icons-material/FormatAlignCenter";
-import FormatAlignRightIcon from "@mui/icons-material/FormatAlignRight";
-import LaptopIcon from "@mui/icons-material/Laptop";
-import TvIcon from "@mui/icons-material/Tv";
-import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
-import Stack from "@mui/material/Stack";
-import CheckIcon from "@mui/icons-material/Check";
+import * as React from 'react';
+import ViewListIcon from '@mui/icons-material/ViewList';
+import ViewModuleIcon from '@mui/icons-material/ViewModule';
+import ViewQuiltIcon from '@mui/icons-material/ViewQuilt';
+import ToggleButton from '@mui/material/ToggleButton';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+import FormatAlignLeftIcon from '@mui/icons-material/FormatAlignLeft';
+import FormatAlignCenterIcon from '@mui/icons-material/FormatAlignCenter';
+import FormatAlignRightIcon from '@mui/icons-material/FormatAlignRight';
+import LaptopIcon from '@mui/icons-material/Laptop';
+import TvIcon from '@mui/icons-material/Tv';
+import PhoneAndroidIcon from '@mui/icons-material/PhoneAndroid';
+import Stack from '@mui/material/Stack';
+import CheckIcon from '@mui/icons-material/Check';
 
 export function VerticalToggleButtons() {
-  const [view, setView] = React.useState("list");
+  const [view, setView] = React.useState('list');
 
   const handleChange = (event, nextView) => {
     setView(nextView);
   };
 
   return (
-    <ToggleButtonGroup
-      orientation="vertical"
-      value={view}
-      exclusive
-      onChange={handleChange}
-    >
+    <ToggleButtonGroup orientation="vertical" value={view} exclusive onChange={handleChange}>
       <ToggleButton value="list" aria-label="list">
         <ViewListIcon />
       </ToggleButton>
@@ -41,8 +36,8 @@ export function VerticalToggleButtons() {
 }
 
 export function ToggleButtonNotEmpty() {
-  const [alignment, setAlignment] = React.useState("left");
-  const [devices, setDevices] = React.useState(() => ["phone"]);
+  const [alignment, setAlignment] = React.useState('left');
+  const [devices, setDevices] = React.useState(() => ['phone']);
 
   const handleAlignment = (event, newAlignment) => {
     if (newAlignment !== null) {
@@ -75,11 +70,7 @@ export function ToggleButtonNotEmpty() {
         </ToggleButton>
       </ToggleButtonGroup>
 
-      <ToggleButtonGroup
-        value={devices}
-        onChange={handleDevices}
-        aria-label="device"
-      >
+      <ToggleButtonGroup value={devices} onChange={handleDevices} aria-label="device">
         <ToggleButton value="laptop" aria-label="laptop">
           <LaptopIcon />
         </ToggleButton>
@@ -113,7 +104,7 @@ export function StandaloneToggleButton() {
 // color
 
 export function ColorToggleButton() {
-  const [alignment, setAlignment] = React.useState("web");
+  const [alignment, setAlignment] = React.useState('web');
 
   const handleChange = (event, newAlignment) => {
     setAlignment(newAlignment);

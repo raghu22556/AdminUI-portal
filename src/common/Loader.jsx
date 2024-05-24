@@ -1,5 +1,5 @@
-import { Spinner } from "@material-tailwind/react";
-import React from "react";
+import { Spinner } from '@material-tailwind/react';
+import React from 'react';
 
 function Loader({ isLoading }) {
   return (

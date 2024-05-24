@@ -16,11 +16,11 @@ const Demo = () => {
 
 //Demo();
 
-  axios.defaults.baseURL = URL + APIVersion;
-  axios.defaults.headers.common['Content-Type'] = 'application/json';
-  axios.defaults.headers.common['Decoder'] = 'Pascal';
+axios.defaults.baseURL = URL + APIVersion;
+axios.defaults.headers.common['Content-Type'] = 'application/json';
+axios.defaults.headers.common['Decoder'] = 'Pascal';
 
-const onRequestSuccess = config => {
+const onRequestSuccess = (config) => {
   console.debug('request success', config);
   var tokenObject = localStorage.getItem('cube:token');
   if (tokenObject) {
@@ -30,18 +30,18 @@ const onRequestSuccess = config => {
   return config;
 };
 
-const onRequestFail = error => {
+const onRequestFail = (error) => {
   console.debug('request error', error);
   return Promise.reject(error);
 };
 
 axios.interceptors.request.use(onRequestSuccess, onRequestFail);
 
-const onResponseSuccess = response => {
+const onResponseSuccess = (response) => {
   console.debug('response success', response);
   return response;
 };
-const onResponseFail = error => {
+const onResponseFail = (error) => {
   console.debug('response error', error);
   return Promise.reject(error);
 };
@@ -51,7 +51,7 @@ axios.interceptors.response.use(onResponseSuccess, onResponseFail);
 const TriggerAxiosPost = (apiUrl, param) => {
   if (isJWTAuthentication) {
     return axios.post(apiUrl, param);
-  } else if(isOAUTHAuthentication){
+  } else if (isOAUTHAuthentication) {
     alert('Need to handle url for isOAUTHAuthentication');
     const defaultOptions = {
       baseURL: URL,
@@ -71,17 +71,17 @@ const TriggerAxiosPost = (apiUrl, param) => {
     formBody = formBody.join('&');
     return instance.post('connect/token', formBody);
   }
-}
+};
 
 export default class API {
-  static login = param => {
+  static login = (param) => {
     return TriggerAxiosPost(URLs.login, param);
   };
-  static createSuperAdmin = param => {
+  static createSuperAdmin = (param) => {
     return TriggerAxiosPost(URLs.createSuperAdmin, param);
   };
 
-  static refreshToken = param => {
+  static refreshToken = (param) => {
     const defaultOptions = {
       baseURL: URL,
       timeout: 36000,
@@ -100,7 +100,7 @@ export default class API {
     return instance.post('connect/token', formBody);
   };
 
-  static recoverPassword = param => {
+  static recoverPassword = (param) => {
     const defaultOptions = {
       baseURL: URL,
       timeout: 36000,
@@ -150,30 +150,30 @@ export default class API {
 
   static triggerMultiPartPost = (url, param, files) => {
     var action = param.action;
-      delete param.action;
-      delete param.apiIdentifier;
-      //return axios.post(url + '/' + action, param);
+    delete param.action;
+    delete param.apiIdentifier;
+    //return axios.post(url + '/' + action, param);
 
-      const formData = new FormData();
-      for (var property in param) {
-        formData.append(property, param[property]);
+    const formData = new FormData();
+    for (var property in param) {
+      formData.append(property, param[property]);
+    }
+
+    if (files) {
+      for (var file of files) {
+        formData.append('ImageInfo', file);
       }
+    }
 
-      if (files) {
-        for (var file of files) {
-          formData.append('ImageInfo', file);
-        }
-      }
-
-      const config = {
-        headers: {
-          'content-type': 'multipart/form-data',
-        },
-      };
-      return axios.post(API.getURL(url, 'MultiPart' + action), formData, config);
+    const config = {
+      headers: {
+        'content-type': 'multipart/form-data',
+      },
+    };
+    return axios.post(API.getURL(url, 'MultiPart' + action), formData, config);
   };
 
-  static autoFill = param => {
+  static autoFill = (param) => {
     const accessToken = JSON.parse(localStorage.getItem('cube:token')).access_token;
     var identifier = param.identifier;
     delete param.identifier;

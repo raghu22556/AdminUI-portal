@@ -1,10 +1,10 @@
-import { Badge, Button, IconButton, Avatar } from "@material-tailwind/react";
-import { HomeIcon } from "@heroicons/react/24/solid";
+import { Badge, Button, IconButton, Avatar } from '@material-tailwind/react';
+import { HomeIcon } from '@heroicons/react/24/solid';
 
 export function BadgeColors(props) {
   return (
     <>
-      <h1 style={{ marginTop: "30px" }}>{props.label}</h1>
+      <h1 style={{ marginTop: '30px' }}>{props.label}</h1>
       <br />
       <div className="flex items-center gap-4">
         <Badge color="red">
@@ -27,7 +27,7 @@ export function BadgeColors(props) {
 export function BadgeOverlap(props) {
   return (
     <>
-      <h1 style={{ marginTop: "30px" }}>{props.label}</h1>
+      <h1 style={{ marginTop: '30px' }}>{props.label}</h1>
       <br />
       <div className="flex items-center gap-8">
         <Badge content="5">

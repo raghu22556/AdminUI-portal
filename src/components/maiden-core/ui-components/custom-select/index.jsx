@@ -7,17 +7,8 @@ export class CustomSelect extends InputComponent {
     super(props);
   }
   render() {
-    const {
-      options,
-      onChange,
-      name,
-      value,
-      allowZeros,
-      mode,
-      mappingId,
-      title,
-      disabled,
-    } = this.props;
+    const { options, onChange, name, value, allowZeros, mode, mappingId, title, disabled } =
+      this.props;
     var additionalProps = {};
     if (mode == 'multiple') {
       additionalProps = { multiple: true };
@@ -49,7 +40,7 @@ export class CustomSelect extends InputComponent {
               : true;
           }}
         >
-          {options.map(option => (
+          {options.map((option) => (
             <MenuItem
               style={{ zIndex: '999999999' }}
               title={option.DisplayValue}

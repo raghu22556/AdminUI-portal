@@ -29,7 +29,7 @@ class NavPills extends React.Component {
     this.setState({ active });
     if (onSelect && typeof onSelect === 'function') onSelect(active);
   };
-  handleChangeIndex = index => {
+  handleChangeIndex = (index) => {
     this.setState({ active: index });
   };
   render() {

@@ -40,7 +40,7 @@ export const CONFIG = [
 let dynamicConfig = JSON.parse(localStorage.getItem('dynamicConfig'));
 let mapping = [];
 if (null != dynamicConfig) {
-  mapping = dynamicConfig.map(item => {
+  mapping = dynamicConfig.map((item) => {
     return { ...item, actions: [...defaultActions] };
   });
 }

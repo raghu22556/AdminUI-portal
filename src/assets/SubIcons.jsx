@@ -1,12 +1,6 @@
-export default function SubIcons({ color = "#6499E9" }) {
+export default function SubIcons({ color = '#6499E9' }) {
   return (
-    <svg
-      width="20"
-      height="20"
-      viewBox="0 0 20 20"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         d="M2.62505 11.375C2.53983 10.9217 2.49794 10.4613 2.50008 10C2.49908 8.44887 2.97951 6.93573 3.87512 5.66933C4.77074 4.40285 6.03729 3.44566 7.50008 2.92969V8.55469L2.62505 11.375Z"
         fill="black"

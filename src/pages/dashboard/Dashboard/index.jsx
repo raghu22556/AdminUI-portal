@@ -1,12 +1,12 @@
-import Layout from "../../../components/Layout";
-import { Button, Typography } from "@material-tailwind/react";
-import { GrAdd } from "react-icons/gr";
-import LineChart from "./Charts/LineChart";
-import ProgresBar from "./Charts/ProgresBar";
-import Cards from "./Cards";
-import BarChart from "./Charts/BarChart";
-import PieChart from "./Charts/PieChart";
-import { withTranslation } from "react-i18next";
+import Layout from '../../../components/Layout';
+import { Button, Typography } from '@material-tailwind/react';
+import { GrAdd } from 'react-icons/gr';
+import LineChart from './Charts/LineChart';
+import ProgresBar from './Charts/ProgresBar';
+import Cards from './Cards';
+import BarChart from './Charts/BarChart';
+import PieChart from './Charts/PieChart';
+import { withTranslation } from 'react-i18next';
 
 // import "ag-grid-community/styles//ag-grid.css";
 // import "ag-grid-community/styles//ag-theme-quartz.css";
@@ -18,23 +18,23 @@ const Dashboard = (props) => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 overflow-hidden">
         <div className="flex flex-col lg:flex-row justify-between mt-4">
           <Typography className="text-xl font-poppins text-black font-bold text-center  lg:text-left mb-4 lg:mb-0">
-            {t("Dashboard")}
+            {t('Dashboard')}
           </Typography>
           {/* Dashboard */}
           <div className="flex flex-col lg:flex-row gap-2">
             <Button className="flex items-center gap-3 border border-[#6499E9] text-[#6499E9] bg-transparent mb-2 lg:mb-0 font-normal font-semibold">
               <GrAdd />
-              {t("Create Table")}
+              {t('Create Table')}
             </Button>
 
             <Button className="flex items-center gap-3 bg-[#95A4FC] mb-2 lg:mb-0  font-semibold">
               <GrAdd />
-              {t("Add Module")}
+              {t('Add Module')}
             </Button>
 
             <Button className="flex items-center gap-3 bg-[#6499E9] mb-2 lg:mb-0 font-semibold">
               <GrAdd />
-              {t("Create Project")}
+              {t('Create Project')}
             </Button>
           </div>
         </div>

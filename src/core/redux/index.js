@@ -10,7 +10,7 @@ export default class ReduxGenerator {
     const requestType = `${actionName.toUpperCase()}_REQUEST`;
     const successType = `${actionName.toUpperCase()}_SUCCESS`;
     const failedType = `${actionName.toUpperCase()}_FAILURE`;
-    return function(state = { ...defaults }, action) {
+    return function (state = { ...defaults }, action) {
       switch (action.type) {
         case resetType:
           return { ...state, ...defaults };

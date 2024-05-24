@@ -1,5 +1,5 @@
-import { Checkbox } from "@material-tailwind/react";
-import React, { useState } from "react";
+import { Checkbox } from '@material-tailwind/react';
+import React, { useState } from 'react';
 
 const GridHeaderCheckbox = (props) => {
   const [state, setState] = useState(false);

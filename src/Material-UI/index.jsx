@@ -5,26 +5,22 @@ import {
   ValidationTextFields,
   InputWithIcon,
   FormPropsTextFields,
-} from "./MUI-components/inputs";
+} from './MUI-components/inputs';
 import {
   SelectVariants,
   MultipleSelectPlaceholder,
   SelectSmall,
   SelectOtherProps,
-} from "./MUI-components/select";
+} from './MUI-components/select';
 import {
   BasicButtons,
   TextButtons,
   IconLabelButtons,
   ButtonSizes,
   ColorButtons,
-} from "./MUI-components/button";
+} from './MUI-components/button';
 
-import {
-  ColorBadge,
-  CustomColorBadge,
-  BadgeOverlap,
-} from "./MUI-components/badge";
+import { ColorBadge, CustomColorBadge, BadgeOverlap } from './MUI-components/badge';
 
 import {
   Checkboxes,
@@ -34,21 +30,21 @@ import {
   IndeterminateCheckbox,
   SizeCheckboxes,
   ColorCheckboxes,
-} from "./MUI-components/checkbox";
+} from './MUI-components/checkbox';
 
 import {
   RadioButtonsGroup,
   RowRadioButtonsGroup,
   ColorRadioButtons,
   ErrorRadios,
-} from "./MUI-components/radioButton";
-import { HoverRating, BasicRating } from "./MUI-components/feedback";
+} from './MUI-components/radioButton';
+import { HoverRating, BasicRating } from './MUI-components/feedback';
 import {
   BasicSwitches,
   SwitchLabels,
   ColorSwitches,
   CustomizedSwitches,
-} from "./MUI-components/switch";
+} from './MUI-components/switch';
 
 import {
   ContinuousSlider,
@@ -56,14 +52,14 @@ import {
   InputSlider,
   NonLinearSlider,
   ColorSlider,
-} from "./MUI-components/slider";
-import { SelectAllTransferList } from "./MUI-components/transferList";
+} from './MUI-components/slider';
+import { SelectAllTransferList } from './MUI-components/transferList';
 import {
   VerticalToggleButtons,
   ToggleButtonNotEmpty,
   StandaloneToggleButton,
   ColorToggleButton,
-} from "./MUI-components/toggleButton";
+} from './MUI-components/toggleButton';
 
 import {
   ImageAvatars,
@@ -71,14 +67,14 @@ import {
   SizeAvatars,
   TotalAvatars,
   BadgeAvatars,
-} from "./MUI-components/avatar";
+} from './MUI-components/avatar';
 
-import BasicCard from "./MUI-components/cards";
+import BasicCard from './MUI-components/cards';
 
 function MuiComponents() {
   return (
     // rendering the left-part
-    <div style={{ display: "flex", justifyContent: "space-between" }}>
+    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
       <div style={{ flex: 1, marginRight: 20, marginLeft: 20 }}>
         <h1 style={{ paddingLeft: 20, paddingTop: 20 }}>
           <b>Input Variants</b>

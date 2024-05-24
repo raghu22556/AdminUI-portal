@@ -1,5 +1,5 @@
 //export const URL = window.location.origin;
-export const URL = 'https://cubeapp.azurewebsites.net'
+export const URL = 'https://cubeapp.azurewebsites.net';
 export const EnableLogs = false;
 export const isJWTAuthentication = true;
 export const isOAUTHAuthentication = false;

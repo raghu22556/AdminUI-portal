@@ -1,8 +1,8 @@
-import { LineChart } from "@mui/x-charts/LineChart";
+import { LineChart } from '@mui/x-charts/LineChart';
 
 const uData = [5000, 3000, 2000, 2780, 1890, 2390, 3490];
 const pData = [2400, 1398, 4000, 3908, 4800, 3800, 4300];
-const xLabels = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+const xLabels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
 export default function SimpleLineChart() {
   return (
@@ -12,7 +12,7 @@ export default function SimpleLineChart() {
           width={620}
           height={170}
           series={[{ data: pData }, { data: uData }]}
-          xAxis={[{ scaleType: "point", data: xLabels }]}
+          xAxis={[{ scaleType: 'point', data: xLabels }]}
         />
       </div>
     </div>

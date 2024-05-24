@@ -1,7 +1,6 @@
-import { takeLatest, all } from "redux-saga/effects";
-import { genericFunction, handleError } from "./core";
-import { ReduxHelper } from "../../core/redux-helper";
-
+import { takeLatest, all } from 'redux-saga/effects';
+import { genericFunction, handleError } from './core';
+import { ReduxHelper } from '../../core/redux-helper';
 
 export default function* root() {
   var APIs = [takeLatest(ReduxHelper.ActionTypes.HANDLE_ERRORS_REQUEST, handleError)];

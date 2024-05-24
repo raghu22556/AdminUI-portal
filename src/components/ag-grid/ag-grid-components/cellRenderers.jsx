@@ -7,7 +7,7 @@ class CustomCellRenderer extends PureComponent {
     const { value } = this.props;
     return <span title={value}>{value}</span>;
   }
-} 
+}
 
 class IconCellRenderer extends PureComponent {
   render() {
@@ -31,7 +31,7 @@ class ComboCellRenderer extends PureComponent {
     let value = '';
     if (this.props.context.componentParent.props.combos[comboType])
       value = this.props.context.componentParent.props.combos[comboType].find(
-        item => item.LookupId == props.value,
+        (item) => item.LookupId == props.value,
       );
     this.state = {
       value,
@@ -40,7 +40,7 @@ class ComboCellRenderer extends PureComponent {
     };
   }
 
-  refresh = props => {
+  refresh = (props) => {
     const { defaultValue } = this.state;
     if (!this.state.value || props.value !== this.state.value.LookupId) {
       var comboType = this.props.colDef.comboType;
@@ -49,7 +49,7 @@ class ComboCellRenderer extends PureComponent {
       const combos = this.props.context.componentParent.props.combos;
       const checkWarning = this.props.colDef.checkWarning;
       if (combos[comboType]) {
-        value = combos[comboType].find(item => item.LookupId == props.value);
+        value = combos[comboType].find((item) => item.LookupId == props.value);
         if (checkWarning) {
           isWarning = defaultValue[checkWarning] == value[checkWarning];
         } else isWarning = false;
@@ -86,12 +86,12 @@ class ComboCellRendererMulti extends PureComponent {
       let value = [];
       let combos = this.props.context.componentParent.props.combos;
       if (combos[comboType] && combos[comboType].length > 0) {
-        value = combos[comboType].filter(item => {
+        value = combos[comboType].filter((item) => {
           return filterVal.indexOf(item.LookupId.toString()) >= 0;
         });
       }
 
-      value = value.map(item => item.DisplayValue).toString();
+      value = value.map((item) => item.DisplayValue).toString();
       this.state = {
         value,
       };
@@ -132,7 +132,7 @@ class OparationCellRenderer extends PureComponent {
       });
   }
 
-  handleMenuClick = e => {
+  handleMenuClick = (e) => {
     this.props.context.componentParent.props.selectRow(this.props.rowIndex, e.key);
   };
 
@@ -140,7 +140,7 @@ class OparationCellRenderer extends PureComponent {
     return (
       <>
         <DropOption
-          onMenuClick={e => this.handleMenuClick(e)}
+          onMenuClick={(e) => this.handleMenuClick(e)}
           menuOptions={this.state.options}
           dropdownProps={{ trigger: ['click'] }}
         />

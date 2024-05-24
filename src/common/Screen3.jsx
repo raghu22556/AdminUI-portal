@@ -1,8 +1,5 @@
-import { PencilIcon } from "@heroicons/react/24/solid";
-import {
-  ArrowDownTrayIcon,
-  MagnifyingGlassIcon,
-} from "@heroicons/react/24/outline";
+import { PencilIcon } from '@heroicons/react/24/solid';
+import { ArrowDownTrayIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import {
   Card,
   CardHeader,
@@ -15,60 +12,60 @@ import {
   IconButton,
   Tooltip,
   Input,
-} from "@material-tailwind/react";
+} from '@material-tailwind/react';
 
-const TABLE_HEAD = ["Transaction", "Amount", "Date", "Status", "Account", ""];
+const TABLE_HEAD = ['Transaction', 'Amount', 'Date', 'Status', 'Account', ''];
 
 const TABLE_ROWS = [
   {
-    img: "https://docs.material-tailwind.com/img/logos/logo-spotify.svg",
-    name: "Spotify",
-    amount: "$2,500",
-    date: "Wed 3:00pm",
-    status: "paid",
-    account: "visa",
-    accountNumber: "1234",
-    expiry: "06/2026",
+    img: 'https://docs.material-tailwind.com/img/logos/logo-spotify.svg',
+    name: 'Spotify',
+    amount: '$2,500',
+    date: 'Wed 3:00pm',
+    status: 'paid',
+    account: 'visa',
+    accountNumber: '1234',
+    expiry: '06/2026',
   },
   {
-    img: "https://docs.material-tailwind.com/img/logos/logo-amazon.svg",
-    name: "Amazon",
-    amount: "$5,000",
-    date: "Wed 1:00pm",
-    status: "paid",
-    account: "master-card",
-    accountNumber: "1234",
-    expiry: "06/2026",
+    img: 'https://docs.material-tailwind.com/img/logos/logo-amazon.svg',
+    name: 'Amazon',
+    amount: '$5,000',
+    date: 'Wed 1:00pm',
+    status: 'paid',
+    account: 'master-card',
+    accountNumber: '1234',
+    expiry: '06/2026',
   },
   {
-    img: "https://docs.material-tailwind.com/img/logos/logo-pinterest.svg",
-    name: "Pinterest",
-    amount: "$3,400",
-    date: "Mon 7:40pm",
-    status: "pending",
-    account: "master-card",
-    accountNumber: "1234",
-    expiry: "06/2026",
+    img: 'https://docs.material-tailwind.com/img/logos/logo-pinterest.svg',
+    name: 'Pinterest',
+    amount: '$3,400',
+    date: 'Mon 7:40pm',
+    status: 'pending',
+    account: 'master-card',
+    accountNumber: '1234',
+    expiry: '06/2026',
   },
   {
-    img: "https://docs.material-tailwind.com/img/logos/logo-google.svg",
-    name: "Google",
-    amount: "$1,000",
-    date: "Wed 5:00pm",
-    status: "paid",
-    account: "visa",
-    accountNumber: "1234",
-    expiry: "06/2026",
+    img: 'https://docs.material-tailwind.com/img/logos/logo-google.svg',
+    name: 'Google',
+    amount: '$1,000',
+    date: 'Wed 5:00pm',
+    status: 'paid',
+    account: 'visa',
+    accountNumber: '1234',
+    expiry: '06/2026',
   },
   {
-    img: "https://docs.material-tailwind.com/img/logos/logo-netflix.svg",
-    name: "netflix",
-    amount: "$14,000",
-    date: "Wed 3:30am",
-    status: "cancelled",
-    account: "visa",
-    accountNumber: "1234",
-    expiry: "06/2026",
+    img: 'https://docs.material-tailwind.com/img/logos/logo-netflix.svg',
+    name: 'netflix',
+    amount: '$14,000',
+    date: 'Wed 3:30am',
+    status: 'cancelled',
+    account: 'visa',
+    accountNumber: '1234',
+    expiry: '06/2026',
   },
 ];
 
@@ -77,40 +74,28 @@ export default function Screen3() {
     <div className="flex h-screen bg-gray-100">
       <aside className="w-60 bg-gray-100 p-5">
         <div className="mb-8">
-          <h2
-            className="text-lg font-semibold"
-            style={{ color: "#5c8ed5", fontSize: "18px" }}
-          >
+          <h2 className="text-lg font-semibold" style={{ color: '#5c8ed5', fontSize: '18px' }}>
             MaidenCube
           </h2>
           <nav className="mt-2">
-            <a
-              className="flex items-center space-x-2 py-1 text-gray-700"
-              href="#"
-            >
+            <a className="flex items-center space-x-2 py-1 text-gray-700" href="#">
               <LayoutDashboardIcon className="h-4 w-4" />
-              <span style={{ marginLeft: "10px" }}>Dashboard</span>
+              <span style={{ marginLeft: '10px' }}>Dashboard</span>
             </a>
             <a
               className="flex items-center space-x-2 py-1 text-gray-700 bg-gray-200 rounded"
               href="#"
             >
               <LayoutDashboardIcon className="h-4 w-4" />
-              <span style={{ marginLeft: "10px" }}>Projects</span>
+              <span style={{ marginLeft: '10px' }}>Projects</span>
             </a>
-            <a
-              className="flex items-center space-x-2 py-1 text-gray-700"
-              href="#"
-            >
+            <a className="flex items-center space-x-2 py-1 text-gray-700" href="#">
               <LayoutDashboardIcon className="h-4 w-4" />
-              <span style={{ marginLeft: "10px" }}>Profile</span>
+              <span style={{ marginLeft: '10px' }}>Profile</span>
             </a>
-            <a
-              className="flex items-center space-x-2 py-1 text-gray-700"
-              href="#"
-            >
+            <a className="flex items-center space-x-2 py-1 text-gray-700" href="#">
               <LayoutDashboardIcon className="h-4 w-4" />
-              <span style={{ marginLeft: "10px" }}>Reports</span>
+              <span style={{ marginLeft: '10px' }}>Reports</span>
             </a>
           </nav>
         </div>
@@ -118,33 +103,21 @@ export default function Screen3() {
           <br />
           <h3 className="text-sm font-semibold ">Masters</h3>
           <nav className="mt-2">
-            <a
-              className="flex items-center space-x-2 py-1 text-gray-700"
-              href="#"
-            >
+            <a className="flex items-center space-x-2 py-1 text-gray-700" href="#">
               <ViewIcon className="h-4 w-4" />
-              <span style={{ marginLeft: "10px" }}>User Management</span>
+              <span style={{ marginLeft: '10px' }}>User Management</span>
             </a>
-            <a
-              className="flex items-center space-x-2 py-1 text-gray-700"
-              href="#"
-            >
+            <a className="flex items-center space-x-2 py-1 text-gray-700" href="#">
               <ViewIcon className="h-4 w-4" />
-              <span style={{ marginLeft: "10px" }}>Designations</span>
+              <span style={{ marginLeft: '10px' }}>Designations</span>
             </a>
-            <a
-              className="flex items-center space-x-2 py-1 text-gray-700"
-              href="#"
-            >
+            <a className="flex items-center space-x-2 py-1 text-gray-700" href="#">
               <ViewIcon className="h-4 w-4" />
-              <span style={{ marginLeft: "10px" }}>Roles</span>
+              <span style={{ marginLeft: '10px' }}>Roles</span>
             </a>
-            <a
-              className="flex items-center space-x-2 py-1 text-gray-700"
-              href="#"
-            >
+            <a className="flex items-center space-x-2 py-1 text-gray-700" href="#">
               <ViewIcon className="h-4 w-4" />
-              <span style={{ marginLeft: "10px" }}>Access Control</span>
+              <span style={{ marginLeft: '10px' }}>Access Control</span>
             </a>
           </nav>
         </div>
@@ -152,13 +125,13 @@ export default function Screen3() {
       <div className="flex-1 px-10 py-8">
         <div className="mt-8">
           <div className="mt-4 flex space-x-4"></div>
-          <Card className="h-full w-full" style={{ margin: "0px !important" }}>
+          <Card className="h-full w-full" style={{ margin: '0px !important' }}>
             <CardHeader floated={false} shadow={false} className="rounded-none">
               <div className="flex justify-between">
                 <p className="text-lg font-semibold">Project</p>
                 <div className="flex items-center space-x-7">
                   <BellIcon className="h-6 w-6 text-gray-600" />
-                  <span style={{ marginLeft: "10px" }}></span>
+                  <span style={{ marginLeft: '10px' }}></span>
                   <UserCircleIcon className="h-6 w-6 text-gray-600" />
                 </div>
               </div>
@@ -168,17 +141,12 @@ export default function Screen3() {
               <div className="mb-4 flex flex-col justify-between gap-8 md:flex-row md:items-center">
                 <div className="flex justify-between">
                   <h2 className="text-lg font-semibold">Project 01</h2>
-                  <Button className="bg-blue-500 text-white">
-                    + Add Module
-                  </Button>
+                  <Button className="bg-blue-500 text-white">+ Add Module</Button>
                 </div>
 
                 <div className="flex justify-between">
                   <div className=" md:w-72">
-                    <Input
-                      label="Search"
-                      icon={<MagnifyingGlassIcon className="h-5 w-5" />}
-                    />
+                    <Input label="Search" icon={<MagnifyingGlassIcon className="h-5 w-5" />} />
                   </div>
                 </div>
               </div>
@@ -206,22 +174,11 @@ export default function Screen3() {
                 <tbody>
                   {TABLE_ROWS.map(
                     (
-                      {
-                        img,
-                        name,
-                        amount,
-                        date,
-                        status,
-                        account,
-                        accountNumber,
-                        expiry,
-                      },
+                      { img, name, amount, date, status, account, accountNumber, expiry },
                       index,
                     ) => {
                       const isLast = index === TABLE_ROWS.length - 1;
-                      const classes = isLast
-                        ? "p-4"
-                        : "p-4 border-b border-blue-gray-50";
+                      const classes = isLast ? 'p-4' : 'p-4 border-b border-blue-gray-50';
 
                       return (
                         <tr key={name}>
@@ -233,30 +190,18 @@ export default function Screen3() {
                                 size="md"
                                 className="border border-blue-gray-50 bg-blue-gray-50/50 object-contain p-1"
                               />
-                              <Typography
-                                variant="small"
-                                color="blue-gray"
-                                className="font-bold"
-                              >
+                              <Typography variant="small" color="blue-gray" className="font-bold">
                                 {name}
                               </Typography>
                             </div>
                           </td>
                           <td className={classes}>
-                            <Typography
-                              variant="small"
-                              color="blue-gray"
-                              className="font-normal"
-                            >
+                            <Typography variant="small" color="blue-gray" className="font-normal">
                               {amount}
                             </Typography>
                           </td>
                           <td className={classes}>
-                            <Typography
-                              variant="small"
-                              color="blue-gray"
-                              className="font-normal"
-                            >
+                            <Typography variant="small" color="blue-gray" className="font-normal">
                               {date}
                             </Typography>
                           </td>
@@ -267,11 +212,11 @@ export default function Screen3() {
                                 variant="ghost"
                                 value={status}
                                 color={
-                                  status === "paid"
-                                    ? "green"
-                                    : status === "pending"
-                                      ? "amber"
-                                      : "red"
+                                  status === 'paid'
+                                    ? 'green'
+                                    : status === 'pending'
+                                      ? 'amber'
+                                      : 'red'
                                 }
                               />
                             </div>
@@ -281,9 +226,9 @@ export default function Screen3() {
                               <div className="h-9 w-12 rounded-md border border-blue-gray-50 p-1">
                                 <Avatar
                                   src={
-                                    account === "visa"
-                                      ? "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/logos/visa.png"
-                                      : "https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/logos/mastercard.png"
+                                    account === 'visa'
+                                      ? 'https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/logos/visa.png'
+                                      : 'https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/logos/mastercard.png'
                                   }
                                   size="sm"
                                   alt={account}
@@ -297,7 +242,7 @@ export default function Screen3() {
                                   color="blue-gray"
                                   className="font-normal capitalize"
                                 >
-                                  {account.split("-").join(" ")} {accountNumber}
+                                  {account.split('-').join(' ')} {accountNumber}
                                 </Typography>
                                 <Typography
                                   variant="small"

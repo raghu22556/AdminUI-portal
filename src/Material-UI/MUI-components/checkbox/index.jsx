@@ -1,17 +1,17 @@
-import * as React from "react";
-import Checkbox from "@mui/material/Checkbox";
-import FormGroup from "@mui/material/FormGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
-import Favorite from "@mui/icons-material/Favorite";
-import BookmarkBorderIcon from "@mui/icons-material/BookmarkBorder";
-import BookmarkIcon from "@mui/icons-material/Bookmark";
-import { pink } from "@mui/material/colors";
-import Box from "@mui/material/Box";
+import * as React from 'react';
+import Checkbox from '@mui/material/Checkbox';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FavoriteBorder from '@mui/icons-material/FavoriteBorder';
+import Favorite from '@mui/icons-material/Favorite';
+import BookmarkBorderIcon from '@mui/icons-material/BookmarkBorder';
+import BookmarkIcon from '@mui/icons-material/Bookmark';
+import { pink } from '@mui/material/colors';
+import Box from '@mui/material/Box';
 
 // checkbox variants
 
-const label = { inputProps: { "aria-label": "Checkbox demo" } };
+const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
 export function Checkboxes() {
   return (
@@ -39,16 +39,8 @@ export function CheckboxLabels() {
 export function IconCheckboxes() {
   return (
     <div>
-      <Checkbox
-        {...label}
-        icon={<FavoriteBorder />}
-        checkedIcon={<Favorite />}
-      />
-      <Checkbox
-        {...label}
-        icon={<BookmarkBorderIcon />}
-        checkedIcon={<BookmarkIcon />}
-      />
+      <Checkbox {...label} icon={<FavoriteBorder />} checkedIcon={<Favorite />} />
+      <Checkbox {...label} icon={<BookmarkBorderIcon />} checkedIcon={<BookmarkIcon />} />
     </div>
   );
 }
@@ -64,7 +56,7 @@ export function ControlledCheckbox() {
     <Checkbox
       checked={checked}
       onChange={handleChange}
-      inputProps={{ "aria-label": "controlled" }}
+      inputProps={{ 'aria-label': 'controlled' }}
     />
   );
 }
@@ -85,7 +77,7 @@ export function IndeterminateCheckbox() {
   };
 
   const children = (
-    <Box sx={{ display: "flex", flexDirection: "column", ml: 3 }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
       <FormControlLabel
         label="Child 1"
         control={<Checkbox checked={checked[0]} onChange={handleChange2} />}
@@ -123,11 +115,7 @@ export function SizeCheckboxes() {
     <div>
       <Checkbox {...label} defaultChecked size="small" />
       <Checkbox {...label} defaultChecked />
-      <Checkbox
-        {...label}
-        defaultChecked
-        sx={{ "& .MuiSvgIcon-root": { fontSize: 28 } }}
-      />
+      <Checkbox {...label} defaultChecked sx={{ '& .MuiSvgIcon-root': { fontSize: 28 } }} />
     </div>
   );
 }
@@ -148,7 +136,7 @@ export function ColorCheckboxes() {
         defaultChecked
         sx={{
           color: pink[800],
-          "&.Mui-checked": {
+          '&.Mui-checked': {
             color: pink[600],
           },
         }}

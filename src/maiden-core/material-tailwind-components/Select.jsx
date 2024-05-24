@@ -1,8 +1,8 @@
-import { Select, Option } from "@material-tailwind/react";
+import { Select, Option } from '@material-tailwind/react';
 
 export function SelectVariants(props) {
   return (
-    <div className="flex w-72 flex-col gap-6" style={{ marginTop: "30px" }}>
+    <div className="flex w-72 flex-col gap-6" style={{ marginTop: '30px' }}>
       <h1>{props.label}</h1>
       <Select variant="static" label="Select Version">
         <Option>Material Tailwind HTML</Option>

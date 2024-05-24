@@ -1,6 +1,6 @@
-import { useState } from "react";
-import Modal from "./Modal";
-import Layout from "../../../common/Layout";
+import { useState } from 'react';
+import Modal from './Modal';
+import Layout from '../../../common/Layout';
 
 const Index = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -21,14 +21,13 @@ const Index = () => {
           <div className="text-center mt-8 shadow-sm rounded-lg border p-6 mx-4 sm:w-3/4 md:w-2/3">
             <div>
               <p className="mt-4 mobile:text-[12px] laptop:text-sm  laptop:text-center mobile:text-justify font-poppins">
-                It seems like you haven't created an organization yet.
-                Organizations are essential for managing your data, projects,
-                and team collaboration efficiently. By creating an organization,
-                you'll unlock a range of features and benefits
+                It seems like you haven't created an organization yet. Organizations are essential
+                for managing your data, projects, and team collaboration efficiently. By creating an
+                organization, you'll unlock a range of features and benefits
               </p>
               <button
                 className="bg-[#056EE9] text-white py-1.5 px-4 rounded text-sm font-poppins"
-                style={{ marginTop: "40px" }}
+                style={{ marginTop: '40px' }}
                 onClick={toggleModal}
               >
                 Create Organization
@@ -37,11 +36,7 @@ const Index = () => {
           </div>
         </div>
 
-        <Modal
-          open={isModalOpen}
-          onClose={toggleModal}
-          title="Create Organization"
-        ></Modal>
+        <Modal open={isModalOpen} onClose={toggleModal} title="Create Organization"></Modal>
       </Layout>
     </div>
   );

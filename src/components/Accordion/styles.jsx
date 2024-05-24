@@ -26,8 +26,7 @@ const grayColor = [
   '#505050',
 ];
 
-
-const accordionStyle = theme => ({
+const accordionStyle = (theme) => ({
   root: {
     flexGrow: 1,
     marginBottom: '20px',

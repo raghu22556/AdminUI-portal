@@ -1,49 +1,44 @@
-import React, { useState } from "react";
-import { Button, Typography } from "@material-tailwind/react";
-import DashbordIcon from "../../assets/DashbordIcon";
-import DashbordIconActive from "../../assets/DashbordIconActive";
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
-import {
-  MdCardGiftcard,
-  MdClose,
-  MdNotifications,
-  MdTouchApp,
-} from "react-icons/md";
+import React, { useState } from 'react';
+import { Button, Typography } from '@material-tailwind/react';
+import DashbordIcon from '../../assets/DashbordIcon';
+import DashbordIconActive from '../../assets/DashbordIconActive';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
+import { MdCardGiftcard, MdClose, MdNotifications, MdTouchApp } from 'react-icons/md';
 
 export default function Sidebar(props) {
   const navigate = useNavigate();
   const { handleToggle } = props;
   const { pathname } = useLocation();
-  const [dropValue, setDropValue] = useState("");
+  const [dropValue, setDropValue] = useState('');
 
   // Handle Navigate
   const handleNavigate = (path) => navigate(path);
 
   // Handle Dropdown
-  const handleDrop = (value) => setDropValue(value === dropValue ? "" : value);
+  const handleDrop = (value) => setDropValue(value === dropValue ? '' : value);
 
-  let menu = JSON.parse(localStorage.getItem("menu"));
+  let menu = JSON.parse(localStorage.getItem('menu'));
 
   // All Links & Nested Links
   const navLinks = [
     // Dashboard
     {
-      name: "Dashboard",
+      name: 'Dashboard',
       icon: <DashbordIcon />,
       activeIcon: <DashbordIconActive />,
-      path: "/dashboard",
+      path: '/dashboard',
     },
     {
-      name: "Organization",
+      name: 'Organization',
       icon: <DashbordIcon />,
       activeIcon: <DashbordIconActive />,
-      path: "/organization",
+      path: '/organization',
     },
     {
-      name: "Projects",
+      name: 'Projects',
       icon: <DashbordIcon />,
       activeIcon: <DashbordIconActive />,
-      path: "/projects",
+      path: '/projects',
     },
     //{
     //  name: "Reports",
@@ -90,7 +85,7 @@ export default function Sidebar(props) {
   menu.forEach((menuItem) => {
     let newNavItem = {
       name: menuItem.cardText,
-      path: "/" + menuItem.url,
+      path: '/' + menuItem.url,
       icon: <DashbordIcon />,
       activeIcon: <DashbordIconActive />,
     };
@@ -98,7 +93,7 @@ export default function Sidebar(props) {
     if (menuItem.children && menuItem.children.length > 0) {
       newNavItem.child = menuItem.children.map((childItem) => ({
         name: childItem.cardText,
-        path: "/" + menuItem.cardText + "/" + childItem.url,
+        path: '/' + menuItem.cardText + '/' + childItem.url,
       }));
     }
 
@@ -111,18 +106,15 @@ export default function Sidebar(props) {
           className="text-2xl font-bold text-center"
           style={{
             fontWeight: 800,
-            fontSize: "24px",
-            lineHeight: "32.78px",
-            letterSpacing: "2%",
-            color: "#056EE9",
+            fontSize: '24px',
+            lineHeight: '32.78px',
+            letterSpacing: '2%',
+            color: '#056EE9',
           }}
         >
           MaidenCube
         </h1>
-        <MdClose
-          onClick={handleToggle}
-          className="text-color text-xl md:hidden cursor-pointer"
-        />
+        <MdClose onClick={handleToggle} className="text-color text-xl md:hidden cursor-pointer" />
       </div>
       {/*
       <div className="flex justify-center py-4" style={{ width: "100%" }}>
@@ -156,10 +148,10 @@ export default function Sidebar(props) {
       </div>
       */}
 
-      <div className="space-y-2 px-3 py-4" style={{ width: "100%" }}>
+      <div className="space-y-2 px-3 py-4" style={{ width: '100%' }}>
         <h2
           className="text-lg font-semibold"
-          style={{ fontWeight: "600", fontSize: "12px", lineHeight: "18px" }}
+          style={{ fontWeight: '600', fontSize: '12px', lineHeight: '18px' }}
         >
           Main
         </h2>
@@ -168,13 +160,12 @@ export default function Sidebar(props) {
             <div key={item.name}>
               <Button
                 style={{
-                  backgroundColor:
-                    item.path === pathname ? "#056EE9" : "rgb(229, 228, 226)",
-                  width: "220px",
-                  height: "44px",
-                  borderRadius: "8px",
-                  border: "1px solid #E5E4E2",
-                  padding: "12px 16px",
+                  backgroundColor: item.path === pathname ? '#056EE9' : 'rgb(229, 228, 226)',
+                  width: '220px',
+                  height: '44px',
+                  borderRadius: '8px',
+                  border: '1px solid #E5E4E2',
+                  padding: '12px 16px',
                 }}
                 className="flex items-center space-x-2 w-full"
                 variant="default"
@@ -184,11 +175,10 @@ export default function Sidebar(props) {
                 <span
                   style={{
                     fontWeight: 500,
-                    fontSize: "12px",
-                    lineHeight: "18px",
-                    color:
-                      item.path === pathname ? "#FFFFFF" : "rgb(138 134 134)",
-                    textTransform: "capitalize",
+                    fontSize: '12px',
+                    lineHeight: '18px',
+                    color: item.path === pathname ? '#FFFFFF' : 'rgb(138 134 134)',
+                    textTransform: 'capitalize',
                   }}
                 >
                   {item.name}
@@ -199,10 +189,10 @@ export default function Sidebar(props) {
         })}
       </div>
 
-      <div className="space-y-2 px-3 py-4" style={{ width: "100%" }}>
+      <div className="space-y-2 px-3 py-4" style={{ width: '100%' }}>
         <h2
           className="text-lg font-semibold"
-          style={{ fontWeight: "600", fontSize: "12px", lineHeight: "18px" }}
+          style={{ fontWeight: '600', fontSize: '12px', lineHeight: '18px' }}
         >
           Modules
         </h2>
@@ -211,13 +201,12 @@ export default function Sidebar(props) {
             <div key={item.name}>
               <Button
                 style={{
-                  backgroundColor:
-                    item.path === pathname ? "#056EE9" : "rgb(229, 228, 226)",
-                  width: "220px",
-                  height: "44px",
-                  borderRadius: "8px",
-                  border: "1px solid #E5E4E2",
-                  padding: "12px 16px",
+                  backgroundColor: item.path === pathname ? '#056EE9' : 'rgb(229, 228, 226)',
+                  width: '220px',
+                  height: '44px',
+                  borderRadius: '8px',
+                  border: '1px solid #E5E4E2',
+                  padding: '12px 16px',
                 }}
                 className="flex items-center space-x-2 w-full"
                 variant="default"
@@ -227,11 +216,10 @@ export default function Sidebar(props) {
                 <span
                   style={{
                     fontWeight: 500,
-                    fontSize: "12px",
-                    lineHeight: "18px",
-                    color:
-                      item.path === pathname ? "#FFFFFF" : "rgb(138 134 134)",
-                    textTransform: "capitalize",
+                    fontSize: '12px',
+                    lineHeight: '18px',
+                    color: item.path === pathname ? '#FFFFFF' : 'rgb(138 134 134)',
+                    textTransform: 'capitalize',
                   }}
                 >
                   {item.name}
@@ -244,16 +232,16 @@ export default function Sidebar(props) {
         <span
           className="flex items-center space-x-2 w-full"
           variant="default"
-          style={{ marginTop: "15px" }}
+          style={{ marginTop: '15px' }}
         >
-          <PlusIcon style={{ color: "#95A4FC" }} className="h-4 w-4" />
+          <PlusIcon style={{ color: '#95A4FC' }} className="h-4 w-4" />
           <span
             style={{
               fontWeight: 500,
-              fontSize: "12px",
-              lineHeight: "18px",
-              color: "#95A4FC",
-              textTransform: "capitalize",
+              fontSize: '12px',
+              lineHeight: '18px',
+              color: '#95A4FC',
+              textTransform: 'capitalize',
             }}
           >
             Create Module
@@ -261,32 +249,32 @@ export default function Sidebar(props) {
         </span>
       </div>
 
-      <div className="space-y-2 px-3 py-4" style={{ width: "100%" }}>
+      <div className="space-y-2 px-3 py-4" style={{ width: '100%' }}>
         <h2
           className="text-lg font-semibold"
-          style={{ fontWeight: "600", fontSize: "12px", lineHeight: "18px" }}
+          style={{ fontWeight: '600', fontSize: '12px', lineHeight: '18px' }}
         >
           Settings
         </h2>
         <Button
           style={{
-            backgroundColor: "rgb(229, 228, 226)",
-            width: "220px",
-            height: "44px",
-            borderRadius: "8px",
-            border: "1px solid #E5E4E2",
-            padding: "12px, 16px, 12px, 16px",
+            backgroundColor: 'rgb(229, 228, 226)',
+            width: '220px',
+            height: '44px',
+            borderRadius: '8px',
+            border: '1px solid #E5E4E2',
+            padding: '12px, 16px, 12px, 16px',
           }}
           className="flex items-center space-x-2"
         >
-          <BellIcon style={{ color: "rgb(138 134 134)	" }} className="h-5 w-5" />
+          <BellIcon style={{ color: 'rgb(138 134 134)	' }} className="h-5 w-5" />
           <span
             style={{
               fontWeight: 500,
-              fontSize: "12px",
-              lineHeight: "18px",
-              color: "rgb(138 134 134)",
-              textTransform: "capitalize",
+              fontSize: '12px',
+              lineHeight: '18px',
+              color: 'rgb(138 134 134)',
+              textTransform: 'capitalize',
             }}
           >
             Notification Settings
@@ -294,28 +282,25 @@ export default function Sidebar(props) {
         </Button>
         <Button
           style={{
-            backgroundColor: "rgb(229, 228, 226)",
-            width: "220px",
-            height: "44px",
-            borderRadius: "8px",
-            border: "1px solid #E5E4E2",
-            padding: "12px, 16px, 12px, 16px",
-            color: "#A9A9A9 ",
+            backgroundColor: 'rgb(229, 228, 226)',
+            width: '220px',
+            height: '44px',
+            borderRadius: '8px',
+            border: '1px solid #E5E4E2',
+            padding: '12px, 16px, 12px, 16px',
+            color: '#A9A9A9 ',
           }}
           className="flex items-center space-x-2 w-full"
           variant="default"
         >
-          <UserCircleIcon
-            style={{ color: "rgb(138 134 134)	" }}
-            className="h-5 w-5"
-          />
+          <UserCircleIcon style={{ color: 'rgb(138 134 134)	' }} className="h-5 w-5" />
           <span
             style={{
               fontWeight: 500,
-              fontSize: "12px",
-              lineHeight: "18px",
-              color: "rgb(138 134 134)",
-              textTransform: "capitalize",
+              fontSize: '12px',
+              lineHeight: '18px',
+              color: 'rgb(138 134 134)',
+              textTransform: 'capitalize',
             }}
           >
             Profile Setting

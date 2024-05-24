@@ -10,7 +10,9 @@ var ActionTypes = handler.getActionTypes();
 var Reducers = handler.getReducers();
 
 const ReduxHelper = {
-  Actions, ActionTypes, Reducers
+  Actions,
+  ActionTypes,
+  Reducers,
 };
 
 export { ReduxHelper };

@@ -1,12 +1,6 @@
-import React from "react";
+import React from 'react';
 
-import {
-  Tabs,
-  TabsHeader,
-  TabPanel,
-  Tab,
-  TabsBody,
-} from "@material-tailwind/react";
+import { Tabs, TabsHeader, TabPanel, Tab, TabsBody } from '@material-tailwind/react';
 
 class NavPills extends React.Component {
   constructor(props) {
@@ -18,7 +12,7 @@ class NavPills extends React.Component {
   handleChange = (event, active) => {
     const { onSelect } = this.props.tabs[active];
     this.setState({ active });
-    if (onSelect && typeof onSelect === "function") onSelect(active);
+    if (onSelect && typeof onSelect === 'function') onSelect(active);
   };
   handleChangeIndex = (index) => {
     this.setState({ active: index });
@@ -26,11 +20,7 @@ class NavPills extends React.Component {
   render() {
     const { tabs, alignCenter } = this.props;
     const CustomTabs = (
-      <Tabs
-        value={0}
-        onChange={this.handleChange}
-        centered={alignCenter}
-      >
+      <Tabs value={0} onChange={this.handleChange} centered={alignCenter}>
         <TabsHeader>
           {tabs.map((prop, key) => (
             <Tab key={key} value={prop.tabButton}>

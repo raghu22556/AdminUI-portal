@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   Card,
   CardBody,
@@ -9,35 +9,33 @@ import {
   Button,
   Alert,
   Checkbox,
-} from "@material-tailwind/react";
-import { ReduxHelper } from "../core/redux-helper";
-import OrganizationNameInput from "../common/OrganizationNameInput";
+} from '@material-tailwind/react';
+import { ReduxHelper } from '../core/redux-helper';
+import OrganizationNameInput from '../common/OrganizationNameInput';
 
 import {
   CustomEmailInput,
   CustomPasswordInput,
   CustomConfirmPasswordInput,
-} from "../maiden-core/ui-components";
+} from '../maiden-core/ui-components';
 
 //import WelcomeLayout from "../components/WelcomeLayout/index";
 
 const SignupForm = ({ setIsLoading }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [organization, setOrganization] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPass, setConfirmPass] = useState("");
+  const [organization, setOrganization] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPass, setConfirmPass] = useState('');
   const [acceptTerms, setAcceptTerms] = useState(false);
   const [error, setError] = useState(null);
-  const createSuperAdmin_result = useSelector(
-    (state) => state?.createSuperAdmin
-  );
+  const createSuperAdmin_result = useSelector((state) => state?.createSuperAdmin);
 
   useEffect(() => {
     if (createSuperAdmin_result.data) {
-      alert("Organization Created Succesfully");
-      navigate("/acceptterm");
+      alert('Organization Created Succesfully');
+      navigate('/acceptterm');
     } else if (createSuperAdmin_result.error) {
       setIsLoading(false);
       setError(createSuperAdmin_result.error);
@@ -75,32 +73,32 @@ const SignupForm = ({ setIsLoading }) => {
     const specialCharRegex = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/;
 
     if (!organization) {
-      setError("Organization Name is required!");
+      setError('Organization Name is required!');
       return false;
     }
 
     if (!email) {
-      setError("Email is required!");
+      setError('Email is required!');
       return false;
     } else if (!emailRegex.test(email)) {
-      setError("This is not a valid email format!");
+      setError('This is not a valid email format!');
       return false;
     }
 
     if (!password) {
-      setError("Password is required");
+      setError('Password is required');
       return false;
     } else if (password.length < 4) {
-      setError("Password must be more than 4 characters");
+      setError('Password must be more than 4 characters');
       return false;
     } else if (password.length > 10) {
-      setError("Password cannot exceed more than 10 characters");
+      setError('Password cannot exceed more than 10 characters');
       return false;
     } else if (!numberRegex.test(password)) {
-      setError("Password must contain at least one number");
+      setError('Password must contain at least one number');
       return false;
     } else if (!specialCharRegex.test(password)) {
-      setError("Password must contain at least one special character");
+      setError('Password must contain at least one special character');
       return false;
     }
 
@@ -110,9 +108,7 @@ const SignupForm = ({ setIsLoading }) => {
     }
 
     if (!acceptTerms) {
-      setError(
-        "Please indicate that you have read and agree to the Terms and Conditions"
-      );
+      setError('Please indicate that you have read and agree to the Terms and Conditions');
       return false;
     }
 
@@ -128,7 +124,7 @@ const SignupForm = ({ setIsLoading }) => {
           organization,
           email,
           password,
-        })
+        }),
       );
     }
   };
@@ -167,7 +163,7 @@ const SignupForm = ({ setIsLoading }) => {
           onChange={handleConfirmPasswordChange}
           onFocus={() => setError(null)}
         />
-        <div style={{ display: "flex", alignItems: "center" }}>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
           <Checkbox
             variant="paragraph"
             className="text-sm"
@@ -176,10 +172,10 @@ const SignupForm = ({ setIsLoading }) => {
             onFocus={() => setError(null)}
           />
           <label className="text-sm">
-            I agree to the{" "}
+            I agree to the{' '}
             <a
               href="/terms-and-conditions"
-              style={{ color: "#056EE9", textDecoration: "underline" }}
+              style={{ color: '#056EE9', textDecoration: 'underline' }}
             >
               terms & conditions
             </a>
@@ -188,11 +184,11 @@ const SignupForm = ({ setIsLoading }) => {
         {error && (
           <Alert
             style={{
-              background: "#DF4A4A",
-              padding: "5px",
-              fontSize: "10px",
-              opacity: "1",
-              transition: "opacity 0.2s ease-in-out",
+              background: '#DF4A4A',
+              padding: '5px',
+              fontSize: '10px',
+              opacity: '1',
+              transition: 'opacity 0.2s ease-in-out',
             }}
           >
             {error}
@@ -207,11 +203,14 @@ const SignupForm = ({ setIsLoading }) => {
           fullWidth
           color="rose"
           onClick={handleSubmit}
-          style={{backgroundColor:'#056EE9'}}
+          style={{ backgroundColor: '#056EE9' }}
         >
           Create
         </Button>
-        <Typography style={{fontSize:'12px',fontWeight:'bold',color:'#1C1C1C'}} className="mt-4 flex justify-center text-[12x]">
+        <Typography
+          style={{ fontSize: '12px', fontWeight: 'bold', color: '#1C1C1C' }}
+          className="mt-4 flex justify-center text-[12x]"
+        >
           Already have an Account ?
           <Link to="/" className="ml-1 font-[600] text-[#056EE9]">
             Sign in

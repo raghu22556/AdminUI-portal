@@ -1,14 +1,14 @@
-import * as React from "react";
-import Grid from "@mui/material/Grid";
-import List from "@mui/material/List";
-import Card from "@mui/material/Card";
-import CardHeader from "@mui/material/CardHeader";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import Checkbox from "@mui/material/Checkbox";
-import Button from "@mui/material/Button";
-import Divider from "@mui/material/Divider";
+import * as React from 'react';
+import Grid from '@mui/material/Grid';
+import List from '@mui/material/List';
+import Card from '@mui/material/Card';
+import CardHeader from '@mui/material/CardHeader';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemText from '@mui/material/ListItemText';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import Checkbox from '@mui/material/Checkbox';
+import Button from '@mui/material/Button';
+import Divider from '@mui/material/Divider';
 
 function not(a, b) {
   return a.filter((value) => b.indexOf(value) === -1);
@@ -72,16 +72,11 @@ export function SelectAllTransferList() {
         avatar={
           <Checkbox
             onClick={handleToggleAll(items)}
-            checked={
-              numberOfChecked(items) === items.length && items.length !== 0
-            }
-            indeterminate={
-              numberOfChecked(items) !== items.length &&
-              numberOfChecked(items) !== 0
-            }
+            checked={numberOfChecked(items) === items.length && items.length !== 0}
+            indeterminate={numberOfChecked(items) !== items.length && numberOfChecked(items) !== 0}
             disabled={items.length === 0}
             inputProps={{
-              "aria-label": "all items selected",
+              'aria-label': 'all items selected',
             }}
           />
         }
@@ -93,8 +88,8 @@ export function SelectAllTransferList() {
         sx={{
           width: 200,
           height: 230,
-          bgcolor: "background.paper",
-          overflow: "auto",
+          bgcolor: 'background.paper',
+          overflow: 'auto',
         }}
         dense
         component="div"
@@ -104,18 +99,14 @@ export function SelectAllTransferList() {
           const labelId = `transfer-list-all-item-${value}-label`;
 
           return (
-            <ListItemButton
-              key={value}
-              role="listitem"
-              onClick={handleToggle(value)}
-            >
+            <ListItemButton key={value} role="listitem" onClick={handleToggle(value)}>
               <ListItemIcon>
                 <Checkbox
                   checked={checked.indexOf(value) !== -1}
                   tabIndex={-1}
                   disableRipple
                   inputProps={{
-                    "aria-labelledby": labelId,
+                    'aria-labelledby': labelId,
                   }}
                 />
               </ListItemIcon>
@@ -129,7 +120,7 @@ export function SelectAllTransferList() {
 
   return (
     <Grid container spacing={2} justifyContent="center" alignItems="center">
-      <Grid item>{customList("Choices", left)}</Grid>
+      <Grid item>{customList('Choices', left)}</Grid>
       <Grid item>
         <Grid container direction="column" alignItems="center">
           <Button
@@ -154,7 +145,7 @@ export function SelectAllTransferList() {
           </Button>
         </Grid>
       </Grid>
-      <Grid item>{customList("Chosen", right)}</Grid>
+      <Grid item>{customList('Chosen', right)}</Grid>
     </Grid>
   );
 }

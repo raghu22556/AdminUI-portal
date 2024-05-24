@@ -11,7 +11,10 @@ class DynamicBaseView extends BaseView {
   constructor(props) {
     super(props);
     var tableName = props.tableName;
-    var config = { ...generateConfig(tableName), ...Overides['Overide_' + tableName] };
+    var config = {
+      ...generateConfig(tableName),
+      ...Overides['Overide_' + tableName],
+    };
     this.config = this.constructConfig(config);
   }
 }
@@ -20,21 +23,21 @@ const constructTabTitle = (config, idColumn) => {
   let titleColumns = [];
   var columns = config.details
     .filter(
-      item =>
+      (item) =>
         item.dataIndex != 'CreatedBy' &&
         item.dataIndex != 'CreatedDate' &&
         item.dataIndex != 'ModifiedBy' &&
         item.dataIndex != 'ModifiedDate' &&
         item.dataIndex != idColumn,
     )
-    .filter(item => item.editor && item.editor.type != 'combo')
-    .map(item => item);
+    .filter((item) => item.editor && item.editor.type != 'combo')
+    .map((item) => item);
   if (columns.length <= 3) {
-    columns.forEach(item => {
+    columns.forEach((item) => {
       titleColumns.push(item.dataIndex);
     });
   } else {
-    columns.slice(0, 3).forEach(item => {
+    columns.slice(0, 3).forEach((item) => {
       titleColumns.push(item.dataIndex);
     });
   }
@@ -44,14 +47,14 @@ const constructTabTitle = (config, idColumn) => {
 const constructGridColumns = (config, idColumn) => {
   var columns = config.details
     .filter(
-      item =>
+      (item) =>
         item.dataIndex != 'CreatedBy' &&
         item.dataIndex != 'CreatedDate' &&
         item.dataIndex != 'ModifiedBy' &&
         item.dataIndex != 'ModifiedDate' &&
         item.dataIndex != idColumn,
     )
-    .map(item => {
+    .map((item) => {
       let returnItem = {
         dataIndex: item.dataIndex,
         header: item.header,
@@ -96,14 +99,14 @@ const constructGridColumns = (config, idColumn) => {
 const constructFormColumns = (config, idColumn) => {
   var columns = config.details
     .filter(
-      item =>
+      (item) =>
         item.dataIndex != 'CreatedBy' &&
         item.dataIndex != 'CreatedDate' &&
         item.dataIndex != 'ModifiedBy' &&
         item.dataIndex != 'ModifiedDate' &&
         item.dataIndex != idColumn,
     )
-    .map(item => {
+    .map((item) => {
       var returnItem = {
         dataIndex: item.dataIndex,
         header: item.header,
@@ -151,7 +154,7 @@ const constructFormColumns = (config, idColumn) => {
 const constructCombos = (config, idColumn) => {
   var columns = config.details
     .filter(
-      item =>
+      (item) =>
         item.dataIndex != 'CreatedBy' &&
         item.dataIndex != 'CreatedDate' &&
         item.dataIndex != 'ModifiedBy' &&
@@ -160,9 +163,9 @@ const constructCombos = (config, idColumn) => {
         item.editor &&
         item.editor.type &&
         item.editor.type == 'combo' &&
-        (item.editor.comboType || item.editor.lookUpMapping), 
+        (item.editor.comboType || item.editor.lookUpMapping),
     )
-    .map(item => {
+    .map((item) => {
       var returnItem = {};
       if (item.editor.lookUpMapping) {
         returnItem = {
@@ -182,11 +185,14 @@ const constructCombos = (config, idColumn) => {
   return columns;
 };
 
-const constructChilds = config => {
+const constructChilds = (config) => {
   if (config.childs) {
     var childItems = [];
     for (var item of config.childs.split(',')) {
-      childItems.push({ ...generateConfig(item), ...Overides['Overide_' + item] });
+      childItems.push({
+        ...generateConfig(item),
+        ...Overides['Overide_' + item],
+      });
     }
     return childItems;
   } else {
@@ -194,7 +200,7 @@ const constructChilds = config => {
   }
 };
 
-const generateConfig = tableName => {
+const generateConfig = (tableName) => {
   let masterConfig = JSON.parse(localStorage.entityMapping);
   let config = masterConfig[tableName];
   let idColumn = config.entity + 'Id';

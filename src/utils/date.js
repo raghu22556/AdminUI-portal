@@ -12,7 +12,7 @@ export const Util = {
   dateParamFormat: dateParamFormat,
 };
 export default {
-  parse: function(value) {
+  parse: function (value) {
     if (!value) {
       return null;
     }
@@ -31,7 +31,7 @@ export default {
       Number(value.substr(12, 2)),
     );
   },
-  toString: function(date, format) {
+  toString: function (date, format) {
     if (date === undefined || typeof date !== 'object' || date === null) {
       return '-';
     }
@@ -49,7 +49,7 @@ export default {
     }
     return returnValue;
   },
-  getShortMonthName: function(date) {
+  getShortMonthName: function (date) {
     if (Object.prototype.toString.call(date) === '[object Date]') {
       // it is a date
       if (isNaN(date.getTime())) {
@@ -76,7 +76,7 @@ export default {
       return '-';
     }
   },
-  formatAMPM: function(date) {
+  formatAMPM: function (date) {
     if (date === undefined || typeof date !== 'object' || date === null) {
       return '';
     }
@@ -89,17 +89,14 @@ export default {
     var strTime = hours + ':' + minutes + ampm;
     return strTime;
   },
-  getUtDateTime: function(date) {
+  getUtDateTime: function (date) {
     var dateToConvert = new Date();
     if (date) {
       dateToConvert = new Date(date);
     }
-    return dateToConvert
-      .toISOString()
-      .slice(0, 19)
-      .replace('T', ' ');
+    return dateToConvert.toISOString().slice(0, 19).replace('T', ' ');
   },
-  getLocalDateTime: function(utcDate) {
+  getLocalDateTime: function (utcDate) {
     if (!utcDate) {
       return;
     }
@@ -108,7 +105,7 @@ export default {
     d.setMinutes(d.getMinutes() - offset);
     return d;
   },
-  getDateTime: function(date) {
+  getDateTime: function (date) {
     if (!date) {
       return;
     }
@@ -125,7 +122,7 @@ export default {
       (date.getSeconds() < 10 ? '0' + date.getSeconds() : date.getSeconds())
     );
   },
-  getAge: function(from, to) {
+  getAge: function (from, to) {
     if (!from) {
       return '';
     }
@@ -259,13 +256,13 @@ export default {
             ? moment(date).format(Util.dateFormat)
             : ''
           : date && date.getFullYear() > 1899
-          ? moment(date).format(Util.dateTimeFormat)
-          : '';
+            ? moment(date).format(Util.dateTimeFormat)
+            : '';
       timeZone = timeZone ? '  ' + timeZone : ' ';
       return date ? date + timeZone : ' ';
     }
   },
-  DateTimeWithTimeZone: function(value) {
+  DateTimeWithTimeZone: function (value) {
     var val = value.value;
     if (!val) {
       val = value;
@@ -285,7 +282,7 @@ export default {
       : '';
     return date ? date + ' ' + timeZone : '';
   },
-  DateTimeWithLocalTimeZone: function(value) {
+  DateTimeWithLocalTimeZone: function (value) {
     var val = value.value;
     if (!val) {
       val = value;
@@ -306,7 +303,7 @@ export default {
     return date ? date + ' ' + timeZone : '';
   },
 
-  DateLocalizer: function(value) {
+  DateLocalizer: function (value) {
     var val = value.value;
     if (!val) {
       val = value;
@@ -319,7 +316,7 @@ export default {
         : '';
     return date;
   },
-  standardDate: function(value) {
+  standardDate: function (value) {
     if (!value) {
       return '';
     }
@@ -331,7 +328,7 @@ export default {
     date = date && date.getFullYear() > 1899 ? moment(date).format(Util.dateFormat) : '';
     return date;
   },
-  standardDateTime: function(value) {
+  standardDateTime: function (value) {
     if (!value) {
       return '';
     }
@@ -343,7 +340,7 @@ export default {
     date = date && date.getFullYear() > 1899 ? moment(date).format(Util.dateTimeFormat) : '';
     return date;
   },
-  timeZoneSortForm: function(value) {
+  timeZoneSortForm: function (value) {
     if (!value) {
       return '';
     }
@@ -362,7 +359,7 @@ export default {
     }
     return timeZone;
   },
-  addDays: function(date, days) {
+  addDays: function (date, days) {
     date.setDate(date.getDate() + days);
     return date;
   },

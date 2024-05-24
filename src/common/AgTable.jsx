@@ -1,16 +1,16 @@
-import React, { useMemo, useState, useEffect } from "react";
-import { AgGridReact } from "@ag-grid-community/react";
-import { ModuleRegistry } from "@ag-grid-community/core";
-import { ClientSideRowModelModule } from "@ag-grid-community/client-side-row-model";
-import { BiFilter, BiSearch, BiSearchAlt } from "react-icons/bi";
-import { BsArrowDownUp } from "react-icons/bs";
-import { HiOutlineDotsHorizontal } from "react-icons/hi";
-import { Button } from "@material-tailwind/react";
-import InventoryConfig from "../configs/inventory.config";
-import StatusIcon from "../assets/StatusIcon";
+import React, { useMemo, useState, useEffect } from 'react';
+import { AgGridReact } from '@ag-grid-community/react';
+import { ModuleRegistry } from '@ag-grid-community/core';
+import { ClientSideRowModelModule } from '@ag-grid-community/client-side-row-model';
+import { BiFilter, BiSearch, BiSearchAlt } from 'react-icons/bi';
+import { BsArrowDownUp } from 'react-icons/bs';
+import { HiOutlineDotsHorizontal } from 'react-icons/hi';
+import { Button } from '@material-tailwind/react';
+import InventoryConfig from '../configs/inventory.config';
+import StatusIcon from '../assets/StatusIcon';
 
-import "@ag-grid-community/styles/ag-grid.css";
-import "@ag-grid-community/styles/ag-theme-quartz.css";
+import '@ag-grid-community/styles/ag-grid.css';
+import '@ag-grid-community/styles/ag-theme-quartz.css';
 
 ModuleRegistry.registerModules([ClientSideRowModelModule]);
 
@@ -19,7 +19,7 @@ const TableAgGrid = () => {
 
   function randomDate(start, end) {
     return new Date(
-      start.getTime() + Math.random() * (end.getTime() - start.getTime())
+      start.getTime() + Math.random() * (end.getTime() - start.getTime()),
     ).toLocaleDateString();
   }
 
@@ -30,56 +30,56 @@ const TableAgGrid = () => {
 
     return [
       {
-        "Sr no": 1,
-        Module: "Module 01",
-        "Created By": "Admin",
-        "Created Date": randomDate(oneYearAgo, currentDate),
-        "Modified By": "Admin",
-        "Modified Date": randomDate(oneYearAgo, currentDate),
-        status: "Pending",
+        'Sr no': 1,
+        Module: 'Module 01',
+        'Created By': 'Admin',
+        'Created Date': randomDate(oneYearAgo, currentDate),
+        'Modified By': 'Admin',
+        'Modified Date': randomDate(oneYearAgo, currentDate),
+        status: 'Pending',
       },
       {
-        "Sr no": 2,
-        Module: "Module 02",
-        "Created By": "Admin",
-        "Created Date": randomDate(oneYearAgo, currentDate),
-        "Modified By": "Admin",
-        "Modified Date": randomDate(oneYearAgo, currentDate),
-        status: "Complete",
+        'Sr no': 2,
+        Module: 'Module 02',
+        'Created By': 'Admin',
+        'Created Date': randomDate(oneYearAgo, currentDate),
+        'Modified By': 'Admin',
+        'Modified Date': randomDate(oneYearAgo, currentDate),
+        status: 'Complete',
       },
       {
-        "Sr no": 3,
-        Module: "Module 03",
-        "Created By": "Admin",
-        "Created Date": randomDate(oneYearAgo, currentDate),
-        "Modified By": "Admin",
-        "Modified Date": randomDate(oneYearAgo, currentDate),
-        status: "In Progress",
+        'Sr no': 3,
+        Module: 'Module 03',
+        'Created By': 'Admin',
+        'Created Date': randomDate(oneYearAgo, currentDate),
+        'Modified By': 'Admin',
+        'Modified Date': randomDate(oneYearAgo, currentDate),
+        status: 'In Progress',
       },
       {
-        "Sr no": 4,
-        Module: "Module 04",
-        "Created By": "Admin",
-        "Created Date": randomDate(oneYearAgo, currentDate),
-        "Modified By": "Admin",
-        "Modified Date": randomDate(oneYearAgo, currentDate),
-        status: "Rejected",
+        'Sr no': 4,
+        Module: 'Module 04',
+        'Created By': 'Admin',
+        'Created Date': randomDate(oneYearAgo, currentDate),
+        'Modified By': 'Admin',
+        'Modified Date': randomDate(oneYearAgo, currentDate),
+        status: 'Rejected',
       },
       {
-        "Sr no": 5,
-        Module: "Module 05",
-        "Created By": "Admin",
-        "Created Date": randomDate(oneYearAgo, currentDate),
-        "Modified By": "Admin",
-        "Modified Date": randomDate(oneYearAgo, currentDate),
-        status: "Pending",
+        'Sr no': 5,
+        Module: 'Module 05',
+        'Created By': 'Admin',
+        'Created Date': randomDate(oneYearAgo, currentDate),
+        'Modified By': 'Admin',
+        'Modified Date': randomDate(oneYearAgo, currentDate),
+        status: 'Pending',
       },
     ];
   }
 
   const modifiedRowData = useMemo(() => {
     return rowData.map((row, index) => {
-      return { ...row, "Sr no": index + 1 };
+      return { ...row, 'Sr no': index + 1 };
     });
   }, [rowData]);
 
@@ -91,7 +91,7 @@ const TableAgGrid = () => {
       alert(JSONRowData);
     };
     return (
-      <div style={{ cursor: "pointer" }} onClick={handleModuleOnClick}>
+      <div style={{ cursor: 'pointer' }} onClick={handleModuleOnClick}>
         {value}
       </div>
     );
@@ -101,13 +101,13 @@ const TableAgGrid = () => {
     let needsUpdate = false;
     const updatedColumnDefs = columnDefs.map((colDef) => {
       //fetching each column headerName
-      if (colDef.headerName === "Action" && !colDef.pinned) {
+      if (colDef.headerName === 'Action' && !colDef.pinned) {
         needsUpdate = true;
-        return { ...colDef, pinned: "right" };
-      } else if (colDef.field === "Module") {
+        return { ...colDef, pinned: 'right' };
+      } else if (colDef.field === 'Module') {
         return {
           ...colDef,
-          cellStyle: { color: "blue" },
+          cellStyle: { color: 'blue' },
           cellRenderer: moduleCellRenderer,
         };
       }

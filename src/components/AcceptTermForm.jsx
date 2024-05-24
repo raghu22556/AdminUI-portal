@@ -1,10 +1,10 @@
-import { FormEvent, useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
-import AcceptTermSelectBackend from "../common/AcceptTermSelectBackend";
-import AcceptTermSelectFrontend from "../common/AcceptTermSelectFrontend";
-import AcceptTermSelectRole from "../common/AcceptTermSelectRole";
-import { ReduxHelper } from "../core/redux-helper";
+import { FormEvent, useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import AcceptTermSelectBackend from '../common/AcceptTermSelectBackend';
+import AcceptTermSelectFrontend from '../common/AcceptTermSelectFrontend';
+import AcceptTermSelectRole from '../common/AcceptTermSelectRole';
+import { ReduxHelper } from '../core/redux-helper';
 
 import {
   Card,
@@ -17,12 +17,12 @@ import {
   Button,
   Select,
   Option,
-} from "@material-tailwind/react";
+} from '@material-tailwind/react';
 
 const AcceptTermForm = ({ setIsLoading }) => {
-  const [acceptTermSelectBackend, setAcceptTermSelectBackend] = useState("");
-  const [acceptTermSelectFrontend, setAcceptTermSelectFrontend] = useState("");
-  const [selectedRole, setSelectedRole] = useState("");
+  const [acceptTermSelectBackend, setAcceptTermSelectBackend] = useState('');
+  const [acceptTermSelectFrontend, setAcceptTermSelectFrontend] = useState('');
+  const [selectedRole, setSelectedRole] = useState('');
   /*let createSuperAdmin_result = useSelector((state) => state?.createSuperAdmin);
 
   useEffect(() => {
@@ -37,7 +37,7 @@ const AcceptTermForm = ({ setIsLoading }) => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  
+
   const selectBackendHandler = (selectedValue) => {
     setAcceptTermSelectBackend(selectedValue);
   };
@@ -64,12 +64,12 @@ const AcceptTermForm = ({ setIsLoading }) => {
     setIsLoading(true);
     dispatch(
       ReduxHelper.Actions.createSuperAdmin({
-        Organization: "Demo1",
-        Email: "Test@Demo1.com",
-        Password: "123456",
-        BackendLanguge: "sql",
+        Organization: 'Demo1',
+        Email: 'Test@Demo1.com',
+        Password: '123456',
+        BackendLanguge: 'sql',
         IsMobile: true,
-      })
+      }),
     );
   };
 
@@ -78,7 +78,7 @@ const AcceptTermForm = ({ setIsLoading }) => {
       <form onSubmit={formSubmitHandler}>
         <CardBody className="flex flex-col gap-3 ">
           <AcceptTermSelectBackend
-            crossOrigin={""}
+            crossOrigin={''}
             label="Hands on Backend Language"
             size="lg"
             color="blue"
@@ -87,7 +87,7 @@ const AcceptTermForm = ({ setIsLoading }) => {
             onChange={selectBackendHandler}
           />
           <AcceptTermSelectFrontend
-            crossOrigin={""}
+            crossOrigin={''}
             label="Hands on Frontend Language"
             size="lg"
             color="blue"
@@ -96,7 +96,7 @@ const AcceptTermForm = ({ setIsLoading }) => {
             onChange={selectFrontendHandler}
           />
           <AcceptTermSelectRole
-            crossOrigin={""}
+            crossOrigin={''}
             label="Whats Your Role"
             size="lg"
             color="blue"

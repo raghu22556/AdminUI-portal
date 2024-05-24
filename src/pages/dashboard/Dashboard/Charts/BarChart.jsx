@@ -1,5 +1,5 @@
-import { BarChart } from "@mui/x-charts/BarChart"; // Importing the BarChart component from the @mui/x-charts library
-import { useRef } from "react"; // Importing the useRef hook from React
+import { BarChart } from '@mui/x-charts/BarChart'; // Importing the BarChart component from the @mui/x-charts library
+import { useRef } from 'react'; // Importing the useRef hook from React
 
 export default function BasicBars() {
   const barChartRef = useRef(null);
@@ -10,15 +10,8 @@ export default function BasicBars() {
         ref={barChartRef}
         xAxis={[
           {
-            scaleType: "band",
-            data: [
-              "Project 1",
-              "Project 2",
-              "Project 3",
-              "Project 4",
-              "Project 5",
-              "Project 6",
-            ],
+            scaleType: 'band',
+            data: ['Project 1', 'Project 2', 'Project 3', 'Project 4', 'Project 5', 'Project 6'],
             paddingInner: 0.2,
             paddingOuter: 0.3,
           },

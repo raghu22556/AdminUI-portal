@@ -10,7 +10,7 @@ const getThemeColor = () => {
 };
 
 export default {
-  constructParams: function(query) {
+  constructParams: function (query) {
     return query
       ? (/^[?#]/.test(query) ? query.slice(1) : query).split('&').reduce((params, param) => {
           var data = param.split('='),
@@ -68,12 +68,16 @@ const defaultLoader = () => {
   );
 };
 
-const successAlert = t => {
+const successAlert = (t) => {
   modal.destroyAll();
   modal.success({
     title: t('Record Saved Successfully') + '...',
     okButtonProps: {
-      style: { backgroundColor: getThemeColor(), border: 'none', display: 'none' },
+      style: {
+        backgroundColor: getThemeColor(),
+        border: 'none',
+        display: 'none',
+      },
     },
   });
   setTimeout(() => {
@@ -85,13 +89,14 @@ const showModal = (msg, type) => {
   modal.destroyAll();
   modal[type]({
     title: msg,
-    okButtonProps: { style: { backgroundColor: '#c31d1d', border: 'none', display: 'none' } },
+    okButtonProps: {
+      style: { backgroundColor: '#c31d1d', border: 'none', display: 'none' },
+    },
   });
   setTimeout(() => {
     modal.destroyAll();
   }, 2000);
 };
-
 
 const triggerAPI = ({
   t,
@@ -117,7 +122,7 @@ const triggerAPI = ({
   }
 
   API.triggerPost(controller, params)
-    .then(response => {
+    .then((response) => {
       if (response.status === 200) {
         if (response.data.success) {
           successAlert(t);
@@ -154,7 +159,7 @@ const triggerAPI = ({
         }
       }
     })
-    .catch(err => {
+    .catch((err) => {
       showModal(err.message, 'error');
 
       gridPanel.setState({ ...failureStateParams });
@@ -165,6 +170,6 @@ const triggerAPI = ({
     });
 };
 
-const toVariableCase = (string) => string.charAt(0).toLowerCase() + string.slice(1);;
+const toVariableCase = (string) => string.charAt(0).toLowerCase() + string.slice(1);
 
 export { toVariableCase, defaultGridColumns, defaultLoader, triggerAPI };

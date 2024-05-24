@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   Button,
   Dialog,
@@ -6,13 +6,13 @@ import {
   DialogBody,
   DialogFooter,
   Typography,
-} from "@material-tailwind/react";
-import { GrAdd } from "react-icons/gr";
-import { HiChevronLeft } from "react-icons/hi";
-import { HiChevronRight } from "react-icons/hi";
-import EmailAddressInputModal from "../../common/EmailAddressInputModal";
-import DescriptionModal from "../../common/DescriptionModal";
-import { withTranslation } from "react-i18next";
+} from '@material-tailwind/react';
+import { GrAdd } from 'react-icons/gr';
+import { HiChevronLeft } from 'react-icons/hi';
+import { HiChevronRight } from 'react-icons/hi';
+import EmailAddressInputModal from '../../common/EmailAddressInputModal';
+import DescriptionModal from '../../common/DescriptionModal';
+import { withTranslation } from 'react-i18next';
 
 const AddOrganizationModal = (props) => {
   const { t } = props;
@@ -23,21 +23,21 @@ const AddOrganizationModal = (props) => {
   return (
     <>
       <Button
-        style={{ background: "#056EE9" }}
+        style={{ background: '#056EE9' }}
         className="flex items-center gap-2 capitalize font-poppins"
         onClick={handleOpen}
         variant="gradient"
       >
         <GrAdd />
-        {t("Add Organizations")}
+        {t('Add Organizations')}
       </Button>
 
       <Dialog open={open} handler={handleOpen}>
         <DialogBody>
           <div className="flex justify-between items-center ">
             <Typography className="text-left text-lg text-black font-bold">
-              {" "}
-              {t("Add Organizations")}
+              {' '}
+              {t('Add Organizations')}
             </Typography>
             <div className="flex items-center">
               <Button
@@ -60,7 +60,7 @@ const AddOrganizationModal = (props) => {
         <DialogBody>
           <EmailAddressInputModal />
           <div className="mt-5">
-            {" "}
+            {' '}
             <DescriptionModal />
           </div>
         </DialogBody>

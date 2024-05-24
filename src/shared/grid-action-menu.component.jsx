@@ -1,6 +1,6 @@
-import { IconButton, Menu, MenuItem } from "@mui/material";
-import React, { useState } from "react";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
+import { IconButton, Menu, MenuItem } from '@mui/material';
+import React, { useState } from 'react';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 // import { MenuItem as MenuItemModel } from "../../shared/models/MenuItem";
 
@@ -33,8 +33,8 @@ const GridActionMenu = (props) => {
       <IconButton
         aria-label="more"
         id="long-button"
-        aria-controls={open ? "long-menu" : undefined}
-        aria-expanded={open ? "true" : undefined}
+        aria-controls={open ? 'long-menu' : undefined}
+        aria-expanded={open ? 'true' : undefined}
         aria-haspopup="true"
         className="action-icon"
         onClick={handleClick}
@@ -47,7 +47,7 @@ const GridActionMenu = (props) => {
         <Menu
           id="long-menu"
           MenuListProps={{
-            "aria-labelledby": "long-button",
+            'aria-labelledby': 'long-button',
           }}
           anchorEl={anchorEl}
           open={open}
@@ -55,7 +55,7 @@ const GridActionMenu = (props) => {
           PaperProps={{
             style: {
               maxHeight: ITEM_HEIGHT * 4.5,
-              width: "20ch",
+              width: '20ch',
             },
           }}
         >
@@ -70,7 +70,7 @@ const GridActionMenu = (props) => {
           ))}
         </Menu>
       ) : (
-        ""
+        ''
       )}
     </span>
   );

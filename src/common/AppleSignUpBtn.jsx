@@ -1,5 +1,5 @@
-import { Button } from "@material-tailwind/react";
-import React from "react";
+import { Button } from '@material-tailwind/react';
+import React from 'react';
 
 const AppleSignUpBtn = () => {
   return (
@@ -8,12 +8,12 @@ const AppleSignUpBtn = () => {
         // shadow={false}
         className="flex items-center gap-1 text-[12px] py-3 mobile:text-[11px] mobile:flex mobile:justify-center  lowercase  laptopM:w-full "
         style={{
-          background: "rgba(28, 28, 28, 0.05)",
-          border: "1px solid rgba(28, 28, 28, 0.1)",
-          color: "black",
-          width: "230px",
-          fontWeight: "600",
-          boxShadow: "none",
+          background: 'rgba(28, 28, 28, 0.05)',
+          border: '1px solid rgba(28, 28, 28, 0.1)',
+          color: 'black',
+          width: '230px',
+          fontWeight: '600',
+          boxShadow: 'none',
         }}
       >
         <svg

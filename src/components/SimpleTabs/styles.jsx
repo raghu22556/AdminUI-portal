@@ -46,7 +46,7 @@ const redditColor = '#ff4500';
 // // // Example: input = #999 => output = 153, 153, 153
 // // // Example: input = 999 => output = 153, 153, 153
 // #############################
-const hexToRgb = input => {
+const hexToRgb = (input) => {
   input = input + '';
   input = input.replace('#', '');
   let hexRegex = /[0-9A-Fa-f]/g;
@@ -66,7 +66,7 @@ const hexToRgb = input => {
   return parseInt(first, 16) + ', ' + parseInt(second, 16) + ', ' + parseInt(last, 16);
 };
 
-const navPillsStyle = theme => ({
+const navPillsStyle = (theme) => ({
   root: {
     marginTop: '20px',
     paddingLeft: '0',
@@ -102,8 +102,8 @@ const navPillsStyle = theme => ({
     height: 'auto',
     // opacity: '1',
     maxWidth: '100%',
-     marginBottom: '-30px !important',
-     backgroundColor: '#E5E4E2 !important',
+    marginBottom: '-30px !important',
+    backgroundColor: '#E5E4E2 !important',
   },
   pillsWithIcons: {
     borderRadius: '4px',
@@ -144,7 +144,7 @@ const navPillsStyle = theme => ({
     '&,&:hover': {
       color: 'black',
       backgroundColor: '#ADD0F1 !important',
-      borderBottom: '2px solid #127FE7 '
+      borderBottom: '2px solid #127FE7 ',
       // other styles...
     },
   },

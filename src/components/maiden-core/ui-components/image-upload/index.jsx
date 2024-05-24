@@ -33,7 +33,7 @@ export class ImageUpload extends React.Component {
               accept="image/*"
               id="file"
               hidden
-              onChange={e => {
+              onChange={(e) => {
                 var a = window.URL.createObjectURL(e.target.files[0]);
                 this.props.onChange(e.target.files[0], 'file');
                 this.setState({ file: a });

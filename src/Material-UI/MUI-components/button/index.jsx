@@ -1,9 +1,9 @@
-import * as React from "react";
-import Stack from "@mui/material/Stack";
-import Button from "@mui/material/Button";
-import DeleteIcon from "@mui/icons-material/Delete";
-import SendIcon from "@mui/icons-material/Send";
-import Box from "@mui/material/Box";
+import * as React from 'react';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+import DeleteIcon from '@mui/icons-material/Delete';
+import SendIcon from '@mui/icons-material/Send';
+import Box from '@mui/material/Box';
 
 export function BasicButtons() {
   return (
@@ -40,7 +40,7 @@ export function IconLabelButtons() {
 
 export function ButtonSizes() {
   return (
-    <Box sx={{ "& button": { m: 1 } }}>
+    <Box sx={{ '& button': { m: 1 } }}>
       <div>
         <Button variant="contained" size="small">
           Small

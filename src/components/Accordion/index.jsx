@@ -22,7 +22,7 @@ class Accordions extends React.Component {
       };
     }
   }
-  handleChange = panel => (event, expanded) => {
+  handleChange = (panel) => (event, expanded) => {
     if (this.state.active == 0) {
       this.setState({
         active: 1,

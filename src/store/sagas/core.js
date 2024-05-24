@@ -1,7 +1,7 @@
 import { all, put, takeLatest, call } from 'redux-saga/effects';
 import { ReduxHelper } from '../../core/redux-helper';
 import API from '../requests';
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 const ActionTypes = ReduxHelper.ActionTypes;
 
@@ -63,22 +63,22 @@ export function* genericFunction(action) {
 export function* handleError(action) {
   const { error, successAction, failureType, successType } = action;
   if (error && error.response && error.response.status) {
-    if(error.response.status == 401){
+    if (error.response.status == 401) {
       alert('UnAuthorized');
       const navigate = useNavigate();
       navigate('/');
       window.location.reload(true);
-    } else if(error.response.status == 400 || error.response.status == 500){
+    } else if (error.response.status == 400 || error.response.status == 500) {
       yield put({
         type: failureType,
         error: error,
       });
     }
-  } else if(error.code == 'ERR_NETWORK'){
+  } else if (error.code == 'ERR_NETWORK') {
     error.response = {
       data: {
-        Message: error.message
-      }
+        Message: error.message,
+      },
     };
     delete error.message;
     yield put({
@@ -93,7 +93,7 @@ export function* handleError(action) {
   }
 }
 
-export const sagaGenerator = actionReq =>
+export const sagaGenerator = (actionReq) =>
   function* sagaFunc() {
     yield takeLatest(actionReq, genericFunction);
   };

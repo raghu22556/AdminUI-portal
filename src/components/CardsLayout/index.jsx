@@ -1,10 +1,10 @@
-import React from "react";
-import Layout from "../../components/Layout";
-import { Card, CardBody, Typography } from "@material-tailwind/react";
-import { useNavigate } from "react-router-dom";
+import React from 'react';
+import Layout from '../../components/Layout';
+import { Card, CardBody, Typography } from '@material-tailwind/react';
+import { useNavigate } from 'react-router-dom';
 
-import { injectTOStore } from "../../core/redux-helper/injectTOStore";
-import { newConfig } from "../../store/config";
+import { injectTOStore } from '../../core/redux-helper/injectTOStore';
+import { newConfig } from '../../store/config';
 
 injectTOStore(newConfig);
 const WidgetCard = ({ title, onClick }) => {
@@ -13,9 +13,9 @@ const WidgetCard = ({ title, onClick }) => {
       className="rounded-md cursor-pointer"
       onClick={onClick}
       style={{
-        border: "1px solid rgba(28, 28, 28, 0.1) ",
-        backgroundColor: "transparent",
-        boxShadow: "none",
+        border: '1px solid rgba(28, 28, 28, 0.1) ',
+        backgroundColor: 'transparent',
+        boxShadow: 'none',
       }}
     >
       <CardBody className="p-4 text-right ">
@@ -31,7 +31,7 @@ const WidgetCard = ({ title, onClick }) => {
               variant="small"
               color="blue-gray"
               className="text-sm mt-2 text-left tracking-[.5px] text-[11px]  font-poppins"
-              style={{ color: "rgba(28, 28, 28, 0.4)" }}
+              style={{ color: 'rgba(28, 28, 28, 0.4)' }}
             >
               Click here to view {title}
             </Typography>
@@ -54,7 +54,7 @@ const CardsLayout = ({ item }) => {
         {item.children.map(({ displayText, url, ...rest }) => (
           <WidgetCard
             onClick={() => {
-              navigate("/" + item.url + "/" + url);
+              navigate('/' + item.url + '/' + url);
             }}
             key={url}
             {...rest}

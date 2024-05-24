@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import { Route, Routes } from "react-router-dom";
-import AllRoutes from "./routes/AllRoutes";
+import { useEffect, useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import AllRoutes from './routes/AllRoutes';
 //import "./core/redux-helper"
 
 const App = () => {
@@ -9,15 +9,7 @@ const App = () => {
       <Routes>
         {AllRoutes.map((item, index) => {
           const { name, path, element } = item;
-          return (
-            <Route
-              name={name}
-              path={path}
-              element={element}
-              exact={true}
-              key={index}
-            />
-          );
+          return <Route name={name} path={path} element={element} exact={true} key={index} />;
         })}
       </Routes>
     </>

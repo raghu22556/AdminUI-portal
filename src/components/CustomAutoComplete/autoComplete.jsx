@@ -46,7 +46,7 @@ class ReduxAutoComplete extends React.PureComponent {
       };
       var me = this;
       API.autoFill(param)
-        .then(response => {
+        .then((response) => {
           let data = response.data.records;
           me.setState({
             data: data,
@@ -54,7 +54,7 @@ class ReduxAutoComplete extends React.PureComponent {
             displayValue: data[0].DisplayValue,
           });
         })
-        .catch(error => {
+        .catch((error) => {
           debugger;
         });
     }
@@ -92,7 +92,7 @@ class ReduxAutoComplete extends React.PureComponent {
       };
       var me = this;
       API.autoFill(param)
-        .then(response => {
+        .then((response) => {
           let data = response.data.records;
           me.setState({
             data: data,
@@ -101,13 +101,13 @@ class ReduxAutoComplete extends React.PureComponent {
             displayValue: data[0].DisplayValue,
           });
         })
-        .catch(error => {
+        .catch((error) => {
           console.debug(error);
         });
     }
   }
 
-  getAutoComplete = searchTxt => {
+  getAutoComplete = (searchTxt) => {
     const { activeModule, comboType, params } = this.props;
     var param = {
       start: 0,
@@ -122,7 +122,7 @@ class ReduxAutoComplete extends React.PureComponent {
     var me = this;
     this.setState({ loadingData: true });
     API.autoFill(param)
-      .then(response => {
+      .then((response) => {
         let data = response.data.records;
         me.setState({
           data: data,
@@ -132,7 +132,7 @@ class ReduxAutoComplete extends React.PureComponent {
           loadingData: false,
         });
       })
-      .catch(error => {
+      .catch((error) => {
         debugger;
       });
   };
@@ -208,7 +208,7 @@ class ReduxAutoComplete extends React.PureComponent {
             }}
             autocomplete="none"
             tabIndex={tabIndex}
-            onSelect={value => {
+            onSelect={(value) => {
               this.setState({ oldValue: value }, this.closeMenu);
             }}
             onSearch={this.getAutoComplete}
@@ -217,7 +217,7 @@ class ReduxAutoComplete extends React.PureComponent {
             disabled={!!disabled}
             maxLength={maxLength}
             open={this.state.isOpen}
-            dataSource={data.map(item => (
+            dataSource={data.map((item) => (
               <Option key={item.LookupId} title={item.DisplayValue}>
                 {item.DisplayValue}
               </Option>
@@ -231,9 +231,10 @@ class ReduxAutoComplete extends React.PureComponent {
             <Input
               suffix={
                 <>
-                  {loadingData && ( "loading"
+                  {
+                    loadingData && 'loading'
                     // <Icon type="loading" className="autoComIcon" style={{ height: '10px' }} />
-                  )}
+                  }
                   {/* <Icon
                     type="down"
                     className="autoComIcon"

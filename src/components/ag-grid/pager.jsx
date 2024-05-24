@@ -131,7 +131,12 @@ export default class Pager extends React.PureComponent {
             active: i == currentPage,
             onClick: () => this.onPageChange(currentPage + 3 == i ? i + 4 : i - 4),
           });
-        else a.push({ text: i, active: i == currentPage, onClick: () => this.onPageChange(i - 1) });
+        else
+          a.push({
+            text: i,
+            active: i == currentPage,
+            onClick: () => this.onPageChange(i - 1),
+          });
       }
       // if (currentPage + pages - 5 < i) {
       //   a.push({ text: i, active: i == currentPage, onClick: () => this.onPageChange(i) })
@@ -152,18 +157,11 @@ export default class Pager extends React.PureComponent {
       refreshGridPage,
       onPageSizeChange,
     } = this;
-    const {
-      title,
-      currentPage,
-      pageSize,
-      totalRecords,
-      totalPage,
-      isLoading,
-      pagination,
-    } = this.props;
+    const { title, currentPage, pageSize, totalRecords, totalPage, isLoading, pagination } =
+      this.props;
     const menu = (
       <Menu onClick={onPageSizeChange}>
-        {paging.options.map(item => (
+        {paging.options.map((item) => (
           <Menu.Item eventKey={item} key={item}>
             {item}
           </Menu.Item>
@@ -185,7 +183,9 @@ export default class Pager extends React.PureComponent {
           >
             <span
               class="ag-paging-row-summary-panel"
-              style={{ margin: pagination == 'compressed' ? 'unset' : 'inherit' }}
+              style={{
+                margin: pagination == 'compressed' ? 'unset' : 'inherit',
+              }}
             >
               <span>{currentPage * pageSize + 1}</span> to{' '}
               <span>
@@ -196,7 +196,9 @@ export default class Pager extends React.PureComponent {
             </span>
             <span
               class="ag-paging-page-summary-panel"
-              style={{ marginLeft: pagination == 'compressed' ? 'inherit' : '32px' }}
+              style={{
+                marginLeft: pagination == 'compressed' ? 'inherit' : '32px',
+              }}
             >
               <div
                 class={`ag-paging-button ${
@@ -206,7 +208,9 @@ export default class Pager extends React.PureComponent {
               >
                 <span
                   class="ag-icon ag-icon-first"
-                  style={{ margin: pagination == 'compressed' ? 'inherit' : '0px 8px' }}
+                  style={{
+                    margin: pagination == 'compressed' ? 'inherit' : '0px 8px',
+                  }}
                 ></span>
                 {/* <button type="button">First</button> */}
               </div>
@@ -218,7 +222,9 @@ export default class Pager extends React.PureComponent {
               >
                 <span
                   class="ag-icon ag-icon-previous"
-                  style={{ margin: pagination == 'compressed' ? 'inherit' : '0px 8px' }}
+                  style={{
+                    margin: pagination == 'compressed' ? 'inherit' : '0px 8px',
+                  }}
                 ></span>
                 {/* <button type="button">Previous</button> */}
               </div>
@@ -231,7 +237,9 @@ export default class Pager extends React.PureComponent {
               >
                 <span
                   class="ag-icon ag-icon-next"
-                  style={{ margin: pagination == 'compressed' ? 'inherit' : '0px 8px' }}
+                  style={{
+                    margin: pagination == 'compressed' ? 'inherit' : '0px 8px',
+                  }}
                 ></span>
                 {/* <button type="button">Next</button> */}
               </div>
@@ -243,7 +251,9 @@ export default class Pager extends React.PureComponent {
               >
                 <span
                   class="ag-icon ag-icon-last"
-                  style={{ margin: pagination == 'compressed' ? 'inherit' : '0px 8px' }}
+                  style={{
+                    margin: pagination == 'compressed' ? 'inherit' : '0px 8px',
+                  }}
                 ></span>
                 {/* <button type="button">Last</button> */}
               </div>

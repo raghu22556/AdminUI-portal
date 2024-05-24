@@ -41,7 +41,7 @@ export class MultiInput extends Component {
                 {item}
                 <Close
                   disabled={this.props.disabled ? this.props.disabled : false}
-                  onClick={event => {
+                  onClick={(event) => {
                     event.preventDefault();
                     const val = [...arr];
                     val.splice(index, 1);
@@ -53,10 +53,10 @@ export class MultiInput extends Component {
           <li className="multi-auto" disabled={this.props.disabled ? this.props.disabled : false}>
             <input
               type="text"
-              onClick={event => {
+              onClick={(event) => {
                 event.preventDefault();
               }}
-              onKeyDown={evt => {
+              onKeyDown={(evt) => {
                 if (evt.keyCode == 13 || evt.keyCode == 9) {
                   evt.preventDefault();
                   if (arr) {
@@ -67,8 +67,11 @@ export class MultiInput extends Component {
                   this.setState({ searchStr: '' });
                 }
               }}
-              onChange={evt =>
-                this.setState({ searchStr: evt.target.value, value: evt.target.value })
+              onChange={(evt) =>
+                this.setState({
+                  searchStr: evt.target.value,
+                  value: evt.target.value,
+                })
               }
               ref={this.input}
               value={searchStr}
@@ -87,7 +90,7 @@ export class MultiInput extends Component {
   }
 }
 
-const Close = props => (
+const Close = (props) => (
   <span {...props}>
     <svg
       height="18"

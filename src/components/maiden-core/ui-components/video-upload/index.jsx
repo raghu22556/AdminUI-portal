@@ -21,7 +21,7 @@ export class VideoUpload extends React.Component {
             type="file"
             name="myfile"
             accept="video/*"
-            onChange={e => {
+            onChange={(e) => {
               var a = window.URL.createObjectURL(e.target.files[0]);
               this.props.onChange(e.target.files[0], 'file');
               this.setState({ file: a });

@@ -3,7 +3,7 @@ import { reducer as formReducer } from 'redux-form';
 import { ReduxHelper } from '../../core/redux-helper';
 import Combo from './combo';
 
-const rootReducer = asyncReducers => {
+const rootReducer = (asyncReducers) => {
   return combineReducers({
     form: formReducer,
     combos: Combo,

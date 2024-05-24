@@ -21,14 +21,14 @@ class SelectCellEditor extends Component {
     return this.state.value;
   }
 
-  dispatchValues = value => {
+  dispatchValues = (value) => {
     const { dispatch } = this.props.context.componentParent.props;
     if (this.props.colDef.getEditingValue) {
       dispatch({
         type: 'GET_EDITING_VALUES_SUCCESS',
         payload: {
           type: 'select',
-          data: this.state.arr.find(item => item.LookupId === value) || null,
+          data: this.state.arr.find((item) => item.LookupId === value) || null,
         },
       });
     }
@@ -63,12 +63,12 @@ class SelectCellEditor extends Component {
         }
         allowClear
         dropdownMatchSelectWidth={true}
-        onInputKeyDown={event => {
+        onInputKeyDown={(event) => {
           // TO DO : work on the keyDown chage value
           // .ant-select-dropdown-menu-item.ant-select-dropdown-menu-item-active target this class to get value
         }}
       >
-        {arr.map(item => {
+        {arr.map((item) => {
           return (
             <Option value={item.LookupId} title={item.DisplayValue}>
               {item.DisplayValue}
@@ -107,7 +107,7 @@ class AutoFillCellEditor extends Component {
     return this.state.value;
   }
 
-  getAutoComplete = searchTxt => {
+  getAutoComplete = (searchTxt) => {
     const { activeModule, comboType } = this.props.colDef;
     var param = {
       start: 0,
@@ -120,11 +120,15 @@ class AutoFillCellEditor extends Component {
     };
     var me = this;
     API.autoFill(param)
-      .then(response => {
+      .then((response) => {
         let data = response.data.records;
-        me.setState({ data: data, dataString: JSON.stringify(data), isDataLoaded: true });
+        me.setState({
+          data: data,
+          dataString: JSON.stringify(data),
+          isDataLoaded: true,
+        });
       })
-      .catch(error => {
+      .catch((error) => {
         debugger;
       });
     this.setState({ value: searchTxt });
@@ -150,9 +154,9 @@ class AutoFillCellEditor extends Component {
         autoComplete="none"
         onSearch={this.getAutoComplete}
         value={value}
-        onSelect={value => this.setState({ value })}
+        onSelect={(value) => this.setState({ value })}
       >
-        {data.map(item => (
+        {data.map((item) => (
           <Option key={item.LookupId}>{item.DisplayValue}</Option>
         ))}
       </AutoComplete>

@@ -1,7 +1,7 @@
-import ReduxHandler from "../../core/handler";
-import store from "../../store";
-import { sagaGenerator } from "../../store/sagas/core";
-import { ReduxHelper } from "./index";
+import ReduxHandler from '../../core/handler';
+import store from '../../store';
+import { sagaGenerator } from '../../store/sagas/core';
+import { ReduxHelper } from './index';
 
 export const injectTOStore = (newConfig) => {
   let newHandler = new ReduxHandler(newConfig);
