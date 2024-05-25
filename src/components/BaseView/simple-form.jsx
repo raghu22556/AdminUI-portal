@@ -484,7 +484,7 @@ class SimpleForm extends PureComponent {
 
   onSave = (closeable, callBack) => {
     const { t } = this.props;
-    this.props.form.validateFields({ validateOnly: true }).then(() => {
+    this.props.form.validateFields({ validateOnly: false }).then(() => {
       this.setState({ loading: true });
       this.files = [];
       const {
