@@ -69,6 +69,7 @@ class AgGrid extends Component {
         sortingOrder,
         hideInTable,
         checkValueBeforeChange,
+        pinned,
       } = item;
       let sortable = true;
       if (typeof notsortabletype == 'boolean' && notsortabletype) sortable = false;
@@ -146,6 +147,7 @@ class AgGrid extends Component {
         checkValueBeforeChange,
         comparator: () => false,
         decimal,
+        pinned: pinned || false,
       };
       if (comboType && combos)
         config.filterParams = {

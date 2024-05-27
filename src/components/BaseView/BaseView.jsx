@@ -357,13 +357,14 @@ export default class BaseView extends PureComponent {
     var gridColumns = [
       ...fields,
       {
-        dataIndex: 'Operation',
-        header: 'Operation',
+        dataIndex: 'Action',
+        title: 'Action',
         width: 105,
         type: 'operation',
         editable: false,
         nofiltertype: true,
         notsortabletype: true,
+        pinned: 'right',
       },
     ];
     return gridColumns;
