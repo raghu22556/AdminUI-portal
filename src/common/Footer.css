@@ -7,10 +7,6 @@
     margin-bottom: 0 !important;
   }
 
-  footer {
-    position: static !important;
-  }
-
   footer ul {
     width: 100% !important;
     margin: auto;
