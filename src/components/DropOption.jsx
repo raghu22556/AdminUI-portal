@@ -1,16 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Dropdown, Button, Menu } from 'antd';
-import { BarsOutlined, DownOutlined } from '@ant-design/icons';
+import { Dropdown, Menu } from 'antd';
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 
 const DropOption = ({ onMenuClick, menuOptions = [], buttonStyle, dropdownProps }) => {
   const menu = menuOptions.map((item) => <Menu.Item key={item.key}>{item.name}</Menu.Item>);
   return (
     <Dropdown overlay={<Menu onClick={onMenuClick}>{menu}</Menu>} {...dropdownProps}>
-      <Button style={{ border: 'none', ...buttonStyle }}>
-        <BarsOutlined />
-        <DownOutlined />
-      </Button>
+      <MoreVertIcon style={{ cursor: 'pointer' }} />
     </Dropdown>
   );
 };
