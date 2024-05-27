@@ -20,14 +20,14 @@ import { defaultActions } from "../app-config";
 import AppleSignUpBtn from "../common/AppleSignUpBtn";
 import GoogleSignUpBtn from "../common/GoogleSignUpBtn";
 
-const LoginForm = ({setIsLoading}) => {
+const LoginForm = ({ setIsLoading }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const login_result = useSelector((state) => state?.login);
 
   useEffect(() => {
     if (login_result.data) {
-      if(login_result.data.message){
+      if (login_result.data.message) {
         setError(login_result.data.message);
         setIsLoading(false);
         return;
@@ -62,10 +62,10 @@ const LoginForm = ({setIsLoading}) => {
       }
       injectTOStore(newConfig);
       navigate("/dashboard");
-    } else if(login_result.error) {
+    } else if (login_result.error) {
       setError(login_result.error);
-        setIsLoading(false);
-        return;
+      setIsLoading(false);
+      return;
     }
   }, [login_result]);
 
@@ -117,7 +117,7 @@ const LoginForm = ({setIsLoading}) => {
       email,
       password,
     };
-    
+
     setIsLoading(true);
     dispatch(ReduxHelper.Actions.login(params));
   };
