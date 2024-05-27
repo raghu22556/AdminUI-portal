@@ -23,7 +23,8 @@ const Navbar = (props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const { handleToggle, drawer, t } = props;
-  let menu = JSON.parse(localStorage.getItem('menu'));
+  let projects = JSON.parse(localStorage.getItem('project'));
+
 
   const handleClick = () => {
     // check is the previous drop-down is open or closed and do opposite
@@ -84,7 +85,7 @@ const Navbar = (props) => {
             style={{ width: '200px' }}
             onClick={() => setIsOpen(!isOpen)}
           >
-            <img src="./Projects.svg" alt="" /> <span>Project Name</span>
+            <img src="./Projects.svg" alt="" style={{ width: '16px' }} /> <span style={{ fontSize: '14px' }}>Project Name</span>
             {isOpen ? <BsChevronUp className="ml-2" /> : <BsChevronDown className="ml-2" />}
           </div>
           {isOpen && (
@@ -92,13 +93,13 @@ const Navbar = (props) => {
               className="absolute bg-white border border-lightgray rounded-md mt-2 z-10"
               style={{ marginTop: '10px' }}
             >
-              {menu.map((item) => (
+              {projects.map((item) => (
                 <div
-                  key={item.menuId}
-                  className="flex items-center p-2 cursor-pointer hover:bg-gray-200"
+                  key={item.ProjectId}
+                  className="flex items-center p-2 cursor-pointer hover:bg-gray-200 w-[200px] mt-2"
                   onClick={() => onProjectChange(item)}
                 >
-                  {item.cardText}
+                  <p style={{ fontSize: '14px' }}>{item.ProjectName}</p>
                 </div>
               ))}
             </div>
