@@ -7,7 +7,7 @@ export class CustomSelect extends InputComponent {
     super(props);
   }
   render() {
-    const { options, onChange, name, value, allowZeros, mode, mappingId, title, disabled } =
+    const { options, onChange, name, value, allowZeros, mode, mappingId, title, disabled, ...rest } =
       this.props;
     var additionalProps = {};
     if (mode == 'multiple') {
@@ -17,6 +17,7 @@ export class CustomSelect extends InputComponent {
       <FormControl style={{ width: '100%' }} disabled={disabled}>
         <InputLabel>{title}</InputLabel>
         <Select
+        {...rest}
           {...additionalProps}
           name={name}
           value={value}

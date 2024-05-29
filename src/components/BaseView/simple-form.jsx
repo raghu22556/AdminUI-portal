@@ -703,6 +703,7 @@ class SimpleForm extends PureComponent {
       if (value.charAt && value.charAt(0) == ' ') value = value.trim();
       if (typeof this.props.setShowConfMsg === 'function') this.props.setShowConfMsg(true);
       this.setState({ [field]: value, applyLocalChange: true });
+      this.props.form.setFieldsValue({ [field]: value })
     }
   };
 
@@ -1178,7 +1179,7 @@ class SimpleForm extends PureComponent {
         <Form.Item
           label={item.hideLabel ? undefined : item.title}
           style={this.formItemStyles(item)}
-          name={item.title}
+          name={id}
           rules={this.getFieldRules(item, t, id)}
           initialValue={value}
         >
