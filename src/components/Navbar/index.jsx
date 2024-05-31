@@ -68,7 +68,7 @@ const Navbar = (props) => {
         className="text-color text-xl cursor-pointer"
       /> */}
       <img
-        src="close.svg"
+        src="/close.svg"
         alt=""
         onClick={handleToggle}
         className="text-color text-xl cursor-pointer w-[30px]"
@@ -85,7 +85,7 @@ const Navbar = (props) => {
             style={{ width: '200px' }}
             onClick={() => setIsOpen(!isOpen)}
           >
-            <img src="./Projects.svg" alt="" style={{ width: '16px' }} /> <span style={{ fontSize: '14px' }}>Project Name</span>
+            <img src="/Projects.svg" alt="" style={{ width: '16px' }} /> <span style={{ fontSize: '14px' }}>Project Name</span>
             {isOpen ? <BsChevronUp className="ml-2" /> : <BsChevronDown className="ml-2" />}
           </div>
           {isOpen && (
@@ -130,8 +130,9 @@ const Navbar = (props) => {
             src="https://s3-alpha-sig.figma.com/img/0eba/1822/f3b6e417139fd32b6e85460026150af7?Expires=1717372800&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=P-QDZ8U9MASEc1BV-X5irII9q913cobryW92i29fBe1VFA16ZoTFMBzVTM-9wyjgh5dP7yBj8NFiXIZAyDuL3PIwdSpSXt0i459-cS7ueyqtQ6scZrjxBNter--9~IxQ-ZjO6mLlossbO~ayB5cafGwb08x8BtfvvnvcxzyZr17iDSZsHDOS1LNcxwRdoexZPGvsHyJLYYfhKgqfPf03BZIThKBPpXKk7zGjmzb~Jv6hfvvJi47nGq346aKbwRWU58Dce6MqDuuNQ7GgQHEZ2VlAVqoSuM3IIuYfdlzp8Mr9m~wv4~l1AeTL3mN-Wl-wSBjCG0tUYlcOjJ7Q8NVyEw__"
             className="icon-bg text-color text-xl w-8 h-8 md:w-9 md:h-9 flex justify-center items-center rounded-md cursor-pointer"
           />
+
           <div className="icon-bg text-color text-lg sm:text-xl  w-8 h-8 md:w-9 md:h-9 flex justify-center items-center rounded-full p-1.5 cursor-pointer">
-            <img src="./Notifications.svg" alt="icon" />
+            <img src="/Notifications.svg" alt="icon" />
           </div>
 
           {/* By clicking outside, the drop-down will be closed */}

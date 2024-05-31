@@ -5,6 +5,8 @@ import GridConfig from './config';
 import { textAlign } from '@material-ui/system';
 import { Paper, Grid } from '@material-ui/core';
 import Tooltip from '@material-ui/core/Tooltip';
+import RefreshRoundedIcon from '@mui/icons-material/RefreshRounded';
+import RotateRightRoundedIcon from '@mui/icons-material/RotateRightRounded';
 const { strings, paging } = GridConfig;
 
 const Pagination = () => <div>Need to implement</div>;
@@ -201,9 +203,8 @@ export default class Pager extends React.PureComponent {
               }}
             >
               <div
-                class={`ag-paging-button ${
-                  totalPage == 0 ? true : currentPage == 0 ? 'ag-disabled' : ''
-                }`}
+                class={`ag-paging-button ${totalPage == 0 ? true : currentPage == 0 ? 'ag-disabled' : ''
+                  }`}
                 onClick={firstPage}
               >
                 <span
@@ -215,9 +216,8 @@ export default class Pager extends React.PureComponent {
                 {/* <button type="button">First</button> */}
               </div>
               <div
-                class={`ag-paging-button ${
-                  totalPage == 0 ? true : currentPage == 0 ? 'ag-disabled' : ''
-                }`}
+                class={`ag-paging-button ${totalPage == 0 ? true : currentPage == 0 ? 'ag-disabled' : ''
+                  }`}
                 onClick={previousPage}
               >
                 <span
@@ -230,9 +230,8 @@ export default class Pager extends React.PureComponent {
               </div>
               Page <span>{currentPage + 1}</span> of <span>{totalPage}</span>
               <div
-                class={`ag-paging-button ${
-                  totalPage == 0 ? true : currentPage >= totalPage - 1 ? 'ag-disabled' : ''
-                }`}
+                class={`ag-paging-button ${totalPage == 0 ? true : currentPage >= totalPage - 1 ? 'ag-disabled' : ''
+                  }`}
                 onClick={nextPage}
               >
                 <span
@@ -244,9 +243,8 @@ export default class Pager extends React.PureComponent {
                 {/* <button type="button">Next</button> */}
               </div>
               <div
-                class={`ag-paging-button ${
-                  totalPage == 0 ? true : currentPage >= totalPage - 1 ? 'ag-disabled' : ''
-                }`}
+                class={`ag-paging-button ${totalPage == 0 ? true : currentPage >= totalPage - 1 ? 'ag-disabled' : ''
+                  }`}
                 onClick={lastPage}
               >
                 <span
@@ -264,7 +262,7 @@ export default class Pager extends React.PureComponent {
                   <span>
                     <Button
                       onClick={refreshGridPage}
-                      icon={isLoading ? 'loading' : 'reload'}
+                      icon={isLoading ? <RotateRightRoundedIcon style={{ fontSize: '18px' }} /> : <RefreshRoundedIcon style={{ fontSize: '18px' }} />}
                       style={{
                         margin: '0px',
                         background: 'none',
