@@ -706,6 +706,12 @@ class GridPanel extends PureComponent {
         fromDate = new Date(today.getFullYear(), today.getMonth() - 1, 1);
         toDate = new Date(today.getFullYear(), today.getMonth(), 0, 23, 59, 59);
         break;
+      case 'reset':
+        // Reset filter
+        gridApi.setFilterModel(null);
+        gridApi.onFilterChanged();
+        return;
+
       default:
         break;
     }
@@ -719,7 +725,9 @@ class GridPanel extends PureComponent {
         },
       };
       gridApi.setFilterModel(filterModel);
-      gridApi.onFilterChanged();
+      setTimeout(() => {
+        gridApi.onFilterChanged();
+      }, 100);
     }
   };
 
@@ -1256,6 +1264,7 @@ class GridPanel extends PureComponent {
               style={{ width: 150, marginLeft: '10px' }}
               onChange={this.applyDateRangeFilter}
             >
+              <Option value="reset">Reset</Option>
               <Option value="today">Today</Option>
               <Option value="yesterday">Yesterday</Option>
               <Option value="last7days">Last 7 Days</Option>
