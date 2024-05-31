@@ -706,7 +706,7 @@ class GridPanel extends PureComponent {
         fromDate = new Date(today.getFullYear(), today.getMonth() - 1, 1);
         toDate = new Date(today.getFullYear(), today.getMonth(), 0, 23, 59, 59);
         break;
-      case 'Clear All':
+      case 'reset':
         // Reset filter
         gridApi.setFilterModel(null);
         gridApi.onFilterChanged();
@@ -1264,7 +1264,7 @@ class GridPanel extends PureComponent {
               style={{ width: 150, marginLeft: '10px' }}
               onChange={this.applyDateRangeFilter}
             >
-              <Option value="Clear All">Clear All</Option>
+              <Option value="reset">Reset</Option>
               <Option value="today">Today</Option>
               <Option value="yesterday">Yesterday</Option>
               <Option value="last7days">Last 7 Days</Option>
