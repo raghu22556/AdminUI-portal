@@ -238,7 +238,7 @@ class ListFilter extends PureComponent {
             display: 'flex',
             justifyContent: 'space-between',
             padding: '20px',
-            marginTop:'10px'
+            marginTop: '10px',
           }}
         >
           <button
@@ -627,7 +627,7 @@ class NumberFilter extends PureComponent {
       <div ref="tabBody" class="ag-tab-body">
         <div class="ag-filter">
           <div>
-            <div class="ag-filter-body-wrapper" style={{padding:'10px'}}>
+            <div class="ag-filter-body-wrapper" style={{ padding: '10px' }}>
               <div class="ag-filter-body" role="presentation">
                 <div class="ag-input-wrapper" role="presentation">
                   <ArrowForwardIosIcon className="icon" />
@@ -661,7 +661,10 @@ class NumberFilter extends PureComponent {
                 </div>
               </div>
             </div>
-            <div class="ag-filter-apply-panel" style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <div
+              class="ag-filter-apply-panel"
+              style={{ display: 'flex', justifyContent: 'space-between' }}
+            >
               <button
                 disabled={disableBtn}
                 style={{ marginLeft: '5px', color: '#3f51b5' }}

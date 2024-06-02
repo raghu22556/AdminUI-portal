@@ -203,8 +203,9 @@ export default class Pager extends React.PureComponent {
               }}
             >
               <div
-                class={`ag-paging-button ${totalPage == 0 ? true : currentPage == 0 ? 'ag-disabled' : ''
-                  }`}
+                class={`ag-paging-button ${
+                  totalPage == 0 ? true : currentPage == 0 ? 'ag-disabled' : ''
+                }`}
                 onClick={firstPage}
               >
                 <span
@@ -216,8 +217,9 @@ export default class Pager extends React.PureComponent {
                 {/* <button type="button">First</button> */}
               </div>
               <div
-                class={`ag-paging-button ${totalPage == 0 ? true : currentPage == 0 ? 'ag-disabled' : ''
-                  }`}
+                class={`ag-paging-button ${
+                  totalPage == 0 ? true : currentPage == 0 ? 'ag-disabled' : ''
+                }`}
                 onClick={previousPage}
               >
                 <span
@@ -230,8 +232,9 @@ export default class Pager extends React.PureComponent {
               </div>
               Page <span>{currentPage + 1}</span> of <span>{totalPage}</span>
               <div
-                class={`ag-paging-button ${totalPage == 0 ? true : currentPage >= totalPage - 1 ? 'ag-disabled' : ''
-                  }`}
+                class={`ag-paging-button ${
+                  totalPage == 0 ? true : currentPage >= totalPage - 1 ? 'ag-disabled' : ''
+                }`}
                 onClick={nextPage}
               >
                 <span
@@ -243,8 +246,9 @@ export default class Pager extends React.PureComponent {
                 {/* <button type="button">Next</button> */}
               </div>
               <div
-                class={`ag-paging-button ${totalPage == 0 ? true : currentPage >= totalPage - 1 ? 'ag-disabled' : ''
-                  }`}
+                class={`ag-paging-button ${
+                  totalPage == 0 ? true : currentPage >= totalPage - 1 ? 'ag-disabled' : ''
+                }`}
                 onClick={lastPage}
               >
                 <span
@@ -262,7 +266,13 @@ export default class Pager extends React.PureComponent {
                   <span>
                     <Button
                       onClick={refreshGridPage}
-                      icon={isLoading ? <RotateRightRoundedIcon style={{ fontSize: '18px' }} /> : <RefreshRoundedIcon style={{ fontSize: '18px' }} />}
+                      icon={
+                        isLoading ? (
+                          <RotateRightRoundedIcon style={{ fontSize: '18px' }} />
+                        ) : (
+                          <RefreshRoundedIcon style={{ fontSize: '18px' }} />
+                        )
+                      }
                       style={{
                         margin: '0px',
                         background: 'none',

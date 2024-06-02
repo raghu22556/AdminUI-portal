@@ -3,9 +3,7 @@ import './Footer.css';
 
 export default function Footer() {
   return (
-    <footer
-      className="flex w-full flex-row flex-wrap   border-t border-blue-gray-50 py-6  md:justify-between"
-    >
+    <footer className="flex w-full flex-row flex-wrap   border-t border-blue-gray-50 py-6  md:justify-between">
       <ul className="flex flex-wrap  gap-y-2 gap-x-8" style={{ marginTop: '10px' }}>
         <li className="footer-item">
           <Typography

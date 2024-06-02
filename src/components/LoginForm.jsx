@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
 import {
   Card,
   CardBody,
@@ -9,16 +9,13 @@ import {
   Checkbox,
   Button,
   Alert,
-} from "@material-tailwind/react";
-import {
-  CustomEmailInput,
-  CustomPasswordInput,
-} from "../maiden-core/ui-components";
-import { ReduxHelper } from "../core/redux-helper";
-import { injectTOStore } from "../core/redux-helper/injectTOStore";
-import { defaultActions } from "../app-config";
-import AppleSignUpBtn from "../common/AppleSignUpBtn";
-import GoogleSignUpBtn from "../common/GoogleSignUpBtn";
+} from '@material-tailwind/react';
+import { CustomEmailInput, CustomPasswordInput } from '../maiden-core/ui-components';
+import { ReduxHelper } from '../core/redux-helper';
+import { injectTOStore } from '../core/redux-helper/injectTOStore';
+import { defaultActions } from '../app-config';
+import AppleSignUpBtn from '../common/AppleSignUpBtn';
+import GoogleSignUpBtn from '../common/GoogleSignUpBtn';
 
 const LoginForm = ({ setIsLoading }) => {
   const navigate = useNavigate();
@@ -33,7 +30,16 @@ const LoginForm = ({ setIsLoading }) => {
         return;
       }
       localStorage.clear();
-      const { token, menu, dynamicConfig, masterDataList, userTable, localizedData, organizationId, project } = login_result.data;
+      const {
+        token,
+        menu,
+        dynamicConfig,
+        masterDataList,
+        userTable,
+        localizedData,
+        organizationId,
+        project,
+      } = login_result.data;
       var entityMapping = {};
       for (var item of JSON.parse(masterDataList)) {
         entityMapping[item.table] = item;
@@ -44,14 +50,14 @@ const LoginForm = ({ setIsLoading }) => {
         //refresh_token: refresh_token,
         created: Date.now(),
       };
-      localStorage.setItem("cube:token", JSON.stringify(tokenObject));
-      localStorage.setItem("menu", JSON.stringify(menu));
-      localStorage.setItem("dynamicConfig", dynamicConfig);
-      localStorage.setItem("entityMapping", JSON.stringify(entityMapping));
+      localStorage.setItem('cube:token', JSON.stringify(tokenObject));
+      localStorage.setItem('menu', JSON.stringify(menu));
+      localStorage.setItem('dynamicConfig', dynamicConfig);
+      localStorage.setItem('entityMapping', JSON.stringify(entityMapping));
       localStorage.setItem('userTable', userTable);
       localStorage.setItem('languageData', JSON.stringify(localizedData));
       localStorage.setItem('organizationId', organizationId);
-      localStorage.setItem("project", JSON.stringify(project));
+      localStorage.setItem('project', JSON.stringify(project));
 
       let dynamicConfigJson = JSON.parse(dynamicConfig);
       let newConfig = [];
@@ -61,7 +67,7 @@ const LoginForm = ({ setIsLoading }) => {
         });
       }
       injectTOStore(newConfig);
-      navigate("/dashboard");
+      navigate('/dashboard');
     } else if (login_result.error) {
       setError(login_result.error);
       setIsLoading(false);
@@ -69,8 +75,8 @@ const LoginForm = ({ setIsLoading }) => {
     }
   }, [login_result]);
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
   const [loginSuccess, setLoginSuccess] = useState(false);
 
@@ -90,13 +96,13 @@ const LoginForm = ({ setIsLoading }) => {
   };
 
   const onLoginClick = () => {
-    if (!email.trim() || !email.includes("@")) {
-      setError("Email is invalid");
+    if (!email.trim() || !email.includes('@')) {
+      setError('Email is invalid');
       return;
     }
 
     if (password.length < 8) {
-      setError("Password must be at least 8 characters long");
+      setError('Password must be at least 8 characters long');
       return;
     }
 
@@ -104,12 +110,12 @@ const LoginForm = ({ setIsLoading }) => {
     const specialCharRegex = /[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]/;
 
     if (!numberRegex.test(password)) {
-      setError("Password must contain at least one number");
+      setError('Password must contain at least one number');
       return;
     }
 
     if (!specialCharRegex.test(password)) {
-      setError("Password must contain at least one special character");
+      setError('Password must contain at least one special character');
       return;
     }
 
@@ -150,11 +156,11 @@ const LoginForm = ({ setIsLoading }) => {
         {error && (
           <Alert
             style={{
-              background: "#DF4A4A",
-              padding: "5px",
-              fontSize: "10px",
-              opacity: "1",
-              transition: "opacity 0.2s ease-in-out",
+              background: '#DF4A4A',
+              padding: '5px',
+              fontSize: '10px',
+              opacity: '1',
+              transition: 'opacity 0.2s ease-in-out',
             }}
           >
             {error}
@@ -163,11 +169,11 @@ const LoginForm = ({ setIsLoading }) => {
         {loginSuccess && (
           <Alert
             style={{
-              background: "#4CAF50",
-              padding: "5px",
-              fontSize: "10px",
-              opacity: "1",
-              transition: "opacity 0.2s ease-in-out",
+              background: '#4CAF50',
+              padding: '5px',
+              fontSize: '10px',
+              opacity: '1',
+              transition: 'opacity 0.2s ease-in-out',
             }}
           >
             Login successful!
@@ -192,7 +198,7 @@ const LoginForm = ({ setIsLoading }) => {
             type="submit"
             disabled={false}
             onClick={onLoginClick}
-            style={{ shadow: "none" }}
+            style={{ shadow: 'none' }}
           >
             Log In
           </Button>

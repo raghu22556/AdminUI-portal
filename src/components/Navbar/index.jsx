@@ -25,7 +25,6 @@ const Navbar = (props) => {
   const { handleToggle, drawer, t } = props;
   let projects = JSON.parse(localStorage.getItem('project'));
 
-
   const handleClick = () => {
     // check is the previous drop-down is open or closed and do opposite
     setOpen((prev) => !prev);
@@ -85,7 +84,8 @@ const Navbar = (props) => {
             style={{ width: '200px' }}
             onClick={() => setIsOpen(!isOpen)}
           >
-            <img src="/Projects.svg" alt="" style={{ width: '16px' }} /> <span style={{ fontSize: '14px' }}>Project Name</span>
+            <img src="/Projects.svg" alt="" style={{ width: '16px' }} />{' '}
+            <span style={{ fontSize: '14px' }}>Project Name</span>
             {isOpen ? <BsChevronUp className="ml-2" /> : <BsChevronDown className="ml-2" />}
           </div>
           {isOpen && (

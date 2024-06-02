@@ -66,7 +66,7 @@ export const welcomePage = (RenderComponent, Footer) => {
                   <RenderComponent setIsLoading={setIsLoading} />
                 </div>
               </main>
-             <Footer />
+              <Footer />
             </div>
           </div>
         </main>

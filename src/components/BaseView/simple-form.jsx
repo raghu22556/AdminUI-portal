@@ -703,7 +703,7 @@ class SimpleForm extends PureComponent {
       if (value.charAt && value.charAt(0) == ' ') value = value.trim();
       if (typeof this.props.setShowConfMsg === 'function') this.props.setShowConfMsg(true);
       this.setState({ [field]: value, applyLocalChange: true });
-      this.props.form.setFieldsValue({ [field]: value })
+      this.props.form.setFieldsValue({ [field]: value });
     }
   };
 

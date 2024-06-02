@@ -150,7 +150,7 @@ export default class BaseView extends PureComponent {
         idColumn: child.idColumn,
         hidePaging: child.hidePaging,
         extraParams: child.extraParams || {},
-        onGridPanelReady: child.onGridPanelReady || (() => { }),
+        onGridPanelReady: child.onGridPanelReady || (() => {}),
         tabTitle: child.tabTitle,
         gridHeight: child.gridHeight,
         pagination: child.pagination,
@@ -246,7 +246,7 @@ export default class BaseView extends PureComponent {
         filterInfo: [],
       },
       extraParams: entity.extraParams || {},
-      onGridPanelReady: entity.onGridPanelReady || (() => { }),
+      onGridPanelReady: entity.onGridPanelReady || (() => {}),
       gridHeight: entity.gridHeight,
       pagination: entity.pagination,
       onRowDoubleClicked: entity.onRowDoubleClicked,
@@ -1939,7 +1939,7 @@ class TabContainer extends PureComponent {
           shouldNotResetFields={true}
           // mode={mode}
           config={config}
-          resetProps={() => { }}
+          resetProps={() => {}}
         />
       );
     } else if (item.type === 'gridonly') {
@@ -1975,20 +1975,20 @@ class TabContainer extends PureComponent {
       <>
         {childView == 'section' || childView == 'flex'
           ? items &&
-          items.length > 0 &&
-          items.map((item) => {
-            return this.constructTabItem(item);
-          })
+            items.length > 0 &&
+            items.map((item) => {
+              return this.constructTabItem(item);
+            })
           : items &&
-          items.length > 0 && (
-            <NavPills
-              tabs={items.map((item, index) => ({
-                tabButton: item.title,
-                tabContent: this.constructTabItem(item),
-                onSelect: (tabindex) => onSelect(tabindex),
-              }))}
-            />
-          )}
+            items.length > 0 && (
+              <NavPills
+                tabs={items.map((item, index) => ({
+                  tabButton: item.title,
+                  tabContent: this.constructTabItem(item),
+                  onSelect: (tabindex) => onSelect(tabindex),
+                }))}
+              />
+            )}
       </>
     );
   }
