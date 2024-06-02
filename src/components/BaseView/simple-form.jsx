@@ -682,12 +682,15 @@ class SimpleForm extends PureComponent {
   onChange = (field, control, type) => {
     if (type == 'file' || type == 'multiInput') {
       this.setState({ [field]: control });
+      this.props.form.setFieldsValue({ [field]: value });
     } else if (control == null) {
       this.setState({ [field]: control, applyLocalChange: true });
+      this.props.form.setFieldsValue({ [field]: value });
     } else if (control._isAMomentObject) {
       var value = '';
       if (typeof control === 'object') value = control; //.format('YYYY-MM-DD hh:mm:ss');
       this.setState({ [field]: value, applyLocalChange: true });
+      this.props.form.setFieldsValue({ [field]: value });
     } else {
       var value = '';
       if (typeof control === 'object') {
