@@ -22,7 +22,8 @@ const Navbar = (props) => {
   const [selectedProject, setSelectedProject] = useState('');
   const [isOpen, setIsOpen] = useState(false);
 
-  const { handleToggle, drawer, t } = props;
+  const { handleToggle, handleOpenToggle, drawer, t } = props;
+
   let projects = JSON.parse(localStorage.getItem('project'));
 
   const handleClick = () => {
@@ -66,12 +67,22 @@ const Navbar = (props) => {
         onClick={handleToggle}
         className="text-color text-xl cursor-pointer"
       /> */}
-      <img
-        src="/close.svg"
-        alt=""
-        onClick={handleToggle}
-        className="text-color text-xl cursor-pointer w-[30px]"
-      />
+
+      {!drawer ? (
+        <img
+          src="/close.svg"
+          alt=""
+          onClick={handleToggle}
+          className="text-color text-xl cursor-pointer w-[30px]"
+        />
+      ) : (
+        <img
+          src="/open.svg"
+          alt=""
+          className="text-color text-xl cursor-pointer w-[30px]"
+          onClick={handleToggle}
+        />
+      )}
 
       <div className={`sm:ml-5 ml-2.5 ${drawer ? 'hidden md:flex' : 'flex md:hidden'}`}>
         <Typography>MaidenCube</Typography>
