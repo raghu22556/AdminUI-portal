@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BsChatDots, BsChevronDown, BsChevronUp } from 'react-icons/bs';
 import { MdOutlineNotificationsActive } from 'react-icons/md';
 import { HiOutlineMenu, HiOutlineSearch } from 'react-icons/hi';
+import { FaCheck } from 'react-icons/fa';
 
 import { useNavigate } from 'react-router-dom';
 import { Typography } from '@material-tailwind/react';
@@ -15,7 +16,14 @@ import { withTranslation } from 'react-i18next';
 import moment from 'moment';
 import ModeEditSharpIcon from '@mui/icons-material/ModeEditSharp';
 import FullScreen from '../FullScreen';
-
+import '../component.css';
+const options = [
+  { value: 'en', label: 'English', icon: 'united-states.png' },
+  { value: 'es', label: 'Spanish', icon: 'flag.png' },
+  { value: 'pt', label: 'Portuguese', icon: 'portugal.png' },
+  { value: 'ar', label: 'Arabic', icon: 'flag (1).png' },
+  { value: 'cn', label: 'Chinese', icon: 'china.png' },
+];
 const Navbar = (props) => {
   const navigate = useNavigate();
   const [pop, setPop] = useState(false);
@@ -23,6 +31,8 @@ const Navbar = (props) => {
   const [selectedProject, setSelectedProject] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const [profile, setProfile] = useState(false);
+  const [selectedOption, setSelectedOption] = useState(options[0]);
+  const [langOpen, setlangOpen] = useState(false);
 
   const { handleToggle, handleOpenToggle, drawer, t } = props;
 
@@ -30,6 +40,27 @@ const Navbar = (props) => {
   const showProfile = () => {
     setProfile(!profile);
   };
+  const languageSelect = (option) => {
+    setSelectedOption(option);
+    setlangOpen(false);
+    if (option.value) {
+      let selectedLang = option.value;
+      props.i18n.changeLanguage(selectedLang);
+      localStorage.setItem('selectedLanguage', selectedLang);
+      moment.locale(selectedLang);
+    }
+  };
+
+  useEffect(() => {
+    const storedLang = localStorage.getItem('selectedLanguage');
+    if (storedLang) {
+      const selectedLangOption = options.find((option) => option.value === storedLang);
+      setSelectedOption(selectedLangOption);
+      props.i18n.changeLanguage(storedLang);
+      moment.locale(storedLang);
+    }
+  }, []);
+
   const handleClick = () => {
     // check is the previous drop-down is open or closed and do opposite
     setOpen((prev) => !prev);
@@ -44,16 +75,6 @@ const Navbar = (props) => {
   };
   const handleTogglePop = () => {
     setPop(false);
-  };
-
-  const onLanguageChange = (e) => {
-    if (e) {
-      let selectedLang = e.target.value;
-      props.i18n.changeLanguage(selectedLang);
-      localStorage.selectedLanguage = selectedLang;
-      moment.locale(selectedLang);
-      window.location.reload();
-    }
   };
 
   const onProjectChange = (e) => {
@@ -92,7 +113,7 @@ const Navbar = (props) => {
         <Typography>MaidenCube</Typography>
       </div>
 
-      <section className="flex ml-auto gap-3 sm:gap-4 md:gap-5">
+      <section className="flex ml-auto gap-2 sm:gap-4 md:gap-5">
         <div className="relative ml-auto mr-2.5">
           <div
             className="bg-[#F7F9FB] p-2 px-5 border border-lightgray rounded-md cursor-pointer flex items-center justify-between"
@@ -125,161 +146,37 @@ const Navbar = (props) => {
           <BsChatDots />
         </div> */}
         {/* Profile */}
-        <section className="flex items-center gap-1.5 sm:gap-3">
+        <section className="flex items-center gap-1.5 sm:gap-3 ml-2 mr-2">
           <div className="icon-bg text-color text-lg sm:text-xl  w-8 h-8 md:w-9 md:h-9 flex justify-center items-center rounded-full p-1.5 cursor-pointer">
             <img src="/Notifications.svg" alt="icon" />
           </div>
         </section>
 
         <FullScreen />
-        <Popper
-          open={open}
-          role={undefined}
-          transition
-          // disablePortal
-          style={{
-            position: 'absolute',
-            left: 'unset !important',
-            top: 'unset !important',
-          }}
-        >
-          {({ TransitionProps, placement }) => (
-            <Grow
-              {...TransitionProps}
-              style={{
-                position: 'absolute',
-                transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom',
-                left: 'unset !important',
-                top: 'unset !important',
-              }}
-            >
-              <Paper>
-                <ClickAwayListener onClickAway={handleToggles}>
-                  <div
-                    autoFocusItem={open}
-                    style={{
-                      position: 'fixed',
-                      backgroundColor: '#eeeeee',
-                      borderRadius: '3px',
-                      right: '25px',
-                      top: '72px',
-                      width: '300px',
-                      padding: '10px',
-                      boxShadow: 'rgba(51, 51, 51, 0.45) 1px 1px 3px 1px',
-                      zIndex: '9',
-                      padding: '15px',
-                    }}
-                  >
-                    <div>
-                      <p style={{ fontWeight: 'bold', margin: '2px 0px' }}>Rohit Sharma</p>
-                      {/* <p style={{ fontWeight: 'bold', margin: '2px' }}>lastName</p> */}
-                      <p style={{ fontSize: 'smaller', fontWeight: '500px' }}>rohitz93</p>
 
-                      <div
-                        style={{
-                          display: 'flex',
-                          flexDirection: 'column',
-                        }}
-                      >
-                        <div
-                          id="google_translate_element"
-                          style={{
-                            display: 'flex',
-                          }}
-                        >
-                          <div
-                            style={{
-                              color: 'black',
-                              marginRight: '1em',
-                              width: '50%',
-                            }}
-                          >
-                            {t('Language')}
-                          </div>
-                          <select
-                            defaultValue={
-                              localStorage.selectedLanguage ? localStorage.selectedLanguage : '1'
-                            }
-                            style={{ width: '50%' }}
-                            onChange={onLanguageChange}
-                          >
-                            <option value="1" hidden="hidden">
-                              English
-                            </option>
-                            <option value="en">English</option>
-                            <option value="es">{t('Spanish')}</option>
-                            <option value="pt">{t('Portuguese')}</option>
-                            <option value="ar">{t('Arabic')}</option>
-                            <option value="cn">{t('Chinese')}</option>
-                          </select>
-                        </div>
-                        <br></br>
-                        {/* <div
-                          id="project_lists"
-                          style={{
-                            display: "flex",
-                          }}
-                        >
-                          <div
-                            style={{
-                              color: "black",
-                              marginRight: "1em",
-                              width: "50%",
-                            }}
-                          >
-                            {"Project"}
-                          </div>
-                          <select
-                            value={selectedProject}
-                            style={{ width: "50%" }}
-                            onChange={onProjectChange}
-                          >
-                            <option value="" disabled hidden>
-                              View Projects
-                            </option>
-                            <option value="projectTable">Project 01</option>
-                            <option value="userpage">Project 02</option>
-                            <option value="Project03">Project 03</option>
-                            <option value="Project04">Project 04</option>
-                            <option value="Project05">Project 05</option>
-                          </select>
-                        </div> */}
-                      </div>
-
-                      <br></br>
-                    </div>
-                  </div>
-                </ClickAwayListener>
-              </Paper>
-            </Grow>
-          )}
-        </Popper>
-        <button
-          style={{
-            backgroundColor: '#FFF',
-            borderRadius: '50px',
-          }}
-          aria-label="Person"
-          justIcon
-          onClick={handleClick}
-        >
-          <span style={{ color: 'black', fontWeight: 'bold' }}>{t('NF')}</span>
-          {/* <Person
-            className={
-              classes.headerLinksSvg +
-              " " +
-              (rtlActive
-                ? classes.links + " " + classes.linksRTL
-                : classes.links)
-            }
-
-          /> */}
-          {/* <Hidden mdUp implementation="css">
-            <span className={classes.linkText}>
-              {rtlActive ? "الملف الشخصي" : "Profile"}
-            </span>
-          </Hidden> */}
-        </button>
+        <div className="dropdown">
+          <div className="dropdown-header" onClick={() => setlangOpen(!langOpen)}>
+            <>
+              <img src={selectedOption.icon} width={22} height={22} alt={selectedOption.label} />
+              <span>{selectedOption.label}</span>
+            </>
+          </div>
+          <div className={`dropdown-list ${langOpen ? 'open' : ''}`}>
+            {options.map((option) => (
+              <div
+                key={option.value}
+                className={`dropdown-list-item ${selectedOption && selectedOption.value === option.value ? 'active' : ''}`}
+                onClick={() => languageSelect(option)}
+              >
+                <img src={option.icon} width={20} height={20} alt={option.label} />
+                <span>{option.label}</span>
+                {selectedOption && selectedOption.value === option.value && (
+                  <FaCheck className="check-icon" />
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
         <div>
           <img
             onClick={showProfile}
@@ -333,11 +230,6 @@ const Navbar = (props) => {
 
               <hr class="my-2 border-blue-gray-50" role="menuitem" />
               <button
-                onClick={() => {
-                  localStorage.clear();
-                  navigate('/');
-                  // toast.success("LogOut Success!");
-                }}
                 role="menuitem"
                 class="flex w-full cursor-pointer select-none items-center gap-2 pl-1 rounded-md px-3 pt-[9px] pb-2 text-start leading-tight outline-none transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
               >

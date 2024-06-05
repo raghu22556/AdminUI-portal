@@ -12,3 +12,83 @@
 .fullScreenPopup {
   background-color: rgb(5, 110, 233);
 }
+
+.dropdown {
+  position: relative;
+  width: 150px;
+  margin: 0 auto;
+  font-family: Arial, sans-serif;
+}
+
+.dropdown-header {
+  display: flex;
+  align-items: center;
+
+  padding: 7px;
+  border-radius: 4px;
+  cursor: pointer;
+  background-color: #fff;
+  margin-left: 15px;
+}
+
+.dropdown-header span {
+  margin-left: 8px;
+}
+
+.dropdown-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-top: 5px;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  visibility: hidden;
+  max-height: 0;
+  overflow: hidden;
+  transition:
+    opacity 0.3s ease,
+    max-height 0.3s ease;
+}
+
+.dropdown-list.open {
+  opacity: 1;
+  visibility: visible;
+  max-height: 300px; 
+}
+
+.dropdown-list-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.dropdown-list-item span {
+  margin-left: 8px;
+}
+
+.dropdown-list-item:hover {
+  background: #f0f0f0;
+}
+
+.dropdown-list-item.active {
+  background: #e0e0e0;
+}
+
+.check-icon {
+  margin-left: auto;
+  color: #007bff;
+}
+
+.fas.fa-chevron-down {
+  transition: transform 0.3s ease;
+}
+
+.fas.fa-chevron-down.open {
+  transform: rotate(180deg);
+}
