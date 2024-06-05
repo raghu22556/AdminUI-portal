@@ -19,9 +19,9 @@ import FullScreen from '../FullScreen';
 import '../component.css';
 const options = [
   { value: 'en', label: 'English', icon: 'united-states.png' },
-  { value: 'es', label: 'Spanish', icon: 'flag.png' },
-  { value: 'pt', label: 'Portuguese', icon: 'portugal.png' },
-  { value: 'ar', label: 'Arabic', icon: 'flag (1).png' },
+  { value: 'es', label: 'Spanish', icon: 'spanish.png' },
+  { value: 'pt', label: 'Portuguese', icon: 'portuguese.png' },
+  { value: 'ar', label: 'Arabic', icon: 'arabic.png' },
   { value: 'cn', label: 'Chinese', icon: 'china.png' },
 ];
 const Navbar = (props) => {
@@ -230,6 +230,11 @@ const Navbar = (props) => {
 
               <hr class="my-2 border-blue-gray-50" role="menuitem" />
               <button
+               onClick={() => {
+                localStorage.clear();
+                navigate('/');
+                // toast.success("LogOut Success!");
+              }}
                 role="menuitem"
                 class="flex w-full cursor-pointer select-none items-center gap-2 pl-1 rounded-md px-3 pt-[9px] pb-2 text-start leading-tight outline-none transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
               >
