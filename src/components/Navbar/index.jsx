@@ -17,6 +17,7 @@ import moment from 'moment';
 import ModeEditSharpIcon from '@mui/icons-material/ModeEditSharp';
 import FullScreen from '../FullScreen';
 import '../component.css';
+import toast, { Toaster } from 'react-hot-toast';
 const options = [
   { value: 'en', label: 'English', icon: 'united-states.png' },
   { value: 'es', label: 'Spanish', icon: 'spanish.png' },
@@ -86,6 +87,32 @@ const Navbar = (props) => {
     }
   };
 
+  const handleNotification = () => {
+    toast('No New Notifications', {
+      duration: 4000,
+      position: 'top-right',
+
+      // Styling
+      style: {},
+      className: '',
+
+      // Custom Icon
+      icon: '😞',
+
+      // Change colors of success/error/loading icon
+      iconTheme: {
+        primary: '#000',
+        secondary: '#fff',
+      },
+
+      // Aria
+      ariaProps: {
+        role: 'status',
+        'aria-live': 'polite',
+      },
+    });
+  };
+
   return (
     <div className="p-4 bg-white sticky z-40 border-b top-0 left-0 shadow-sm flex items-center">
       {/* <HiOutlineMenu
@@ -148,7 +175,8 @@ const Navbar = (props) => {
         {/* Profile */}
         <section className="flex items-center gap-1.5 sm:gap-3 ml-2 mr-2">
           <div className="icon-bg text-color text-lg sm:text-xl  w-8 h-8 md:w-9 md:h-9 flex justify-center items-center rounded-full p-1.5 cursor-pointer">
-            <img src="/Notifications.svg" alt="icon" />
+            <img src="/Notifications.svg" alt="icon" onClick={handleNotification} />
+            <Toaster />
           </div>
         </section>
 
@@ -230,11 +258,11 @@ const Navbar = (props) => {
 
               <hr class="my-2 border-blue-gray-50" role="menuitem" />
               <button
-               onClick={() => {
-                localStorage.clear();
-                navigate('/');
-                // toast.success("LogOut Success!");
-              }}
+                onClick={() => {
+                  localStorage.clear();
+                  navigate('/');
+                  // toast.success("LogOut Success!");
+                }}
                 role="menuitem"
                 class="flex w-full cursor-pointer select-none items-center gap-2 pl-1 rounded-md px-3 pt-[9px] pb-2 text-start leading-tight outline-none transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
               >
