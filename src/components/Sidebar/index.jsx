@@ -161,7 +161,7 @@ export default function Sidebar(props) {
               <Button
                 style={{
                   backgroundColor: item.path === pathname ? '#056EE9' : 'rgb(229, 228, 226)',
-                  width: '220px',
+                  width: '190px',
                   height: '44px',
                   borderRadius: '8px',
                   border: '1px solid #E5E4E2',
@@ -202,7 +202,7 @@ export default function Sidebar(props) {
               <Button
                 style={{
                   backgroundColor: item.path === pathname ? '#056EE9' : 'rgb(229, 228, 226)',
-                  width: '220px',
+                  width: '190px',
                   height: '44px',
                   borderRadius: '8px',
                   border: '1px solid #E5E4E2',
@@ -259,7 +259,7 @@ export default function Sidebar(props) {
         <Button
           style={{
             backgroundColor: 'rgb(229, 228, 226)',
-            width: '220px',
+            width: '190px',
             height: '44px',
             borderRadius: '8px',
             border: '1px solid #E5E4E2',
@@ -283,7 +283,7 @@ export default function Sidebar(props) {
         <Button
           style={{
             backgroundColor: 'rgb(229, 228, 226)',
-            width: '220px',
+            width: '190px',
             height: '44px',
             borderRadius: '8px',
             border: '1px solid #E5E4E2',
