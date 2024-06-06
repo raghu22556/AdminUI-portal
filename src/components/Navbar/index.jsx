@@ -3,7 +3,7 @@ import { BsChatDots, BsChevronDown, BsChevronUp } from 'react-icons/bs';
 import { MdOutlineNotificationsActive } from 'react-icons/md';
 import { HiOutlineMenu, HiOutlineSearch } from 'react-icons/hi';
 import { FaCheck } from 'react-icons/fa';
-
+import { URL } from '../../app-config';
 import { useNavigate } from 'react-router-dom';
 import { Typography } from '@material-tailwind/react';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
@@ -18,6 +18,8 @@ import ModeEditSharpIcon from '@mui/icons-material/ModeEditSharp';
 import FullScreen from '../FullScreen';
 import '../component.css';
 import toast, { Toaster } from 'react-hot-toast';
+import { useSelector, useDispatch } from 'react-redux';
+
 const options = [
   { value: 'en', label: 'English', icon: 'united-states.png' },
   { value: 'es', label: 'Spanish', icon: 'spanish.png' },
@@ -34,6 +36,8 @@ const Navbar = (props) => {
   const [profile, setProfile] = useState(false);
   const [selectedOption, setSelectedOption] = useState(options[0]);
   const [langOpen, setlangOpen] = useState(false);
+  const [userProfile, setUserProfile] = useState({});
+  const login_result = useSelector((state) => state?.login);
 
   const { handleToggle, handleOpenToggle, drawer, t } = props;
 
@@ -51,7 +55,12 @@ const Navbar = (props) => {
       moment.locale(selectedLang);
     }
   };
-
+  useEffect(() => {
+    if (login_result?.data?.userInfo) {
+      setUserProfile(login_result.data.userInfo);
+      localStorage.setItem('email', login_result.data.userInfo.Email);
+    }
+  }, [login_result]);
   useEffect(() => {
     const storedLang = localStorage.getItem('selectedLanguage');
     if (storedLang) {
@@ -206,13 +215,16 @@ const Navbar = (props) => {
           </div>
         </div>
         <div>
-          <img
-            onClick={showProfile}
-            alt="tania andrew"
-            src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1480&amp;q=80"
-            class="relative inline-block object-cover object-center w-9 h-9 rounded-full cursor-pointer"
-            data-popover-target="profile-menu"
-          />
+          {userProfile.ProfileImage || (
+            <img
+              onClick={showProfile}
+              alt="Profile Image"
+              src="noProfilePic.png"
+              class="relative inline-block object-cover object-center w-9 h-9 rounded-full cursor-pointer"
+              data-popover-target="profile-menu"
+            />
+          )}
+
           {profile && (
             <ul
               role="menu"
@@ -220,16 +232,21 @@ const Navbar = (props) => {
               data-popover-placement="bottom"
               class="absolute mx-[-160px] my-5 z-10 flex min-w-[200px] flex-col gap-2 overflow-auto rounded-md border border-blue-gray-50 bg-white p-3 font-sans text-sm font-normal text-blue-gray-500 shadow-lg shadow-blue-gray-500/10 focus:outline-none"
             >
-              <div class="flex w-full cursor-pointer select-none items-center gap-2 rounded-md px-3 pt-[9px] pb-2 pl-1 text-start leading-tight outline-none transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
-                <img
-                  alt="tania andrew"
-                  src="https://images.unsplash.com/photo-1633332755192-727a05c4013d?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1480&amp;q=80"
-                  class="relative inline-block object-cover object-center w-9 h-9 rounded-full cursor-pointer"
-                  data-popover-target="profile-menu"
-                />
+              <div class="flex w-full cursor-pointer select-none items-center gap-2 rounded-md px-3 pt-[9px] pb-2 pl-0 text-start leading-tight outline-none transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
+                {userProfile.ProfileImage || (
+                  <img
+                    alt=""
+                    src="noProfilePic.png"
+                    class="relative inline-block object-cover object-center w-9 h-9 rounded-full cursor-pointer"
+                    data-popover-target="profile-menu"
+                  />
+                )}
+
                 <div className="text-sm hidden md:flex flex-col">
-                  <span className="text-color font-semibold">Admin</span>
-                  <span className="text-gray-500 text-xs">MaidenCube.in</span>
+                  <span className="text-color font-semibold">{userProfile.Name || 'Admin'}</span>
+                  <span className="text-gray-500 text-xs">
+                    {userProfile.Email || localStorage.getItem('email')}
+                  </span>
                 </div>
               </div>
 
