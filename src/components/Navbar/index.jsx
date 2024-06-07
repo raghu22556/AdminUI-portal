@@ -20,12 +20,16 @@ import '../component.css';
 import toast, { Toaster } from 'react-hot-toast';
 import { useSelector, useDispatch } from 'react-redux';
 
-const options = [
+const languageOptions = [
   { value: 'en', label: 'English', icon: 'united-states.png' },
   { value: 'es', label: 'Spanish', icon: 'spanish.png' },
   { value: 'pt', label: 'Portuguese', icon: 'portuguese.png' },
   { value: 'ar', label: 'Arabic', icon: 'arabic.png' },
   { value: 'cn', label: 'Chinese', icon: 'china.png' },
+];
+const themeOptions = [
+  { value: 'light', label: 'Light', icon: 'lightMode.png' },
+  { value: 'dark', label: 'Dark', icon: 'darkMode.png' },
 ];
 const Navbar = (props) => {
   const navigate = useNavigate();
@@ -34,8 +38,11 @@ const Navbar = (props) => {
   const [selectedProject, setSelectedProject] = useState('');
   const [isOpen, setIsOpen] = useState(false);
   const [profile, setProfile] = useState(false);
-  const [selectedOption, setSelectedOption] = useState(options[0]);
+  const [languageSelectedOption, setlanguageSelectedOption] = useState(languageOptions[0]);
   const [langOpen, setlangOpen] = useState(false);
+  const [themeOpen, setthemeOpen] = useState(false);
+  const [themeSelectedOption, setthemeSelectedOption] = useState(themeOptions[0]);
+
   const [userProfile, setUserProfile] = useState({});
   const login_result = useSelector((state) => state?.login);
 
@@ -46,12 +53,22 @@ const Navbar = (props) => {
     setProfile(!profile);
   };
   const languageSelect = (option) => {
-    setSelectedOption(option);
+    setlanguageSelectedOption(option);
     setlangOpen(false);
     if (option.value) {
       let selectedLang = option.value;
       props.i18n.changeLanguage(selectedLang);
       localStorage.setItem('selectedLanguage', selectedLang);
+      moment.locale(selectedLang);
+    }
+  };
+  const themeSelect = (option) => {
+    setthemeSelectedOption(option);
+    setthemeOpen(false);
+    if (option.value) {
+      let selectedLang = option.value;
+      // props.i18n.changeLanguage(selectedLang);
+      // localStorage.setItem('selectedLanguage', selectedLang);
       moment.locale(selectedLang);
     }
   };
@@ -64,8 +81,8 @@ const Navbar = (props) => {
   useEffect(() => {
     const storedLang = localStorage.getItem('selectedLanguage');
     if (storedLang) {
-      const selectedLangOption = options.find((option) => option.value === storedLang);
-      setSelectedOption(selectedLangOption);
+      const selectedLangOption = languageOptions.find((option) => option.value === storedLang);
+      setlanguageSelectedOption(selectedLangOption);
       props.i18n.changeLanguage(storedLang);
       moment.locale(storedLang);
     }
@@ -150,7 +167,7 @@ const Navbar = (props) => {
       </div>
 
       <section className="flex ml-auto gap-2 sm:gap-4 md:gap-5">
-        <div className="relative ml-auto mr-2.5">
+        <div className="relative ml-14 mr-2.5">
           <div
             className="bg-[#F7F9FB] p-2 px-5 border border-lightgray rounded-md cursor-pointer flex items-center justify-between"
             style={{ width: '200px' }}
@@ -182,32 +199,70 @@ const Navbar = (props) => {
           <BsChatDots />
         </div> */}
         {/* Profile */}
-        <section className="flex items-center gap-1.5 sm:gap-3 ml-2 mr-2">
+        <section className="flex items-center gap-1.5 sm:gap-3 ml-2 mr-2 mt-0.5">
           <div className="icon-bg text-color text-lg sm:text-xl  w-8 h-8 md:w-9 md:h-9 flex justify-center items-center rounded-full p-1.5 cursor-pointer">
-            <img src="/Notifications.svg" alt="icon" onClick={handleNotification} />
+            <img
+              className="h-5 w-5"
+              src="/Notifications.svg"
+              alt="icon"
+              onClick={handleNotification}
+            />
             <Toaster />
           </div>
         </section>
 
         <FullScreen />
 
-        <div className="dropdown">
+        <div className="dropdown mt-1" style={{ marginRight: '-75px' }}>
+          <div className="dropdown-header" onClick={() => setthemeOpen(!themeOpen)}>
+            <>
+              <img
+                src={themeSelectedOption.icon}
+                width={19}
+                height={19}
+                alt={themeSelectedOption.label}
+              />
+            </>
+          </div>
+          <div className={`dropdown-list ${themeOpen ? 'open' : ''}`}>
+            {themeOptions.map((option) => (
+              <div
+                key={option.value}
+                className={`dropdown-list-item ${themeSelectedOption && themeSelectedOption.value === option.value ? 'active' : ''}`}
+                onClick={() => themeSelect(option)}
+              >
+                <img src={option.icon} width={20} height={20} alt={option.label} />
+                <span>{option.label}</span>
+                {themeSelectedOption && themeSelectedOption.value === option.value && (
+                  <FaCheck className="check-icon" />
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="dropdown mt-0.5">
           <div className="dropdown-header" onClick={() => setlangOpen(!langOpen)}>
             <>
-              <img src={selectedOption.icon} width={22} height={22} alt={selectedOption.label} />
-              <span>{selectedOption.label}</span>
+              <img
+                src={languageSelectedOption.icon}
+                width={21}
+                height={21}
+                alt={languageSelectedOption.label}
+              />
+              <span>{languageSelectedOption.label}</span>
             </>
           </div>
           <div className={`dropdown-list ${langOpen ? 'open' : ''}`}>
-            {options.map((option) => (
+            {languageOptions.map((option) => (
               <div
                 key={option.value}
-                className={`dropdown-list-item ${selectedOption && selectedOption.value === option.value ? 'active' : ''}`}
+                className={`dropdown-list-item ${languageSelectedOption && languageSelectedOption.value === option.value ? 'active' : ''}`}
                 onClick={() => languageSelect(option)}
               >
                 <img src={option.icon} width={20} height={20} alt={option.label} />
                 <span>{option.label}</span>
-                {selectedOption && selectedOption.value === option.value && (
+                {languageSelectedOption && languageSelectedOption.value === option.value && (
                   <FaCheck className="check-icon" />
                 )}
               </div>

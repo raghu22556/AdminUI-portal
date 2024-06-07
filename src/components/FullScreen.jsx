@@ -45,7 +45,7 @@ const FullScreen = () => {
   };
 
   return (
-    <div className="text-center">
+    <div className="text-center mt-0.5">
       <div className="relative inline-block group">
         <button
           onClick={toggleFullscreen}
