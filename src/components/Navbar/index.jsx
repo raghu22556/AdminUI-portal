@@ -18,6 +18,7 @@ import ModeEditSharpIcon from '@mui/icons-material/ModeEditSharp';
 import FullScreen from '../FullScreen';
 import '../component.css';
 import toast, { Toaster } from 'react-hot-toast';
+import FeedbackModal from '../Modals/FeedbackModal';
 const options = [
   { value: 'en', label: 'English', icon: 'united-states.png' },
   { value: 'es', label: 'Spanish', icon: 'spanish.png' },
@@ -255,7 +256,7 @@ const Navbar = (props) => {
                   My Profile
                 </p>
               </button>
-
+              <FeedbackModal />
               <hr class="my-2 border-blue-gray-50" role="menuitem" />
               <button
                 onClick={() => {
