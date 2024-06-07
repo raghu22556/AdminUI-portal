@@ -1,4 +1,4 @@
-import ReduxHandler from '../../core/handler';
+import ReduxHandler from 'core-redux-handler';
 import store from '../../store';
 import { sagaGenerator } from '../../store/sagas/core';
 import { ReduxHelper } from './index';

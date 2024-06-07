@@ -35,6 +35,7 @@
     "apexcharts": "^3.48.0",
     "autoprefixer": "^10.4.19",
     "axios": "^1.6.8",
+    "core-redux-handler": "^1.0.0",
     "fbjs": "^3.0.5",
     "file-saver": "^2.0.5",
     "guid": "^0.0.12",
