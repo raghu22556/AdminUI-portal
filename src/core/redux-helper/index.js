@@ -1,4 +1,4 @@
-import ReduxHandler from '../../core/handler';
+import ReduxHandler from 'core-redux-handler';
 import { CONFIG } from '../../store/config';
 
 var handler = new ReduxHandler(CONFIG);
