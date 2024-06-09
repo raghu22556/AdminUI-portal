@@ -13,15 +13,24 @@ const chartData = {
 
 const PieChart = () => {
   return (
-    <div className="flex justify-center mt-3">
-      <div className="lg:w-[100%]  bg-white p-5 rounded-lg shadow-lg w-[420px]  mt-[-10px] ">
-        <ReactApexChart
-          height={400}
-          options={chartData.options}
-          series={chartData.series}
-          type="donut"
-        />
-      </div>
+    // <div className="flex justify-center">
+    //   <div className="bg-white rounded-lg w-[520px]">
+    //     <ReactApexChart
+    //       height={410}
+    //       options={chartData.options}
+    //       series={chartData.series}
+    //       type="donut"
+    //     />
+    //   </div>
+    // </div>
+
+    <div className="bg-white rounded-lg ">
+      <ReactApexChart
+        height={300}
+        options={chartData.options}
+        series={chartData.series}
+        type="donut"
+      />
     </div>
   );
 };

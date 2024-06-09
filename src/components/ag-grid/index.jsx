@@ -8,6 +8,11 @@ import '@ag-grid-community/styles/ag-grid.css';
 import '@ag-grid-community/styles/ag-theme-material.css';
 import { ClientSideRowModelModule } from '@ag-grid-community/client-side-row-model';
 import Pager from './pager';
+import 'ag-grid-community/styles/ag-theme-balham.css';
+import 'ag-grid-community/styles/ag-theme-material.css';
+import 'ag-grid-community/styles/ag-grid.css';
+import 'ag-grid-community/styles/ag-theme-alpine.css';
+
 import { isSingleReset } from '../../app-config';
 import {
   BooleanFilter,
@@ -31,6 +36,7 @@ import {
 import moment from 'moment';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { connect } from 'react-redux';
+import { Padding } from '@mui/icons-material';
 
 ModuleRegistry.registerModules([ClientSideRowModelModule]);
 class CustomLoadingOverlay extends Component {
@@ -575,33 +581,42 @@ class AgGrid extends Component {
 
     return (
       <div className="ag-theme-material">
-        <div style={{ height: height || 'calc(100vh - 300px)', width: '100%' }}>
-          <AgGridReact
-            popupParent={this.state.popupParent}
-            onGridReady={this.onGridReady}
-            gridOptions={this.state.gridOptions}
-            columnDefs={this.state.columnDefs}
-            rowData={data}
-            // rowModelType={this.state.rowModelType}
-            // onPaginationChanged={this.paginationChanged}
-            suppressPaginationPanel={true}
-            editType={this.state.editType}
-            getMainMenuItems={this.getMainMenuItems}
-            rowSelection="single"
-            stopEditingWhenGridLosesFocus={true}
-            onSelectionChanged={this.onSelectionChanged}
-            suppressContextMenu={true}
-            tabToNextCell={this.tabToNextCell}
-            onCellValueChanged={(node) => {
-              if (isGridEditable && node.oldValue !== node.newValue) node.data.modified = true;
-            }}
-            onRowDoubleClicked={(node) => {
-              if (onRowDoubleClicked) onRowDoubleClicked(node);
-            }}
-            onCellClicked={(event) => {
-              if (onCellClicked) onCellClicked(event);
-            }}
-          />
+        <div
+          style={{
+            height: height || 'calc(100vh - 300px)',
+            width: '100%',
+            fontFamily: 'Poppins',
+          }}
+        >
+          <div className="ag-theme-alpine" style={{ height: '500px', width: '100%' }}>
+            <AgGridReact
+              popupParent={this.state.popupParent}
+              onGridReady={this.onGridReady}
+              gridOptions={this.state.gridOptions}
+              columnDefs={this.state.columnDefs}
+              rowData={data}
+              // rowModelType={this.state.rowModelType}
+              // onPaginationChanged={this.paginationChanged}
+              suppressPaginationPanel={true}
+              editType={this.state.editType}
+              getMainMenuItems={this.getMainMenuItems}
+              rowSelection="single"
+              stopEditingWhenGridLosesFocus={true}
+              onSelectionChanged={this.onSelectionChanged}
+              suppressContextMenu={true}
+              tabToNextCell={this.tabToNextCell}
+              onCellValueChanged={(node) => {
+                if (isGridEditable && node.oldValue !== node.newValue) node.data.modified = true;
+              }}
+              onRowDoubleClicked={(node) => {
+                if (onRowDoubleClicked) onRowDoubleClicked(node);
+              }}
+              onCellClicked={(event) => {
+                if (onCellClicked) onCellClicked(event);
+              }}
+              rowClass="ag-row"
+            />
+          </div>
         </div>
         {!hidePaging && (
           <Pager

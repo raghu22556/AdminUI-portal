@@ -14,7 +14,7 @@ const ProjectPage = (props) => {
   return (
     <div>
       <div className="flex justify-between mt-4">
-        <Typography className="text-xl text-black font-poppins font-bold">
+        <Typography className="text-xl text-black font-poppins" style={{ fontWeight: '600' }}>
           {t('Organizations')}
         </Typography>
 

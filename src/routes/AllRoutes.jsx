@@ -102,7 +102,7 @@ if (localStorage.getItem('menu') !== null) {
         {/* Sidebar */}
         <section
           id="sidebar"
-          style={{ width: '23%', borderRight: '1px solid rgba(28, 28, 28, 0.1)' }}
+          style={{ width: '20%', borderRight: '1px solid rgba(28, 28, 28, 0.1)' }}
           // className={`w-80 z-50 lg:w-80 overflow-y-auto md:w-96 shadow border-gray-200 bg-white p-2 md:static absolute h-full transition-all duration-50 ${
           //   drawer ? "md:hidden left-0" : "-left-full"
           // }`}

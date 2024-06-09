@@ -100,14 +100,15 @@ export default function Sidebar(props) {
     navLinksModules.push(newNavItem);
   });
   return (
-    <div className="flex flex-col w-full max-w-xs bg-white">
-      <div className="px-6 py-4">
+    <div className="flex flex-col w-full max-w-xs bg-white h-screen md:h-auto fixed md:relative z-50">
+      <div className="px-4 py-2 flex justify-between items-center">
         <h1
-          className="text-2xl font-bold text-center"
+          className="text-2xl font-bold"
           style={{
             fontWeight: 800,
-            fontSize: '24px',
-            lineHeight: '32.78px',
+            fontSize: '26px',
+            width: '100%',
+            lineHeight: '38.78px',
             letterSpacing: '2%',
             color: '#056EE9',
           }}
@@ -116,38 +117,6 @@ export default function Sidebar(props) {
         </h1>
         <MdClose onClick={handleToggle} className="text-color text-xl md:hidden cursor-pointer" />
       </div>
-      {/*
-      <div className="flex justify-center py-4" style={{ width: "100%" }}>
-        <Button
-          style={{
-            backgroundColor: "white",
-            width: "220px",
-            height: "44px",
-            borderRadius: "8px",
-            border: "1px solid #95A4FC",
-            padding: "12px, 16px, 12px, 16px",
-          }}
-          className="flex items-center space-x-2"
-        >
-          <ArrowLeftIcon
-            style={{ color: "#95A4FC", height: "20px", width: "20px" }}
-            className="h-5 w-5"
-          />
-          <span
-            style={{
-              fontWeight: 500,
-              fontSize: "12px",
-              lineHeight: "18px",
-              color: "#95A4FC",
-              textTransform: "capitalize",
-            }}
-          >
-            Back to Projects
-          </span>
-        </Button>
-      </div>
-      */}
-
       <div className="space-y-2 px-3 py-4" style={{ width: '100%' }}>
         <h2
           className="text-lg font-semibold"
@@ -155,41 +124,37 @@ export default function Sidebar(props) {
         >
           Main
         </h2>
-        {navLinks.map((item) => {
-          return (
-            <div key={item.name}>
-              <Button
+        {navLinks.map((item) => (
+          <div key={item.name}>
+            <button
+              style={{
+                backgroundColor: item.path === pathname ? '#056EE9' : 'rgb(229, 228, 226)',
+                width: '100%',
+                height: '44px',
+                borderRadius: '8px',
+                border: '1px solid #E5E4E2',
+                padding: '12px 16px',
+              }}
+              className="flex items-center space-x-2 w-full"
+              onClick={() => handleNavigate(item.path)}
+            >
+              {item.icon}
+              <span
                 style={{
-                  backgroundColor: item.path === pathname ? '#056EE9' : 'rgb(229, 228, 226)',
-                  width: '190px',
-                  height: '44px',
-                  borderRadius: '8px',
-                  border: '1px solid #E5E4E2',
-                  padding: '12px 16px',
+                  fontWeight: 500,
+                  fontSize: '12px',
+                  lineHeight: '18px',
+                  color: item.path === pathname ? '#FFFFFF' : 'rgb(138 134 134)',
+                  textTransform: 'capitalize',
                 }}
-                className="flex items-center space-x-2 w-full"
-                variant="default"
-                onClick={() => handleNavigate(item.path)}
               >
-                {item.icon}
-                <span
-                  style={{
-                    fontWeight: 500,
-                    fontSize: '12px',
-                    lineHeight: '18px',
-                    color: item.path === pathname ? '#FFFFFF' : 'rgb(138 134 134)',
-                    textTransform: 'capitalize',
-                  }}
-                >
-                  {item.name}
-                </span>
-              </Button>
-            </div>
-          );
-        })}
+                {item.name}
+              </span>
+            </button>
+          </div>
+        ))}
       </div>
-
-      <div className="space-y-2 px-3 py-4" style={{ width: '100%' }}>
+      <div className="space-y-2 px-3 py-1" style={{ width: '100%' }}>
         <h2
           className="text-lg font-semibold"
           style={{ fontWeight: '600', fontSize: '12px', lineHeight: '18px' }}
@@ -202,13 +167,13 @@ export default function Sidebar(props) {
               <Button
                 style={{
                   backgroundColor: item.path === pathname ? '#056EE9' : 'rgb(229, 228, 226)',
-                  width: '190px',
+                  width: '100%',
                   height: '44px',
                   borderRadius: '8px',
                   border: '1px solid #E5E4E2',
                   padding: '12px 16px',
                 }}
-                className="flex items-center space-x-2 w-full"
+                className="flex items-center space-x-2 w-full "
                 variant="default"
                 onClick={() => handleNavigate(item.path)}
               >
@@ -230,7 +195,7 @@ export default function Sidebar(props) {
         })}
 
         <span
-          className="flex items-center space-x-2 w-full"
+          className="flex items-center space-x-2 w-full py-2"
           variant="default"
           style={{ marginTop: '15px' }}
         >
@@ -249,7 +214,7 @@ export default function Sidebar(props) {
         </span>
       </div>
 
-      <div className="space-y-2 px-3 py-4" style={{ width: '100%' }}>
+      <div className="space-y-2 px-3" style={{ width: '100%' }}>
         <h2
           className="text-lg font-semibold"
           style={{ fontWeight: '600', fontSize: '12px', lineHeight: '18px' }}
@@ -259,7 +224,7 @@ export default function Sidebar(props) {
         <Button
           style={{
             backgroundColor: 'rgb(229, 228, 226)',
-            width: '190px',
+            width: '100%',
             height: '44px',
             borderRadius: '8px',
             border: '1px solid #E5E4E2',
@@ -283,7 +248,7 @@ export default function Sidebar(props) {
         <Button
           style={{
             backgroundColor: 'rgb(229, 228, 226)',
-            width: '190px',
+            width: '100%',
             height: '44px',
             borderRadius: '8px',
             border: '1px solid #E5E4E2',

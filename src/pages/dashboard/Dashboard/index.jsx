@@ -40,24 +40,43 @@ const Dashboard = (props) => {
         </div>
         <Cards />
         {/* Linecharts and Progresbar */}
-        <div className="flex flex-col lg:flex-row items-center justify-between gap-6">
-          <div className="overflow-x-auto w-full lg:w-auto shadow-lg">
-            <LineChart className="mb-4 lg:mb-0 " />
+        {/* <div className="flex flex-col lg:flex-row items-center justify-between gap-6 mt-2">
+          <div className="w-full overflow-x-auto shadow-lg lg:w-[2100px]">
+            <LineChart />
           </div>
-          <div className="w-[100] lg:w-auto">
+          <div className="w-full shadow-lg ">
             <ProgresBar />
           </div>
         </div>
-        {/* BarChart and PieChart */}
-        <div className="flex flex-col lg:flex-row justify-between items-center mt-6">
-          <div className="flex flex-col lg:flex-row gap-5">
-            <div className="w-full md:w-1/2 mb-4 lg:mb-0 shadow-md">
-              <BarChart />
-            </div>
-            <div className="w-full mg:w-1/4">
-              <PieChart />
-            </div>
+       
+
+        <div className="flex flex-col lg:flex-row justify-between items-center mt-6 gap-6 mb-5">
+          <div className="overflow-x-auto lg:w-[59%] shadow-lg">
+            <BarChart />
           </div>
+          <div className="overflow-x-auto lg:w-[40%] shadow-lg">
+            <PieChart />
+          </div>
+        </div> */}
+
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-6 mt-2">
+          <div className="w-full lg:w-[100%] shadow-lg overflow-x-auto lg:overflow-hidden">
+            <LineChart />
+          </div>
+          <div className="w-full shadow-lg lg:w-[40%]">
+            <ProgresBar />
+          </div>
+        </div>
+        <div className="flex flex-col lg:flex-row justify-between items-center mt-6 gap-6 mb-5">
+          <div className="w-full lg:w-[58%] shadow-lg overflow-x-auto lg:overflow-hidden">
+            <BarChart />
+          </div>
+          <div className="w-full lg:w-[40%] shadow-lg overflow-x-auto lg:overflow-hidden">
+            <PieChart />
+          </div>
+          {/* <div className="w-full lg:w-[40%] shadow-lg overflow-x-auto lg:overflow-hidden">
+            <PieChart />
+          </div> */}
         </div>
       </div>
     </div>
