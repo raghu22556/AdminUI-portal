@@ -35,7 +35,7 @@ const SignupForm = ({ setIsLoading }) => {
   useEffect(() => {
     if (createSuperAdmin_result.data) {
       alert('Organization Created Succesfully');
-      navigate('/acceptterm');
+      navigate('/');
     } else if (createSuperAdmin_result.error) {
       setIsLoading(false);
       setError(createSuperAdmin_result.error);
