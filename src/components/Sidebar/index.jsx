@@ -371,7 +371,7 @@ export default function Sidebar(props) {
             <Button
               style={{
                 backgroundColor: themename === 'dark' ? 'rgb(26, 26, 26)' : 'rgb(229, 228, 226)',
-                width: '100px',
+                width: '100%',
                 height: '44px',
                 borderRadius: '8px',
                 border: '1px solid #E5E4E2',
