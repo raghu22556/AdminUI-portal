@@ -22,6 +22,8 @@ const LoginForm = ({ setIsLoading }) => {
   const dispatch = useDispatch();
   const login_result = useSelector((state) => state?.login);
 
+  localStorage.clear();
+  
   useEffect(() => {
     if (login_result.data) {
       if (login_result.data.message) {

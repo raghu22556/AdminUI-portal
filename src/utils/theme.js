@@ -8,8 +8,8 @@ const theme = {
   },
 };
 
-export const darkTheme = {};
+export const darkTheme = { ...theme };
 
-export const whiteTheme = {};
+export const whiteTheme = { ...theme };
 
 export default theme;

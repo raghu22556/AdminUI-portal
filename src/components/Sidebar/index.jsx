@@ -111,6 +111,29 @@ export default function Sidebar(props) {
   const theme = localStorage.getItem('currentTheme');
   const currentTheme = JSON.parse(theme);
   const themename = localStorage.getItem('themename');
+
+  const iconColor = (item, pathname) => item.path === pathname && themename === 'dark'
+    ? 'rgb(5, 110, 233)'
+    : (item.path === pathname && themename === 'light'
+      ? 'white'
+      : themename === 'dark' ? 'rgb(138, 134, 134)' : '#0D0E12');
+
+  const buttonBC = (item, pathname) => item.path === pathname
+    ? themename === 'light'
+      ? 'rgb(5, 110, 233)'
+      : ' '
+    : themename === 'dark'
+      ? 'rgb(26, 26, 26)'
+      : 'rgb(229, 228, 226)';
+
+  const spanColor = (item, pathaname) => item.path === pathname
+    ? themename === 'light'
+      ? 'white'
+      : 'rgb(5, 110, 233)'
+    : themename === 'dark'
+      ? 'rgb(138, 134, 134)'
+      : 'rgb(138, 134, 134)'
+
   return (
     <div
       className="flex flex-col w-full max-w-xs bg-white h-screen md:h-auto fixed md:relative z-50"
@@ -148,28 +171,11 @@ export default function Sidebar(props) {
               Profile Setting
             </h2>
             {UserProfileSetting.map((item) => {
-              // const iconColor =
-              //   item.path === pathname && themename === 'dark'
-              //     ? 'rgb(5, 110, 233)'
-              //     : item.path === pathname && themename === 'light'
-              //       ? 'white'
-              //       : themename === 'dark'
-              //         ? 'rgb(138, 134, 134)'
-              //         : '#0D0E12';
-
               return (
                 <div key={item.name}>
                   <Button
                     style={{
-                      backgroundColor:
-                        item.path === pathname
-                          ? themename === 'light'
-                            ? 'rgb(5, 110, 233)'
-                            : ''
-                          : themename === 'light'
-                            ? 'rgb(229, 228, 226)'
-                            : 'rgb(26, 26, 26)',
-
+                      backgroundColor: buttonBC(item, pathname),
                       width: '100%',
                       height: '44px',
                       borderRadius: '8px',
@@ -183,17 +189,9 @@ export default function Sidebar(props) {
                     <span
                       style={{
                         fontWeight: item.path === pathname ? 'bold' : 'normal',
-
                         fontSize: '12px',
                         lineHeight: '18px',
-                        color:
-                          item.path === pathname
-                            ? themename === 'light'
-                              ? 'white'
-                              : 'rgb(5, 110, 233)'
-                            : themename === 'light'
-                              ? 'rgb(138, 134, 134)'
-                              : 'rgb(138, 134, 134)',
+                        color: spanColor(item, pathname),
                         textTransform: 'capitalize',
                       }}
                     >
@@ -220,26 +218,11 @@ export default function Sidebar(props) {
               Main
             </h2>
             {navLinks.map((item) => {
-              const iconColor =
-                item.path === pathname && themename === 'dark'
-                  ? 'rgb(5, 110, 233)'
-                  : item.path === pathname && themename === 'light'
-                    ? 'white'
-                    : themename === 'dark'
-                      ? 'rgb(138, 134, 134)'
-                      : '#0D0E12';
               return (
                 <div key={item.name}>
                   <button
                     style={{
-                      backgroundColor:
-                        item.path === pathname
-                          ? themename === 'light'
-                            ? 'rgb(5, 110, 233)'
-                            : ''
-                          : themename === 'light'
-                            ? 'rgb(229, 228, 226)'
-                            : 'rgb(26, 26, 26)',
+                      backgroundColor: buttonBC(item, pathname),
                       width: '100%',
                       height: '44px',
                       borderRadius: '8px',
@@ -249,20 +232,13 @@ export default function Sidebar(props) {
                     variant="default"
                     onClick={() => handleNavigate(item.path)}
                   >
-                    <DashbordIcon color={iconColor} />
+                    <DashbordIcon color={iconColor(item, pathname)} />
                     <span
                       style={{
                         fontWeight: item.path === pathname ? 'bold' : 'normal',
                         fontSize: '12px',
                         lineHeight: '18px',
-                        color:
-                          item.path === pathname
-                            ? themename === 'light'
-                              ? 'white'
-                              : 'rgb(5, 110, 233)'
-                            : themename === 'light'
-                              ? 'rgb(138, 134, 134)'
-                              : 'rgb(138, 134, 134)',
+                        color: spanColor(item, pathname),
                         textTransform: 'capitalize',
                       }}
                     >
@@ -286,26 +262,11 @@ export default function Sidebar(props) {
               Modules
             </h2>
             {navLinksModules.map((item) => {
-              const iconColor =
-                item.path === pathname && themename === 'dark'
-                  ? 'rgb(5, 110, 233)'
-                  : item.path === pathname && themename === 'light'
-                    ? 'white'
-                    : themename === 'dark'
-                      ? 'rgb(138, 134, 134)'
-                      : '#0D0E12';
               return (
                 <div key={item.name}>
                   <Button
                     style={{
-                      backgroundColor:
-                        item.path === pathname
-                          ? themename === 'light'
-                            ? 'rgb(5, 110, 233)'
-                            : ' '
-                          : themename === 'light'
-                            ? 'rgb(229, 228, 226)'
-                            : 'rgb(26, 26, 26)',
+                      backgroundColor: buttonBC(item, pathname),
                       width: '100%',
                       height: '44px',
                       borderRadius: '8px',
@@ -316,20 +277,13 @@ export default function Sidebar(props) {
                     variant="default"
                     onClick={() => handleNavigate(item.path)}
                   >
-                    <DashbordIcon color={iconColor} />
+                    <DashbordIcon color={iconColor(item, pathname)} />
                     <span
                       style={{
                         fontWeight: item.path === pathname ? 'bold' : 'normal',
                         fontSize: '12px',
                         lineHeight: '18px',
-                        color:
-                          item.path === pathname
-                            ? themename === 'light'
-                              ? 'white'
-                              : 'rgb(5, 110, 233)'
-                            : themename === 'light'
-                              ? 'rgb(138, 134, 134)'
-                              : 'rgb(138, 134, 134)',
+                        color: spanColor(item, pathname),
                         textTransform: 'capitalize',
                       }}
                     >
@@ -374,7 +328,7 @@ export default function Sidebar(props) {
             </h2>
             <Button
               style={{
-                backgroundColor: themename === 'dark' ? 'rgb(26, 26, 26)' : 'rgb(229, 228, 226)',
+                backgroundColor: buttonBC({ path: '/Settings'}, pathname),
                 width: '100%',
                 height: '44px',
                 borderRadius: '8px',
@@ -398,7 +352,7 @@ export default function Sidebar(props) {
             </Button>
             <Button
               style={{
-                backgroundColor: 'rgb(229, 228, 226)',
+                backgroundColor: buttonBC({ path: '/NotificationSettings'}, pathname),
                 width: '100%',
                 height: '44px',
                 borderRadius: '8px',
