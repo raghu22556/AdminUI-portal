@@ -112,7 +112,8 @@ export default function Sidebar(props) {
   const currentTheme = JSON.parse(theme);
   const themename = localStorage.getItem('themename');
   return (
-    <div className="flex flex-col w-full max-w-xs bg-white h-screen md:h-auto fixed md:relative z-50"
+    <div
+      className="flex flex-col w-full max-w-xs bg-white h-screen md:h-auto fixed md:relative z-50"
       style={{
         backgroundColor: 'white',
       }}
@@ -203,72 +204,75 @@ export default function Sidebar(props) {
               );
             })}
           </div>
-        </>) : (<><div className="space-y-2 px-3 py-4" style={{ width: '100%' }}>
-          <h2
-            className="text-lg font-semibold"
-            style={{
-              fontWeight: '600',
-              fontSize: '12px',
-              lineHeight: '18px',
-              color: themename === 'dark' ? currentTheme.colors.text : '',
-            }}
-          >
-            Main
-          </h2>
-          {navLinks.map((item) => {
-            const iconColor =
-              item.path === pathname && themename === 'dark'
-                ? 'rgb(5, 110, 233)'
-                : item.path === pathname && themename === 'light'
-                  ? 'white'
-                  : themename === 'dark'
-                    ? 'rgb(138, 134, 134)'
-                    : '#0D0E12';
-            return (
-              <div key={item.name}>
-                <button
-                  style={{
-                    backgroundColor:
-                      item.path === pathname
-                        ? themename === 'light'
-                          ? 'rgb(5, 110, 233)'
-                          : ''
-                        : themename === 'light'
-                          ? 'rgb(229, 228, 226)'
-                          : 'rgb(26, 26, 26)',
-                    width: '100%',
-                    height: '44px',
-                    borderRadius: '8px',
-                    padding: '12px 16px',
-                  }}
-                  className="flex items-center space-x-2 w-full"
-                  variant="default"
-                  onClick={() => handleNavigate(item.path)}
-                >
-                  <DashbordIcon color={iconColor} />
-                  <span
+        </>
+      ) : (
+        <>
+          <div className="space-y-2 px-3 py-4" style={{ width: '100%' }}>
+            <h2
+              className="text-lg font-semibold"
+              style={{
+                fontWeight: '600',
+                fontSize: '12px',
+                lineHeight: '18px',
+                color: themename === 'dark' ? currentTheme.colors.text : '',
+              }}
+            >
+              Main
+            </h2>
+            {navLinks.map((item) => {
+              const iconColor =
+                item.path === pathname && themename === 'dark'
+                  ? 'rgb(5, 110, 233)'
+                  : item.path === pathname && themename === 'light'
+                    ? 'white'
+                    : themename === 'dark'
+                      ? 'rgb(138, 134, 134)'
+                      : '#0D0E12';
+              return (
+                <div key={item.name}>
+                  <button
                     style={{
-                      fontWeight: item.path === pathname ? 'bold' : 'normal',
-                      fontSize: '12px',
-                      lineHeight: '18px',
-                      color:
+                      backgroundColor:
                         item.path === pathname
                           ? themename === 'light'
-                            ? 'white'
-                            : 'rgb(5, 110, 233)'
+                            ? 'rgb(5, 110, 233)'
+                            : ''
                           : themename === 'light'
-                            ? 'rgb(138, 134, 134)'
-                            : 'rgb(138, 134, 134)',
-                      textTransform: 'capitalize',
+                            ? 'rgb(229, 228, 226)'
+                            : 'rgb(26, 26, 26)',
+                      width: '100%',
+                      height: '44px',
+                      borderRadius: '8px',
+                      padding: '12px 16px',
                     }}
+                    className="flex items-center space-x-2 w-full"
+                    variant="default"
+                    onClick={() => handleNavigate(item.path)}
                   >
-                    {item.name}
-                  </span>
-                </button>
-              </div>
-            );
-          })}
-        </div>
+                    <DashbordIcon color={iconColor} />
+                    <span
+                      style={{
+                        fontWeight: item.path === pathname ? 'bold' : 'normal',
+                        fontSize: '12px',
+                        lineHeight: '18px',
+                        color:
+                          item.path === pathname
+                            ? themename === 'light'
+                              ? 'white'
+                              : 'rgb(5, 110, 233)'
+                            : themename === 'light'
+                              ? 'rgb(138, 134, 134)'
+                              : 'rgb(138, 134, 134)',
+                        textTransform: 'capitalize',
+                      }}
+                    >
+                      {item.name}
+                    </span>
+                  </button>
+                </div>
+              );
+            })}
+          </div>
           <div className="space-y-2 px-3 py-1" style={{ width: '100%' }}>
             <h2
               className="text-lg font-semibold"
@@ -418,8 +422,9 @@ export default function Sidebar(props) {
                 Profile Setting
               </span>
             </Button>
-          </div></>)}
-
+          </div>
+        </>
+      )}
     </div>
   );
 }
