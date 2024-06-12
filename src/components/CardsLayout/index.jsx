@@ -23,15 +23,15 @@ const WidgetCard = ({ title, onClick }) => {
           <div>
             <Typography
               variant="small"
-              className=" font-poppins text-black text-[14px] font-bold text-left"
+              className=" font-poppins text-black text-[14px] text-left"
+              style={{ fontWeight: '600' }}
             >
               {title}
             </Typography>
             <Typography
               variant="small"
-              color="blue-gray"
-              className="text-sm mt-2 text-left tracking-[.5px] text-[11px]  font-poppins"
-              style={{ color: 'rgba(28, 28, 28, 0.4)' }}
+              color="#1C1C1C66"
+              className="text-sm mt-2 text-left tracking-[.5px]  text-[12px]  font-poppins"
             >
               Click here to view {title}
             </Typography>

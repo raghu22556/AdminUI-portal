@@ -15,8 +15,8 @@
 
 .dropdown {
   position: relative;
-  width: 150px;
-  margin: 0 auto;
+  width: 130px;
+  margin-left: -16px;
   font-family: Arial, sans-serif;
 }
 
@@ -58,7 +58,7 @@
 .dropdown-list.open {
   opacity: 1;
   visibility: visible;
-  max-height: 300px; 
+  max-height: 300px;
 }
 
 .dropdown-list-item {

@@ -45,15 +45,15 @@ const FullScreen = () => {
   };
 
   return (
-    <div className="text-center">
-      <div className="relative inline-block group">
+    <div className="text-center mt-0.4 mr-3" >
+      <div className="relative inline-block group w-9 h-9">
         <button
           onClick={toggleFullscreen}
           className="p-2 rounded-full hover:bg-gray-200 focus:outline-none"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            fill="red"
+            fill=""
             viewBox="0 0 24 24"
             className="h-5 w-5"
           >

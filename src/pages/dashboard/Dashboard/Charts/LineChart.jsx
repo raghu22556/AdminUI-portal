@@ -6,14 +6,15 @@ const xLabels = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
 export default function SimpleLineChart() {
   return (
-    <div className="mt-6 max-w-screen-md mx-auto bg-white p-4 shadow-md rounded-lg scrollBars">
+    <div className="mt-6 p-2 mx-auto rounded-lg scrollBars max-w-full  w-[100%]">
       <div className="overflow-x-auto">
-        <LineChart
-          width={620}
-          height={170}
-          series={[{ data: pData }, { data: uData }]}
-          xAxis={[{ scaleType: 'point', data: xLabels }]}
-        />
+        <div className="relative w-full">
+          <LineChart
+            height={270}
+            series={[{ data: pData }, { data: uData }]}
+            xAxis={[{ scaleType: 'point', data: xLabels }]}
+          />
+        </div>
       </div>
     </div>
   );

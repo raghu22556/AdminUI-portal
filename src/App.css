@@ -1,8 +1,8 @@
 .text-color {
-  color: #1E40AF;
+  color: #1e40af;
 }
 .bg-color {
-  background-color:  #0a3657;
+  background-color: #0a3657;
   color: white;
 }
 .icon-bg {
@@ -10,8 +10,7 @@
 }
 .text-hover:hover {
   /* color: rgb(236, 157, 11); */
-  color:#0a3657;
- 
+  color: #0a3657;
 }
 
 .bg-secondary {

@@ -5,7 +5,7 @@ export default function BasicBars() {
   const barChartRef = useRef(null);
 
   return (
-    <div className=" lg:max-w-screen-md lg:w-auto w-[420px] lg:p-4 p-0 bg-white shadow-md rounded-lg">
+    <div className="lg:max-w-screen-md p-0 bg-white shadow-md rounded-lg">
       <BarChart
         ref={barChartRef}
         xAxis={[
@@ -17,8 +17,7 @@ export default function BasicBars() {
           },
         ]}
         series={[{ data: [4, 1, 2, 3, 5, 2] }]}
-        width={450}
-        height={230}
+        height={300}
       >
         {({ bars }) =>
           bars.map((barGroup, groupIndex) =>

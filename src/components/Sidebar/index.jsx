@@ -18,7 +18,16 @@ export default function Sidebar(props) {
   const handleDrop = (value) => setDropValue(value === dropValue ? '' : value);
 
   let menu = JSON.parse(localStorage.getItem('menu'));
-
+  const UserProfileSetting = [
+    {
+      name: 'User Profile',
+      path: '/userProfileUpdate',
+    },
+    {
+      name: 'Password',
+      path: '/password',
+    },
+  ];
   // All Links & Nested Links
   const navLinks = [
     // Dashboard
@@ -99,15 +108,23 @@ export default function Sidebar(props) {
 
     navLinksModules.push(newNavItem);
   });
+  const theme = localStorage.getItem('currentTheme');
+  const currentTheme = JSON.parse(theme);
+  const themename = localStorage.getItem('themename');
   return (
-    <div className="flex flex-col w-full max-w-xs bg-white">
-      <div className="px-6 py-4">
+    <div className="flex flex-col w-full max-w-xs bg-white h-screen md:h-auto fixed md:relative z-50"
+      style={{
+        backgroundColor: 'white',
+      }}
+    >
+      <div className="px-4 py-2 flex justify-between items-center">
         <h1
-          className="text-2xl font-bold text-center"
+          className="text-2xl font-bold"
           style={{
             fontWeight: 800,
-            fontSize: '24px',
-            lineHeight: '32.78px',
+            fontSize: '26px',
+            width: '100%',
+            lineHeight: '38.78px',
             letterSpacing: '2%',
             color: '#056EE9',
           }}
@@ -116,197 +133,293 @@ export default function Sidebar(props) {
         </h1>
         <MdClose onClick={handleToggle} className="text-color text-xl md:hidden cursor-pointer" />
       </div>
-      {/*
-      <div className="flex justify-center py-4" style={{ width: "100%" }}>
-        <Button
-          style={{
-            backgroundColor: "white",
-            width: "220px",
-            height: "44px",
-            borderRadius: "8px",
-            border: "1px solid #95A4FC",
-            padding: "12px, 16px, 12px, 16px",
-          }}
-          className="flex items-center space-x-2"
-        >
-          <ArrowLeftIcon
-            style={{ color: "#95A4FC", height: "20px", width: "20px" }}
-            className="h-5 w-5"
-          />
-          <span
+      {pathname === '/userProfileUpdate' || pathname === '/password' ? (
+        <>
+          <div className="space-y-2 px-3 py-4" style={{ width: '100%' }}>
+            <h2
+              className="text-lg font-semibold"
+              style={{
+                fontWeight: '600',
+                fontSize: '12px',
+                lineHeight: '18px',
+              }}
+            >
+              Profile Setting
+            </h2>
+            {UserProfileSetting.map((item) => {
+              // const iconColor =
+              //   item.path === pathname && themename === 'dark'
+              //     ? 'rgb(5, 110, 233)'
+              //     : item.path === pathname && themename === 'light'
+              //       ? 'white'
+              //       : themename === 'dark'
+              //         ? 'rgb(138, 134, 134)'
+              //         : '#0D0E12';
+
+              return (
+                <div key={item.name}>
+                  <Button
+                    style={{
+                      backgroundColor:
+                        item.path === pathname
+                          ? themename === 'light'
+                            ? 'rgb(5, 110, 233)'
+                            : ''
+                          : themename === 'light'
+                            ? 'rgb(229, 228, 226)'
+                            : 'rgb(26, 26, 26)',
+
+                      width: '100%',
+                      height: '44px',
+                      borderRadius: '8px',
+                      padding: '12px 16px',
+                    }}
+                    className="flex items-center space-x-2 w-full"
+                    variant="default"
+                    onClick={() => handleNavigate(item.path)}
+                  >
+                    {/* <DashbordIcon color={iconColor} /> */}
+                    <span
+                      style={{
+                        fontWeight: item.path === pathname ? 'bold' : 'normal',
+
+                        fontSize: '12px',
+                        lineHeight: '18px',
+                        color:
+                          item.path === pathname
+                            ? themename === 'light'
+                              ? 'white'
+                              : 'rgb(5, 110, 233)'
+                            : themename === 'light'
+                              ? 'rgb(138, 134, 134)'
+                              : 'rgb(138, 134, 134)',
+                        textTransform: 'capitalize',
+                      }}
+                    >
+                      {item.name}
+                    </span>
+                  </Button>
+                </div>
+              );
+            })}
+          </div>
+        </>) : (<><div className="space-y-2 px-3 py-4" style={{ width: '100%' }}>
+          <h2
+            className="text-lg font-semibold"
             style={{
-              fontWeight: 500,
-              fontSize: "12px",
-              lineHeight: "18px",
-              color: "#95A4FC",
-              textTransform: "capitalize",
+              fontWeight: '600',
+              fontSize: '12px',
+              lineHeight: '18px',
+              color: themename === 'dark' ? currentTheme.colors.text : '',
             }}
           >
-            Back to Projects
-          </span>
-        </Button>
-      </div>
-      */}
-
-      <div className="space-y-2 px-3 py-4" style={{ width: '100%' }}>
-        <h2
-          className="text-lg font-semibold"
-          style={{ fontWeight: '600', fontSize: '12px', lineHeight: '18px' }}
-        >
-          Main
-        </h2>
-        {navLinks.map((item) => {
-          return (
-            <div key={item.name}>
-              <Button
-                style={{
-                  backgroundColor: item.path === pathname ? '#056EE9' : 'rgb(229, 228, 226)',
-                  width: '190px',
-                  height: '44px',
-                  borderRadius: '8px',
-                  border: '1px solid #E5E4E2',
-                  padding: '12px 16px',
-                }}
-                className="flex items-center space-x-2 w-full"
-                variant="default"
-                onClick={() => handleNavigate(item.path)}
-              >
-                {item.icon}
-                <span
+            Main
+          </h2>
+          {navLinks.map((item) => {
+            const iconColor =
+              item.path === pathname && themename === 'dark'
+                ? 'rgb(5, 110, 233)'
+                : item.path === pathname && themename === 'light'
+                  ? 'white'
+                  : themename === 'dark'
+                    ? 'rgb(138, 134, 134)'
+                    : '#0D0E12';
+            return (
+              <div key={item.name}>
+                <button
                   style={{
-                    fontWeight: 500,
-                    fontSize: '12px',
-                    lineHeight: '18px',
-                    color: item.path === pathname ? '#FFFFFF' : 'rgb(138 134 134)',
-                    textTransform: 'capitalize',
+                    backgroundColor:
+                      item.path === pathname
+                        ? themename === 'light'
+                          ? 'rgb(5, 110, 233)'
+                          : ''
+                        : themename === 'light'
+                          ? 'rgb(229, 228, 226)'
+                          : 'rgb(26, 26, 26)',
+                    width: '100%',
+                    height: '44px',
+                    borderRadius: '8px',
+                    padding: '12px 16px',
                   }}
+                  className="flex items-center space-x-2 w-full"
+                  variant="default"
+                  onClick={() => handleNavigate(item.path)}
                 >
-                  {item.name}
-                </span>
-              </Button>
-            </div>
-          );
-        })}
-      </div>
+                  <DashbordIcon color={iconColor} />
+                  <span
+                    style={{
+                      fontWeight: item.path === pathname ? 'bold' : 'normal',
+                      fontSize: '12px',
+                      lineHeight: '18px',
+                      color:
+                        item.path === pathname
+                          ? themename === 'light'
+                            ? 'white'
+                            : 'rgb(5, 110, 233)'
+                          : themename === 'light'
+                            ? 'rgb(138, 134, 134)'
+                            : 'rgb(138, 134, 134)',
+                      textTransform: 'capitalize',
+                    }}
+                  >
+                    {item.name}
+                  </span>
+                </button>
+              </div>
+            );
+          })}
+        </div>
+          <div className="space-y-2 px-3 py-1" style={{ width: '100%' }}>
+            <h2
+              className="text-lg font-semibold"
+              style={{
+                fontWeight: '600',
+                fontSize: '12px',
+                lineHeight: '18px',
+                color: themename === 'dark' ? currentTheme.colors.text : '',
+              }}
+            >
+              Modules
+            </h2>
+            {navLinksModules.map((item) => {
+              const iconColor =
+                item.path === pathname && themename === 'dark'
+                  ? 'rgb(5, 110, 233)'
+                  : item.path === pathname && themename === 'light'
+                    ? 'white'
+                    : themename === 'dark'
+                      ? 'rgb(138, 134, 134)'
+                      : '#0D0E12';
+              return (
+                <div key={item.name}>
+                  <Button
+                    style={{
+                      backgroundColor:
+                        item.path === pathname
+                          ? themename === 'light'
+                            ? 'rgb(5, 110, 233)'
+                            : ' '
+                          : themename === 'light'
+                            ? 'rgb(229, 228, 226)'
+                            : 'rgb(26, 26, 26)',
+                      width: '100%',
+                      height: '44px',
+                      borderRadius: '8px',
 
-      <div className="space-y-2 px-3 py-4" style={{ width: '100%' }}>
-        <h2
-          className="text-lg font-semibold"
-          style={{ fontWeight: '600', fontSize: '12px', lineHeight: '18px' }}
-        >
-          Modules
-        </h2>
-        {navLinksModules.map((item) => {
-          return (
-            <div key={item.name}>
-              <Button
+                      padding: '12px 16px',
+                    }}
+                    className="flex items-center space-x-2 w-full "
+                    variant="default"
+                    onClick={() => handleNavigate(item.path)}
+                  >
+                    <DashbordIcon color={iconColor} />
+                    <span
+                      style={{
+                        fontWeight: item.path === pathname ? 'bold' : 'normal',
+                        fontSize: '12px',
+                        lineHeight: '18px',
+                        color:
+                          item.path === pathname
+                            ? themename === 'light'
+                              ? 'white'
+                              : 'rgb(5, 110, 233)'
+                            : themename === 'light'
+                              ? 'rgb(138, 134, 134)'
+                              : 'rgb(138, 134, 134)',
+                        textTransform: 'capitalize',
+                      }}
+                    >
+                      {item.name}
+                    </span>
+                  </Button>
+                </div>
+              );
+            })}
+
+            <span
+              className="flex items-center space-x-2 w-full py-2"
+              variant="default"
+              style={{ marginTop: '15px' }}
+            >
+              <PlusIcon style={{ color: '#95A4FC' }} className="h-4 w-4" />
+              <span
                 style={{
-                  backgroundColor: item.path === pathname ? '#056EE9' : 'rgb(229, 228, 226)',
-                  width: '190px',
-                  height: '44px',
-                  borderRadius: '8px',
-                  border: '1px solid #E5E4E2',
-                  padding: '12px 16px',
+                  fontWeight: 500,
+                  fontSize: '12px',
+                  lineHeight: '18px',
+                  color: '#95A4FC',
+                  textTransform: 'capitalize',
                 }}
-                className="flex items-center space-x-2 w-full"
-                variant="default"
-                onClick={() => handleNavigate(item.path)}
               >
-                {item.icon}
-                <span
-                  style={{
-                    fontWeight: 500,
-                    fontSize: '12px',
-                    lineHeight: '18px',
-                    color: item.path === pathname ? '#FFFFFF' : 'rgb(138 134 134)',
-                    textTransform: 'capitalize',
-                  }}
-                >
-                  {item.name}
-                </span>
-              </Button>
-            </div>
-          );
-        })}
+                Create Module
+              </span>
+            </span>
+          </div>
 
-        <span
-          className="flex items-center space-x-2 w-full"
-          variant="default"
-          style={{ marginTop: '15px' }}
-        >
-          <PlusIcon style={{ color: '#95A4FC' }} className="h-4 w-4" />
-          <span
-            style={{
-              fontWeight: 500,
-              fontSize: '12px',
-              lineHeight: '18px',
-              color: '#95A4FC',
-              textTransform: 'capitalize',
-            }}
-          >
-            Create Module
-          </span>
-        </span>
-      </div>
+          <div className="space-y-2 px-3" style={{ width: '100%' }}>
+            <h2
+              className="text-lg font-semibold"
+              style={{
+                fontWeight: '600',
+                fontSize: '12px',
+                lineHeight: '18px',
+                color: themename === 'dark' ? currentTheme.colors.text : '',
+              }}
+            >
+              Settings
+            </h2>
+            <Button
+              style={{
+                backgroundColor: themename === 'dark' ? 'rgb(26, 26, 26)' : 'rgb(229, 228, 226)',
+                width: '100%',
+                height: '44px',
+                borderRadius: '8px',
+                border: '1px solid #E5E4E2',
+                padding: '12px, 16px, 12px, 16px',
+              }}
+              className="flex items-center space-x-2"
+            >
+              <BellIcon style={{ color: 'rgb(138 134 134)	' }} className="h-5 w-5" />
+              <span
+                style={{
+                  fontWeight: 500,
+                  fontSize: '12px',
+                  lineHeight: '18px',
+                  color: 'rgb(138 134 134)',
+                  textTransform: 'capitalize',
+                }}
+              >
+                Notification Settings
+              </span>
+            </Button>
+            <Button
+              style={{
+                backgroundColor: 'rgb(229, 228, 226)',
+                width: '100%',
+                height: '44px',
+                borderRadius: '8px',
+                border: '1px solid #E5E4E2',
+                padding: '12px, 16px, 12px, 16px',
+                color: '#A9A9A9 ',
+              }}
+              className="flex items-center space-x-2 w-full"
+              variant="default"
+            >
+              <UserCircleIcon style={{ color: 'rgb(138 134 134)	' }} className="h-5 w-5" />
+              <span
+                style={{
+                  fontWeight: 500,
+                  fontSize: '12px',
+                  lineHeight: '18px',
+                  color: 'rgb(138 134 134)',
+                  textTransform: 'capitalize',
+                }}
+              >
+                Profile Setting
+              </span>
+            </Button>
+          </div></>)}
 
-      <div className="space-y-2 px-3 py-4" style={{ width: '100%' }}>
-        <h2
-          className="text-lg font-semibold"
-          style={{ fontWeight: '600', fontSize: '12px', lineHeight: '18px' }}
-        >
-          Settings
-        </h2>
-        <Button
-          style={{
-            backgroundColor: 'rgb(229, 228, 226)',
-            width: '190px',
-            height: '44px',
-            borderRadius: '8px',
-            border: '1px solid #E5E4E2',
-            padding: '12px, 16px, 12px, 16px',
-          }}
-          className="flex items-center space-x-2"
-        >
-          <BellIcon style={{ color: 'rgb(138 134 134)	' }} className="h-5 w-5" />
-          <span
-            style={{
-              fontWeight: 500,
-              fontSize: '12px',
-              lineHeight: '18px',
-              color: 'rgb(138 134 134)',
-              textTransform: 'capitalize',
-            }}
-          >
-            Notification Settings
-          </span>
-        </Button>
-        <Button
-          style={{
-            backgroundColor: 'rgb(229, 228, 226)',
-            width: '190px',
-            height: '44px',
-            borderRadius: '8px',
-            border: '1px solid #E5E4E2',
-            padding: '12px, 16px, 12px, 16px',
-            color: '#A9A9A9 ',
-          }}
-          className="flex items-center space-x-2 w-full"
-          variant="default"
-        >
-          <UserCircleIcon style={{ color: 'rgb(138 134 134)	' }} className="h-5 w-5" />
-          <span
-            style={{
-              fontWeight: 500,
-              fontSize: '12px',
-              lineHeight: '18px',
-              color: 'rgb(138 134 134)',
-              textTransform: 'capitalize',
-            }}
-          >
-            Profile Setting
-          </span>
-        </Button>
-      </div>
     </div>
   );
 }
