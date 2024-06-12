@@ -19,6 +19,9 @@ import DynamicBaseView from '../components/DynamicBaseView';
 import { Forms } from '../maiden-core';
 import Sidebar from '../components/Sidebar';
 import Navbar from '../components/Navbar';
+import Layout from '../components/Layout';
+import PasswordUpdate from '../pages/dashboard/UserProfile/PasswordUpdate';
+import UserProfileUpdate from '../pages/dashboard/UserProfile/UserProfileUpdate';
 
 // const pages = {
 //   LookUpType: <LookUpType/>
@@ -29,6 +32,14 @@ const AllRoutes = [
   { name: 'Signup', path: '/signup', element: <SignupPage />, private: false },
   { name: 'Scree3', path: '/screen3', element: <Screen3 />, private: false },
   { name: 'Forms', path: '/forms', element: <Forms />, private: false },
+  { name: 'password', path: '/password', element: <PasswordUpdate />, private: false },
+  {
+    name: 'userProfileUpdate',
+    path: '/userProfileUpdate',
+    element: <UserProfileUpdate />,
+    private: false,
+  },
+
   {
     name: 'NewOrganization',
     path: '/neworganization',
@@ -102,7 +113,9 @@ if (localStorage.getItem('menu') !== null) {
         {/* Sidebar */}
         <section
           id="sidebar"
-          style={{ width: '20%', borderRight: '1px solid rgba(28, 28, 28, 0.1)' }}
+          style={{
+            width: '20%',
+          }}
           // className={`w-80 z-50 lg:w-80 overflow-y-auto md:w-96 shadow border-gray-200 bg-white p-2 md:static absolute h-full transition-all duration-50 ${
           //   drawer ? "md:hidden left-0" : "-left-full"
           // }`}
