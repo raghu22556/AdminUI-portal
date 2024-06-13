@@ -23,6 +23,7 @@ import * as XLSX from 'xlsx';
 import moment from 'moment';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
+import '../../index.css'
 
 const { Option } = Select;
 const modal = Modal;

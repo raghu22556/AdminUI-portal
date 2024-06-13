@@ -10,7 +10,9 @@
   font-family: "Poppins", sans-serif;
 } */
 
-
+.grid-view-flex{
+  display: flex;
+}
 .child-view-section-header {
   font-size: 20px;
   margin-top: 82px;
