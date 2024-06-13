@@ -23,15 +23,15 @@ import { useSelector, useDispatch } from 'react-redux';
 import { darkTheme, whiteTheme } from '../../utils/theme'; // Importing theme objects for dark and light modes
 
 const languageOptions = [
-  { value: 'en', label: 'English', icon: 'united-states.png' },
-  { value: 'es', label: 'Spanish', icon: 'spanish.png' },
-  { value: 'pt', label: 'Portuguese', icon: 'portuguese.png' },
-  { value: 'ar', label: 'Arabic', icon: 'arabic.png' },
-  { value: 'cn', label: 'Chinese', icon: 'china.png' },
+  { value: 'en', label: 'English', icon: '/united-states.png' },
+  { value: 'es', label: 'Spanish', icon: '/spanish.png' },
+  { value: 'pt', label: 'Portuguese', icon: '/portuguese.png' },
+  { value: 'ar', label: 'Arabic', icon: '/arabic.png' },
+  { value: 'cn', label: 'Chinese', icon: '/china.png' },
 ];
 const themeOptions = [
-  { value: 'light', label: 'Light', icon: 'lightMode.png' },
-  { value: 'dark', label: 'Dark', icon: 'darkMode.png' },
+  { value: 'light', label: 'Light', icon: '/lightMode.png' },
+  { value: 'dark', label: 'Dark', icon: '/darkMode.png' },
 ];
 const Navbar = (props) => {
   const navigate = useNavigate();
@@ -272,11 +272,10 @@ const Navbar = (props) => {
                 {themeOptions.map((option) => (
                   <div
                     key={option.value}
-                    className={`flex items-center p-2 cursor-pointer  hover:bg-gray-200 transition-all duration-200 ease-in-out ${
-                      themeSelectedOption.value === option.value
+                    className={`flex items-center p-2 cursor-pointer  hover:bg-gray-200 transition-all duration-200 ease-in-out ${themeSelectedOption.value === option.value
                         ? 'bg-gray-200 text-black bold'
                         : ''
-                    }`}
+                      }`}
                     onClick={() => themeSelect(option)}
                     style={{ borderRadius: '4px', margin: '10px' }}
                   >
@@ -310,11 +309,10 @@ const Navbar = (props) => {
                 {languageOptions.map((option) => (
                   <div
                     key={option.value}
-                    className={`flex items-center p-2 cursor-pointer  hover:bg-gray-200 transition-all duration-200 ease-in-out ${
-                      languageSelectedOption.value === option.value
+                    className={`flex items-center p-2 cursor-pointer  hover:bg-gray-200 transition-all duration-200 ease-in-out ${languageSelectedOption.value === option.value
                         ? 'bg-gray-200 text-black bold'
                         : ''
-                    }`}
+                      }`}
                     onClick={() => languageSelect(option)}
                     style={{ borderRadius: '4px', margin: '10px' }}
                   >
@@ -334,8 +332,8 @@ const Navbar = (props) => {
             <img
               onClick={showProfile}
               alt="Profile Image"
-              src="noProfilePic.png"
-              class="relative inline-block object-cover object-center w-9 h-9 rounded-full cursor-pointer"
+              src="/noProfilePic.png"
+              className="relative inline-block object-cover object-center w-9 h-9 rounded-full cursor-pointer"
               data-popover-target="profile-menu"
             />
           )}
@@ -345,14 +343,14 @@ const Navbar = (props) => {
               role="menu"
               data-popover="profile-menu"
               data-popover-placement="bottom"
-              class="absolute mx-[-160px] my-5 z-10 flex min-w-[200px] flex-col gap-2 overflow-auto rounded-md border border-blue-gray-50 bg-white p-3 font-sans text-sm font-normal text-blue-gray-500 shadow-lg shadow-blue-gray-500/10 focus:outline-none"
+              className="absolute mx-[-160px] my-5 z-10 flex min-w-[200px] flex-col gap-2 overflow-auto rounded-md border border-blue-gray-50 bg-white p-3 font-sans text-sm font-normal text-blue-gray-500 shadow-lg shadow-blue-gray-500/10 focus:outline-none"
             >
-              <div class="flex w-full cursor-pointer select-none items-center gap-2 rounded-md px-3 pt-[9px] pb-2 pl-0 text-start leading-tight outline-none transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
+              <div className="flex w-full cursor-pointer select-none items-center gap-2 rounded-md px-3 pt-[9px] pb-2 pl-0 text-start leading-tight outline-none transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
                 {userProfile.ProfileImage || (
                   <img
                     alt=""
-                    src="noProfilePic.png"
-                    class="relative inline-block object-cover object-center w-9 h-9 rounded-full cursor-pointer"
+                    src="/noProfilePic.png"
+                    className="relative inline-block object-cover object-center w-9 h-9 rounded-full cursor-pointer"
                     data-popover-target="profile-menu"
                   />
                 )}
@@ -368,15 +366,15 @@ const Navbar = (props) => {
               <button
                 onClick={userProfileSetting}
                 role="menuitem"
-                class="flex w-full cursor-pointer select-none items-center gap-2 rounded-md px-3 pt-[9px] pb-2 pl-1 text-start leading-tight outline-none transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
+                className="flex w-full cursor-pointer select-none items-center gap-2 rounded-md px-3 pt-[9px] pb-2 pl-1 text-start leading-tight outline-none transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
               >
-                <p class="block font-sans text-sm antialiased font-medium leading-normal text-inherit">
+                <p className="block font-sans text-sm antialiased font-medium leading-normal text-inherit">
                   My Profile
                 </p>
               </button>
               <FeedbackModal />
 
-              <hr class="my-2 border-blue-gray-50" role="menuitem" />
+              <hr className="my-2 border-blue-gray-50" role="menuitem" />
               <button
                 onClick={() => {
                   localStorage.clear();
@@ -384,9 +382,9 @@ const Navbar = (props) => {
                   // toast.success("LogOut Success!");
                 }}
                 role="menuitem"
-                class="flex w-full cursor-pointer select-none items-center gap-2 pl-1 rounded-md px-3 pt-[9px] pb-2 text-start leading-tight outline-none transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
+                className="flex w-full cursor-pointer select-none items-center gap-2 pl-1 rounded-md px-3 pt-[9px] pb-2 text-start leading-tight outline-none transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
               >
-                <p class="block font-sans text-sm antialiased font-medium leading-normal text-inherit">
+                <p className="block font-sans text-sm antialiased font-medium leading-normal text-inherit">
                   Sign Out
                 </p>
               </button>
