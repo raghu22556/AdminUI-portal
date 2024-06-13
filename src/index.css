@@ -9,3 +9,22 @@
 * {
   font-family: "Poppins", sans-serif;
 } */
+
+
+.child-view-section-header {
+  font-size: 20px;
+  margin-top: 82px;
+  font-weight: 600;
+  padding-bottom: 0px;
+}
+
+.grid-view-flex .child-view-section-header {
+  font-size: 20px;
+  margin-top: 15px;
+  font-weight: 600;
+  padding-bottom: 0px;
+  margin-bottom: 5px;
+  background-color: #ebebeb;
+  padding: 5px 0px 5px 25px;
+  border-bottom: 2px solid #2f2f2f61;
+}

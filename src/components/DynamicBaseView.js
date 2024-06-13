@@ -2,10 +2,7 @@ import React, { PureComponent } from 'react';
 import BaseView from './BaseView/BaseView';
 //import { Actions } from 'core/redux-helper';
 import { defaultGridColumns } from '../core/utils';
-//import { Overides } from '../../entityconfig/configOverides';
-
-// Need to implement
-const Overides = {};
+import { Overides } from '../entityconfig/configOverides';
 
 class DynamicBaseView extends BaseView {
   constructor(props) {

@@ -37,17 +37,17 @@ export default function Sidebar(props) {
       activeIcon: <DashbordIconActive />,
       path: '/dashboard',
     },
-    {
+    /*{
       name: 'Organization',
       icon: <DashbordIcon />,
       activeIcon: <DashbordIconActive />,
-      path: '/organization',
-    },
+      path: '/OnBoarding/Organization',
+    },*/
     {
       name: 'Projects',
       icon: <DashbordIcon />,
       activeIcon: <DashbordIconActive />,
-      path: '/projects',
+      path: '/OnBoarding/Project',
     },
     //{
     //  name: "Reports",
