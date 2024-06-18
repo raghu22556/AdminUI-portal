@@ -18,7 +18,7 @@ const OrganizationNameInput = (props) => {
         type={`${false ? 'text' : 'Organization Name'}`}
         placeholder="Enter Name"
         variant="static"
-        className=" bg-white p-0 m-0  ring-4 ring-transparent "
+        className=" bg-white p-2 m-0  ring-4 ring-transparent "
         labelProps={{
           className: 'hidden',
         }}
