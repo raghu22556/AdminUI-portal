@@ -136,10 +136,10 @@ export default function Sidebar(props) {
 
   return (
     <div
-      className="flex flex-col w-full max-w-xs bg-white h-screen md:h-auto fixed md:relative z-50"
-      style={{
-        backgroundColor: 'white',
-      }}
+      className="flex flex-col w-full h-full max-w-xs bg-white h-screen md:h-auto fixed md:relative z-50 dark:bg-gray-900 dark:text-white"
+      // style={{
+      //   backgroundColor: '',
+      // }}
     >
       <div className="px-4 py-2 flex justify-between items-center">
         <h1
