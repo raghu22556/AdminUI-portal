@@ -129,9 +129,9 @@ if (localStorage.getItem('menu') !== null) {
         </section>
 
         {/* Navbar & Child */}
-        <section className="overflow-auto h-full w-full bg-[rgb(247,245,250)]">
+        <section className="overflow-auto h-full w-full bg-[rgb(247,245,250)]" >
           <Navbar handleToggle={handleToggle} drawer={drawer} />
-          <div className="p-4 h-auto">
+          <div className="p-4 h-auto" > 
             <DynamicBaseView {...tableName} />
           </div>
         </section>

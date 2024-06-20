@@ -76,6 +76,9 @@ const Navbar = (props) => {
       const storedThemeOption = themeOptions.find((option) => option.value === storedThemeName);
       setthemeSelectedOption(storedThemeOption);
     }
+    if(storedThemeName==='dark'){
+      document.body.classList.add("dark");
+    }
   }, []);
   const handleThemes = (event) => {
     setTheme(event.target.value); // Function to handle theme change
@@ -95,6 +98,11 @@ const Navbar = (props) => {
     }
   };
   const themeSelect = (option) => {
+    if(option.value==='dark'){
+      document.body.classList.add("dark");
+    }else{
+      document.body.classList.remove("dark");
+    }
     setthemeSelectedOption(option);
     setthemeOpen(false);
     if (option.value) {
@@ -178,7 +186,7 @@ const Navbar = (props) => {
   };
 
   return (
-    <div className="p-4 bg-white sticky z-40 border-b top-0 left-0 shadow-sm flex items-center">
+    <div className="p-4 bg-white sticky z-40 border-b top-0 left-0 shadow-sm flex items-center dark:bg-gray-900 ">
       {/* <HiOutlineMenu
         onClick={handleToggle}
         className="text-color text-xl cursor-pointer"
@@ -204,7 +212,7 @@ const Navbar = (props) => {
         <Typography>MaidenCube</Typography>
       </div>
 
-      <section className="flex ml-auto gap-2 sm:gap-4 md:gap-5 ">
+      <section className="flex ml-auto gap-2 sm:gap-4 md:gap-5 dark:bg-slate-900">
         <div className="relative mr-7 ">
           <div
             className="bg-[#F7F9FB] p-2 px-5 border border-lightgray rounded-md cursor-pointer flex items-center justify-between"
