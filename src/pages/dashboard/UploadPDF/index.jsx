@@ -1,34 +1,15 @@
 import React from 'react';
 import BaseView from '../../../components/BaseView/BaseView';
-// import moment from 'moment-timezone';
-// import {
-//   Collapse,
-//   Upload,
-// //   Icon,
-//   Button,
-//   Spin,
-//   Tooltip,
-//   Modal,
-//   Input,
-
-//   List,
-//   Card,
-// } from 'antd';
-// import Label from 'antd'
-import { Modal, Collapse, Upload } from 'antd';
-import { AddBox as AddBoxIcon, Label } from '@material-ui/icons';
-// import { getThemeColor } from '../util';
+import { Modal, Collapse, Upload, Button, Spin, Tooltip } from 'antd';
 import { connect } from 'react-redux';
-// import { withTranslation } from 'react-i18next';
+import { withTranslation } from 'react-i18next';
 import { Dialog, DialogContent, IconButton, DialogTitle, DialogActions } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
-import InfoIcon from '@material-ui/icons/Info';
 import API from '../../../store/requests';
 import { compose } from 'redux';
 import { BlobServiceClient } from '@azure/storage-blob';
 import Progress from 'antd/lib/progress';
 import { intersectionWith, isEqual } from 'lodash';
-// import { confirm as awaitConfirm } from './IRResultsCorrections/fabricUtil';
 import Layout from '../../../components/Layout';
 
 const { confirm } = Modal;
@@ -36,29 +17,12 @@ const { Panel } = Collapse;
 const { Dragger } = Upload;
 const modal = Modal;
 
-// if (localStorage.selectedLanguage && localStorage.selectedLanguage !== 'undefined') {
-//   moment.locale(localStorage.selectedLanguage);
-// } else {
-//   moment.locale('en');
-// }
-
 class UploadPDF extends BaseView {
   constructor(props) {
     super({ props });
-
-    // const { batchId, batchNumber, categoriesId, subCategoryId, retailerId } =
-    //   props.location.state || {};
     this.state = {
       files: [],
-      retailerData: [],
-      categoriesData: [],
-      subCategoriesData: [],
       batchData: [],
-      //   retailerId: retailerId,
-      //   categoriesId: categoriesId,
-      //   subCategoryId: subCategoryId,
-      batchId: batchId,
-      batchNumber: batchNumber,
       previewDialog: false,
       previewURL: '',
       showFormatMsg: false,
@@ -67,16 +31,9 @@ class UploadPDF extends BaseView {
       uploadProgress: {},
       uploaded: false,
       isUploading: false,
-      disableSelection: batchId ? true : false,
+      disableSelection: true,
       availableFiles: [],
     };
-    // if (retailerId) {
-    //   this.loadRetailerCategories(retailerId, { categoriesId, subCategoryId });
-    //   this.loadBatchCombo(retailerId);
-    // }
-    // if (categoriesId) {
-    //   this.loadRetailerSubCategories(categoriesId, { subCategoryId });
-    // }
   }
 
   pannelStyles = {
@@ -85,249 +42,91 @@ class UploadPDF extends BaseView {
     userSelect: 'none',
   };
 
-  //   loadRetailerCategories = (id, overideState) => {
-  //     if (id > 0) {
-  //       this.setState({ retailerId: id, showLoader: true });
+  loadAzureStorageConfig() {
+    let me = this;
+    let params = {
+      action: 'LoadAzureStorageConfig',
+    };
+    API.triggerPost('DataUploader', params)
+      .then(response => {
+        if (response.status === 200 && response.data.success) {
+          me.setState({
+            containerName: response.data.containerName,
+            blockMainDirectoryName: response.data.blockMainDirectoryName,
+            storageAccountName: response.data.storageAccountName,
+            sasToken: response.data.sasToken.replace('?', ''),
+          });
+          const { getUploadedFiles } = this.state || {};
+          if (getUploadedFiles) {
+            this.checkToBeUploaded();
+          }
+        }
+      })
+      .catch(err => {
+        me.showModal(err.message, 'error');
+      });
+  }
 
-  //       let params = {};
-  //       params.comboType = 'RetailerCategory';
-  //       params.RetailerId = id;
-  //       params.asArray = 0;
+  componentDidMount() {
+    this.loadAzureStorageConfig();
+  }
 
-  //       API.triggerPost('combo', params).then(response => {
-  //         if (response.status === 200) {
-  //           this.setState({
-  //             categoriesId: null,
-  //             subCategoryId: null,
-  //             categoriesData: response.data.records,
-  //             subCategoriesData: [],
-  //             showLoader: false,
-  //             ...overideState,
-  //           });
-  //         }
-  //       });
-  //     }
-  //   };
+  submitBatch = t => {
+    let me = this;
+    const {
+      blockMainDirectoryName,
+    } = this.state;
 
-  //   loadRetailerSubCategories = (id, overideState) => {
-  //     if (id > 0) {
-  //       this.setState({ categoriesId: id, showLoader: true });
+    let blobFolder = [
+      blockMainDirectoryName,
+    ]
+      .filter(directory => directory)
+      .join('/');
 
-  //       let params = {};
-  //       params.comboType = 'RetailerSubCategory';
-  //       params.RetailerId = this.state.retailerId;
-  //       params.RetailerCategoryId = id;
-  //       params.asArray = 0;
-  //       API.triggerPost('combo', params).then(response => {
-  //         if (response.status === 200) {
-  //           this.setState({
-  //             subCategoryId: null,
-  //             subCategoriesData: response.data.records,
-  //             showLoader: false,
-  //             ...overideState,
-  //           });
-  //         }
-  //       });
-  //     }
-  //   };
+    let params = {
+      blobFolder,
+      action: 'SyncData',
+    };
+    this.setState({ showLoader: true });
+    API.triggerPost('DataUploader', params)
+      .then(response => {
+        this.setState({ showLoader: false });
+        if (response.status === 200 && response.data.success) {
+          alert('Files are in Sync')
+          /*this.props.history.push({
+            pathname: '/POG/DataUploader/InternalBatch',
+            state: {},
+          });*/
+        }
+      })
+      .catch(err => {
+        this.setState({ showLoader: false });
+        me.showModal(err.message, 'error');
+      });
+  };
 
-  //   onSubCategoriesChange = id => {
-  //     if (id > 0) {
-  //       this.setState({ subCategoryId: id });
-  //     }
-  //   };
-
-  //   onBatchChange = (id, batchNumber) => {
-  //     if (id > 0) {
-  //       this.setState({ batchId: id, batchNumber: batchNumber });
-  //     }
-  //   };
-
-  //   loadBatchCombo(retailerId) {
-  //     this.setState({ showLoader: true });
-
-  //     let params = {};
-  //     params.comboType = 'PDFToPOGRetailerBatch';
-  //     params.RetailerId = retailerId;
-  //     params.asArray = 0;
-
-  //     API.triggerPost('combo', params)
-  //       .then(response => {
-  //         if (response.status === 200) {
-  //           this.setState({
-  //             batchData: response.data.records,
-  //             showLoader: false,
-  //           });
-  //         }
-  //       })
-  //       .catch(err => {
-  //         this.setState({ showLoader: false });
-  //         this.showModal(err.message, 'error');
-  //       });
-  //   }
-
-  //   loadRetailerCombo() {
-  //     this.setState({ showLoader: true });
-
-  //     let params = {};
-  //     params.comboType = 'PDFToPOGRetailer';
-  //     params.ClientId = localStorage.getItem('clientId');
-  //     params.asArray = 0;
-
-  //     API.triggerPost('combo', params)
-  //       .then(response => {
-  //         if (response.status === 200) {
-  //           this.setState({
-  //             retailerData: response.data.records,
-  //             showLoader: false,
-  //           });
-  //         }
-  //       })
-  //       .catch(err => {
-  //         this.setState({ showLoader: false });
-  //         this.showModal(err.message, 'error');
-  //       });
-  //   }
-
-  //   loadAzureStorageConfig() {
-  //     let me = this;
-  //     let params = {
-  //       action: 'LoadAzureStorageConfig',
-  //     };
-  //     API.triggerPost('PDFToPOG', params)
-  //       .then(response => {
-  //         if (response.status === 200 && response.data.success) {
-  //           me.setState({
-  //             containerName: response.data.containerName,
-  //             blockMainDirectoryName: response.data.blockMainDirectoryName,
-  //             storageAccountName: response.data.storageAccountName,
-  //             sasToken: response.data.sasToken.replace('?', ''),
-  //           });
-
-  //           const { getUploadedFiles } = this.props.location.state || {};
-  //           if (getUploadedFiles) {
-  //             this.checkToBeUploaded();
-  //           }
-  //         }
-  //       })
-  //       .catch(err => {
-  //         me.showModal(err.message, 'error');
-  //       });
-  //   }
-
-  //   componentDidMount() {
-  //     this.loadRetailerCombo();
-  //     this.loadAzureStorageConfig();
-  //   }
-
-  //   submitBatch = t => {
-  //     let me = this;
-  //     const {
-  //       batchId,
-  //       retailerId,
-  //       categoriesId,
-  //       subCategoryId,
-  //       batchNumber,
-  //       blockMainDirectoryName,
-  //     } = this.state;
-  //     let clientCode = localStorage.getItem('clientCode');
-
-  //     let blobFolder = [
-  //       blockMainDirectoryName,
-  //       clientCode,
-  //       retailerId,
-  //       categoriesId,
-  //       subCategoryId,
-  //       batchNumber,
-  //     ]
-  //       .filter(directory => directory)
-  //       .join('/');
-
-  //     let params = {
-  //       batchId,
-  //       blobFolder,
-  //       categoriesId: categoriesId == null ? '' : categoriesId,
-  //       subCategoryId: subCategoryId == null ? '' : subCategoryId,
-  //       action: 'SubmitBatch',
-  //     };
-  //     this.setState({ showLoader: true });
-  //     API.triggerPost('PDFToPOG', params)
-  //       .then(response => {
-  //         this.setState({ showLoader: false });
-  //         if (response.status === 200 && response.data.success) {
-  //           this.props.history.push({
-  //             pathname: '/POG/PDFToPOG/InternalBatch',
-  //             state: {},
-  //           });
-  //         }
-  //       })
-  //       .catch(err => {
-  //         this.setState({ showLoader: false });
-  //         me.showModal(err.message, 'error');
-  //       });
-  //   };
-
-  //   showConfirm = t => {
-  //     const {
-  //       retailerId,
-  //       categoriesId,
-  //       subCategoryId,
-  //       batchId,
-  //       retailerData,
-  //       categoriesData,
-  //       subCategoriesData,
-  //       batchData,
-  //     } = this.state;
-  //     let retailer = (retailerData || []).find(item => item.LookupId === retailerId).DisplayValue;
-  //     let categorie = (categoriesData || []).find(item => item.LookupId === categoriesId);
-  //     let subCategory = (subCategoriesData || []).find(item => item.LookupId === subCategoryId);
-  //     let batch = (batchData || []).find(item => item.LookupId === batchId).DisplayValue;
-  //     confirm({
-  //       title: (
-  //         <>
-  //           {t('You have selected') + ':'}
-  //           <br />
-  //           {t('Retailer')} - {retailer}
-  //           <br />
-  //           {categoriesId ? (
-  //             <>
-  //               {t('Category')} - {categorie.DisplayValue}
-  //               <br />
-  //             </>
-  //           ) : (
-  //             ''
-  //           )}
-  //           {subCategoryId ? (
-  //             <>
-  //               {t('Subcategory')} - {subCategory.DisplayValue}
-  //               <br />
-  //             </>
-  //           ) : (
-  //             ''
-  //           )}
-  //           {t('Batch')} - {batch}
-  //           <br /> {t('would you like to Submit the files') + ' ?'}
-  //         </>
-  //       ),
-  //       okText: 'Yes',
-  //       okType: 'danger',
-  //       cancelText: 'No',
-  //       onOk: () => this.submitBatch(this.props.t),
-  //       onCancel: () => {},
-  //     });
-  //   };
+  showConfirm = t => {
+    const {
+    } = this.state;
+    confirm({
+      title: (
+        <>
+          <br /> {t('would you like to Sync the files') + ' ?'}
+        </>
+      ),
+      okText: 'Yes',
+      okType: 'danger',
+      cancelText: 'No',
+      onOk: () => this.submitBatch(this.props.t),
+      onCancel: () => { },
+    });
+  };
 
   uploadFilesOnServer = async (t) => {
     let me = this;
     this.setState({ uploaded: false, isUploading: true, disableSelection: true });
-    let clientCode = localStorage.getItem('clientCode');
     let availableFiles = await this.checkToBeUploaded();
     const {
-      retailerId,
-      categoriesId,
-      subCategoryId,
-      batchId,
-      batchNumber,
       files,
       storageAccountName,
       sasToken,
@@ -354,11 +153,6 @@ class UploadPDF extends BaseView {
       ));
     let folderName = [
       blockMainDirectoryName,
-      clientCode,
-      retailerId,
-      categoriesId,
-      subCategoryId,
-      batchNumber,
     ]
       .filter((directory) => directory)
       .join('/');
@@ -438,9 +232,8 @@ class UploadPDF extends BaseView {
         let params = {
           action: 'AddAllBatchFiles',
           fileJson: JSON.stringify(fileJson),
-          batchId: batchId,
         };
-        API.triggerPost('PDFToPOG', params)
+        API.triggerPost('DataUploader', params)
           .then((response) => {
             this.setState({
               showLoader: false,
@@ -469,62 +262,51 @@ class UploadPDF extends BaseView {
     return `${(bytes / 1024 ** i).toFixed(1)} ${sizes[i]}`;
   };
 
-  //   deleteFile = async (fileToDelete, t) => {
-  //     let me = this;
+  deleteFile = async (fileToDelete, t) => {
+    let me = this;
 
-  //     let clientCode = localStorage.getItem('clientCode');
-  //     const {
-  //       retailerId,
-  //       categoriesId,
-  //       subCategoryId,
-  //       batchId,
-  //       batchNumber,
-  //       blockMainDirectoryName,
-  //     } = this.state;
-  //     this.setState({ showLoader: true });
-  //     let blobName = [
-  //       blockMainDirectoryName,
-  //       clientCode,
-  //       retailerId,
-  //       categoriesId,
-  //       subCategoryId,
-  //       batchNumber,
-  //       fileToDelete.name,
-  //     ]
-  //       .filter(directory => directory)
-  //       .join('/');
+    const {
+      blockMainDirectoryName,
+    } = this.state;
+    this.setState({ showLoader: true });
+    let blobName = [
+      blockMainDirectoryName,
+      fileToDelete.name,
+    ]
+      .filter(directory => directory)
+      .join('/');
 
-  //     let params = {
-  //       action: 'DeleteBatchFile',
-  //       PDffilepath: blobName,
-  //     };
+    let params = {
+      action: 'DeleteBatchFile',
+      PDffilepath: blobName,
+    };
 
-  //     API.triggerPost('PDFToPOG', params)
-  //       .then(response => {
-  //         if (response.status === 200) {
-  //           if (response.data.success) {
-  //             me.deleteBlob(blobName);
-  //             me.showModal(t('Deleted Successfully'), 'success');
-  //             const files = me.state.files.filter(file => file.name !== fileToDelete.name);
-  //             delete me.state.fileToUpload[fileToDelete.name];
-  //             delete me.state.uploadProgress[fileToDelete.name];
-  //             me.setState({ files, showLoader: false });
-  //           } else {
-  //             me.setState({ showLoader: false });
-  //             me.showModal(response.data.error, 'error');
-  //             /*me.deleteBlob(blobName);
-  //             me.showModal(t('Deleted Successfully'), 'success');
-  //             const files = me.state.files.filter(file => file.uid !== fileToDelete.uid);
-  //             delete me.state.fileToUpload[fileToDelete.name];
-  //             me.setState({ files, showLoader: false });*/
-  //           }
-  //         }
-  //       })
-  //       .catch(err => {
-  //         me.setState({ showLoader: false });
-  //         me.showModal(err.message, 'error');
-  //       });
-  //   };
+    API.triggerPost('DataUploader', params)
+      .then(response => {
+        if (response.status === 200) {
+          if (response.data.success) {
+            me.deleteBlob(blobName);
+            me.showModal(t('Deleted Successfully'), 'success');
+            const files = me.state.files.filter(file => file.name !== fileToDelete.name);
+            delete me.state.fileToUpload[fileToDelete.name];
+            delete me.state.uploadProgress[fileToDelete.name];
+            me.setState({ files, showLoader: false });
+          } else {
+            me.setState({ showLoader: false });
+            me.showModal(response.data.error, 'error');
+            /*me.deleteBlob(blobName);
+            me.showModal(t('Deleted Successfully'), 'success');
+            const files = me.state.files.filter(file => file.uid !== fileToDelete.uid);
+            delete me.state.fileToUpload[fileToDelete.name];
+            me.setState({ files, showLoader: false });*/
+          }
+        }
+      })
+      .catch(err => {
+        me.setState({ showLoader: false });
+        me.showModal(err.message, 'error');
+      });
+  };
 
   deleteBlob = async (blobName) => {
     const { storageAccountName, sasToken, containerName } = this.state;
@@ -543,7 +325,7 @@ class UploadPDF extends BaseView {
     };
     await blockBlobClient.deleteIfExists(options);
 
-    const { getUploadedFiles } = this.props.location.state || {};
+    const { getUploadedFiles } = this.state || {};
     if (getUploadedFiles) {
       this.checkToBeUploaded();
     }
@@ -551,25 +333,14 @@ class UploadPDF extends BaseView {
 
   checkToBeUploaded = async (t) => {
     const {
-      retailerId,
-      categoriesId,
-      subCategoryId,
-      batchId,
-      batchNumber,
       storageAccountName,
       sasToken,
       containerName,
       blockMainDirectoryName,
     } = this.state;
     let availableFiles = [];
-    let clientCode = localStorage.getItem('clientCode');
     let blobDirectory = [
       blockMainDirectoryName,
-      clientCode,
-      retailerId,
-      categoriesId,
-      subCategoryId,
-      batchNumber,
     ]
       .filter((directory) => directory)
       .join('/');
@@ -653,268 +424,8 @@ class UploadPDF extends BaseView {
     return filesUploaded.length;
   };
 
-  //   retailerAddButton(t) {
-  //     var me = this;
-  //     const confirms = confirm({
-  //       icon: null,
-  //       content: (
-  //         <>
-  //           <Input
-  //             placeholder={t('Add New Retailer')}
-  //             onChange={event => {
-  //               me.setState({
-  //                 retailerName: event.target.value,
-  //               });
-  //               confirms.update({
-  //                 okButtonProps: {
-  //                   disabled: event.target.value ? false : true,
-  //                 },
-  //               });
-  //             }}
-  //           />
-  //         </>
-  //       ),
-  //       okType: 'danger',
-  //       okText: t('Save'),
-  //       okButtonProps: {
-  //         disabled: true,
-  //       },
-  //       onOk() {
-  //         me.setState({ showLoader: true });
-
-  //         let params = {};
-  //         params.Name = me.state.retailerName;
-  //         params.action = 'CreateRetailer';
-
-  //         API.triggerPost('PDFToPOG', params)
-  //           .then(response => {
-  //             if (response.status === 200) {
-  //               if (response.data.success) {
-  //                 me.loadRetailerCombo();
-  //               } else {
-  //                 me.setState({ showLoader: false });
-  //                 me.showModal(response.data.error, 'error');
-  //               }
-  //             }
-  //           })
-  //           .catch(err => {
-  //             me.setState({ showLoader: false });
-  //             me.showModal(err.message, 'error');
-  //           });
-  //       },
-  //       onCancel() {
-  //         console.log('Cancel');
-  //       },
-  //     });
-  //   }
-
-  //   categoryAddButton(t) {
-  //     var me = this;
-  //     if (this.state.retailerId == null) {
-  //       modal.error({
-  //         title: t('Please Select Retailer'),
-  //         icon: null,
-  //         okButtonProps: { style: { backgroundColor: getThemeColor(), border: 'none' } },
-  //     });
-  //       return;
-  //     }
-  //     const confirms = confirm({
-  //       icon: null,
-  //       content: (
-  //         <>
-  //           <Input
-  //             placeholder={t('Add New Category')}
-  //             onChange={event => {
-  //               me.setState({
-  //                 categoryName: event.target.value,
-  //               });
-  //               confirms.update({
-  //                 okButtonProps: {
-  //                   disabled: event.target.value ? false : true,
-  //                 },
-  //               });
-  //             }}
-  //           />
-  //         </>
-  //       ),
-  //       okText: t('Save'),
-  //       okButtonProps: {
-  //         disabled: true,
-  //       },
-  //       onOk() {
-  //         me.setState({ showLoader: true });
-
-  //         let params = {};
-  //         params.Name = me.state.categoryName;
-  //         params.RetailerId = me.state.retailerId;
-  //         params.action = 'CreateRetailerCategory';
-
-  //         API.triggerPost('PDFToPOG', params)
-  //           .then(response => {
-  //             if (response.status === 200) {
-  //               if (response.data.success) {
-  //                 me.loadRetailerCategories(me.state.retailerId);
-  //               } else {
-  //                 me.setState({ showLoader: false });
-  //                 me.showModal(response.data.error, 'error');
-  //               }
-  //             }
-  //           })
-  //           .catch(err => {
-  //             me.setState({ showLoader: false });
-  //             me.showModal(err.message, 'error');
-  //           });
-  //       },
-  //       onCancel() {
-  //         console.log('Cancel');
-  //       },
-  //     });
-  //   }
-
-  //   batchAddButton(t) {
-  //     var me = this;
-  //     if (this.state.retailerId == null) {
-  //       modal.error({
-  //         title: t('Please Select Retailer'),
-  //         icon: null,
-  //         okButtonProps: { style: { backgroundColor: getThemeColor(), border: 'none' } },
-  //     });
-  //       return;
-  //     }
-
-  //     const confirms = confirm({
-  //       icon: null,
-  //       content: (
-  //         <>
-  //           <Input
-  //             placeholder={t('Add New Batch')}
-  //             onChange={event => {
-  //               me.setState({ batchName: event.target.value });
-  //               confirms.update({
-  //                 okButtonProps: {
-  //                   disabled: event.target.value ? false : true,
-  //                 },
-  //               });
-  //             }}
-  //           />
-  //         </>
-  //       ),
-  //       okText: 'Save',
-  //       okButtonProps: {
-  //         disabled: true,
-  //       },
-  //       onOk() {
-  //         me.setState({ showLoader: true });
-
-  //         let params = {};
-  //         params.Name = me.state.batchName;
-  //         params.RetailerId = me.state.retailerId;
-  //         params.RetailerCategoryId = me.state.categoriesId || 0;
-  //         params.RetailerSubCategoryId = me.state.subCategoryId || 0;
-  //         params.action = 'CreateBatch';
-
-  //         API.triggerPost('PDFToPOG', params)
-  //           .then(response => {
-  //             if (response.status === 200) {
-  //               if (response.data.success) {
-  //                 me.loadBatchCombo(me.state.retailerId);
-  //               } else {
-  //                 me.setState({ showLoader: false });
-  //                 me.showModal(response.data.error, 'error');
-  //               }
-  //             }
-  //           })
-  //           .catch(err => {
-  //             me.setState({ showLoader: false });
-  //             me.showModal(err.message, 'error');
-  //           });
-  //       },
-  //       onCancel() {
-  //         console.log('Cancel');
-  //       },
-  //     });
-  //   }
-
-  //   subCategoryAddButton(t) {
-  //     var me = this;
-  //     if (this.state.retailerId == null) {
-  //       modal.error({
-  //         title: t('Please Select Retailer'),
-  //         icon: null,
-  //         okButtonProps: { style: { backgroundColor: getThemeColor(), border: 'none' } },
-  //     });
-  //       return;
-  //     }
-  //     if (this.state.categoriesId == null) {
-  //       modal.error({
-  //         title: t('Please Select Category'),
-  //         icon: null,
-  //         okButtonProps: { style: { backgroundColor: getThemeColor(), border: 'none' } },
-  //     });
-  //       return;
-  //     }
-
-  //     const confirms = confirm({
-  //       icon: null,
-  //       content: (
-  //         <>
-  //           <Input
-  //             placeholder={t('Add New Sub Category')}
-  //             onChange={event => {
-  //               me.setState({ subCategoryName: event.target.value });
-  //               confirms.update({
-  //                 okButtonProps: {
-  //                   disabled: event.target.value ? false : true,
-  //                 },
-  //               });
-  //             }}
-  //           />
-  //         </>
-  //       ),
-  //       okText: 'Save',
-  //       okButtonProps: {
-  //         disabled: true,
-  //       },
-  //       onOk() {
-  //         me.setState({ showLoader: true });
-
-  //         let params = {};
-  //         params.Name = me.state.subCategoryName;
-  //         params.RetailerCategoryId = me.state.categoriesId;
-  //         params.action = 'CreateRetailerSubCategory';
-
-  //         API.triggerPost('PDFToPOG', params)
-  //           .then(response => {
-  //             if (response.status === 200) {
-  //               if (response.data.success) {
-  //                 me.loadRetailerSubCategories(me.state.categoriesId);
-  //               } else {
-  //                 me.setState({ showLoader: false });
-  //                 me.showModal(response.data.error, 'error');
-  //               }
-  //             }
-  //           })
-  //           .catch(err => {
-  //             me.setState({ showLoader: false });
-  //             me.showModal(err.message, 'error');
-  //           });
-  //       },
-  //       onCancel() {
-  //         console.log('Cancel');
-  //       },
-  //     });
-  //   }
-
   getForm = () => {
     const {
-      retailerData,
-      categoriesData,
-      subCategoriesData,
-      batchData,
-      retailerId,
-      categoriesId,
-      subCategoryId,
-      batchId,
       previewDialog,
       previewURL,
       files,
@@ -926,24 +437,19 @@ class UploadPDF extends BaseView {
     } = this.state;
     let { t } = this.props;
 
-    //const isUploadDisabled = retailerId === null ? true : categoriesId === null ? true : batchId === null ? true : files.length === 0 ? true : false;
+    //const isUploadDisabled = files.length === 0 ? true : false;
 
     const isUploadDisabled =
-      retailerId == null
+      files.length === 0
         ? true
-        : batchId == null
-          ? true
-          : files.length === 0
-            ? true
-            : isUploading
-              ? isUploading
-              : isFailed
-                ? false
-                : uploaded;
-    const isSubmitDisabled =
-      retailerId == null ? true : batchId == null ? true : files.length === 0 ? true : !uploaded;
+        : isUploading
+          ? isUploading
+          : isFailed
+            ? false
+            : uploaded;
+    const isSubmitDisabled = files.length === 0 ? true : !uploaded;
 
-    const { getUploadedFiles } = this.props.location.state || {};
+    const { getUploadedFiles } = this.state || {};
     const panelProps = (text) => ({
       header: (
         <div className="header-collapse">
@@ -958,150 +464,6 @@ class UploadPDF extends BaseView {
     const defaultActiveKey = disableSelection ? '' : 1;
     return (
       <Spin className="upload-spinner" spinning={showLoader}>
-        <div className="collapse-style pdfToPog m-2 mt-4 p-2">
-          <div className="row ">
-            <div className="col-3">
-              <div className="row">
-                <div className="col-11">
-                  <Collapse defaultActiveKey={defaultActiveKey}>
-                    <Panel {...panelProps(t('Retailer'))}>
-                      {retailerData.map((item) => (
-                        <div
-                          key={item.LookupId}
-                          onClick={() => {
-                            this.loadRetailerCategories(item.LookupId);
-                            this.loadBatchCombo(item.LookupId);
-                          }}
-                          className={retailerId === item.LookupId && 'active-item'}
-                        >
-                          {item.DisplayValue}
-                        </div>
-                      ))}
-                    </Panel>
-                  </Collapse>
-                </div>
-                <div className="col-1 px-0">
-                  <IconButton
-                    style={{
-                      borderRadius: '0',
-                      padding: '0',
-                      background: 'rgb(195, 29, 29)',
-                      color: 'white',
-                      marginLeft: '-13px',
-                      marginTop: '1px',
-                    }}
-                  >
-                    <AddBoxIcon />
-                  </IconButton>
-                </div>
-              </div>
-            </div>
-
-            <div className="col-3">
-              <div className="row">
-                <div className="col-11">
-                  <Collapse defaultActiveKey={defaultActiveKey}>
-                    <Panel {...panelProps(t('Category'))}>
-                      {categoriesData.map((item) => (
-                        <div
-                          key={item.LookupId}
-                          onClick={() => this.loadRetailerSubCategories(item.LookupId)}
-                          className={categoriesId === item.LookupId && 'active-item'}
-                        >
-                          {item.DisplayValue}
-                        </div>
-                      ))}
-                    </Panel>
-                  </Collapse>
-                </div>
-                <div className="col-1 px-0">
-                  <IconButton
-                    style={{
-                      borderRadius: '0',
-                      padding: '0',
-                      background: 'rgb(195, 29, 29)',
-                      color: 'white',
-                      marginLeft: '-13px',
-                      marginTop: '1px',
-                    }}
-                  >
-                    <AddBoxIcon />
-                  </IconButton>
-                </div>
-              </div>
-            </div>
-
-            <div className="col-3">
-              <div className="row">
-                <div className="col-11">
-                  <Collapse defaultActiveKey={defaultActiveKey}>
-                    <Panel {...panelProps(t('Sub Category'))}>
-                      {subCategoriesData.map((item) => (
-                        <div
-                          key={item.LookupId}
-                          onClick={() => this.onSubCategoriesChange(item.LookupId)}
-                          className={subCategoryId === item.LookupId && 'active-item'}
-                        >
-                          {item.DisplayValue}
-                        </div>
-                      ))}
-                    </Panel>
-                  </Collapse>
-                </div>
-                <div className="col-1 px-0">
-                  <IconButton
-                    style={{
-                      borderRadius: '0',
-                      padding: '0',
-                      background: 'rgb(195, 29, 29)',
-                      color: 'white',
-                      marginLeft: '-13px',
-                      marginTop: '1px',
-                    }}
-                  >
-                    <AddBoxIcon />
-                  </IconButton>
-                </div>
-              </div>
-            </div>
-            <div></div>
-            <div className="col-3">
-              <div className="row">
-                <div className="col-11">
-                  <Collapse defaultActiveKey={defaultActiveKey}>
-                    <Panel {...panelProps(t('Batch'))}>
-                      {batchData.map((item) => (
-                        <div
-                          key={item.LookupId}
-                          className={batchId === item.LookupId && 'active-item'}
-                        >
-                          <div onClick={() => this.onBatchChange(item.LookupId, item.BatchNumber)}>
-                            {item.DisplayValue}
-                          </div>
-                        </div>
-                      ))}
-                    </Panel>
-                  </Collapse>
-                </div>
-                <div className="col-1 px-0">
-                  <IconButton
-                    style={{
-                      borderRadius: '0',
-                      padding: '0',
-                      background: 'rgb(195, 29, 29)',
-                      color: 'white',
-                      marginLeft: '-13px',
-                      marginTop: '1px',
-                    }}
-                  >
-                    <AddBoxIcon />
-                  </IconButton>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
         {getUploadedFiles && (
           <div className="row m-2 mt-4 mb-4 p-2">
             <div className="col-12">
@@ -1175,7 +537,7 @@ class UploadPDF extends BaseView {
                               status="active"
                             />
                             {this.state.uploadProgress[file.name] === file.size &&
-                            this.state.uploaded ? (
+                              this.state.uploaded ? (
                               <button
                                 className="close-button"
                                 onClick={() => this.deleteFile(file, t)}
@@ -1246,7 +608,7 @@ class UploadPDF extends BaseView {
                 }
                 return false;
               }}
-              customRequest={(data) => {}}
+              customRequest={(data) => { }}
             >
               <p className="ant-upload-drag-icon">{/* <Icon type="inbox" /> */}</p>
               <p className="ant-upload-text">{t('Click or drag file to this area to upload')}</p>
@@ -1269,7 +631,7 @@ class UploadPDF extends BaseView {
                 {this.state.isFailed ? t('Retry & Upload') : t('Upload')}
               </Button>
             </Tooltip>
-            <Tooltip title="Submit">
+            <Tooltip title="Sync Server">
               <Button
                 variant="outlined"
                 shape="round"
@@ -1279,7 +641,7 @@ class UploadPDF extends BaseView {
                 disabled={isSubmitDisabled}
                 onClick={() => this.showConfirm(t)}
               >
-                {t('Submit')}
+                {t('Sync Server')}
               </Button>
             </Tooltip>
           </div>
@@ -1317,33 +679,8 @@ class UploadPDF extends BaseView {
 }
 
 const mapStateToProps = (state) => {
-  const { combos } = state;
-  let IrUser = [];
-  let LocationType = [];
-  let SubTradeChannelType = [];
-  let SalesOrganization = [];
-  let SalesTerritory = [];
-  let LocalSubtradeChannel = [];
-  let LocationCluster = [];
-  if (combos) {
-    IrUser = combos.IrUser || [];
-    LocationType = combos.LocationType || [];
-    SubTradeChannelType = combos.SubTradeChannelType || [];
-    SalesOrganization = combos.SalesOrganization || [];
-    SalesTerritory = combos.SalesTerritory || [];
-    LocalSubtradeChannel = combos.LocalSubtradeChannel || [];
-    LocationCluster = combos.LocationCluster || [];
-  }
   return {
-    IrUser,
-    LocationType,
-    SubTradeChannelType,
-    SalesOrganization,
-    SalesTerritory,
-    LocalSubtradeChannel,
-    LocationCluster,
   };
 };
 
-const enhance = compose(connect(mapStateToProps));
-export default enhance(Layout(UploadPDF));
+export default withTranslation()(connect(mapStateToProps)(Layout(UploadPDF)));
