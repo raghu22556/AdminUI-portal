@@ -22,6 +22,7 @@ import Navbar from '../components/Navbar';
 import Layout from '../components/Layout';
 import PasswordUpdate from '../pages/dashboard/UserProfile/PasswordUpdate';
 import UserProfileUpdate from '../pages/dashboard/UserProfile/UserProfileUpdate';
+import UploadPDF from '../pages/dashboard/UploadPDF';
 
 // const pages = {
 //   LookUpType: <LookUpType/>
@@ -33,6 +34,7 @@ const AllRoutes = [
   { name: 'Scree3', path: '/screen3', element: <Screen3 />, private: false },
   { name: 'Forms', path: '/forms', element: <Forms />, private: false },
   { name: 'password', path: '/password', element: <PasswordUpdate />, private: false },
+  { name: 'uploadPDF', path: '/uploadPDF', element: <UploadPDF />, private: false },
   {
     name: 'userProfileUpdate',
     path: '/userProfileUpdate',
@@ -127,9 +129,9 @@ if (localStorage.getItem('menu') !== null) {
         </section>
 
         {/* Navbar & Child */}
-        <section className="overflow-auto h-full w-full bg-[rgb(247,245,250)]">
+        <section className="overflow-auto h-full w-full bg-[rgb(247,245,250)]" >
           <Navbar handleToggle={handleToggle} drawer={drawer} />
-          <div className="p-4 h-auto">
+          <div className="p-4 h-auto" > 
             <DynamicBaseView {...tableName} />
           </div>
         </section>

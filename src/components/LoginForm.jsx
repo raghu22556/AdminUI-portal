@@ -77,6 +77,12 @@ const LoginForm = ({ setIsLoading }) => {
     }
   }, [login_result]);
 
+  useEffect(() => {
+    return () => {
+        dispatch(ReduxHelper.Actions.resetLogin());
+    }
+}, [])
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
