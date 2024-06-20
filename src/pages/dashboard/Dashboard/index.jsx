@@ -15,7 +15,7 @@ const Dashboard = (props) => {
   const { t } = props;
   return (
     <div>
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 overflow-hidden">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 overflow-hidden dark:bg-gray-900">
         <div className="flex flex-col lg:flex-row justify-between mt-4">
           <Typography className="text-xl font-poppins text-black font-bold text-center  lg:text-left mb-4 lg:mb-0">
             {t('Dashboard')}
