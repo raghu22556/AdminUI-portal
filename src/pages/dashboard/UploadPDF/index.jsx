@@ -230,7 +230,7 @@ class UploadPDF extends BaseView {
       } else {
         this.setState({ showLoader: true });
         let params = {
-          action: 'AddAllBatchFiles',
+          action: 'AddAllFiles',
           fileJson: JSON.stringify(fileJson),
         };
         API.triggerPost('DataUploader', params)
