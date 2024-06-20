@@ -46,7 +46,6 @@ const Navbar = (props) => {
   const initialTheme = localStorage.getItem('themename') || 'light';
   const initialThemeOption = themeOptions.find((option) => option.value === initialTheme);
   const [themeSelectedOption, setthemeSelectedOption] = useState(initialThemeOption);
-
   const [userProfile, setUserProfile] = useState({});
   const [theme, setTheme] = useState(initialTheme);
   const [currentTheme, setCurrentTheme] = useState(
@@ -58,7 +57,8 @@ const Navbar = (props) => {
   }
 
   const login_result = useSelector((state) => state?.login);
-
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
+  const [isButtonVisible, setIsButtonVisible] = useState(true);
   const { handleToggle, handleOpenToggle, drawer, t, handleUserProfileSetting } = props;
   useEffect(() => {
     const selectedTheme = theme === 'dark' ? darkTheme : whiteTheme;
@@ -178,221 +178,372 @@ const Navbar = (props) => {
   };
 
   return (
-    <div className="p-4 bg-white sticky z-40 border-b top-0 left-0 shadow-sm flex items-center">
-      {/* <HiOutlineMenu
-        onClick={handleToggle}
-        className="text-color text-xl cursor-pointer"
-      /> */}
+    <>
+      {/* navbar */}
+      <div className="p-4 bg-white sticky z-40 border-b top-0 left-0 shadow-sm flex items-center">
+        {!drawer ? (
+          <img
+            src="/close.svg"
+            alt=""
+            onClick={handleToggle}
+            className="text-color text-xl cursor-pointer w-[40px]"
+          />
+        ) : (
+          <img
+            src="/open.svg"
+            alt=""
+            className="text-color text-xl cursor-pointer w-[40px]"
+            onClick={handleToggle}
+          />
+        )}
 
-      {!drawer ? (
-        <img
-          src="/close.svg"
-          alt=""
-          onClick={handleToggle}
-          className="text-color text-xl cursor-pointer w-[30px]"
-        />
-      ) : (
-        <img
-          src="/open.svg"
-          alt=""
-          className="text-color text-xl cursor-pointer w-[30px]"
-          onClick={handleToggle}
-        />
-      )}
-
-      <div className={`sm:ml-5 ml-2.5 ${drawer ? 'hidden md:flex' : 'flex md:hidden'}`}>
-        <Typography>MaidenCube</Typography>
-      </div>
-
-      <section className="flex ml-auto gap-2 sm:gap-4 md:gap-5 ">
-        <div className="relative mr-7 ">
-          <div
-            className="bg-[#F7F9FB] p-2 px-5 border border-lightgray rounded-md cursor-pointer flex items-center justify-between"
-            style={{ width: '200px' }}
-            onClick={() => setIsOpen(!isOpen)}
+        <div className={`sm:ml-5 ml-2.5 ${drawer ? 'hidden md:flex' : 'flex md:hidden'}`}>
+          <Typography
+            style={{
+              fontWeight: 800,
+              fontSize: '26px',
+              width: '100%',
+              lineHeight: '38.78px',
+              letterSpacing: '2%',
+              color: '#056EE9',
+            }}
           >
-            <img src="/Projects.svg" alt="" style={{ width: '16px' }} />{' '}
-            <span style={{ fontSize: '14px' }}>Project Name</span>
-            {isOpen ? <BsChevronUp className="ml-2" /> : <BsChevronDown className="ml-2" />}
-          </div>
-          {isOpen && (
+            MaidenCube
+          </Typography>
+        </div>
+
+        <section className="flex ml-auto gap-2 sm:gap-4 md:gap-5 ">
+          <div className="relative mr-7 hidden md:flex">
             <div
-              className="absolute bg-white border border-lightgray rounded-md mt-2 z-10"
-              style={{ marginTop: '10px' }}
+              className="bg-[#F7F9FB] p-2 px-5 border border-lightgray rounded-md cursor-pointer flex items-center justify-between"
+              style={{ width: '200px' }}
+              onClick={() => setIsOpen(!isOpen)}
             >
-              {projects.map((item) => (
-                <div
-                  key={item.ProjectId}
-                  className="flex items-center p-2 cursor-pointer hover:bg-gray-200 w-[200px] mt-2"
-                  onClick={() => onProjectChange(item)}
-                >
-                  <p style={{ fontSize: '14px' }}>{item.ProjectName}</p>
-                </div>
-              ))}
+              <img src="/Projects.svg" alt="" style={{ width: '16px' }} />{' '}
+              <span style={{ fontSize: '14px' }}>Project Name</span>
+              {isOpen ? <BsChevronUp className="ml-2" /> : <BsChevronDown className="ml-2" />}
             </div>
-          )}
-        </div>
-
-        {/* <div className="icon-bg text-color text-lg sm:text-xl  w-8 h-8 md:w-9 md:h-9 flex justify-center items-center rounded-full p-1.5 cursor-pointer">
-          <BsChatDots />
-        </div> */}
-        {/* Profile */}
-
-        <section
-          className="flex items-center gap-1.5 sm:gap-3 ml-2 mr-6"
-          style={{ marginTop: '-3px' }}
-        >
-          <div className="icon-bg text-color text-lg sm:text-xl  w-9 h-9 md:w-9 md:h-9 flex justify-center items-center rounded-full p-1.5 cursor-pointer">
-            <img
-              className="h-5 w-5"
-              src="/Notifications.svg"
-              alt="icon"
-              onClick={handleNotification}
-            />
-            <Toaster />
-          </div>
-        </section>
-
-        <FullScreen />
-
-        <div className="ml-auto relative " style={{ marginRight: '-50px' }}>
-          <div
-            className="flex items-center gap-2  p-2 px-5  rounded-md cursor-pointer"
-            style={{ width: '100px' }}
-            onClick={() => setthemeOpen(!themeOpen)}
-          >
-            <img src={themeSelectedOption.icon} alt="" className="w-5 font-bold" />{' '}
-          </div>
-          {themeOpen && (
-            <ClickAwayListener onClickAway={() => setthemeOpen(false)}>
-              <div
-                className="absolute bg-white  rounded-md mt-2 z-10 md:mt-4 w-40 border border-gray-300"
-                style={{ marginTop: '10px', width: '130px' }}
-              >
-                {themeOptions.map((option) => (
-                  <div
-                    key={option.value}
-                    className={`flex items-center p-2 cursor-pointer  hover:bg-gray-200 transition-all duration-200 ease-in-out ${themeSelectedOption.value === option.value
-                        ? 'bg-gray-200 text-black bold'
-                        : ''
-                      }`}
-                    onClick={() => themeSelect(option)}
-                    style={{ borderRadius: '4px', margin: '10px' }}
-                  >
-                    <img src={option.icon} alt="" style={{ width: '16px' }} />{' '}
-                    <span className="text-sm ml-3 ">{option.label}</span>
-                    {themeSelectedOption.value === option.value && (
-                      <FaCheck className="ml-auto text-color text-blue-700" />
-                    )}
-                  </div>
-                ))}
-              </div>
-            </ClickAwayListener>
-          )}
-        </div>
-
-        <div className="ml-auto relative " style={{ marginRight: '-45px' }}>
-          <div
-            className="flex items-center gap-2  p-2 px-5  rounded-md cursor-pointer"
-            style={{ width: '170px' }}
-            onClick={() => setlangOpen(!langOpen)}
-          >
-            <img src={languageSelectedOption.icon} alt="" style={{ width: '18px' }} />{' '}
-            <span style={{ fontSize: '14px' }}>{languageSelectedOption.label}</span>
-          </div>
-          {langOpen && (
-            <ClickAwayListener onClickAway={() => setlangOpen(false)}>
+            {isOpen && (
               <div
                 className="absolute bg-white border border-lightgray rounded-md mt-2 z-10"
-                style={{ marginTop: '10px', width: '170px' }}
+                style={{ marginTop: '40px' }}
               >
-                {languageOptions.map((option) => (
+                {projects.map((item) => (
                   <div
-                    key={option.value}
-                    className={`flex items-center p-2 cursor-pointer  hover:bg-gray-200 transition-all duration-200 ease-in-out ${languageSelectedOption.value === option.value
-                        ? 'bg-gray-200 text-black bold'
-                        : ''
-                      }`}
-                    onClick={() => languageSelect(option)}
-                    style={{ borderRadius: '4px', margin: '10px' }}
+                    key={item.ProjectId}
+                    className="flex items-center p-2 cursor-pointer hover:bg-gray-200 w-[200px] mt-2"
+                    onClick={() => onProjectChange(item)}
                   >
-                    <img src={option.icon} alt="" style={{ width: '16px' }} />{' '}
-                    <span className="text-sm ml-3">{option.label}</span>
-                    {languageSelectedOption.value === option.value && (
-                      <FaCheck className="ml-auto text-color text-blue-700" />
-                    )}
+                    <p style={{ fontSize: '14px' }}>{item.ProjectName}</p>
                   </div>
                 ))}
               </div>
-            </ClickAwayListener>
-          )}
-        </div>
-        <div>
-          {userProfile.ProfileImage || (
-            <img
-              onClick={showProfile}
-              alt="Profile Image"
-              src="/noProfilePic.png"
-              className="relative inline-block object-cover object-center w-9 h-9 rounded-full cursor-pointer"
-              data-popover-target="profile-menu"
-            />
-          )}
+            )}
+          </div>
 
-          {profile && (
-            <ul
-              role="menu"
-              data-popover="profile-menu"
-              data-popover-placement="bottom"
-              className="absolute mx-[-160px] my-5 z-10 flex min-w-[200px] flex-col gap-2 overflow-auto rounded-md border border-blue-gray-50 bg-white p-3 font-sans text-sm font-normal text-blue-gray-500 shadow-lg shadow-blue-gray-500/10 focus:outline-none"
+          <section
+            className="hidden md:flex items-center gap-1.5 sm:gap-3 ml-2"
+            style={{ marginTop: '-3px' }}
+          >
+            <div className="icon-bg text-color text-lg sm:text-xl w-9 h-9 md:w-9 md:h-9 flex justify-center items-center rounded-full p-1.5 cursor-pointer">
+              <img
+                className="h-5 w-5"
+                src="/Notifications.svg"
+                alt="icon"
+                onClick={handleNotification}
+              />
+              <Toaster />
+            </div>
+          </section>
+
+          <div className="hidden md:flex items-center gap-1.5 sm:gap-3 ml-2 ">
+            <FullScreen />
+          </div>
+
+          <div className="ml-auto relative hidden md:flex" style={{ marginRight: '-50px' }}>
+            <div
+              className="flex items-center gap-2  p-2 px-5  rounded-md cursor-pointer"
+              style={{ width: '100px' }}
+              onClick={() => setthemeOpen(!themeOpen)}
             >
-              <div className="flex w-full cursor-pointer select-none items-center gap-2 rounded-md px-3 pt-[9px] pb-2 pl-0 text-start leading-tight outline-none transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
-                {userProfile.ProfileImage || (
-                  <img
-                    alt=""
-                    src="/noProfilePic.png"
-                    className="relative inline-block object-cover object-center w-9 h-9 rounded-full cursor-pointer"
-                    data-popover-target="profile-menu"
-                  />
-                )}
-
-                <div className="text-sm hidden md:flex flex-col">
-                  <span className="text-color font-semibold">{userProfile.Name || 'Admin'}</span>
-                  <span className="text-gray-500 text-xs">
-                    {userProfile.Email || localStorage.getItem('email')}
-                  </span>
+              <img src={themeSelectedOption.icon} alt="" className="w-5 font-bold" />{' '}
+            </div>
+            {themeOpen && (
+              <ClickAwayListener onClickAway={() => setthemeOpen(false)}>
+                <div
+                  className="absolute bg-white  rounded-md mt-2 z-10 md:mt-5 w-40 border border-gray-300"
+                  style={{ marginTop: '40px', width: '130px' }}
+                >
+                  {themeOptions.map((option) => (
+                    <div
+                      key={option.value}
+                      className={`flex items-center p-2 cursor-pointer  hover:bg-gray-200 transition-all duration-200 ease-in-out ${
+                        themeSelectedOption.value === option.value
+                          ? 'bg-gray-200 text-black bold'
+                          : ''
+                      }`}
+                      onClick={() => themeSelect(option)}
+                      style={{ borderRadius: '4px', margin: '10px' }}
+                    >
+                      <img src={option.icon} alt="" style={{ width: '16px' }} />{' '}
+                      <span className="text-sm ml-3 ">{option.label}</span>
+                      {themeSelectedOption.value === option.value && (
+                        <FaCheck className="ml-auto text-color text-blue-700" />
+                      )}
+                    </div>
+                  ))}
                 </div>
+              </ClickAwayListener>
+            )}
+          </div>
+
+          <div className="ml-auto relative hidden md:flex" style={{ marginRight: '-45px' }}>
+            <div
+              className="flex items-center gap-2  p-2 px-5  rounded-md cursor-pointer"
+              style={{ width: '170px' }}
+              onClick={() => setlangOpen(!langOpen)}
+            >
+              <img src={languageSelectedOption.icon} alt="" style={{ width: '18px' }} />{' '}
+              <span style={{ fontSize: '14px' }}>{languageSelectedOption.label}</span>
+            </div>
+            {langOpen && (
+              <ClickAwayListener onClickAway={() => setlangOpen(false)}>
+                <div
+                  className="absolute bg-white border border-lightgray rounded-md mt-2 z-10"
+                  style={{ marginTop: '40px', width: '170px' }}
+                >
+                  {languageOptions.map((option) => (
+                    <div
+                      key={option.value}
+                      className={`flex items-center p-2 cursor-pointer  hover:bg-gray-200 transition-all duration-200 ease-in-out ${
+                        languageSelectedOption.value === option.value
+                          ? 'bg-gray-200 text-black bold'
+                          : ''
+                      }`}
+                      onClick={() => languageSelect(option)}
+                      style={{ borderRadius: '4px', margin: '10px' }}
+                    >
+                      <img src={option.icon} alt="" style={{ width: '16px' }} />{' '}
+                      <span className="text-sm ml-3">{option.label}</span>
+                      {languageSelectedOption.value === option.value && (
+                        <FaCheck className="ml-auto text-color text-blue-700" />
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </ClickAwayListener>
+            )}
+          </div>
+          <div>
+            {userProfile.ProfileImage || (
+              <img
+                onClick={showProfile}
+                alt="Profile Image"
+                src="/noProfilePic.png"
+                className="relative inline-block object-cover object-center w-9 h-9 rounded-full cursor-pointer"
+                data-popover-target="profile-menu"
+              />
+            )}
+
+            {profile && (
+              <ul
+                role="menu"
+                data-popover="profile-menu"
+                data-popover-placement="bottom"
+                className="absolute mx-[-160px] my-5 flex min-w-[200px] flex-col gap-2 overflow-auto rounded-md border border-blue-gray-50 bg-white p-3 font-sans text-sm font-normal text-blue-gray-500 shadow-lg shadow-blue-gray-500/10 focus:outline-none"
+              >
+                <div className="flex w-full cursor-pointer select-none items-center gap-2 rounded-md px-3 pt-[9px] pb-2 pl-0 text-start leading-tight outline-none transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900">
+                  {userProfile.ProfileImage || (
+                    <img
+                      alt=""
+                      src="/noProfilePic.png"
+                      className="relative inline-block object-cover object-center w-9 h-9 rounded-full cursor-pointer"
+                      data-popover-target="profile-menu"
+                    />
+                  )}
+
+                  <div className="text-sm hidden md:flex flex-col">
+                    <span className="text-color font-semibold">{userProfile.Name || 'Admin'}</span>
+                    <span className="text-gray-500 text-xs">
+                      {userProfile.Email || localStorage.getItem('email')}
+                    </span>
+                  </div>
+                </div>
+
+                <button
+                  onClick={userProfileSetting}
+                  role="menuitem"
+                  className="flex w-full cursor-pointer select-none items-center gap-2 rounded-md px-3 pt-[9px] pb-2 pl-1 text-start leading-tight outline-none transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
+                >
+                  <p className="block font-sans text-sm antialiased font-medium leading-normal text-inherit">
+                    My Profile
+                  </p>
+                </button>
+                <FeedbackModal />
+
+                <hr className="my-2 border-blue-gray-50" role="menuitem" />
+                <button
+                  onClick={() => {
+                    localStorage.clear();
+                    navigate('/');
+                    // toast.success("LogOut Success!");
+                  }}
+                  role="menuitem"
+                  className="flex w-full cursor-pointer select-none items-center gap-2 pl-1 rounded-md px-3 pt-[9px] pb-2 text-start leading-tight outline-none transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
+                >
+                  <p className="block font-sans text-sm antialiased font-medium leading-normal text-inherit">
+                    Sign Out
+                  </p>
+                </button>
+              </ul>
+            )}
+          </div>
+        </section>
+      </div>
+      {/* subheader */}
+      <div
+        className="subheader"
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          marginBottom: '20px',
+          width: '100%',
+          padding: '0px 10px',
+        }}
+      >
+        <div
+          className={`sm:ml-5 ml-2.5 ${drawer ? 'hidden md:flex' : 'flex md:hidden'}`}
+          style={{
+            backgroundColor: '#fff',
+            borderBottomRightRadius: '10px',
+            borderBottomLeftRadius: '10px',
+            position: 'fixed',
+            zIndex: '1',
+            boxShadow: '10px 11px 28px -16px rgba(0,0,0,0.40',
+          }}
+        >
+          <div className="flex items-center md:mt-0">
+            <section
+              className="md:hidden flex items-center gap-1.5 sm:gap-3 ml-2 mr-6"
+              style={{ marginTop: '-3px' }}
+            >
+              <div className="icon-bg text-color text-lg sm:text-xl  w-9 h-9 md:w-9 md:h-9 flex justify-center items-center rounded-full p-1.5 cursor-pointer">
+                <img
+                  className="h-5 w-5"
+                  src="/Notifications.svg"
+                  alt="icon"
+                  onClick={handleNotification}
+                />
+                <Toaster />
               </div>
+            </section>
 
-              <button
-                onClick={userProfileSetting}
-                role="menuitem"
-                className="flex w-full cursor-pointer select-none items-center gap-2 rounded-md px-3 pt-[9px] pb-2 pl-1 text-start leading-tight outline-none transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
+            <div
+              className="ml-auto relative md:hidden  gap-1.5 sm:gap-3"
+              style={{ marginRight: '-50px' }}
+            >
+              <div
+                className="flex items-center gap-2  p-2 px-5  rounded-md cursor-pointer"
+                style={{ width: '100px' }}
+                onClick={() => setthemeOpen(!themeOpen)}
               >
-                <p className="block font-sans text-sm antialiased font-medium leading-normal text-inherit">
-                  My Profile
-                </p>
-              </button>
-              <FeedbackModal />
+                <img src={themeSelectedOption.icon} alt="" className="w-5 font-bold" />{' '}
+              </div>
+              {themeOpen && (
+                <ClickAwayListener onClickAway={() => setthemeOpen(false)}>
+                  <div
+                    className="absolute bg-white  rounded-md mt-2 z-10 md:mt-4 w-40 border border-gray-300"
+                    style={{ marginTop: '10px', width: '130px' }}
+                  >
+                    {themeOptions.map((option) => (
+                      <div
+                        key={option.value}
+                        className={`flex items-center p-2 cursor-pointer  hover:bg-gray-200 transition-all duration-200 ease-in-out ${
+                          themeSelectedOption.value === option.value
+                            ? 'bg-gray-200 text-black bold'
+                            : ''
+                        }`}
+                        onClick={() => themeSelect(option)}
+                        style={{ borderRadius: '4px', margin: '10px' }}
+                      >
+                        <img src={option.icon} alt="" style={{ width: '16px' }} />{' '}
+                        <span className="text-sm ml-3 ">{option.label}</span>
+                        {themeSelectedOption.value === option.value && (
+                          <FaCheck className="ml-auto text-color text-blue-700" />
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </ClickAwayListener>
+              )}
+            </div>
 
-              <hr className="my-2 border-blue-gray-50" role="menuitem" />
-              <button
-                onClick={() => {
-                  localStorage.clear();
-                  navigate('/');
-                  // toast.success("LogOut Success!");
-                }}
-                role="menuitem"
-                className="flex w-full cursor-pointer select-none items-center gap-2 pl-1 rounded-md px-3 pt-[9px] pb-2 text-start leading-tight outline-none transition-all hover:bg-blue-gray-50 hover:bg-opacity-80 hover:text-blue-gray-900 focus:bg-blue-gray-50 focus:bg-opacity-80 focus:text-blue-gray-900 active:bg-blue-gray-50 active:bg-opacity-80 active:text-blue-gray-900"
+            <div className="ml-auto relative md:hidden" style={{ marginRight: '-45px' }}>
+              <div
+                className="flex items-center gap-2  p-2 px-5  rounded-md cursor-pointer"
+                style={{ width: '170px' }}
+                onClick={() => setlangOpen(!langOpen)}
               >
-                <p className="block font-sans text-sm antialiased font-medium leading-normal text-inherit">
-                  Sign Out
-                </p>
-              </button>
-            </ul>
-          )}
+                <img src={languageSelectedOption.icon} alt="" style={{ width: '18px' }} />{' '}
+                <span style={{ fontSize: '14px' }}>{languageSelectedOption.label}</span>
+              </div>
+              {langOpen && (
+                <ClickAwayListener onClickAway={() => setlangOpen(false)}>
+                  <div
+                    className="absolute bg-white border border-lightgray rounded-md mt-2 z-10"
+                    style={{ marginTop: '10px', width: '170px' }}
+                  >
+                    {languageOptions.map((option) => (
+                      <div
+                        key={option.value}
+                        className={`flex items-center p-2 cursor-pointer  hover:bg-gray-200 transition-all duration-200 ease-in-out ${
+                          languageSelectedOption.value === option.value
+                            ? 'bg-gray-200 text-black bold'
+                            : ''
+                        }`}
+                        onClick={() => languageSelect(option)}
+                        style={{ borderRadius: '4px', margin: '10px' }}
+                      >
+                        <img src={option.icon} alt="" style={{ width: '16px' }} />{' '}
+                        <span className="text-sm ml-3">{option.label}</span>
+                        {languageSelectedOption.value === option.value && (
+                          <FaCheck className="ml-auto text-color text-blue-700" />
+                        )}
+                      </div>
+                    ))}
+                  </div>
+                </ClickAwayListener>
+              )}
+            </div>
+
+            <div className="relative md:hidden">
+              <div
+                className="bg-[#F7F9FB] p-2 px-5 border border-lightgray rounded-md cursor-pointer flex items-center justify-between"
+                style={{ width: '150px' }}
+                onClick={() => setIsOpen(!isOpen)}
+              >
+                <img src="/Projects.svg" alt="" style={{ width: '12px' }} />{' '}
+                <span style={{ fontSize: '10px' }}>Project Name</span>
+                {isOpen ? <BsChevronUp className="ml-2" /> : <BsChevronDown className="ml-2" />}
+              </div>
+              {isOpen && (
+                <div className="absolute bg-white border border-lightgray rounded-md mt-2">
+                  {projects.map((item) => (
+                    <div
+                      key={item.ProjectId}
+                      className="flex items-center p-2 cursor-pointer hover:bg-gray-200 w-[150px] mt-2"
+                      onClick={() => onProjectChange(item)}
+                    >
+                      <p style={{ fontSize: '10px' }}>{item.ProjectName}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          </div>
         </div>
-      </section>
-    </div>
+      </div>
+    </>
   );
 };
 
