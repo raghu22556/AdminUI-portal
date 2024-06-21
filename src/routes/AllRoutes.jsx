@@ -23,6 +23,7 @@ import Layout from '../components/Layout';
 import PasswordUpdate from '../pages/dashboard/UserProfile/PasswordUpdate';
 import UserProfileUpdate from '../pages/dashboard/UserProfile/UserProfileUpdate';
 import UploadPDF from '../pages/dashboard/UploadPDF';
+import ChatBox from '../components/Chat';
 
 // const pages = {
 //   LookUpType: <LookUpType/>
@@ -111,17 +112,18 @@ if (localStorage.getItem('menu') !== null) {
     const [drawer, setDrawer] = useState(false);
     const handleToggle = () => setDrawer(!drawer);
     return (
-      <div className="flex relative h-screen overflow-hidden">
+      <div className="flex relative h-screen overflow-hidden dark:bg-gray-900">
         {/* Sidebar */}
         <section
           id="sidebar"
           style={{
-            width: '20%',
+            width: '23%',
+            // borderRight:'2px solid red'
           }}
           // className={`w-80 z-50 lg:w-80 overflow-y-auto md:w-96 shadow border-gray-200 bg-white p-2 md:static absolute h-full transition-all duration-50 ${
           //   drawer ? "md:hidden left-0" : "-left-full"
           // }`}
-          className={`w-60 z-50 lg:w-60 overflow-y-auto md:w-60  border-gray-200 bg-white p-2 md:static absolute h-full transition-all duration-50 ${
+          className={`w-60 z-50 lg:w-60 overflow-y-auto md:w-60  border-gray-200 bg-white p-2 md:static absolute h-full transition-all duration-50 dark:bg-gray-900 ${
             drawer ? 'md:hidden left-0' : '-left-full'
           }`}
         >
@@ -129,9 +131,9 @@ if (localStorage.getItem('menu') !== null) {
         </section>
 
         {/* Navbar & Child */}
-        <section className="overflow-auto h-full w-full bg-[rgb(247,245,250)]" >
+        <section className="overflow-auto h-full w-full bg-[rgb(247,245,250)]">
           <Navbar handleToggle={handleToggle} drawer={drawer} />
-          <div className="p-4 h-auto" > 
+          <div className="p-4 h-auto">
             <DynamicBaseView {...tableName} />
           </div>
         </section>
@@ -146,14 +148,18 @@ if (localStorage.getItem('menu') !== null) {
     if (menuItem.children) {
       AllRoutes.push(
         ...menuItem.children.map((childItem) => {
+          let element;
+          if (masterConfig[childItem.cardText]) {
+            element = <DynamicComponent tableName={childItem.tableName} />;
+          } else if (childItem.cardText === 'Chat') {
+            element = <ChatBox />;
+          } else {
+            element = <DynamicComponent tableName={childItem.tableName} />;
+          }
           return {
             name: menuItem.displayText,
             path: '/' + menuItem.url + '/' + childItem.url,
-            element: masterConfig[childItem.tableName] ? (
-              <DynamicComponent tableName={childItem.tableName} />
-            ) : (
-              () => () => <div>Welcome to Demo</div>
-            ),
+            element,
             private: false,
           };
         }),

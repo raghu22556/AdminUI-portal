@@ -92,3 +92,7 @@
 .fas.fa-chevron-down.open {
   transform: rotate(180deg);
 }
+
+.customStyleForChatBox button img{
+  margin-left: 19px;
+}
