@@ -3,7 +3,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App.jsx';
 import './index.css';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import { ThemeProvider } from '@material-tailwind/react';
 import theme from './utils/theme.js';
 import { MaterialTailwindControllerProvider } from './context/index.jsx';
@@ -241,13 +241,13 @@ import store from './store/index';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <I18nextProvider i18n={i18n}>
     <Provider store={store}>
-      <BrowserRouter>
+      <HashRouter>
         <ThemeProvider value={theme}>
           <MaterialTailwindControllerProvider>
             <App />
           </MaterialTailwindControllerProvider>
         </ThemeProvider>
-      </BrowserRouter>
+      </HashRouter>
     </Provider>
   </I18nextProvider>,
 );
