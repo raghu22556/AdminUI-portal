@@ -23,7 +23,7 @@ import Layout from '../components/Layout';
 import PasswordUpdate from '../pages/dashboard/UserProfile/PasswordUpdate';
 import UserProfileUpdate from '../pages/dashboard/UserProfile/UserProfileUpdate';
 import UploadPDF from '../pages/dashboard/UploadPDF';
-import ChatBox from '../components/Chat';
+import Chat from '../components/Chat';
 
 // const pages = {
 //   LookUpType: <LookUpType/>
@@ -107,6 +107,10 @@ const AllRoutes = [
   },
 ];
 
+const Components = {
+  Chat
+};
+
 if (localStorage.getItem('menu') !== null) {
   const DynamicComponent = (tableName) => {
     const [drawer, setDrawer] = useState(false);
@@ -151,8 +155,9 @@ if (localStorage.getItem('menu') !== null) {
           let element;
           if (masterConfig[childItem.cardText]) {
             element = <DynamicComponent tableName={childItem.tableName} />;
-          } else if (childItem.cardText === 'Chat') {
-            element = <ChatBox />;
+          } else if (Components[childItem.url]) {
+            let DComponent = Components[childItem.url];
+            element = <DComponent />;
           } else {
             element = <DynamicComponent tableName={childItem.tableName} />;
           }
