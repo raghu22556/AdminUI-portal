@@ -159,7 +159,7 @@ if (localStorage.getItem('menu') !== null) {
             let DComponent = Components[childItem.url];
             element = <DComponent />;
           } else {
-            element = <DynamicComponent tableName={childItem.tableName} />;
+            element = <div>Need to Implement</div>;
           }
           return {
             name: menuItem.displayText,
