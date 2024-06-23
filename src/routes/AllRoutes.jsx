@@ -153,7 +153,7 @@ if (localStorage.getItem('menu') !== null) {
       AllRoutes.push(
         ...menuItem.children.map((childItem) => {
           let element;
-          if (masterConfig[childItem.cardText]) {
+          if (masterConfig[childItem.tableName]) {
             element = <DynamicComponent tableName={childItem.tableName} />;
           } else if (Components[childItem.url]) {
             let DComponent = Components[childItem.url];
