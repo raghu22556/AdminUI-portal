@@ -1,7 +1,7 @@
 import React from 'react';
 import { Chat, addResponseMessage, addLinkSnippet, addUserMessage } from 'react-chat-popup';
-import Layout from './Layout';
 import './component.css'
+import API from "../store/requests";
 
 class ChatBox extends React.Component {
   componentDidMount() {
@@ -9,8 +9,21 @@ class ChatBox extends React.Component {
   }
 
   handleNewUserMessage = newMessage => {
-    console.log(`New message incomig! ${newMessage}`);
-    // Now send the message throught the backend API
+    console.debug(`New message incomig! ${newMessage}`);
+    let params = {
+      question: newMessage,
+      action: 'GetReply',
+    };
+    API.triggerPost('DataUploader', params)
+    .then(response => {
+      if (response.status === 200 && response.data.success) {
+        addResponseMessage(response.data.result);
+      }
+    })
+    .catch(err => {
+      this.setState({ showLoader: false });
+      me.showModal(err.message, 'error');
+    });
   };
 
   render() {
@@ -21,5 +34,5 @@ class ChatBox extends React.Component {
     );
   }
 }
-
-export default Layout(ChatBox);
+export default ChatBox;
+//export default Layout(ChatBox);

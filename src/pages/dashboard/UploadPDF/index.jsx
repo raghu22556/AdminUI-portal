@@ -11,6 +11,53 @@ import { BlobServiceClient } from '@azure/storage-blob';
 import Progress from 'antd/lib/progress';
 import { intersectionWith, isEqual } from 'lodash';
 import Layout from '../../../components/Layout';
+import { confirmable, createConfirmation } from 'react-confirm';
+
+const backgroundColor = '#c31d1d';// getThemeColor()
+class Confirmation extends React.Component {
+  render() {
+    const {
+      proceedLabel,
+      cancelLabel,
+      title,
+      confirmation,
+      show,
+      proceed,
+      enableEscape = true,
+    } = this.props;
+    return (
+      <div className="static-modal">
+        <Modal
+          title="Shelves Info"
+          visible={show}
+          onOk={() => proceed(true)}
+          onCancel={() => proceed(false)}
+          {...{
+            okText: 'Yes',
+            cancelText: 'No',
+            okButtonProps: {
+              style: { backgroundColor: backgroundColor, border: `1px ${backgroundColor} solid` },
+            },
+            cancelButtonProps: {
+              style: { border: `1px ${backgroundColor} solid`, color: backgroundColor },
+            },
+          }}
+        >
+          {confirmation}
+        </Modal>
+      </div>
+    );
+  }
+}
+
+const awaitConfirm = (confirmation, proceedLabel = 'OK', cancelLabel = 'cancel', options = {}) => {
+  return createConfirmation(confirmable(Confirmation))({
+    confirmation,
+    proceedLabel,
+    cancelLabel,
+    ...options,
+  });
+}
 
 const { confirm } = Modal;
 const { Panel } = Collapse;
@@ -25,7 +72,6 @@ class UploadPDF extends BaseView {
       batchData: [],
       previewDialog: false,
       previewURL: '',
-      showFormatMsg: false,
       showLoader: true,
       fileToUpload: {},
       uploadProgress: {},
@@ -50,16 +96,15 @@ class UploadPDF extends BaseView {
     API.triggerPost('DataUploader', params)
       .then(response => {
         if (response.status === 200 && response.data.success) {
+          let result = response.data.result;
           me.setState({
-            containerName: response.data.containerName,
-            blockMainDirectoryName: response.data.blockMainDirectoryName,
-            storageAccountName: response.data.storageAccountName,
-            sasToken: response.data.sasToken.replace('?', ''),
+            containerName: result.containerName,
+            blockMainDirectoryName: result.blockMainDirectoryName,
+            storageAccountName: result.storageAccountName,
+            sasToken: result.sasToken.replace('?', ''),
+          }, () => {
+            me.checkToBeUploaded();
           });
-          const { getUploadedFiles } = this.state || {};
-          if (getUploadedFiles) {
-            this.checkToBeUploaded();
-          }
         }
       })
       .catch(err => {
@@ -69,6 +114,24 @@ class UploadPDF extends BaseView {
 
   componentDidMount() {
     this.loadAzureStorageConfig();
+    //this.loadFiles();
+  }
+
+  loadFiles() {
+    let me = this;
+    let params = {
+      action: 'LoadFiles',
+    };
+    API.triggerPost('DataUploader', params)
+      .then(response => {
+        if (response.status === 200 && response.data.success) {
+          let files = response.data.result.map(item => { return { name: item.FileName } });
+          me.setState({ showLoader: false, files })
+        }
+      })
+      .catch(err => {
+        me.showModal(err.message, 'error');
+      });
   }
 
   submitBatch = t => {
@@ -85,7 +148,7 @@ class UploadPDF extends BaseView {
 
     let params = {
       blobFolder,
-      action: 'SyncData',
+      action: 'SyncFiles',
     };
     this.setState({ showLoader: true });
     API.triggerPost('DataUploader', params)
@@ -231,7 +294,7 @@ class UploadPDF extends BaseView {
         this.setState({ showLoader: true });
         let params = {
           action: 'AddAllFiles',
-          fileJson: JSON.stringify(fileJson),
+          files: fileJson,
         };
         API.triggerPost('DataUploader', params)
           .then((response) => {
@@ -244,6 +307,7 @@ class UploadPDF extends BaseView {
             });
             if (response.status === 200 && response.data.success) {
               me.showModal(t('Uploaded Successfully'), 'success');
+              me.checkToBeUploaded();
             }
           })
           .catch((err) => {
@@ -277,7 +341,7 @@ class UploadPDF extends BaseView {
       .join('/');
 
     let params = {
-      action: 'DeleteBatchFile',
+      action: 'DeleteFile',
       PDffilepath: blobName,
     };
 
@@ -287,9 +351,9 @@ class UploadPDF extends BaseView {
           if (response.data.success) {
             me.deleteBlob(blobName);
             me.showModal(t('Deleted Successfully'), 'success');
-            const files = me.state.files.filter(file => file.name !== fileToDelete.name);
             delete me.state.fileToUpload[fileToDelete.name];
             delete me.state.uploadProgress[fileToDelete.name];
+            const files = me.state.files.filter(file => file.name !== fileToDelete.name);
             me.setState({ files, showLoader: false });
           } else {
             me.setState({ showLoader: false });
@@ -325,10 +389,7 @@ class UploadPDF extends BaseView {
     };
     await blockBlobClient.deleteIfExists(options);
 
-    const { getUploadedFiles } = this.state || {};
-    if (getUploadedFiles) {
-      this.checkToBeUploaded();
-    }
+    this.checkToBeUploaded();
   };
 
   checkToBeUploaded = async (t) => {
@@ -378,7 +439,7 @@ class UploadPDF extends BaseView {
         marker = response.continuationToken;
       }
     }
-    this.setState({ availableFiles });
+    this.setState({ availableFiles, showLoader: false, files:[] });
     return availableFiles;
   };
 
@@ -434,6 +495,7 @@ class UploadPDF extends BaseView {
       isFailed,
       isUploading,
       uploaded,
+      availableFiles,
     } = this.state;
     let { t } = this.props;
 
@@ -447,9 +509,8 @@ class UploadPDF extends BaseView {
           : isFailed
             ? false
             : uploaded;
-    const isSubmitDisabled = files.length === 0 ? true : !uploaded;
+    const isSubmitDisabled = availableFiles.length === 0;// ? true : !uploaded;
 
-    const { getUploadedFiles } = this.state || {};
     const panelProps = (text) => ({
       header: (
         <div className="header-collapse">
@@ -464,7 +525,7 @@ class UploadPDF extends BaseView {
     const defaultActiveKey = disableSelection ? '' : 1;
     return (
       <Spin className="upload-spinner" spinning={showLoader}>
-        {getUploadedFiles && (
+        {this.state.availableFiles.length > 0 && (
           <div className="row m-2 mt-4 mb-4 p-2">
             <div className="col-12">
               <Collapse
@@ -661,20 +722,9 @@ class UploadPDF extends BaseView {
       </Spin>
     );
   };
-
-  notify = () => {
-    let { t } = this.props;
-    return (
-      <div className="pdf-to-pog-msg">
-        <h1>{t('THANK YOU!')}</h1>
-        <span>{t('Once your format is ready you will be Notified')}</span>
-      </div>
-    );
-  };
-
+  
   render() {
-    const { showFormatMsg } = this.state;
-    return showFormatMsg ? this.notify() : this.getForm();
+    return this.getForm();
   }
 }
 

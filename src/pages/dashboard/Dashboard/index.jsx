@@ -7,6 +7,7 @@ import Cards from './Cards';
 import BarChart from './Charts/BarChart';
 import PieChart from './Charts/PieChart';
 import { withTranslation } from 'react-i18next';
+import Chat from '../../../components/Chat';
 
 // import "ag-grid-community/styles//ag-grid.css";
 // import "ag-grid-community/styles//ag-theme-quartz.css";
@@ -15,6 +16,7 @@ const Dashboard = (props) => {
   const { t } = props;
   return (
     <div>
+      <Chat/>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 overflow-hidden dark:bg-gray-900">
         <div className="flex flex-col lg:flex-row justify-between mt-4">
           <Typography className="text-xl font-poppins text-black font-bold text-center  lg:text-left mb-4 lg:mb-0">
