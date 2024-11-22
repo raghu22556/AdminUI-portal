@@ -3,16 +3,14 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      nodejs: 14
+      nodejs: 18
     commands:
       - echo Installing source NPM dependencies...
       - npm install
-      - ls -la
   build:
     commands:
       - echo Build started on `date`
       - npm run build
-      - ls -la
   post_build:
     commands:
       - echo Build completed on `date`
