@@ -10,7 +10,7 @@ phases:
   build:
     commands:
       - echo Build started on `date`
-      - npm run build
+      - node --max-old-space-size=4096 node_modules/vite/bin/vite.js build
   post_build:
     commands:
       - echo Build completed on `date`
@@ -22,3 +22,4 @@ artifacts:
   files:
     - '**/*'
   base-directory: dist
+ 
