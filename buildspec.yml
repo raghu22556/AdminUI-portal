@@ -11,9 +11,12 @@ phases:
     commands:
       - echo Build started on `date`
       - npm run build
+      - ls -la
   post_build:
     commands:
       - echo Build completed on `date`
+      - echo Checking if build directory exists...
+      - if [ -d "build" ]; then echo "Build directory exists"; else echo "Build directory does not exist"; exit 1; fi
       - echo Archiving artifacts...
       - zip -r dist.zip build/
 artifacts:
