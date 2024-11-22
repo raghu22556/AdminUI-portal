@@ -11,7 +11,7 @@ phases:
   build:
     commands:
       - echo "Building the React project"
-      - npm run build
+      - node --max-old-space-size=4096 node_modules/vite/bin/vite.js build
       - echo "Done building the project ==> Exporting artifacts"
 
 artifacts:
