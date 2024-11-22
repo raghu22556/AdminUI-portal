@@ -1,0 +1,22 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 14
+    commands:
+      - echo Installing source NPM dependencies...
+      - npm install
+  build:
+    commands:
+      - echo Build started on `date`
+      - npm run build
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Archiving artifacts...
+      - zip -r dist.zip build/
+artifacts:
+  files:
+    - '**/*'
+  base-directory: build
