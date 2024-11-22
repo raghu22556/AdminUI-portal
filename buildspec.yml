@@ -7,6 +7,7 @@ phases:
     commands:
       - echo Installing source NPM dependencies...
       - npm install
+      - ls -la
   build:
     commands:
       - echo Build started on `date`
@@ -16,10 +17,10 @@ phases:
     commands:
       - echo Build completed on `date`
       - echo Checking if build directory exists...
-      - if [ -d "build" ]; then echo "Build directory exists"; else echo "Build directory does not exist"; exit 1; fi
+      - if [ -d "dist" ]; then echo "Build directory exists"; else echo "Build directory does not exist"; exit 1; fi
       - echo Archiving artifacts...
-      - zip -r dist.zip build/
+      - zip -r dist.zip dist/
 artifacts:
   files:
     - '**/*'
-  base-directory: build
+  base-directory: dist
